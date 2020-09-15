@@ -1,0 +1,48 @@
+# Xcode Project
+WeatherBoard.xcodeproj/xcuserdata/
+WeatherBoard.xcworkspace/xcuserdata/
+WeatherBoard.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+WeatherBoard.xcworkspace/xcshareddata/*.xccheckout
+WeatherBoard.xcworkspace/xcshareddata/*.xcscmblueprint
+.idea/
+
+## User settings
+xcuserdata/
+
+# Xcode Injection
+IOSInjectionProject/
+OSXInjectionProject/
+
+# Build
+Scripts/build/
+build/
+DerivedData
+*.ipa
+
+# CocoaPods
+Pods
+
+# API keys
+WeatherBoard/Keys.swift
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/sign&cert
+
+# 手动安装的依赖
+/Frameworks/Realm.framework
+
+# CSV
+*.orig
+.svn
+
+# Other
+*~
+.DS_Store
+*.swp
+*.save
+._*
+*.bak

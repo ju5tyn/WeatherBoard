@@ -1,0 +1,16 @@
+PODS:
+  - Hex (6.1.0)
+
+DEPENDENCIES:
+  - Hex
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Hex
+
+SPEC CHECKSUMS:
+  Hex: 2f67dd0cbb178cb24992e7529b025b8d16ff0bdc
+
+PODFILE CHECKSUM: 0a1e70697fe04656b6af9273df8f414c040da30a
+
+COCOAPODS: 1.5.2
