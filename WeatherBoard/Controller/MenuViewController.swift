@@ -32,12 +32,12 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
     //Back button pressed
     @IBAction func backButtonPressed(_ sender: UIButton) {
         //Sends back to main view
-        performSegue(withIdentifier: "toMain", sender: self)
+        performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toMain"{
+        if segue.identifier == Constants.segues.menuToMain{
             
             let mainVC = segue.destination as! MainViewController
             mainVC.menuOpen.toggle()
@@ -72,7 +72,7 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
         if (searchBar.text != ""){
             searchFull = true
             
-            performSegue(withIdentifier: "toMain", sender: self)
+            performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
             
         }else{
             print("error no text boooo")

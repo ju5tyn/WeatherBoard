@@ -19,7 +19,7 @@ struct WeatherManager {
     
     var delegate: WeatherManagerDelegate?
     
-    let weatherURL = "https://api.openweathermap.org/data/2.5/forecast?units=metric&appid=\(Keys.openweathermap)"
+    let weatherURL = "\(Constants.mainURL)\(Keys.openweathermap)"
     
     //MARK: Fetch Weather
     

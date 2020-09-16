@@ -39,16 +39,20 @@ class MainViewController: UIViewController{
     //MARK: - Variables
     var daySelected = 0
     var dayString: String = "day"
+    var menuOpen: Bool = false
+    
     var weatherModel: WeatherModel?
     let gradient = CAGradientLayer()
     let hillGradient = CAGradientLayer()
-    var menuOpen: Bool = false
+    let emitterNode = SKEmitterNode(fileNamed: Constants.rainParticle)!
+    
+    
     
     //MARK: - Delegate stuff
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
     
-    let emitterNode = SKEmitterNode(fileNamed: "RainParticle.sks")!
+    
 
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -84,7 +88,7 @@ class MainViewController: UIViewController{
     //MARK: Menu Pressed
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
-        self.performSegue(withIdentifier: "toMenu", sender: self)
+        self.performSegue(withIdentifier: Constants.segues.mainToMenu, sender: self)
         
         setGradientColor(color: "menu")
         mainView.isHidden = true
@@ -226,7 +230,7 @@ class MainViewController: UIViewController{
     //MARK: - Segues
     //Called on segue to menu
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toMenu"{
+        if segue.identifier == Constants.segues.mainToMenu{
             
             let menuVC = segue.destination as! MenuViewController
             print(menuVC)
