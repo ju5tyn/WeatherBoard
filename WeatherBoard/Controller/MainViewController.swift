@@ -37,7 +37,9 @@ class MainViewController: UIViewController{
     @IBOutlet weak var dayAfterButton: UIButton!
 
     //MARK: - Variables
-    var daySelected = 0
+    
+
+    var daySelected: Int = 0
     var dayString: String = "day"
     var menuOpen: Bool = false
     
@@ -74,8 +76,7 @@ class MainViewController: UIViewController{
         gradientSetup()
         setButton(todayButton)
         
-        //addRain()
-
+        setParticles(baseView: gradientView, emitterNode: emitterNode)
     }
     
     
@@ -234,6 +235,9 @@ class MainViewController: UIViewController{
             
             let menuVC = segue.destination as! MenuViewController
             print(menuVC)
+            
+            //temp code to show particles permenantly
+            menuVC.particlesWereShown = true
             
         }
     }

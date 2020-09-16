@@ -14,6 +14,7 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var searchFull: Bool = false
+    var particlesWereShown: Bool?
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -48,15 +49,14 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
             if searchFull{
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
                 
-                //removeParticles(view: mainVC.view)
-                //hideParticles(view: mainVC.view)
-                //temporary
-                showParticles(view: view)
-                //setParticles(baseView: mainVC.gradientView, emitterNode: mainVC.emitterNode)
+                
+                showParticles(view: mainVC.gradientView)
                 
             }else{
                 
-                showParticles(view: view)
+                if particlesWereShown == true{
+                showParticles(view: mainVC.gradientView)
+                }
                 
             }
             

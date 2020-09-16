@@ -45,7 +45,7 @@ func removeParticles(view: UIView) {
         
         print("Rain Removed")
     }else{
-        print("error")
+        print("error removing rain")
     }
     
 }
@@ -55,7 +55,7 @@ func hideParticles(view: UIView) {
     if let viewWithTag = view.viewWithTag(1){
         viewWithTag.isHidden = true
     }else{
-        print("error")
+        print("error hiding particles")
     }
     
 }
@@ -65,7 +65,7 @@ func showParticles(view: UIView) {
     if let viewWithTag = view.viewWithTag(1){
         viewWithTag.isHidden = false
     }else{
-        print("error")
+        print("error showing particles")
     }
     
 }
