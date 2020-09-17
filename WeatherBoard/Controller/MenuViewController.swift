@@ -19,9 +19,11 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //dismisses keyboard when tapped off
         self.hideKeyboardWhenTappedAround()
         
+        //forces status bar to be dark
         overrideUserInterfaceStyle = .dark
         
         searchBar.delegate = self
@@ -95,6 +97,7 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
 
 //MARK: - Keyboard dismiss code
 extension UIViewController {
+    
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false

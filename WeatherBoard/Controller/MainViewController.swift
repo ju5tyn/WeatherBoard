@@ -46,7 +46,7 @@ class MainViewController: UIViewController{
     var weatherModel: WeatherModel?
     let gradient = CAGradientLayer()
     let hillGradient = CAGradientLayer()
-    let emitterNode = SKEmitterNode(fileNamed: Constants.rainParticle)!
+    let emitterNode = SKEmitterNode(fileNamed: Constants.particles.rainParticle)!
     
     
     

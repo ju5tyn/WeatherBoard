@@ -8,7 +8,7 @@
 
 struct Constants {
     
-    static let rainParticle = "RainParticle.sks"
+    
     
     static let mainURL = "https://api.openweathermap.org/data/2.5/forecast?units=metric&appid="
     
@@ -19,6 +19,13 @@ struct Constants {
         
     }
     
+    struct particles{
+        
+        static let rainParticle = "RainParticle.sks"
+        static let snowParticle = "SnowParticle.sks"
+        static let stormParticle = "StormParticle.sks"
+        
+    }
     
     
 }

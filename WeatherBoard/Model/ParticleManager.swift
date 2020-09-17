@@ -14,23 +14,31 @@ func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
     
     
     let skView = SKView(frame: CGRect(x:0, y:-200, width: baseView.frame.width, height: baseView.frame.height))
-    let scene = SKScene(size: baseView.frame.size)
+    let skScene = SKScene(size: baseView.frame.size)
     
-    scene.backgroundColor = .clear
-    scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-    scene.addChild(emitterNode)
+    skScene.backgroundColor = .clear
+    skScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+    skScene.addChild(emitterNode)
     
     skView.backgroundColor = .clear
-    skView.presentScene(scene)
+    skView.presentScene(skScene)
     skView.isUserInteractionEnabled = false
     skView.tag = 1
     
     
     
-    emitterNode.position.y = scene.frame.maxY
-    emitterNode.particlePositionRange.dx = scene.frame.width
+    emitterNode.position.y = skScene.frame.maxY
+    emitterNode.particlePositionRange.dx = skScene.frame.width
     
     baseView.addSubview(skView)
+    
+}
+
+func updateParticles(emitterNode: SKEmitterNode){
+    
+    
+    
+    
     
 }
 

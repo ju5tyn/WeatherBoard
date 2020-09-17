@@ -61,6 +61,37 @@ struct WeatherModel{
         
     }
     
+    var particleToDisplay: [String?]{
+        
+        return [getParticleName(conditionID[0]), getParticleName(conditionID[1]), getParticleName(conditionID[2])]
+        
+    }
+    
+    func getParticleName(_ conditionID: Int) -> String? {
+        
+        let iconName = getIconName(conditionID)
+        
+        switch iconName{
+        
+        case "rain", "rain_clouds", "shower_rain":
+            return Constants.particles.rainParticle
+            
+        case "thunderstorm":
+            return Constants.particles.stormParticle
+            
+        case "snow":
+            return Constants.particles.snowParticle
+            
+        default:
+            return nil
+        }
+        
+        
+        
+        
+        
+    }
+    
     func getIconName(_ conditionID: Int) -> String{
         
         switch conditionID{
