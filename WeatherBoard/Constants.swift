@@ -24,6 +24,7 @@ struct Constants {
         static let rainParticle = "RainParticle.sks"
         static let snowParticle = "SnowParticle.sks"
         static let stormParticle = "StormParticle.sks"
+        static let starParticle = "StarParticle.sks"
         
     }
     
