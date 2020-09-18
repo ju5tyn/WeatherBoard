@@ -34,13 +34,6 @@ func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
     
 }
 
-func updateParticles(emitterNode: SKEmitterNode){
-    
-    
-    
-    
-    
-}
 
 //MARK: RemoveParticles
 func removeParticles(view: UIView) {
@@ -53,7 +46,7 @@ func removeParticles(view: UIView) {
         
         print("Rain Removed")
     }else{
-        print("error removing rain")
+        print("error removing particles")
     }
     
 }

@@ -20,6 +20,7 @@
 		3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */; };
 		3A81D3D424EC16BD0082A1CF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */; };
 		3A8B132C2510279C00029EEB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8B132B2510279C00029EEB /* Keys.swift */; };
+		3AAD20BC2514DA7E002AF7BA /* SnowParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD20BB2514DA7E002AF7BA /* SnowParticle.sks */; };
 		3AD3881724FAAC72009528EF /* ParticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3881624FAAC72009528EF /* ParticleManager.swift */; };
 		3ADCEEBB24F668E700A6A672 /* RainParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3ADCEEBA24F668E700A6A672 /* RainParticle.sks */; };
 		3AF224542512C1E400371CA4 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF224532512C1E400371CA4 /* Constants.swift */; };
@@ -43,6 +44,9 @@
 		3A33324B24CCE3470053C0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3A8B132B2510279C00029EEB /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
+		3AAD20B52514D9CC002AF7BA /* StarParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarParticle.sks; sourceTree = "<group>"; };
+		3AAD20B62514D9D2002AF7BA /* StormParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StormParticle.sks; sourceTree = "<group>"; };
+		3AAD20BB2514DA7E002AF7BA /* SnowParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SnowParticle.sks; sourceTree = "<group>"; };
 		3AD3881624FAAC72009528EF /* ParticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleManager.swift; sourceTree = "<group>"; };
 		3ADCEEBA24F668E700A6A672 /* RainParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RainParticle.sks; sourceTree = "<group>"; };
 		3AF224532512C1E400371CA4 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -139,7 +143,10 @@
 			isa = PBXGroup;
 			children = (
 				3AD3881624FAAC72009528EF /* ParticleManager.swift */,
+				3AAD20B52514D9CC002AF7BA /* StarParticle.sks */,
+				3AAD20B62514D9D2002AF7BA /* StormParticle.sks */,
 				3ADCEEBA24F668E700A6A672 /* RainParticle.sks */,
+				3AAD20BB2514DA7E002AF7BA /* SnowParticle.sks */,
 			);
 			path = Particles;
 			sourceTree = "<group>";
@@ -221,6 +228,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AAD20BC2514DA7E002AF7BA /* SnowParticle.sks in Resources */,
 				3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */,
 				3A33324724CCE3470053C0F7 /* Assets.xcassets in Resources */,
 				3A0885D624E9A47C006C3DCF /* SF-Compact-Text-Bold.otf in Resources */,

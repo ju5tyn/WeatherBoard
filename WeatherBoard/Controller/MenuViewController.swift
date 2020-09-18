@@ -36,6 +36,8 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
     
     //Back button pressed
     @IBAction func backButtonPressed(_ sender: UIButton) {
+        
+        
         //Sends back to main view
         performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
         
@@ -54,12 +56,10 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
                 
                 
-                showParticles(view: mainVC.gradientView)
-                
             }else{
                 
                 if particlesWereShown == true{
-                showParticles(view: mainVC.gradientView)
+                    removeParticles(view: mainVC.view)
                 }
                 
             }

@@ -36,6 +36,9 @@ class MainViewController: UIViewController{
     @IBOutlet weak var tomorrowButton: UIButton!
     @IBOutlet weak var dayAfterButton: UIButton!
 
+    
+    
+    
     //MARK: - Variables
     
 
@@ -46,8 +49,10 @@ class MainViewController: UIViewController{
     var weatherModel: WeatherModel?
     let gradient = CAGradientLayer()
     let hillGradient = CAGradientLayer()
-    let emitterNode = SKEmitterNode(fileNamed: Constants.particles.rainParticle)!
+    var emitterNode = SKEmitterNode()
     
+    //temp
+    var isSnow: Bool?
     
     
     //MARK: - Delegate stuff
@@ -75,6 +80,11 @@ class MainViewController: UIViewController{
         
         gradientSetup()
         setButton(todayButton)
+        
+        isSnow = true
+        
+        //emitterNode: SKEmitterNode?
+        
         
         setParticles(baseView: gradientView, emitterNode: emitterNode)
     }
@@ -118,6 +128,7 @@ class MainViewController: UIViewController{
         
         //Clears details, changes day selection, then sets details
         resetDetails()
+        
         switch sender.titleLabel!.text{
             case "TODAY":
                 daySelected = 0
@@ -136,6 +147,23 @@ class MainViewController: UIViewController{
     
 //MARK: - Functions
     
+    
+    @IBAction func changeParticleButtonPressed(_ sender: UIButton) {
+        
+        removeParticles(view: view)
+        
+        if isSnow!{
+            emitterNode = SKEmitterNode(fileNamed: Constants.particles.rainParticle)!
+            isSnow!.toggle()
+        }else{
+            emitterNode = SKEmitterNode(fileNamed: Constants.particles.snowParticle)!
+            isSnow!.toggle()
+        }
+        
+        
+        
+        setParticles(baseView: gradientView, emitterNode: emitterNode)
+    }
     
     
     //MARK: - setButton
@@ -163,6 +191,10 @@ class MainViewController: UIViewController{
         weatherImageView.image = nil
         tempLabel.text = ""
         timeLocationLabel.text = ""
+    
+        removeParticles(view: view)
+
+        
     }
     
     //MARK: setDetails
@@ -178,13 +210,30 @@ class MainViewController: UIViewController{
             self.timeLocationLabel.text = "\(weatherModel!.timeString) - \(weatherModel!.cityName)"
             
             //sets weather image to string based on condition and day/night
-            self.weatherImageView.image = UIImage(named: "icon_\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)")
+            self.weatherImageView.setImage(UIImage(named: "icon_\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)"))
+            
             
             //sets gradient color with string based on condition and day/night
             if menuOpen != true {
                 self.setGradientColor(color: "\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)")
-            
+
             }
+            
+            if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
+                
+                print("Particle to display \(SKEmitterNode(fileNamed: "\(particleToDisplay)")!)")
+                
+                emitterNode = SKEmitterNode(fileNamed: "\(particleToDisplay)")!
+                setParticles(baseView: gradientView, emitterNode: emitterNode)
+                print("particles set")
+                
+            }
+            
+                
+            
+            
+                
+            
             
             
             //stops animating activity indicator
@@ -308,6 +357,15 @@ extension MainViewController: WeatherManagerDelegate{
     }
 }
 
+extension UIImageView{
+    func setImage(_ image: UIImage?, animated: Bool = true) {
+        let duration = animated ? 0.4 : 0.0
+        UIView.transition(with: self, duration: duration, options: .transitionFlipFromRight, animations: {
+            
+            self.image = image
+        }, completion: nil)
+    }
+}
 
 
 

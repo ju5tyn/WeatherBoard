@@ -63,13 +63,19 @@ struct WeatherModel{
     
     var particleToDisplay: [String?]{
         
+        print([getParticleName(conditionID[0]), getParticleName(conditionID[1]), getParticleName(conditionID[2])])
+        
         return [getParticleName(conditionID[0]), getParticleName(conditionID[1]), getParticleName(conditionID[2])]
+        
+        
         
     }
     
     func getParticleName(_ conditionID: Int) -> String? {
         
         let iconName = getIconName(conditionID)
+        
+        print(iconName)
         
         switch iconName{
         
@@ -83,7 +89,7 @@ struct WeatherModel{
             return Constants.particles.snowParticle
             
         case "clear":
-            if isDay{
+            if self.isDay{
                 return nil
             }else{
                 return Constants.particles.starParticle
@@ -101,6 +107,8 @@ struct WeatherModel{
     
     func getIconName(_ conditionID: Int) -> String{
         
+        print(conditionID)
+        
         switch conditionID{
             
             //add on night day after
@@ -111,7 +119,7 @@ struct WeatherModel{
             case 300...399:
                 return "rain"
             
-            case 501...502:
+            case 500...502:
                 return "rain_clouds"
             
             case 503...504:
