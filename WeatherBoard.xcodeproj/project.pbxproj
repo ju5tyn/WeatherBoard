@@ -20,6 +20,8 @@
 		3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */; };
 		3A81D3D424EC16BD0082A1CF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */; };
 		3A8B132C2510279C00029EEB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8B132B2510279C00029EEB /* Keys.swift */; };
+		3A9E14842515F96A000E62AE /* StarParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD20B52514D9CC002AF7BA /* StarParticle.sks */; };
+		3A9E14852515F96C000E62AE /* StormParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD20B62514D9D2002AF7BA /* StormParticle.sks */; };
 		3AAD20BC2514DA7E002AF7BA /* SnowParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD20BB2514DA7E002AF7BA /* SnowParticle.sks */; };
 		3AD3881724FAAC72009528EF /* ParticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3881624FAAC72009528EF /* ParticleManager.swift */; };
 		3ADCEEBB24F668E700A6A672 /* RainParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3ADCEEBA24F668E700A6A672 /* RainParticle.sks */; };
@@ -232,7 +234,9 @@
 				3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */,
 				3A33324724CCE3470053C0F7 /* Assets.xcassets in Resources */,
 				3A0885D624E9A47C006C3DCF /* SF-Compact-Text-Bold.otf in Resources */,
+				3A9E14852515F96C000E62AE /* StormParticle.sks in Resources */,
 				3A0885D424E9A3DD006C3DCF /* SF-Compact-Text-Semibold.otf in Resources */,
+				3A9E14842515F96A000E62AE /* StarParticle.sks in Resources */,
 				3A33324524CCE3420053C0F7 /* Main.storyboard in Resources */,
 				3ADCEEBB24F668E700A6A672 /* RainParticle.sks in Resources */,
 			);

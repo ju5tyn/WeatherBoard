@@ -156,7 +156,7 @@ class MainViewController: UIViewController{
             emitterNode = SKEmitterNode(fileNamed: Constants.particles.rainParticle)!
             isSnow!.toggle()
         }else{
-            emitterNode = SKEmitterNode(fileNamed: Constants.particles.snowParticle)!
+            emitterNode = SKEmitterNode(fileNamed: Constants.particles.starParticle)!
             isSnow!.toggle()
         }
         
@@ -221,9 +221,11 @@ class MainViewController: UIViewController{
             
             if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
                 
-                print("Particle to display \(SKEmitterNode(fileNamed: "\(particleToDisplay)")!)")
+                print("Particle to display \(String(describing: SKEmitterNode(fileNamed: String(particleToDisplay))))")
                 
-                emitterNode = SKEmitterNode(fileNamed: "\(particleToDisplay)")!
+                emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                
+                print(emitterNode)
                 setParticles(baseView: gradientView, emitterNode: emitterNode)
                 print("particles set")
                 
