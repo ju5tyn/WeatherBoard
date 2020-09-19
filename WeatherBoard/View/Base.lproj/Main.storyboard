@@ -124,16 +124,6 @@
                                             <constraint firstAttribute="width" constant="150" id="SfR-VX-v0M"/>
                                         </constraints>
                                     </imageView>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQh-X0-gMq">
-                                        <rect key="frame" x="230" y="620" width="117" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Change particles">
-                                            <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="changeParticleButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pes-vc-pbp"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -225,10 +215,20 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-rz-feH">
+                                <rect key="frame" x="360" y="80" width="24" height="24"/>
+                                <state key="normal" backgroundImage="location_white_24pt"/>
+                                <connections>
+                                    <action selector="locationButton:" destination="Ve1-YK-Ghw" eventType="touchUpInside" id="ukT-dT-2lo"/>
+                                    <action selector="locationButtonPressed:" destination="Ujs-7t-r3k" eventType="touchUpInside" id="459-M1-6Jz"/>
+                                    <action selector="menuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="way-9Q-l0C"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tDP-OQ-yOe" firstAttribute="top" secondItem="tHG-eM-E5a" secondAttribute="bottom" constant="-26" id="1uz-oF-DYy"/>
+                            <constraint firstItem="hyJ-FP-r13" firstAttribute="trailing" secondItem="7n4-rz-feH" secondAttribute="trailing" constant="30" id="21U-Hc-VuL"/>
                             <constraint firstItem="hyJ-FP-r13" firstAttribute="trailing" secondItem="1TO-c0-fHM" secondAttribute="trailing" constant="21" id="69f-ct-u4I"/>
                             <constraint firstItem="tHG-eM-E5a" firstAttribute="top" secondItem="hyJ-FP-r13" secondAttribute="top" constant="32" id="8XT-Ep-ANM"/>
                             <constraint firstItem="tDP-OQ-yOe" firstAttribute="top" secondItem="hyJ-FP-r13" secondAttribute="top" constant="35" id="AwO-d6-Ki8"/>
@@ -236,6 +236,7 @@
                             <constraint firstItem="hZm-fn-fpI" firstAttribute="leading" secondItem="hyJ-FP-r13" secondAttribute="leading" constant="30" id="d1R-BA-Avr"/>
                             <constraint firstItem="tHG-eM-E5a" firstAttribute="centerX" secondItem="Ekx-BO-bJj" secondAttribute="centerX" id="eGS-Eg-1DI"/>
                             <constraint firstItem="1TO-c0-fHM" firstAttribute="leading" secondItem="hyJ-FP-r13" secondAttribute="leading" constant="21" id="fte-Ms-LP8"/>
+                            <constraint firstItem="7n4-rz-feH" firstAttribute="top" secondItem="hyJ-FP-r13" secondAttribute="top" constant="36" id="hZN-sc-80f"/>
                             <constraint firstItem="tDP-OQ-yOe" firstAttribute="leading" secondItem="hyJ-FP-r13" secondAttribute="leading" constant="30" id="iha-Jo-2b0"/>
                             <constraint firstItem="hZm-fn-fpI" firstAttribute="top" secondItem="1TO-c0-fHM" secondAttribute="bottom" constant="10" id="qv3-Ov-GjX"/>
                         </constraints>
@@ -254,6 +255,7 @@
     </scenes>
     <resources>
         <image name="cancel_24pt_white" width="24" height="24"/>
+        <image name="location_white_24pt" width="24" height="24"/>
         <image name="menu_24pt_white" width="24" height="24"/>
     </resources>
 </document>

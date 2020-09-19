@@ -31,6 +31,8 @@ class MainViewController: UIViewController{
     //buttons
     @IBOutlet weak var menuButton: UIButton!
     
+    
+    
     //timetravel Buttons
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
@@ -50,9 +52,6 @@ class MainViewController: UIViewController{
     let gradient = CAGradientLayer()
     let hillGradient = CAGradientLayer()
     var emitterNode = SKEmitterNode()
-    
-    //temp
-    var isSnow: Bool?
     
     
     //MARK: - Delegate stuff
@@ -81,10 +80,13 @@ class MainViewController: UIViewController{
         gradientSetup()
         setButton(todayButton)
         
-        isSnow = true
         
-        //emitterNode: SKEmitterNode?
-        
+        //drop shadows for uilabels
+        tempLabel.textDropShadow()
+        timeLocationLabel.textDropShadow()
+        todayButton.titleLabel?.textDropShadow()
+        tomorrowButton.titleLabel?.textDropShadow()
+        dayAfterButton.titleLabel?.textDropShadow()
         
         setParticles(baseView: gradientView, emitterNode: emitterNode)
     }
@@ -146,24 +148,6 @@ class MainViewController: UIViewController{
     }
     
 //MARK: - Functions
-    
-    
-    @IBAction func changeParticleButtonPressed(_ sender: UIButton) {
-        
-        removeParticles(view: view)
-        
-        if isSnow!{
-            emitterNode = SKEmitterNode(fileNamed: Constants.particles.rainParticle)!
-            isSnow!.toggle()
-        }else{
-            emitterNode = SKEmitterNode(fileNamed: Constants.particles.starParticle)!
-            isSnow!.toggle()
-        }
-        
-        
-        
-        setParticles(baseView: gradientView, emitterNode: emitterNode)
-    }
     
     
     //MARK: - setButton
@@ -369,6 +353,20 @@ extension UIImageView{
     }
 }
 
+extension UILabel {
+    func textDropShadow() {
+        self.layer.masksToBounds = false
+        self.layer.shadowRadius = 3.5
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+    }
+
+    static func createCustomLabel() -> UILabel {
+        let label = UILabel()
+        label.textDropShadow()
+        return label
+    }
+}
 
 
 

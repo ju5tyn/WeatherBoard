@@ -14,6 +14,7 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var searchFull: Bool = false
+    var locationPressed: Bool = false
     var particlesWereShown: Bool?
     
     //MARK: - ViewDidLoad
@@ -43,6 +44,16 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
         
     }
     
+    @IBAction func locationButtonPressed(_ sender: UIButton) {
+        
+        locationPressed.toggle()
+        //Sends back to main view
+        performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
+        
+        
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.menuToMain{
             
@@ -52,7 +63,12 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
             mainVC.setDetails()
             
             
-            if searchFull{
+            if locationPressed{
+                
+                mainVC.locationManager.requestLocation()
+                
+                
+            }else if searchFull{
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
                 
                 
