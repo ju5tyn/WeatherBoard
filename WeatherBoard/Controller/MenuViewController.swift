@@ -9,13 +9,13 @@
 import UIKit
 
 
-class MenuViewController: UIViewController, UISearchBarDelegate {
+class MenuViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     
     var searchFull: Bool = false
     var locationPressed: Bool = false
-    var particlesWereShown: Bool?
+    //var particlesWereShown: Bool?
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -28,6 +28,15 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
         overrideUserInterfaceStyle = .dark
         
         searchBar.delegate = self
+        
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        searchBar.becomeFirstResponder()
         
         
     }
@@ -72,17 +81,18 @@ class MenuViewController: UIViewController, UISearchBarDelegate {
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
                 
                 
-            }else{
-                
-                if particlesWereShown == true{
-                    removeParticles(view: mainVC.view)
-                }
-                
             }
-            
+            removeParticles(view: mainVC.gradientView)
             
         }
     }
+    
+    
+    
+    
+}
+
+extension MenuViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         

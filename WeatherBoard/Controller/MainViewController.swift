@@ -63,13 +63,13 @@ class MainViewController: UIViewController{
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         overrideUserInterfaceStyle = .dark
         
         let hillMask = UIImageView()
         hillMask.image = UIImage(named: "hills")
         hillMask.frame = hillView.bounds
         hillView.mask = hillMask
-        
         
         weatherManager.delegate = self
         locationManager.delegate = self
@@ -78,7 +78,7 @@ class MainViewController: UIViewController{
         locationManager.requestLocation()
         
         gradientSetup()
-        setButton(todayButton)
+        highlightButton(todayButton)
         
         
         //drop shadows for uilabels
@@ -102,11 +102,10 @@ class MainViewController: UIViewController{
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: Constants.segues.mainToMenu, sender: self)
-        
         setGradientColor(color: "menu")
+        hideParticles(view: view)
         mainView.isHidden = true
         menuOpen.toggle()
-        hideParticles(view: view)
         
         
     }
@@ -116,21 +115,10 @@ class MainViewController: UIViewController{
     
     @IBAction func timeTravelButtonPressed(_ sender: UIButton) {
         
-        //Sets current button clicked to highlighted
-        setButton(sender)
-        sender.isHighlighted = false
-        
-        if weatherModel != nil{
-            if (weatherModel!.conditionName[self.daySelected] == "clear"){
-                setButtonColor(UIColor.white)
-            }else{
-                setButtonColor(UIColor.white)
-            }
-        }
-        
+        //Highlights button that was pressed
+        highlightButton(sender)
         //Clears details, changes day selection, then sets details
-        resetDetails()
-        
+        clearDetails()
         switch sender.titleLabel!.text{
             case "TODAY":
                 daySelected = 0
@@ -139,29 +127,23 @@ class MainViewController: UIViewController{
             default:
                 daySelected = 2
         }
-        
         setDetails()
-        
-        
-        
         
     }
     
 //MARK: - Functions
     
     
-    //MARK: - setButton
-    //resets all button appearance to transparent
-    func setButton(_ buttonToHighlight: UIButton){
-        
+    //MARK: Set button alpha
+    //Highlights currently selected button
+    func highlightButton(_ buttonToHighlight: UIButton){
         todayButton.alpha = 0.5
         tomorrowButton.alpha = 0.5
         dayAfterButton.alpha = 0.5
         buttonToHighlight.alpha = 1
-        
-        
     }
     
+    //MARK: Set button color UNUSED
     func setButtonColor(_ color: UIColor){
         todayButton.titleLabel!.textColor = color
         tomorrowButton.titleLabel!.textColor = color
@@ -169,16 +151,14 @@ class MainViewController: UIViewController{
         
     }
     
-    //MARK: - resetDetails
+    
+    //MARK: clearDetails
     //resets weather details to empty
-    func resetDetails(){
+    func clearDetails(){
         weatherImageView.image = nil
         tempLabel.text = ""
         timeLocationLabel.text = ""
-    
         removeParticles(view: view)
-
-        
     }
     
     //MARK: setDetails
@@ -196,31 +176,19 @@ class MainViewController: UIViewController{
             //sets weather image to string based on condition and day/night
             self.weatherImageView.setImage(UIImage(named: "icon_\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)"))
             
-            
             //sets gradient color with string based on condition and day/night
             if menuOpen != true {
                 self.setGradientColor(color: "\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)")
 
             }
             
+            //if particleToDisplay not nil, will set emitternode to particle
             if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
                 
-                print("Particle to display \(String(describing: SKEmitterNode(fileNamed: String(particleToDisplay))))")
-                
                 emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                
-                print(emitterNode)
                 setParticles(baseView: gradientView, emitterNode: emitterNode)
-                print("particles set")
-                
+            
             }
-            
-                
-            
-            
-                
-            
-            
             
             //stops animating activity indicator
             self.activityIndicator.stopAnimating()
@@ -269,10 +237,9 @@ class MainViewController: UIViewController{
         if segue.identifier == Constants.segues.mainToMenu{
             
             let menuVC = segue.destination as! MenuViewController
-            print(menuVC)
             
             //temp code to show particles permenantly
-            menuVC.particlesWereShown = true
+            //menuVC.particlesWereShown = true
             
         }
     }
@@ -302,7 +269,7 @@ extension MainViewController: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error:Error){
-        print("Location Error")
+        print(error)
     }
     
 }
@@ -318,30 +285,20 @@ extension MainViewController: WeatherManagerDelegate{
         
         DispatchQueue.main.async {
             
-            if weather.isDay{
-                self.dayString = "day"
-            }else{
-                self.dayString = "night"
-            }
-
+            self.dayString = weather.isDay ? "day" : "night"
             self.setDetails()
             
-            
         }
-        
-         
     }
     
     func didFailWithError(error: Error){
         print(error)
-        
-        DispatchQueue.main.async{
-            
-            print(error)
-            
-        }
     }
 }
+
+
+//MARK: - EXT ImageView
+
 
 extension UIImageView{
     func setImage(_ image: UIImage?, animated: Bool = true) {
@@ -352,6 +309,8 @@ extension UIImageView{
         }, completion: nil)
     }
 }
+
+//MARK: - EXT Label
 
 extension UILabel {
     func textDropShadow() {
