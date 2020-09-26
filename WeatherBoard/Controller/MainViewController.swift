@@ -88,10 +88,7 @@ class MainViewController: UIViewController{
         tomorrowButton.titleLabel?.textDropShadow()
         dayAfterButton.titleLabel?.textDropShadow()
         
-        setParticles(baseView: gradientView, emitterNode: emitterNode)
     }
-    
-    
     
     
     //MARK: - Buttons
@@ -158,12 +155,15 @@ class MainViewController: UIViewController{
         weatherImageView.image = nil
         tempLabel.text = ""
         timeLocationLabel.text = ""
-        removeParticles(view: view)
+        removeParticles(from: view)
     }
     
     //MARK: setDetails
     //sets weather details to contents of weathermodel
     func setDetails(){
+        
+        //removeParticles(from: gradientView)
+        
         //if weather model has had contents populated
         if weatherModel != nil {
             
@@ -184,6 +184,7 @@ class MainViewController: UIViewController{
             
             //if particleToDisplay not nil, will set emitternode to particle
             if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
+                
                 
                 emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
                 setParticles(baseView: gradientView, emitterNode: emitterNode)
@@ -236,7 +237,7 @@ class MainViewController: UIViewController{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.mainToMenu{
             
-            let menuVC = segue.destination as! MenuViewController
+            //let menuVC = segue.destination as! MenuViewController
             
             //temp code to show particles permenantly
             //menuVC.particlesWereShown = true

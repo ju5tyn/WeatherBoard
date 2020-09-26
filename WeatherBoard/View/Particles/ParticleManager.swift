@@ -36,7 +36,7 @@ func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
 
 
 //MARK: RemoveParticles
-func removeParticles(view: UIView) {
+func removeParticles(from view: UIView) {
     
     
     

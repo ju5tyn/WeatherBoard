@@ -12,6 +12,7 @@ import UIKit
 class MenuViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
     var searchFull: Bool = false
     var locationPressed: Bool = false
@@ -24,11 +25,16 @@ class MenuViewController: UIViewController {
         //dismisses keyboard when tapped off
         self.hideKeyboardWhenTappedAround()
         
+        
+        
         //forces status bar to be dark
         overrideUserInterfaceStyle = .dark
         
         searchBar.delegate = self
+        tableView.delegate = self
+        tableView.dataSource = self
         
+        tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         
         
     }
@@ -82,7 +88,7 @@ class MenuViewController: UIViewController {
                 
                 
             }
-            removeParticles(view: mainVC.gradientView)
+            removeParticles(from: mainVC.gradientView)
             
         }
     }
@@ -121,6 +127,8 @@ extension MenuViewController: UISearchBarDelegate {
     
 }
 
+
+
 //MARK: - Keyboard dismiss code
 extension UIViewController {
     
@@ -133,4 +141,22 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+}
+
+extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! MenuTableViewCell
+        
+        return cell
+    }
+    
+    
+    
+    
+    
 }

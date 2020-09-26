@@ -224,6 +224,25 @@
                                     <action selector="menuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="way-9Q-l0C"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="4" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aNd-QS-4El">
+                                <rect key="frame" x="30" y="209" width="354" height="300"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="kVd-PS-Q1Y"/>
+                                </constraints>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuCell" id="hmC-oJ-qIb" customClass="MenuTableViewCell" customModule="WeatherBoard" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="354" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hmC-oJ-qIb" id="AcO-00-aTC">
+                                            <rect key="frame" x="0.0" y="0.0" width="354" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -233,6 +252,9 @@
                             <constraint firstItem="tHG-eM-E5a" firstAttribute="top" secondItem="hyJ-FP-r13" secondAttribute="top" constant="32" id="8XT-Ep-ANM"/>
                             <constraint firstItem="tDP-OQ-yOe" firstAttribute="top" secondItem="hyJ-FP-r13" secondAttribute="top" constant="35" id="AwO-d6-Ki8"/>
                             <constraint firstItem="1TO-c0-fHM" firstAttribute="top" secondItem="tHG-eM-E5a" secondAttribute="bottom" constant="10" id="CPT-SZ-R06"/>
+                            <constraint firstItem="hyJ-FP-r13" firstAttribute="trailing" secondItem="aNd-QS-4El" secondAttribute="trailing" constant="30" id="NTm-IU-Pyw"/>
+                            <constraint firstItem="aNd-QS-4El" firstAttribute="top" secondItem="hZm-fn-fpI" secondAttribute="bottom" constant="8" id="Nv6-WA-C5G"/>
+                            <constraint firstItem="aNd-QS-4El" firstAttribute="leading" secondItem="hyJ-FP-r13" secondAttribute="leading" constant="30" id="S5j-SD-WLZ"/>
                             <constraint firstItem="hZm-fn-fpI" firstAttribute="leading" secondItem="hyJ-FP-r13" secondAttribute="leading" constant="30" id="d1R-BA-Avr"/>
                             <constraint firstItem="tHG-eM-E5a" firstAttribute="centerX" secondItem="Ekx-BO-bJj" secondAttribute="centerX" id="eGS-Eg-1DI"/>
                             <constraint firstItem="1TO-c0-fHM" firstAttribute="leading" secondItem="hyJ-FP-r13" secondAttribute="leading" constant="21" id="fte-Ms-LP8"/>
@@ -244,6 +266,7 @@
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="1TO-c0-fHM" id="e2m-yP-sOv"/>
+                        <outlet property="tableView" destination="aNd-QS-4El" id="1zt-gC-wom"/>
                         <segue destination="Ve1-YK-Ghw" kind="unwind" identifier="toMain" unwindAction="unwind:" id="eaM-Yx-jau"/>
                     </connections>
                 </viewController>
