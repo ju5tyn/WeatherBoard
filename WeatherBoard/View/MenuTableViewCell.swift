@@ -9,21 +9,25 @@
 import UIKit
 
 class MenuTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var cellBackgroundView: UIView!
+    @IBOutlet weak var menuButton: MenuButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        backgroundColor = UIColor.clear
         
-        
+        //menuButton.titleLabel?.textColor = UIColor.white
         // Initialization code
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
+        
+        
         // Configure the view for the selected state
     }
+    
+    
     
 }
