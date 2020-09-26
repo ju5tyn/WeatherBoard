@@ -1,16 +1,22 @@
 PODS:
-  - Hex (6.1.0)
+  - Realm (5.4.3):
+    - Realm/Headers (= 5.4.3)
+  - Realm/Headers (5.4.3)
+  - RealmSwift (5.4.3):
+    - Realm (= 5.4.3)
 
 DEPENDENCIES:
-  - Hex
+  - RealmSwift
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Hex
+  trunk:
+    - Realm
+    - RealmSwift
 
 SPEC CHECKSUMS:
-  Hex: 2f67dd0cbb178cb24992e7529b025b8d16ff0bdc
+  Realm: e3d5fcc50fd79ddf87a2d86301f6edbf57531f84
+  RealmSwift: db608068eccc54bce47928e8118bde13c120c307
 
-PODFILE CHECKSUM: 0a1e70697fe04656b6af9273df8f414c040da30a
+PODFILE CHECKSUM: e0306266d14047ef3fa4469ec88e1e5295ee7482
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.9.3

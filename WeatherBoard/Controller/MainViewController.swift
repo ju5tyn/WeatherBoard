@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Hex
 import CoreLocation
 import SpriteKit
 

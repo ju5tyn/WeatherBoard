@@ -6,8 +6,6 @@ target 'WeatherBoard' do
   use_frameworks!
   
   # Pods for WeatherBoard
-  pod 'Hex'
-  
-
+  pod 'RealmSwift'
 
 end
