@@ -8,9 +8,18 @@
 
 import UIKit
 
+protocol MenuTableViewCellDelegate {
+    
+    func didPressButton(with cityName: String, indexPath: IndexPath)
+    
+    
+}
+
 class MenuTableViewCell: UITableViewCell {
     @IBOutlet weak var menuButton: MenuButton!
     @IBOutlet weak var menuLabel: UILabel!
+    
+    var delegate: MenuTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +37,21 @@ class MenuTableViewCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
+    
+    @IBAction func menuButtonPressed(_ sender: MenuButton) {
+        if
+            let collectionView = superview as? UITableView,
+            let index = collectionView.indexPath(for: self)
+                {
+                if let validLabel = menuLabel.text{
+                    delegate?.didPressButton(with: validLabel, indexPath: index)
+                }
+            }
+        
+        
+        
+    }
+    
     
     
     

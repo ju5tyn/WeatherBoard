@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, MenuTableViewCellDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -17,6 +17,7 @@ class MenuViewController: UIViewController {
     var searchFull: Bool = false
     var locationPressed: Bool = false
     var menuItems: Results<MenuItem>?
+    var menuItemPressedCityName: String?
     //var particlesWereShown: Bool?
     
     //realm
@@ -37,6 +38,7 @@ class MenuViewController: UIViewController {
         //forces status bar to be dark
         overrideUserInterfaceStyle = .dark
         
+    
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -60,6 +62,23 @@ class MenuViewController: UIViewController {
         
         menuItems = realm.objects(MenuItem.self).sorted(byKeyPath: "date", ascending: false)
         tableView.reloadData()
+        
+    }
+    
+    func didPressButton(with cityName: String, indexPath: IndexPath) {
+        menuItemPressedCityName = cityName
+        
+        do{
+            try realm.write{
+                realm.delete(menuItems![indexPath.row])
+            }
+        }catch{
+            print(error)
+        }
+        
+        tableView.reloadData()
+        //Sends back to main view
+        performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
         
     }
 
@@ -100,20 +119,12 @@ class MenuViewController: UIViewController {
                 mainVC.locationManager.requestLocation()
                 
                 
-            }else if searchFull{
-                /*
-                do{
-                    try realm.write{
-                        let newItem = MenuItem()
-                        newItem.cityName = searchBar.text!
-                        realm.add(newItem)
-                    }
-                    
-                }catch{
-                    print(error)
-                }
-                */
+            }else if let validCityName = menuItemPressedCityName{
                 
+                mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0)
+                
+            }else if searchFull{
+    
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
                 
                 
@@ -173,6 +184,9 @@ extension UIViewController {
     }
 }
 
+
+//MARK: - TableView Methods
+
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -192,11 +206,13 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! MenuTableViewCell
         
+        cell.delegate = self
+        
         let cellCityName = menuItems?[indexPath.row].cityName
         
         cell.menuLabel.text = cellCityName
         
-        cell.menuButton.tag = indexPath.row
+        //cell.menuButton.tag = indexPath.row
         
         return cell
     }
@@ -206,6 +222,8 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         
         
     }
+    
+    
     
     
     

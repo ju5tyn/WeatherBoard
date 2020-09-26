@@ -30,6 +30,9 @@
                         <state key="normal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
+                        <connections>
+                            <action selector="menuButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="K1h-nE-yck"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7wk-bg-04g">
                         <rect key="frame" x="20" y="18" width="53" height="24"/>

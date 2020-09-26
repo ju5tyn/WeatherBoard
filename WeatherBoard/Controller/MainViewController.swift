@@ -286,12 +286,9 @@ extension MainViewController: WeatherManagerDelegate{
         
         weatherModel = weather
         //sets this view's weather model to data from weathermanager
-        
-        
-        
-        
         DispatchQueue.main.async {
             
+            //writes the city name to realm
             do{
                 try self.realm.write{
                     let newItem = MenuItem()
@@ -301,6 +298,8 @@ extension MainViewController: WeatherManagerDelegate{
             }catch{
                 print(error)
             }
+            //realm end
+            
             
             self.dayString = weather.isDay ? "day" : "night"
             self.setDetails()
