@@ -48,15 +48,25 @@ class MenuButton: UIButton {
         // 3
         let outerPath = createRoundedRectPath(for: outerRect, radius: 12.0)
       
+        var outerTop = UIColor(named: "grad_clear_night_top")
+        var outerBottom = UIColor(named: "grad_clear_night_bottom")
+       
         // 4
         if state != .highlighted {
             context.saveGState()
             context.setFillColor(outerColor.cgColor)
-            context.setShadow(offset: CGSize(width: 0, height: 2),
-              blur: 3.0, color: shadowColor.cgColor)
+            
             context.addPath(outerPath)
             context.fillPath()
             context.restoreGState()
+            
+            context.setShadow(offset: CGSize(width: 0, height: 2),
+            blur: 3.0, color: shadowColor.cgColor)
+            
+            outerTop = UIColor(named: "grad_clear_night_bottom")
+            outerBottom = UIColor(named: "grad_clear_night_top")
+            
+            
       }
         
         // Outer Path Gradient:
@@ -67,8 +77,7 @@ class MenuButton: UIButton {
         //let outerBottom = UIColor(hue: hue, saturation: saturation, brightness: brightness * 0.8, alpha: 1.0)
 
         
-        let outerTop = UIColor(named: "grad_clear_night_bottom")
-        let outerBottom = UIColor(named: "grad_clear_night_top")
+        
         // 2
         context.saveGState()
         context.addPath(outerPath)
@@ -77,6 +86,34 @@ class MenuButton: UIButton {
                            startColor: outerTop!.cgColor, endColor: outerBottom!.cgColor)
         context.restoreGState()
 
+    }
+    
+    @objc func hesitateUpdate() {
+      setNeedsDisplay()
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+      super.touchesBegan(touches, with: event)
+      setNeedsDisplay()
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+      super.touchesMoved(touches, with: event)
+      setNeedsDisplay()
+    }
+
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+      super.touchesCancelled(touches, with: event)
+      setNeedsDisplay()
+      
+      perform(#selector(hesitateUpdate), with: nil, afterDelay: 0.1)
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+      super.touchesEnded(touches, with: event)
+      setNeedsDisplay()
+      
+      perform(#selector(hesitateUpdate), with: nil, afterDelay: 0.1)
     }
 
 }
