@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		3A33324724CCE3470053C0F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A33324624CCE3470053C0F7 /* Assets.xcassets */; };
 		3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */; };
 		3A3724C9251F4C1900CB6FE6 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */; };
+		3A3724CD251F7CAA00CB6FE6 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3724CC251F7CAA00CB6FE6 /* MenuItem.swift */; };
 		3A81D3D424EC16BD0082A1CF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */; };
 		3A8B132C2510279C00029EEB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8B132B2510279C00029EEB /* Keys.swift */; };
 		3A9E14842515F96A000E62AE /* StarParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD20B52514D9CC002AF7BA /* StarParticle.sks */; };
@@ -48,6 +49,7 @@
 		3A33324924CCE3470053C0F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A33324B24CCE3470053C0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		3A3724CC251F7CAA00CB6FE6 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3A8B132B2510279C00029EEB /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		3AAD20B52514D9CC002AF7BA /* StarParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarParticle.sks; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				3A0885DA24E9AFC4006C3DCF /* WeatherManager.swift */,
 				3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */,
 				3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */,
+				3A3724CC251F7CAA00CB6FE6 /* MenuItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				3A0885DB24E9AFC5006C3DCF /* WeatherManager.swift in Sources */,
 				3A81D3D424EC16BD0082A1CF /* MenuViewController.swift in Sources */,
 				3AF224542512C1E400371CA4 /* Constants.swift in Sources */,
+				3A3724CD251F7CAA00CB6FE6 /* MenuItem.swift in Sources */,
 				3AF6CEF9251E21B2005D39CA /* MenuTableViewCell.swift in Sources */,
 				3A33324024CCE3420053C0F7 /* SceneDelegate.swift in Sources */,
 				3A3724C9251F4C1900CB6FE6 /* MenuButton.swift in Sources */,

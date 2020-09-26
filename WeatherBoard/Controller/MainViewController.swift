@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 import SpriteKit
+import RealmSwift
 
 
 
@@ -52,6 +53,9 @@ class MainViewController: UIViewController{
     let hillGradient = CAGradientLayer()
     var emitterNode = SKEmitterNode()
     
+    //MARK: realm
+    let realm = try! Realm()
+    var menuItems: Results<MenuItem>?
     
     //MARK: - Delegate stuff
     var weatherManager = WeatherManager()
@@ -283,7 +287,20 @@ extension MainViewController: WeatherManagerDelegate{
         weatherModel = weather
         //sets this view's weather model to data from weathermanager
         
+        
+        
+        
         DispatchQueue.main.async {
+            
+            do{
+                try self.realm.write{
+                    let newItem = MenuItem()
+                    newItem.cityName = self.weatherModel?.cityName
+                    self.realm.add(newItem)
+                }
+            }catch{
+                print(error)
+            }
             
             self.dayString = weather.isDay ? "day" : "night"
             self.setDetails()
@@ -293,6 +310,9 @@ extension MainViewController: WeatherManagerDelegate{
     
     func didFailWithError(error: Error){
         print(error)
+        print("error getting data")
+        
+        
     }
 }
 

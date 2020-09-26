@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import RealmSwift
 
 class MenuViewController: UIViewController {
 
@@ -16,11 +16,18 @@ class MenuViewController: UIViewController {
     
     var searchFull: Bool = false
     var locationPressed: Bool = false
+    var menuItems: Results<MenuItem>?
     //var particlesWereShown: Bool?
+    
+    //realm
+    let realm = try! Realm()
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadMenuItems()
+        //print(realm.configuration.fileURL?.absoluteURL)
         
         //dismisses keyboard when tapped off
         self.hideKeyboardWhenTappedAround()
@@ -37,6 +44,8 @@ class MenuViewController: UIViewController {
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
         
         
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,6 +53,13 @@ class MenuViewController: UIViewController {
         
         searchBar.becomeFirstResponder()
         
+        
+    }
+    
+    func loadMenuItems(){
+        
+        menuItems = realm.objects(MenuItem.self).sorted(byKeyPath: "date", ascending: false)
+        tableView.reloadData()
         
     }
 
@@ -78,12 +94,26 @@ class MenuViewController: UIViewController {
             mainVC.setDetails()
             
             
+            
             if locationPressed{
                 
                 mainVC.locationManager.requestLocation()
                 
                 
             }else if searchFull{
+                /*
+                do{
+                    try realm.write{
+                        let newItem = MenuItem()
+                        newItem.cityName = searchBar.text!
+                        realm.add(newItem)
+                    }
+                    
+                }catch{
+                    print(error)
+                }
+                */
+                
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
                 
                 
@@ -146,13 +176,35 @@ extension UIViewController {
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        //if number of menu items lower than 4, return that number of menu items
+        
+        
+        if (menuItems?.count ?? 0 < 4){
+            return menuItems?.count ?? 0
+        }else{
+            return 4
+        }
+ 
+        //return menuItems?.count ?? 0
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! MenuTableViewCell
         
+        let cellCityName = menuItems?[indexPath.row].cityName
+        
+        cell.menuLabel.text = cellCityName
+        
+        cell.menuButton.tag = indexPath.row
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
     }
     
     
