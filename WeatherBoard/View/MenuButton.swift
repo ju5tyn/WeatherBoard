@@ -10,23 +10,11 @@ import UIKit
 
 class MenuButton: UIButton {
 
-    var hue: CGFloat {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
-      
-    var saturation: CGFloat {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
-      
-    var brightness: CGFloat {
-        didSet {
-            setNeedsDisplay()
-        }
-    }
+    var hue: CGFloat
+    var saturation: CGFloat
+    var brightness: CGFloat
+    
+    
     
     required init?(coder aDecoder: NSCoder) {
         self.hue = 0.5
@@ -35,10 +23,12 @@ class MenuButton: UIButton {
         
       
         super.init(coder: aDecoder)
-          
+        
+        self.titleLabel!.font = UIFont(name: "SF-Compact-Text-Bold.otf", size: 20)
         
         self.isOpaque = false
         self.backgroundColor = .clear
+        
         
     }
 
@@ -50,7 +40,7 @@ class MenuButton: UIButton {
         // 1
         let outerColor = UIColor(
             hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
-        let shadowColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
+        let shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
       
         // 2
         let outerMargin: CGFloat = 5.0
@@ -70,18 +60,21 @@ class MenuButton: UIButton {
       }
         
         // Outer Path Gradient:
+        
         // 1
-        let outerTop = UIColor(hue: hue, saturation: saturation,
-          brightness: brightness, alpha: 1.0)
-        let outerBottom = UIColor(hue: hue, saturation: saturation,
-          brightness: brightness * 0.8, alpha: 1.0)
+        //let outerTop = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+        
+        //let outerBottom = UIColor(hue: hue, saturation: saturation, brightness: brightness * 0.8, alpha: 1.0)
 
+        
+        let outerTop = UIColor(named: "grad_clear_night_bottom")
+        let outerBottom = UIColor(named: "grad_clear_night_top")
         // 2
         context.saveGState()
         context.addPath(outerPath)
         context.clip()
         drawLinearGradient(context: context, rect: outerRect,
-          startColor: outerTop.cgColor, endColor: outerBottom.cgColor)
+                           startColor: outerTop!.cgColor, endColor: outerBottom!.cgColor)
         context.restoreGState()
 
     }

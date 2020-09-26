@@ -10,14 +10,15 @@ import UIKit
 
 class MenuTableViewCell: UITableViewCell {
     @IBOutlet weak var menuButton: MenuButton!
+    @IBOutlet weak var menuLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         backgroundColor = UIColor.clear
         
-        //menuButton.titleLabel?.textColor = UIColor.white
-        // Initialization code
+        menuLabel.textDropShadow()
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
