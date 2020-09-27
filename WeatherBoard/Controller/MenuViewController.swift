@@ -39,6 +39,8 @@ class MenuViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
+        
+        tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,7 +53,12 @@ class MenuViewController: UIViewController {
     
     func loadMenuItems(){
         //loads tableview items from realm, then reloads tableview
-        menuItems = realm.objects(MenuItem.self).sorted(byKeyPath: "date", ascending: false)
+        
+        
+        menuItems = realm.objects(MenuItem.self).sorted(byKeyPath: "date", ascending: false).sorted(byKeyPath: "isCurrentLocation", ascending: false)
+        
+        
+        
         tableView.reloadData()
         
     }
@@ -70,6 +77,14 @@ class MenuViewController: UIViewController {
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         
+        do{
+            try realm.write{
+                let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
+                realm.delete(oldLocations)
+            }
+        }catch{
+            print(error)
+        }
         locationPressed.toggle()
         //Sends back to main view
         performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
@@ -89,14 +104,20 @@ class MenuViewController: UIViewController {
 
             if locationPressed{
                 mainVC.locationManager.requestLocation()
+                mainVC.clearDetails()
                 
             }else if let validCityName = menuItemPressedCityName{
                 mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0)
+                mainVC.clearDetails()
                 
             }else if searchFull{
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
+                mainVC.clearDetails()
                 
             }
+            
+            
+            
             removeParticles(from: mainVC.gradientView)
             
         }
@@ -111,13 +132,17 @@ extension MenuViewController: MenuTableViewCellDelegate{
     func didPressButton(with cityName: String, indexPath: IndexPath) {
         menuItemPressedCityName = cityName
         
-        do{
-            try realm.write{
-                realm.delete(menuItems![indexPath.row])
+        if menuItems![indexPath.row].isCurrentLocation != true {
+            do{
+                try realm.write{
+                    realm.delete(menuItems![indexPath.row])
+                    
+                }
+            }catch{
+                print(error)
             }
-        }catch{
-            print(error)
         }
+        
         //Sends back to main view
         performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
         

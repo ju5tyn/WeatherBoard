@@ -7,14 +7,27 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    //MARK: Realm
+    let realm = try! Realm()
+    var menuItems: Results<MenuItem>?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        do{
+            try realm.write{
+                let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
+                realm.delete(oldLocations)
+            }
+        }catch{
+            print(error)
+        }
+        
         return true
     }
 

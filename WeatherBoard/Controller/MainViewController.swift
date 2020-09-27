@@ -82,9 +82,13 @@ class MainViewController: UIViewController{
         weatherManager.delegate = self
         locationManager.delegate = self
         
+        
+        
         //Requests user location
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
+        
+        
         
     }
     
@@ -95,6 +99,8 @@ class MainViewController: UIViewController{
     
     //MARK: Menu Pressed
     @IBAction func menuButtonPressed(_ sender: UIButton) {
+        
+        
         
         self.performSegue(withIdentifier: Constants.segues.mainToMenu, sender: self)
         setGradientColor(color: "menu")
@@ -153,6 +159,8 @@ class MainViewController: UIViewController{
         weatherImageView.image = nil
         tempLabel.text = ""
         timeLocationLabel.text = ""
+        activityIndicator.startAnimating()
+        setGradientColor(color: "menu")
         removeParticles(from: view)
     }
     

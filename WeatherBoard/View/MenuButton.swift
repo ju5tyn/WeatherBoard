@@ -8,6 +8,11 @@
 
 import UIKit
 import CoreGraphics
+import RealmSwift
+
+//MARK: Realm
+let realm = try! Realm()
+var menuItems: Results<MenuItem>?
 
 class MenuButton: UIButton {
 

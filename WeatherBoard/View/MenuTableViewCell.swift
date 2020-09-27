@@ -47,6 +47,7 @@ class MenuTableViewCell: UITableViewCell {
             let index = collectionView.indexPath(for: self)
                 {
                 if let validLabel = menuLabel.text{
+                    
                     delegate?.didPressButton(with: validLabel, indexPath: index)
                 }
             }
