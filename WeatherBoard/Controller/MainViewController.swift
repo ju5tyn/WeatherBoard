@@ -31,19 +31,12 @@ class MainViewController: UIViewController{
     //buttons
     @IBOutlet weak var menuButton: UIButton!
     
-    
-    
     //timetravel Buttons
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
     @IBOutlet weak var dayAfterButton: UIButton!
-
-    
-    
     
     //MARK: - Variables
-    
-
     var daySelected: Int = 0
     var dayString: String = "day"
     var menuOpen: Bool = false
@@ -53,36 +46,30 @@ class MainViewController: UIViewController{
     let hillGradient = CAGradientLayer()
     var emitterNode = SKEmitterNode()
     
-    //MARK: realm
+    //MARK: Realm
     let realm = try! Realm()
     var menuItems: Results<MenuItem>?
     
     //MARK: - Delegate stuff
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
-    
-    
 
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //forces status bar to appear white
         overrideUserInterfaceStyle = .dark
         
+        //setup for mask of hill
         let hillMask = UIImageView()
         hillMask.image = UIImage(named: "hills")
         hillMask.frame = hillView.bounds
         hillView.mask = hillMask
-        
-        weatherManager.delegate = self
-        locationManager.delegate = self
-        
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.requestLocation()
-        
+
+        //for gradients
         gradientSetup()
         highlightButton(todayButton)
-        
         
         //drop shadows for uilabels
         tempLabel.textDropShadow()
@@ -90,6 +77,14 @@ class MainViewController: UIViewController{
         todayButton.titleLabel?.textDropShadow()
         tomorrowButton.titleLabel?.textDropShadow()
         dayAfterButton.titleLabel?.textDropShadow()
+        
+        //delegate
+        weatherManager.delegate = self
+        locationManager.delegate = self
+        
+        //Requests user location
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
         
     }
     
@@ -187,13 +182,10 @@ class MainViewController: UIViewController{
             
             //if particleToDisplay not nil, will set emitternode to particle
             if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
-                
-                
                 emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
                 setParticles(baseView: gradientView, emitterNode: emitterNode)
             
             }
-            
             //stops animating activity indicator
             self.activityIndicator.stopAnimating()
         }

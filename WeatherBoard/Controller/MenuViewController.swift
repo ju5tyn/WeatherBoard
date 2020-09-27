@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class MenuViewController: UIViewController, MenuTableViewCellDelegate {
+class MenuViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -18,12 +18,10 @@ class MenuViewController: UIViewController, MenuTableViewCellDelegate {
     var locationPressed: Bool = false
     var menuItems: Results<MenuItem>?
     var menuItemPressedCityName: String?
-    //var particlesWereShown: Bool?
-    
     //realm
     let realm = try! Realm()
     
-    //MARK: - ViewDidLoad
+    //MARK: - AppDelegate functions
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,56 +31,32 @@ class MenuViewController: UIViewController, MenuTableViewCellDelegate {
         //dismisses keyboard when tapped off
         self.hideKeyboardWhenTappedAround()
         
-        
-        
-        //forces status bar to be dark
+        //forces status bar to be lightt text
         overrideUserInterfaceStyle = .dark
-        
-    
+
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableCell")
-        
-        
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         searchBar.becomeFirstResponder()
-        
-        
     }
     
+    //MARK: - Functions
+    
     func loadMenuItems(){
-        
+        //loads tableview items from realm, then reloads tableview
         menuItems = realm.objects(MenuItem.self).sorted(byKeyPath: "date", ascending: false)
         tableView.reloadData()
         
     }
     
-    func didPressButton(with cityName: String, indexPath: IndexPath) {
-        menuItemPressedCityName = cityName
-        
-        do{
-            try realm.write{
-                realm.delete(menuItems![indexPath.row])
-            }
-        }catch{
-            print(error)
-        }
-        
-        tableView.reloadData()
-        //Sends back to main view
-        performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
-        
-    }
 
-    
     //MARK: - Buttons
     
     //Back button pressed
@@ -103,6 +77,7 @@ class MenuViewController: UIViewController, MenuTableViewCellDelegate {
         
     }
     
+    //MARK: - Prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segues.menuToMain{
@@ -111,22 +86,15 @@ class MenuViewController: UIViewController, MenuTableViewCellDelegate {
             mainVC.menuOpen.toggle()
             mainVC.toggleHide()
             mainVC.setDetails()
-            
-            
-            
+
             if locationPressed{
-                
                 mainVC.locationManager.requestLocation()
                 
-                
             }else if let validCityName = menuItemPressedCityName{
-                
                 mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0)
                 
             }else if searchFull{
-    
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
-                
                 
             }
             removeParticles(from: mainVC.gradientView)
@@ -134,10 +102,29 @@ class MenuViewController: UIViewController, MenuTableViewCellDelegate {
         }
     }
     
-    
-    
-    
 }
+
+//MARK: - MenuTableViewCell Delegate methods
+
+extension MenuViewController: MenuTableViewCellDelegate{
+    
+    func didPressButton(with cityName: String, indexPath: IndexPath) {
+        menuItemPressedCityName = cityName
+        
+        do{
+            try realm.write{
+                realm.delete(menuItems![indexPath.row])
+            }
+        }catch{
+            print(error)
+        }
+        //Sends back to main view
+        performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
+        
+    }
+}
+
+//MARK: - UISearchBar Delegate Methods
 
 extension MenuViewController: UISearchBarDelegate {
     
@@ -152,25 +139,17 @@ extension MenuViewController: UISearchBarDelegate {
             performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
             
         }else{
-            print("error no text boooo")
+            print("No text in ")
         }
         
     }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
-    }
-    
     
 }
 
 
 
 //MARK: - Keyboard dismiss code
+
 extension UIViewController {
     
     func hideKeyboardWhenTappedAround() {
@@ -185,48 +164,21 @@ extension UIViewController {
 }
 
 
-//MARK: - TableView Methods
+//MARK: - TableView Datasource+Delegate Methods
 
 extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //if number of menu items lower than 4, return that number of menu items
-        
-        
-        if (menuItems?.count ?? 0 < 4){
-            return menuItems?.count ?? 0
-        }else{
-            return 4
-        }
- 
-        //return menuItems?.count ?? 0
-        
+        return(menuItems?.count ?? 0 < 4 ? menuItems?.count ?? 0 : 4)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableCell", for: indexPath) as! MenuTableViewCell
         
         cell.delegate = self
-        
-        let cellCityName = menuItems?[indexPath.row].cityName
-        
-        cell.menuLabel.text = cellCityName
-        
-        //cell.menuButton.tag = indexPath.row
-        
+        cell.menuLabel.text = menuItems?[indexPath.row].cityName
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-        
-    }
-    
-    
-    
-    
-    
-    
     
 }
