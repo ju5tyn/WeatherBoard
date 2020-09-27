@@ -18,6 +18,8 @@ protocol MenuTableViewCellDelegate {
 class MenuTableViewCell: UITableViewCell {
     @IBOutlet weak var menuButton: MenuButton!
     @IBOutlet weak var menuLabel: UILabel!
+    @IBOutlet weak var locationIcon: UIImageView!
+    
     
     var delegate: MenuTableViewCellDelegate?
     
@@ -27,6 +29,7 @@ class MenuTableViewCell: UITableViewCell {
         backgroundColor = UIColor.clear
         
         menuLabel.textDropShadow()
+        //locationIcon.isHidden = true
         
     }
     

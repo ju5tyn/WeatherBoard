@@ -16,11 +16,13 @@ struct WeatherModel{
     let sunrise: Int
     let sunset: Int
     let dt: Int
-    
+    let isCurrentLocation: Bool
     
     let conditionID: [Int]
     let temperature: [Double]
     let description: [String]
+    
+    
     
     var tempString: [String] {
         return [String(format: "%.0f", temperature[0]), String(format: "%.0f", temperature[1]), String(format: "%.0f", temperature[2])]
@@ -98,10 +100,6 @@ struct WeatherModel{
         default:
             return nil
         }
-        
-        
-        
-        
         
     }
     

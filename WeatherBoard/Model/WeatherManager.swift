@@ -25,17 +25,17 @@ struct WeatherManager {
     
     func fetchWeather(cityName: String, time: Int) {
         let urlString = "\(weatherURL)&q=\(cityName)"
-        performRequest(with: urlString, time: time)
+        performRequest(with: urlString, time: time, isCurrentLocation: false)
         
     }
     
     func fetchWeather(latitude: Double, longitude: Double, time: Int){
         let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
-        performRequest(with: urlString, time: time)
+        performRequest(with: urlString, time: time, isCurrentLocation: true)
     }
     
     
-    func performRequest(with urlString: String, time: Int) {
+    func performRequest(with urlString: String, time: Int, isCurrentLocation: Bool) {
         //Create a url
         
         if let url = URL(string: urlString){
@@ -53,7 +53,7 @@ struct WeatherManager {
                     
                     
                     if let safeData = data {
-                        if let weather = self.parseJSON(safeData) {
+                        if let weather = self.parseJSON(safeData, isCurrentLocation: isCurrentLocation) {
                             self.delegate?.didUpdateWeather(self, weather: weather)
                         }
                     }
@@ -65,7 +65,7 @@ struct WeatherManager {
         
     }
     
-    func parseJSON(_ data: Data) -> WeatherModel? {
+    func parseJSON(_ data: Data, isCurrentLocation: Bool) -> WeatherModel? {
         
         let decoder = JSONDecoder()
         do {
@@ -90,7 +90,7 @@ struct WeatherManager {
             
             
             //returns weather model to the caller
-            return WeatherModel(timeZone: timezone, cityName: cityName, sunrise: sunrise, sunset: sunset,  dt: dt, conditionID: id, temperature: temp, description: description)
+            return WeatherModel(timeZone: timezone, cityName: cityName, sunrise: sunrise, sunset: sunset,  dt: dt, isCurrentLocation: isCurrentLocation, conditionID: id, temperature: temp, description: description)
             
         } catch {
             delegate?.didFailWithError(error: error)

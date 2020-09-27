@@ -13,5 +13,6 @@ class MenuItem: Object{
     
     @objc dynamic var cityName: String?
     @objc dynamic var date: Date = Date()
+    @objc dynamic var isCurrentLocation: Bool = false
     
 }

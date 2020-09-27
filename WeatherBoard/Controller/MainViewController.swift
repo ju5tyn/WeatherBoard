@@ -285,6 +285,7 @@ extension MainViewController: WeatherManagerDelegate{
                 try self.realm.write{
                     let newItem = MenuItem()
                     newItem.cityName = self.weatherModel?.cityName
+                    newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
                     self.realm.add(newItem)
                 }
             }catch{
