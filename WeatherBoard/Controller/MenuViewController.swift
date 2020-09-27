@@ -16,6 +16,7 @@ class MenuViewController: UIViewController {
     
     var searchFull: Bool = false
     var locationPressed: Bool = false
+    var locationCellPressed: Bool = false
     var menuItems: Results<MenuItem>?
     var menuItemPressedCityName: String?
     //realm
@@ -77,6 +78,7 @@ class MenuViewController: UIViewController {
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         
+        
         do{
             try realm.write{
                 let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
@@ -107,11 +109,17 @@ class MenuViewController: UIViewController {
                 mainVC.clearDetails()
                 
             }else if let validCityName = menuItemPressedCityName{
-                mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0)
-                mainVC.clearDetails()
-                
+                if locationCellPressed{
+                    print("boom shaka")
+                    mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0, doNotSave: true)
+                    mainVC.clearDetails()
+                }else{
+                    mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0, doNotSave: false)
+                    print("boooefhiuagebnogfao")
+                    mainVC.clearDetails()
+                }
             }else if searchFull{
-                mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0)
+                mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0, doNotSave: false)
                 mainVC.clearDetails()
                 
             }
@@ -130,9 +138,14 @@ class MenuViewController: UIViewController {
 extension MenuViewController: MenuTableViewCellDelegate{
     
     func didPressButton(with cityName: String, indexPath: IndexPath) {
+        
+        
         menuItemPressedCityName = cityName
         
         if menuItems![indexPath.row].isCurrentLocation != true {
+            
+            
+            
             do{
                 try realm.write{
                     realm.delete(menuItems![indexPath.row])
@@ -141,6 +154,8 @@ extension MenuViewController: MenuTableViewCellDelegate{
             }catch{
                 print(error)
             }
+        }else{
+            locationCellPressed = true
         }
         
         //Sends back to main view
@@ -206,6 +221,7 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         
         if menuItems?[indexPath.row].isCurrentLocation != true{
             cell.locationIcon.isHidden = true
+            
         }
         
         return cell

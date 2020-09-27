@@ -103,6 +103,7 @@ class MainViewController: UIViewController{
         
         
         self.performSegue(withIdentifier: Constants.segues.mainToMenu, sender: self)
+        
         setGradientColor(color: "menu")
         hideParticles(view: view)
         mainView.isHidden = true
@@ -288,20 +289,20 @@ extension MainViewController: WeatherManagerDelegate{
         //sets this view's weather model to data from weathermanager
         DispatchQueue.main.async {
             
-            //writes the city name to realm
-            do{
-                try self.realm.write{
-                    let newItem = MenuItem()
-                    newItem.cityName = self.weatherModel?.cityName
-                    newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
-                    self.realm.add(newItem)
+            if self.weatherModel?.doNotSave != true{
+                //writes the city name to realm
+                do{
+                    try self.realm.write{
+                        let newItem = MenuItem()
+                        newItem.cityName = self.weatherModel?.cityName
+                        newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
+                        self.realm.add(newItem)
+                    }
+                }catch{
+                    print(error)
                 }
-            }catch{
-                print(error)
+                //realm end
             }
-            //realm end
-            
-            
             self.dayString = weather.isDay ? "day" : "night"
             self.setDetails()
             

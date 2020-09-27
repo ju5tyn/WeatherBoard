@@ -17,6 +17,7 @@ struct WeatherModel{
     let sunset: Int
     let dt: Int
     let isCurrentLocation: Bool
+    let doNotSave: Bool
     
     let conditionID: [Int]
     let temperature: [Double]
@@ -65,7 +66,7 @@ struct WeatherModel{
     
     var particleToDisplay: [String?]{
         
-        print([getParticleName(conditionID[0]), getParticleName(conditionID[1]), getParticleName(conditionID[2])])
+        //print([getParticleName(conditionID[0]), getParticleName(conditionID[1]), getParticleName(conditionID[2])])
         
         return [getParticleName(conditionID[0]), getParticleName(conditionID[1]), getParticleName(conditionID[2])]
         
@@ -77,7 +78,7 @@ struct WeatherModel{
         
         let iconName = getIconName(conditionID)
         
-        print(iconName)
+        //print(iconName)
         
         switch iconName{
         
@@ -105,7 +106,7 @@ struct WeatherModel{
     
     func getIconName(_ conditionID: Int) -> String{
         
-        print(conditionID)
+        //print(conditionID)
         
         switch conditionID{
             
