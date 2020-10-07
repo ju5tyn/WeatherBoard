@@ -6,11 +6,13 @@
 //  Copyright © 2020 Justyn Henman. All rights reserved.
 //
 
-struct Constants {
+struct C {
     
     static let cellIdentifier = "MenuCell"
     
     static let mainURL = "https://api.openweathermap.org/data/2.5/forecast?units=metric&appid="
+    
+    
     
     struct segues{
         

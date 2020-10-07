@@ -72,7 +72,7 @@ class MenuViewController: UIViewController {
         
         
         //Sends back to main view
-        performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
+        performSegue(withIdentifier: C.segues.menuToMain, sender: self)
         
     }
     
@@ -89,7 +89,7 @@ class MenuViewController: UIViewController {
         }
         locationPressed.toggle()
         //Sends back to main view
-        performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
+        performSegue(withIdentifier: C.segues.menuToMain, sender: self)
         
         
     }
@@ -97,7 +97,7 @@ class MenuViewController: UIViewController {
     //MARK: - Prepare for segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segues.menuToMain{
+        if segue.identifier == C.segues.menuToMain{
             
             let mainVC = segue.destination as! MainViewController
             mainVC.menuOpen.toggle()
@@ -159,7 +159,7 @@ extension MenuViewController: MenuTableViewCellDelegate{
         }
         
         //Sends back to main view
-        performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
+        performSegue(withIdentifier: C.segues.menuToMain, sender: self)
         
     }
 }
@@ -176,7 +176,7 @@ extension MenuViewController: UISearchBarDelegate {
         if (searchBar.text != ""){
             searchFull = true
             
-            performSegue(withIdentifier: Constants.segues.menuToMain, sender: self)
+            performSegue(withIdentifier: C.segues.menuToMain, sender: self)
             
         }else{
             print("No text in ")

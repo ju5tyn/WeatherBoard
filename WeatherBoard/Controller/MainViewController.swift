@@ -102,7 +102,7 @@ class MainViewController: UIViewController{
         
         
         
-        self.performSegue(withIdentifier: Constants.segues.mainToMenu, sender: self)
+        self.performSegue(withIdentifier: C.segues.mainToMenu, sender: self)
         
         setGradientColor(color: "menu")
         hideParticles(view: view)
@@ -239,7 +239,7 @@ class MainViewController: UIViewController{
     //MARK: - Segues
     //Called on segue to menu
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segues.mainToMenu{
+        if segue.identifier == C.segues.mainToMenu{
             
             //let menuVC = segue.destination as! MenuViewController
             
@@ -311,6 +311,10 @@ extension MainViewController: WeatherManagerDelegate{
     
     func didFailWithError(error: Error){
         print(error)
+        
+        let failedAlert = UIAlertController(title: "Invalid Weather Location", message: "Please entera valid location", preferredStyle: .actionSheet)
+        
+        failedAlert.show(self, sender: self)
         print("error getting data")
         
         

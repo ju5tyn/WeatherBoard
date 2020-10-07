@@ -83,19 +83,19 @@ struct WeatherModel{
         switch iconName{
         
         case "rain", "rain_clouds", "shower_rain":
-            return Constants.particles.rainParticle
+            return C.particles.rainParticle
             
         case "thunderstorm":
-            return Constants.particles.stormParticle
+            return C.particles.stormParticle
             
         case "snow":
-            return Constants.particles.snowParticle
+            return C.particles.snowParticle
             
         case "clear":
             if self.isDay{
                 return nil
             }else{
-                return Constants.particles.starParticle
+                return C.particles.starParticle
             }
             
         default:
