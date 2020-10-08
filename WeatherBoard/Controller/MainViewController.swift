@@ -13,7 +13,9 @@ import RealmSwift
 
 
 
+
 class MainViewController: UIViewController{
+    
 
     //MARK: - IBOutlets
     
@@ -21,12 +23,8 @@ class MainViewController: UIViewController{
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var hillView: UIView!
+    @IBOutlet weak var weatherContainerView: UIView!
     
-    //elements
-    @IBOutlet weak var weatherImageView: UIImageView!
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var timeLocationLabel: UILabel!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     //buttons
     @IBOutlet weak var menuButton: UIButton!
@@ -72,8 +70,6 @@ class MainViewController: UIViewController{
         highlightButton(todayButton)
         
         //drop shadows for uilabels
-        tempLabel.textDropShadow()
-        timeLocationLabel.textDropShadow()
         todayButton.titleLabel?.textDropShadow()
         tomorrowButton.titleLabel?.textDropShadow()
         dayAfterButton.titleLabel?.textDropShadow()
@@ -88,7 +84,7 @@ class MainViewController: UIViewController{
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         
-        
+        clearDetails()
         
     }
     
@@ -157,10 +153,7 @@ class MainViewController: UIViewController{
     //MARK: clearDetails
     //resets weather details to empty
     func clearDetails(){
-        weatherImageView.image = nil
-        tempLabel.text = ""
-        timeLocationLabel.text = ""
-        activityIndicator.startAnimating()
+        
         setGradientColor(color: "menu")
         removeParticles(from: view)
     }
@@ -175,13 +168,13 @@ class MainViewController: UIViewController{
         if weatherModel != nil {
             
             //sets tempLabel label to temperature followed by condition
-            self.tempLabel.text = "\(weatherModel!.tempString[self.daySelected])° \(weatherModel!.description[self.daySelected])"
+            //self.tempLabel.text = "\(weatherModel!.tempString[self.daySelected])° \(weatherModel!.description[self.daySelected])"
             
             //sets time/location label to time in location followed by name of location
-            self.timeLocationLabel.text = "\(weatherModel!.timeString) - \(weatherModel!.cityName)"
+            //self.timeLocationLabel.text = "\(weatherModel!.timeString) - \(weatherModel!.cityName)"
             
             //sets weather image to string based on condition and day/night
-            self.weatherImageView.setImage(UIImage(named: "icon_\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)"))
+            //self.weatherImageView.setImage(UIImage(named: "icon_\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)"))
             
             //sets gradient color with string based on condition and day/night
             if menuOpen != true {
@@ -196,7 +189,7 @@ class MainViewController: UIViewController{
             
             }
             //stops animating activity indicator
-            self.activityIndicator.stopAnimating()
+            //self.activityIndicator.stopAnimating()
         }
     }
     
