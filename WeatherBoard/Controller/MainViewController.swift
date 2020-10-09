@@ -48,6 +48,10 @@ class MainViewController: UIViewController{
     let realm = try! Realm()
     var menuItems: Results<MenuItem>?
     
+    //MARK: - Container views
+    var weatherVC: WeatherViewController?
+    
+    
     //MARK: - Delegate stuff
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
@@ -154,6 +158,7 @@ class MainViewController: UIViewController{
     //resets weather details to empty
     func clearDetails(){
         
+        weatherVC?.clearWeatherDetails()
         setGradientColor(color: "menu")
         removeParticles(from: view)
     }
@@ -239,6 +244,11 @@ class MainViewController: UIViewController{
             //temp code to show particles permenantly
             //menuVC.particlesWereShown = true
             
+        }else if segue.identifier == "mainToWeather"{
+            
+            weatherVC = segue.destination as? WeatherViewController
+            
+            
         }
     }
     
@@ -305,9 +315,9 @@ extension MainViewController: WeatherManagerDelegate{
     func didFailWithError(error: Error){
         print(error)
         
-        let failedAlert = UIAlertController(title: "Invalid Weather Location", message: "Please entera valid location", preferredStyle: .actionSheet)
+        //let failedAlert = UIAlertController(title: "Invalid Weather Location", message: "Please entera valid location", preferredStyle: .actionSheet)
         
-        failedAlert.show(self, sender: self)
+        //failedAlert.show(self, sender: self)
         print("error getting data")
         
         

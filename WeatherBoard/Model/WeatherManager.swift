@@ -25,12 +25,14 @@ struct WeatherManager {
     
     func fetchWeather(cityName: String, time: Int, doNotSave: Bool) {
         let urlString = "\(weatherURL)&q=\(cityName)"
+        print(urlString)
         performRequest(with: urlString, time: time, isCurrentLocation: false, doNotSave: doNotSave)
         
     }
     
     func fetchWeather(latitude: Double, longitude: Double, time: Int){
         let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
+        print(urlString)
         performRequest(with: urlString, time: time, isCurrentLocation: true, doNotSave: false)
     }
     
