@@ -265,7 +265,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:35 - Sydney" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ7-Qx-hdu">
-                                <rect key="frame" x="20" y="239" width="374" height="23"/>
+                                <rect key="frame" x="20" y="299" width="374" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="9Mk-EC-Xb9"/>
                                 </constraints>
@@ -274,7 +274,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lJv-IT-U5x">
-                                <rect key="frame" x="144" y="44" width="126" height="126"/>
+                                <rect key="frame" x="144" y="104" width="126" height="126"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="126" id="3al-3g-Ad2"/>
                                     <constraint firstAttribute="height" constant="126" id="frC-tJ-fzC"/>
@@ -285,7 +285,7 @@
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-8U-sGI">
-                                <rect key="frame" x="20" y="188" width="374" height="41"/>
+                                <rect key="frame" x="20" y="248" width="374" height="41"/>
                                 <string key="text">19° Clear
 </string>
                                 <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="34"/>
@@ -301,7 +301,7 @@
                             <constraint firstItem="lJv-IT-U5x" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="HUV-Wb-S75"/>
                             <constraint firstItem="NZ7-Qx-hdu" firstAttribute="top" secondItem="a5I-8U-sGI" secondAttribute="bottom" constant="10" id="IWT-Cj-rcq"/>
                             <constraint firstItem="NZ7-Qx-hdu" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="Tbz-Ra-EZj"/>
-                            <constraint firstItem="lJv-IT-U5x" firstAttribute="top" secondItem="1IU-mS-zSX" secondAttribute="topMargin" id="WXY-Vl-Wsg"/>
+                            <constraint firstItem="lJv-IT-U5x" firstAttribute="top" secondItem="1IU-mS-zSX" secondAttribute="topMargin" constant="60" id="WXY-Vl-Wsg"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="f0T-h4-VrU"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="top" secondItem="lJv-IT-U5x" secondAttribute="bottom" constant="18" id="hdm-YN-oOT"/>
                             <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="1IU-mS-zSX" secondAttribute="centerY" id="ra1-dY-CJ6"/>

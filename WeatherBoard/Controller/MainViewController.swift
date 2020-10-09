@@ -172,19 +172,12 @@ class MainViewController: UIViewController{
         //if weather model has had contents populated
         if weatherModel != nil {
             
-            //sets tempLabel label to temperature followed by condition
-            //self.tempLabel.text = "\(weatherModel!.tempString[self.daySelected])° \(weatherModel!.description[self.daySelected])"
-            
-            //sets time/location label to time in location followed by name of location
-            //self.timeLocationLabel.text = "\(weatherModel!.timeString) - \(weatherModel!.cityName)"
-            
-            //sets weather image to string based on condition and day/night
-            //self.weatherImageView.setImage(UIImage(named: "icon_\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)"))
+            //sets weather containerView details
+            weatherVC?.setWeatherDetails(using: weatherModel!, day: daySelected)
             
             //sets gradient color with string based on condition and day/night
-            if menuOpen != true {
+            if menuOpen == false {
                 self.setGradientColor(color: "\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)")
-
             }
             
             //if particleToDisplay not nil, will set emitternode to particle
@@ -315,9 +308,9 @@ extension MainViewController: WeatherManagerDelegate{
     func didFailWithError(error: Error){
         print(error)
         
-        //let failedAlert = UIAlertController(title: "Invalid Weather Location", message: "Please entera valid location", preferredStyle: .actionSheet)
+        let failedAlert = UIAlertController(title: "Invalid Weather Location", message: "Please enter valid location", preferredStyle: .actionSheet)
         
-        //failedAlert.show(self, sender: self)
+        failedAlert.show(self, sender: self)
         print("error getting data")
         
         
