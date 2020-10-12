@@ -145,6 +145,7 @@
                     <navigationItem key="navigationItem" id="QcL-xB-pIb"/>
                     <connections>
                         <outlet property="dayAfterButton" destination="XED-g8-fVk" id="rFs-Ol-aab"/>
+                        <outlet property="detailsContainerView" destination="IYJ-Ui-El7" id="jfk-Ny-y0t"/>
                         <outlet property="gradientView" destination="B2f-a6-7Oa" id="ymw-Gy-h1L"/>
                         <outlet property="hillView" destination="xgx-Ll-PVj" id="dbD-Ri-Qzz"/>
                         <outlet property="mainView" destination="gQ8-HG-zRf" id="104-8S-lni"/>
@@ -176,7 +177,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherBoard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHG-eM-E5a">
-                                <rect key="frame" x="124" y="76" width="166" height="29"/>
+                                <rect key="frame" x="130.5" y="76" width="153.5" height="29"/>
                                 <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -190,7 +191,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZm-fn-fpI">
-                                <rect key="frame" x="30" y="181" width="58" height="19"/>
+                                <rect key="frame" x="30" y="181" width="51" height="19"/>
                                 <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -265,7 +266,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:35 - Sydney" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ7-Qx-hdu">
-                                <rect key="frame" x="20" y="299" width="374" height="23"/>
+                                <rect key="frame" x="20" y="298" width="374" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="9Mk-EC-Xb9"/>
                                 </constraints>
@@ -285,7 +286,7 @@
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-8U-sGI">
-                                <rect key="frame" x="20" y="248" width="374" height="41"/>
+                                <rect key="frame" x="20" y="248" width="374" height="40"/>
                                 <string key="text">19° Clear
 </string>
                                 <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="34"/>
@@ -321,12 +322,40 @@
         <!--Details View Controller-->
         <scene sceneID="erl-UF-CSe">
             <objects>
-                <viewController title="Details View Controller" id="Lth-WC-o03" sceneMemberID="viewController">
+                <viewController title="Details View Controller" id="Lth-WC-o03" customClass="DetailsViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IvF-hv-MxF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="679"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OmM-FJ-Lfr">
+                                <rect key="frame" x="30" y="0.0" width="354" height="679"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailsCell" id="AxX-Ne-AsF">
+                                        <rect key="frame" x="0.0" y="28" width="354" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AxX-Ne-AsF" id="Rpw-HV-BO1">
+                                            <rect key="frame" x="0.0" y="0.0" width="354" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Kdf-Qx-GZW"/>
+                        <constraints>
+                            <constraint firstItem="OmM-FJ-Lfr" firstAttribute="top" secondItem="IvF-hv-MxF" secondAttribute="top" id="3bv-xc-F8k"/>
+                            <constraint firstItem="Kdf-Qx-GZW" firstAttribute="trailing" secondItem="OmM-FJ-Lfr" secondAttribute="trailing" constant="30" id="DtG-tb-syq"/>
+                            <constraint firstItem="OmM-FJ-Lfr" firstAttribute="bottom" secondItem="Kdf-Qx-GZW" secondAttribute="bottom" id="KKQ-sw-4d2"/>
+                            <constraint firstItem="OmM-FJ-Lfr" firstAttribute="leading" secondItem="Kdf-Qx-GZW" secondAttribute="leading" constant="30" id="do7-ba-sit"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="OmM-FJ-Lfr" id="qML-ML-0V1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXy-CN-Fsb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

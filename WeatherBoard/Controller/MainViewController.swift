@@ -24,6 +24,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var hillView: UIView!
     @IBOutlet weak var weatherContainerView: UIView!
+    @IBOutlet weak var detailsContainerView: UIView!
     
     
     //buttons
@@ -50,6 +51,10 @@ class MainViewController: UIViewController{
     
     //MARK: - Container views
     var weatherVC: WeatherViewController?
+    var detailsVC: DetailsViewController?
+    
+    
+    
     
     
     //MARK: - Delegate stuff
@@ -82,7 +87,7 @@ class MainViewController: UIViewController{
         weatherManager.delegate = self
         locationManager.delegate = self
         
-        
+        detailsContainerView.isHidden = true
         
         //Requests user location
         locationManager.requestWhenInUseAuthorization()
@@ -129,6 +134,21 @@ class MainViewController: UIViewController{
             default:
                 daySelected = 2
         }
+        
+        if daySelected == 2{
+            
+            weatherContainerView.isHidden = true
+            detailsContainerView.isHidden = false
+            
+            
+        }else{
+            
+            weatherContainerView.isHidden = false
+            detailsContainerView.isHidden = true
+            
+        }
+        
+        
         setDetails()
         
     }
@@ -242,6 +262,10 @@ class MainViewController: UIViewController{
             weatherVC = segue.destination as? WeatherViewController
             
             
+        }else if segue.identifier == "mainToDetails"{
+            
+            detailsVC = segue.destination as? DetailsViewController
+            
         }
     }
     
@@ -318,18 +342,7 @@ extension MainViewController: WeatherManagerDelegate{
 }
 
 
-//MARK: - EXT ImageView
 
-
-extension UIImageView{
-    func setImage(_ image: UIImage?, animated: Bool = true) {
-        let duration = animated ? 0.4 : 0.0
-        UIView.transition(with: self, duration: duration, options: .transitionFlipFromRight, animations: {
-            
-            self.image = image
-        }, completion: nil)
-    }
-}
 
 //MARK: - EXT Label
 

@@ -28,7 +28,7 @@ class WeatherViewController: UIViewController {
     func clearWeatherDetails(){
         print("details cleared")
         weatherImageView.image = nil
-        tempLabel.text = "HAHAHAH"
+        tempLabel.text = ""
         timeLocationLabel.text = ""
         activityIndicator.startAnimating()
     
@@ -53,3 +53,15 @@ class WeatherViewController: UIViewController {
     
 }
 
+//MARK: - EXT ImageView
+
+
+extension UIImageView{
+    func setImage(_ image: UIImage?, animated: Bool = true) {
+        let duration = animated ? 0.4 : 0.0
+        UIView.transition(with: self, duration: duration, options: .transitionFlipFromRight, animations: {
+            
+            self.image = image
+        }, completion: nil)
+    }
+}
