@@ -18,6 +18,7 @@ struct WeatherModel{
     let dt: Int
     let isCurrentLocation: Bool
     let doNotSave: Bool
+    let icon: String
     
     let conditionID: [Int]
     let temperature: [Double]
@@ -26,12 +27,16 @@ struct WeatherModel{
     
     
     var tempString: [String] {
-        return [String(format: "%.0f", temperature[0]), String(format: "%.0f", temperature[1]), String(format: "%.0f", temperature[2])]
+        return [String(format: "%.0f", temperature[0]),
+                String(format: "%.0f", temperature[1]),
+                String(format: "%.0f", temperature[2])]
     }
     
     var conditionName: [String] {
         
-        return [getIconName(conditionID[0]), getIconName(conditionID[1]), getIconName(conditionID[2])]
+        return [getIconName(conditionID[0]),
+                getIconName(conditionID[1]),
+                getIconName(conditionID[2])]
         
     }
     
@@ -66,11 +71,9 @@ struct WeatherModel{
     
     var particleToDisplay: [String?]{
         
-        //print([getParticleName(conditionID[0]), getParticleName(conditionID[1]), getParticleName(conditionID[2])])
-        
-        return [getParticleName(conditionID[0]), getParticleName(conditionID[1]), getParticleName(conditionID[2])]
-        
-        
+        return [getParticleName(conditionID[0]),
+                getParticleName(conditionID[1]),
+                getParticleName(conditionID[2])]
         
     }
     
@@ -78,29 +81,27 @@ struct WeatherModel{
         
         let iconName = getIconName(conditionID)
         
-        //print(iconName)
-        
         switch iconName{
         
-        case "rain", "rain_clouds", "shower_rain":
-            return C.particles.rainParticle
-            
-        case "thunderstorm":
-            return C.particles.stormParticle
-            
-        case "snow":
-            return C.particles.snowParticle
-            
-        case "clear":
-            if self.isDay{
+            case "rain", "rain_clouds", "shower_rain":
+                return C.particles.rainParticle
+                
+            case "thunderstorm":
+                return C.particles.stormParticle
+                
+            case "snow":
+                return C.particles.snowParticle
+                
+            case "clear":
+                if self.isDay{
+                    return nil
+                }else{
+                    return C.particles.starParticle
+                }
+                
+            default:
                 return nil
-            }else{
-                return C.particles.starParticle
             }
-            
-        default:
-            return nil
-        }
         
     }
     

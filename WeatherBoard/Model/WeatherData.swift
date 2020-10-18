@@ -20,6 +20,7 @@ struct List: Decodable{
     let dt: Int
     let main: Main
     let weather: [Weather]
+    
 }
 
 struct City: Decodable {
@@ -41,5 +42,5 @@ struct Weather: Decodable {
     let id: Int
     let main: String
     let description: String
-    
+    let icon: String
 }

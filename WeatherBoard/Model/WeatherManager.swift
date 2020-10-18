@@ -84,7 +84,13 @@ struct WeatherManager {
             //attributes today
             //weather[0] is only in array
             //change list array number to count in 3 hour increments
-            let id = [decodedData.list[0].weather[0].id,decodedData.list[7].weather[0].id,decodedData.list[15].weather[0].id]
+            let id = [decodedData.list[0].weather[0].id,
+                      decodedData.list[7].weather[0].id,
+                      decodedData.list[15].weather[0].id]
+            
+            let icon = [decodedData.list[0].weather[0].icon,
+                        decodedData.list[7].weather[0].icon,
+                        decodedData.list[15].weather[0].icon]
             
             let temp = [decodedData.list[0].main.temp, decodedData.list[7].main.temp, decodedData.list[15].main.temp]
             
@@ -92,7 +98,7 @@ struct WeatherManager {
             
             
             //returns weather model to the caller
-            return WeatherModel(timeZone: timezone, cityName: cityName, sunrise: sunrise, sunset: sunset,  dt: dt, isCurrentLocation: isCurrentLocation, doNotSave: doNotSave, conditionID: id, temperature: temp, description: description)
+            return WeatherModel(timeZone: timezone, cityName: cityName, sunrise: sunrise, sunset: sunset,  dt: dt, isCurrentLocation: isCurrentLocation, doNotSave: doNotSave, icon: "placeholder", conditionID: id, temperature: temp, description: description)
             
         } catch {
             delegate?.didFailWithError(error: error)

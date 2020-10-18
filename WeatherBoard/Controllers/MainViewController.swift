@@ -37,7 +37,6 @@ class MainViewController: UIViewController{
     
     //MARK: - Variables
     var daySelected: Int = 0
-    var dayString: String = "day"
     var menuOpen: Bool = false
     
     var weatherModel: WeatherModel?
@@ -91,6 +90,7 @@ class MainViewController: UIViewController{
         
         //Requests user location
         locationManager.requestWhenInUseAuthorization()
+        
         locationManager.requestLocation()
         
         clearDetails()
@@ -105,13 +105,11 @@ class MainViewController: UIViewController{
     //MARK: Menu Pressed
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
-        
         self.performSegue(withIdentifier: C.segues.mainToMenu, sender: self)
         setGradientColor(color: "menu")
         hideParticles(view: view)
         mainView.isHidden = true
         menuOpen.toggle()
-        
         
     }
     
@@ -124,6 +122,7 @@ class MainViewController: UIViewController{
         highlightButton(sender)
         //Clears details, changes day selection, then sets details
         clearDetails()
+        
         switch sender.titleLabel!.text{
             case "TODAY":
                 daySelected = 0
@@ -179,13 +178,12 @@ class MainViewController: UIViewController{
         weatherVC?.clearWeatherDetails()
         setGradientColor(color: "menu")
         removeParticles(from: view)
+        
     }
     
     //MARK: setDetails
     //sets weather details to contents of weathermodel
     func setDetails(){
-        
-        //removeParticles(from: gradientView)
         
         //if weather model has had contents populated
         if weatherModel != nil {
@@ -219,8 +217,16 @@ class MainViewController: UIViewController{
     //MARK: setGradientColor
     //sets color of gradient to string passed in. Should match asset in asssets folder
     func setGradientColor(color: String){
-        gradient.colors = [UIColor(named: "grad_\(color)_bottom")!.cgColor, UIColor(named: "grad_\(color)_top")!.cgColor]
-        hillGradient.colors = [UIColor(named: "hill_\(color)_bottom")!.cgColor, UIColor(named: "hill_\(color)_top")!.cgColor]
+        
+        gradient.colors = [
+            UIColor(named: "grad_\(color)_bottom")!.cgColor,
+            UIColor(named: "grad_\(color)_top")!.cgColor
+        ]
+        
+        hillGradient.colors = [
+            UIColor(named: "hill_\(color)_bottom")!.cgColor,
+            UIColor(named: "hill_\(color)_top")!.cgColor
+        ]
         
     }
     
@@ -321,7 +327,6 @@ extension MainViewController: WeatherManagerDelegate{
                 }
                 //realm end
             }
-            self.dayString = weather.isDay ? "day" : "night"
             self.setDetails()
             
         }
