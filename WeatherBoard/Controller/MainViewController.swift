@@ -106,9 +106,7 @@ class MainViewController: UIViewController{
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
         
-        
         self.performSegue(withIdentifier: C.segues.mainToMenu, sender: self)
-        
         setGradientColor(color: "menu")
         hideParticles(view: view)
         mainView.isHidden = true
