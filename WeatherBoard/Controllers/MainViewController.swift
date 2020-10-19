@@ -317,9 +317,16 @@ extension MainViewController: WeatherManagerDelegate{
                 //writes the city name to realm
                 do{
                     try self.realm.write{
+                        
                         let newItem = MenuItem()
                         newItem.cityName = self.weatherModel?.cityName
                         newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
+                        
+                        
+                        let colorName = "\(self.weatherModel!.conditionName[0])_\(self.weatherModel!.isDayString)"
+                        newItem.topGradient = "grad_\(colorName)_top"
+                        newItem.bottomGradient = "grad_\(colorName)_bottom"
+                        
                         self.realm.add(newItem)
                     }
                 }catch{

@@ -218,6 +218,8 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         
         cell.delegate = self
         cell.menuLabel.text = menuItems?[indexPath.row].cityName
+        cell.menuButton.bottomGradient = menuItems?[indexPath.row].bottomGradient
+        cell.menuButton.topGradient = menuItems?[indexPath.row].topGradient
         
         if menuItems?[indexPath.row].isCurrentLocation != true{
             cell.locationIcon.isHidden = true

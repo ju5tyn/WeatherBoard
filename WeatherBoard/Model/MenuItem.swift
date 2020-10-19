@@ -15,4 +15,7 @@ class MenuItem: Object{
     @objc dynamic var date: Date = Date()
     @objc dynamic var isCurrentLocation: Bool = false
     
+    @objc dynamic var topGradient: String?
+    @objc dynamic var bottomGradient: String?
+    
 }

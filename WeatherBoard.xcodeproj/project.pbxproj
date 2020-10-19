@@ -99,9 +99,7 @@
 				3A33324324CCE3420053C0F7 /* Main.storyboard */,
 				3ACAA2DC25309CA900377451 /* DetailsTableViewCell.xib */,
 				3ACAA2DB25309CA900377451 /* DetailsTableViewCell.swift */,
-				3AF6CEF8251E21B2005D39CA /* MenuTableViewCell.xib */,
-				3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */,
-				3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */,
+				3AD73188253DBF45009B3A92 /* Menu TableView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,6 +181,16 @@
 				3AAD20BB2514DA7E002AF7BA /* SnowParticle.sks */,
 			);
 			path = Particles;
+			sourceTree = "<group>";
+		};
+		3AD73188253DBF45009B3A92 /* Menu TableView */ = {
+			isa = PBXGroup;
+			children = (
+				3AF6CEF8251E21B2005D39CA /* MenuTableViewCell.xib */,
+				3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */,
+				3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */,
+			);
+			path = "Menu TableView";
 			sourceTree = "<group>";
 		};
 		948890A2592330103FBEDCA9 /* Pods */ = {

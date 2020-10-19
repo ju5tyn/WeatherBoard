@@ -88,10 +88,6 @@ struct WeatherManager {
                       decodedData.list[7].weather[0].id,
                       decodedData.list[15].weather[0].id]
             
-            let icon = [decodedData.list[0].weather[0].icon,
-                        decodedData.list[7].weather[0].icon,
-                        decodedData.list[15].weather[0].icon]
-            
             let temp = [decodedData.list[0].main.temp, decodedData.list[7].main.temp, decodedData.list[15].main.temp]
             
             let description = [decodedData.list[0].weather[0].main, decodedData.list[7].weather[0].main, decodedData.list[15].weather[0].main]

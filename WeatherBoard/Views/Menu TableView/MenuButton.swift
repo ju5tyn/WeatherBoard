@@ -20,7 +20,8 @@ class MenuButton: UIButton {
     var saturation: CGFloat
     var brightness: CGFloat
     
-    
+    var topGradient: String?
+    var bottomGradient: String?
     
     required init?(coder aDecoder: NSCoder) {
         self.hue = 0.5
@@ -54,8 +55,8 @@ class MenuButton: UIButton {
         // 3
         let outerPath = createRoundedRectPath(for: outerRect, radius: 12.0)
       
-        var outerTop = UIColor(named: "grad_clear_night_top")
-        var outerBottom = UIColor(named: "grad_clear_night_bottom")
+        var outerTop = UIColor(named: topGradient!)
+        var outerBottom = UIColor(named: bottomGradient!)
        
         // 4
         if state != .highlighted {
@@ -69,8 +70,8 @@ class MenuButton: UIButton {
             context.setShadow(offset: CGSize(width: 0, height: 2),
             blur: 3.0, color: shadowColor.cgColor)
             
-            outerTop = UIColor(named: "grad_clear_night_bottom")
-            outerBottom = UIColor(named: "grad_clear_night_top")
+            outerTop = UIColor(named: bottomGradient!)
+            outerBottom = UIColor(named: topGradient!)
             
             
       }
