@@ -24,13 +24,27 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var dayLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainTempLabelTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainTempLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageWidthConstraint: NSLayoutConstraint!
     
     
+    //boxes
+    @IBOutlet weak var precipView: UIView!
+    @IBOutlet weak var windView: UIView!
+    @IBOutlet weak var cloudCoverView: UIView!
+    @IBOutlet weak var visibilityView: UIView!
+    @IBOutlet var boxViews: [UIView]!
     
-    
-
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        for box in boxViews{
+            box.layer.cornerRadius = 10
+            box.layer.shadowColor = UIColor.black.cgColor
+            box.layer.shadowOpacity = 0.5
+            box.layer.shadowOffset = .init(width: 0, height: 1)
+            box.layer.shadowRadius = 10
+        }
         
         if isSelected{
             //WHEN BIG
@@ -57,46 +71,55 @@ class DetailsTableViewCell: UITableViewCell {
     
     func setBig(){
         
-        weatherImageView.frame.size.height = 100
-        weatherImageView.frame.size.width = 100
-        
-        
-        
-        self.setNeedsLayout()
-        
-        mainTempLabel.font = mainTempLabel.font.withSize(50)
-        
-        detailStack.isHidden = false
-        highTempLabel.isHidden = false
-        lowTempLabel.isHidden = false
-        conditionLabel.isHidden = false
-        
-        mainTempLabelTopConstraint.constant = 100
-        mainTempLabelTrailingConstraint.constant = 30
-        dayLabelTopConstraint.constant = 100
-        layoutIfNeeded()
+        UIView.animate(withDuration: 0.2){ [self] in
+            self.imageWidthConstraint.constant = 100
+            self.imageHeightConstraint.constant = 100
+            
+            self.setNeedsLayout()
+            
+            mainTempLabel.font = mainTempLabel.font.withSize(50)
+            
+            
+            
+            mainTempLabelTopConstraint.constant = 100
+            mainTempLabelTrailingConstraint.constant = 60
+            dayLabelTopConstraint.constant = 100
+            
+            detailStack.isHidden = false
+            highTempLabel.isHidden = false
+            lowTempLabel.isHidden = false
+            conditionLabel.isHidden = false
+            layoutIfNeeded()
+        }
         
         
     }
     
     func setSmall(){
         
-            weatherImageView.frame.size.height = 50
-            weatherImageView.frame.size.width = 50
+        UIView.animate(withDuration: 0.2){ [self] in
+            self.imageWidthConstraint.constant = 50
+            self.imageHeightConstraint.constant = 50
             
             self.setNeedsLayout()
         
+        
             mainTempLabel.font = mainTempLabel.font.withSize(25)
+            
+            
+            
+            mainTempLabelTopConstraint.constant = 10
+            mainTempLabelTrailingConstraint.constant = 96
+            dayLabelTopConstraint.constant = 25
             
             detailStack.isHidden = true
             highTempLabel.isHidden = true
             lowTempLabel.isHidden = true
             conditionLabel.isHidden = true
-            
-            mainTempLabelTopConstraint.constant = 10
-            mainTempLabelTrailingConstraint.constant = 66
-            dayLabelTopConstraint.constant = 25
             layoutIfNeeded()
+        }
+        
+            
         
         
     }

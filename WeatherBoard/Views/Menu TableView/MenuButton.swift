@@ -90,7 +90,7 @@ class MenuButton: UIButton {
         context.addPath(outerPath)
         context.clip()
         drawLinearGradient(context: context, rect: outerRect,
-                           startColor: outerTop!.cgColor, endColor: outerBottom!.cgColor)
+                           startColor: outerBottom!.cgColor, endColor: outerTop!.cgColor)
         context.restoreGState()
 
     }

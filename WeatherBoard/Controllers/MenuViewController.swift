@@ -44,8 +44,8 @@ class MenuViewController: UIViewController {
         tableView.reloadData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         searchBar.becomeFirstResponder()
     }
@@ -125,7 +125,7 @@ class MenuViewController: UIViewController {
             }
             
             
-            
+            mainVC.addBlur()
             removeParticles(from: mainVC.gradientView)
             
         }

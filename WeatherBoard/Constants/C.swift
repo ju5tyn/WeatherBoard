@@ -27,6 +27,7 @@ struct C {
         static let snowParticle = "SnowParticle.sks"
         static let stormParticle = "StormParticle.sks"
         static let starParticle = "StarParticle.sks"
+        static let starParticleCloudy = "StarParticleCloudy.sks"
         
     }
     

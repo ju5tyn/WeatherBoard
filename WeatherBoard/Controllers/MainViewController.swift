@@ -106,6 +106,7 @@ class MainViewController: UIViewController{
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: C.segues.mainToMenu, sender: self)
+        removeBlur()
         setGradientColor(color: "menu")
         hideParticles(view: view)
         mainView.isHidden = true
@@ -121,15 +122,21 @@ class MainViewController: UIViewController{
         //Highlights button that was pressed
         highlightButton(sender)
         //Clears details, changes day selection, then sets details
-        clearDetails()
+        
+        
         
         switch sender.titleLabel!.text{
             case "TODAY":
                 daySelected = 0
+                removeBlur()
             case "TOMORROW":
                 daySelected = 1
+                removeBlur()
+                
             default:
                 daySelected = 2
+                addBlur()
+                
         }
         
         if daySelected == 2{
@@ -139,19 +146,78 @@ class MainViewController: UIViewController{
             
             
         }else{
-            
+            clearDetails()
             weatherContainerView.isHidden = false
             detailsContainerView.isHidden = true
+            setDetails()
             
         }
         
         
-        setDetails()
+        
         
     }
     
 //MARK: - Functions
     
+    func blurSetup(){
+        
+            if !UIAccessibility.isReduceTransparencyEnabled {
+                view.backgroundColor = .clear
+
+                let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+                let blurEffectView = UIVisualEffectView(effect: nil)
+                blurEffectView.frame = self.view.bounds
+                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                
+                let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+                let vibrancyView = UIVisualEffectView(effect: nil)
+                vibrancyView.frame = self.view.bounds
+                vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                
+                blurEffectView.tag = 2
+                
+                view.insertSubview(blurEffectView, at: 2)
+                blurEffectView.contentView.addSubview(vibrancyView)
+                //blurEffectView.contentView.insertSubview(vibrancyView, aboveSubview: view.viewWithTag(2)!)
+                
+                UIView.animate(withDuration: 0.4){
+                    blurEffectView.effect = blurEffect
+                    vibrancyView.effect = vibrancyEffect
+                }
+                
+                
+                
+            } else {
+                view.backgroundColor = .clear
+            }
+        
+    }
+    
+    func removeBlur(){
+        if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
+            UIView.animate(withDuration: 0.3){
+                blurView.effect = nil
+            }
+            
+        }
+    }
+    
+    func addBlur(){
+        if daySelected == 2{
+            if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
+                UIView.animate(withDuration: 0.3){
+                    
+                    blurView.effect = UIBlurEffect(style: .systemUltraThinMaterial)
+                    
+                }
+                
+            }else{
+                blurSetup()
+            }
+        }
+        
+    }
     
     //MARK: Set button alpha
     //Highlights currently selected button
@@ -202,8 +268,6 @@ class MainViewController: UIViewController{
                 setParticles(baseView: gradientView, emitterNode: emitterNode)
             
             }
-            //stops animating activity indicator
-            //self.activityIndicator.stopAnimating()
         }
     }
     
@@ -324,8 +388,8 @@ extension MainViewController: WeatherManagerDelegate{
                         
                         
                         let colorName = "\(self.weatherModel!.conditionName[0])_\(self.weatherModel!.isDayString)"
-                        newItem.topGradient = "grad_\(colorName)_top"
-                        newItem.bottomGradient = "grad_\(colorName)_bottom"
+                        newItem.topGradient = "button_\(colorName)_top"
+                        newItem.bottomGradient = "button_\(colorName)_bottom"
                         
                         self.realm.add(newItem)
                     }

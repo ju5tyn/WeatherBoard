@@ -92,11 +92,18 @@ struct WeatherModel{
             case "snow":
                 return C.particles.snowParticle
                 
-            case "clear":
+            case "clear", "few_clouds":
                 if self.isDay{
                     return nil
                 }else{
                     return C.particles.starParticle
+                }
+                
+            case "scattered_clouds", "broken_clouds":
+                if self.isDay{
+                    return nil
+                }else{
+                    return C.particles.starParticleCloudy
                 }
                 
             default:
