@@ -119,11 +119,8 @@ struct WeatherModel{
             case 300...399:
                 return "rain"
             
-            case 500...502:
+            case 500...504:
                 return "rain_clouds"
-            
-            case 503...504:
-                return "rain"
             
             case 511:
                 return "snow"
@@ -134,26 +131,23 @@ struct WeatherModel{
             case 600...699:
                 return "snow"
             
-            case 701...711:
+            case 700...780:
                 return "mist"
             
-            case 721:
-                return "mist"
-            
-            case 731, 761, 762:
-                return "mist"
-        
-            case 741, 751, 771:
-                return "mist"
-        
             case 781:
                 return "thunderstorm"
         
             case 800:
                 return "clear"
         
-            case 801...804:
+            case 801:
+                return "few_clouds"
+                
+            case 802...803:
                 return "scattered_clouds"
+                
+            case 804...804:
+                return "broken_clouds"
 
             default:
                 return "scattered_clouds"

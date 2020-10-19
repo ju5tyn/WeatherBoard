@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icon_rain_clouds_night@1x.png",
+      "filename" : "icon_rain_night.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icon_rain_clouds_night@2x.png",
+      "filename" : "icon_rain_night@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icon_rain_clouds_night@3x.png",
+      "filename" : "icon_rain_night@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
