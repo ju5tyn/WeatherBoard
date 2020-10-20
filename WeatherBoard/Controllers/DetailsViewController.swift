@@ -15,25 +15,30 @@ class DetailsViewController: UIViewController {
     var selectedCellIndexPath: IndexPath?
     
     let selectedHeight: CGFloat = 300
-    let deselectedHeight: CGFloat = 80
+    let deselectedHeight: CGFloat = 70
     
-    
+    var firstLaunch: Bool = true
     
         
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         tableView.register(UINib(nibName: "DetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableDetailsCell")
-        
-        
-        //tableView.rowHeight = 300
-        
         tableView.beginUpdates()
         tableView.endUpdates()
         
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        firstLaunch = false
         
     }
     
@@ -46,6 +51,8 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableDetailsCell", for: indexPath) as! DetailsTableViewCell
         
@@ -65,11 +72,23 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        
+        if indexPath.row == 0 && firstLaunch{
+                
+                return selectedHeight
+                
+            }
+        
+        
         if selectedCellIndexPath == indexPath {
                 return selectedHeight
         }else{
+            
             return deselectedHeight
         }
+        
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -85,10 +85,10 @@ class DetailsTableViewCell: UITableViewCell {
             mainTempLabelTrailingConstraint.constant = 60
             dayLabelTopConstraint.constant = 100
             
-            detailStack.isHidden = false
-            highTempLabel.isHidden = false
-            lowTempLabel.isHidden = false
-            conditionLabel.isHidden = false
+            detailStack.alpha = 1
+            highTempLabel.alpha = 1
+            lowTempLabel.alpha = 1
+            conditionLabel.alpha = 1
             layoutIfNeeded()
         }
         
@@ -101,6 +101,8 @@ class DetailsTableViewCell: UITableViewCell {
             self.imageWidthConstraint.constant = 50
             self.imageHeightConstraint.constant = 50
             
+            
+            
             self.setNeedsLayout()
         
         
@@ -112,10 +114,11 @@ class DetailsTableViewCell: UITableViewCell {
             mainTempLabelTrailingConstraint.constant = 96
             dayLabelTopConstraint.constant = 25
             
-            detailStack.isHidden = true
-            highTempLabel.isHidden = true
-            lowTempLabel.isHidden = true
-            conditionLabel.isHidden = true
+            detailStack.alpha = 0
+            
+            highTempLabel.alpha = 0
+            lowTempLabel.alpha = 0
+            conditionLabel.alpha = 0
             layoutIfNeeded()
         }
         

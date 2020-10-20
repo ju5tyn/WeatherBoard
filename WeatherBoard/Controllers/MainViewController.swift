@@ -141,12 +141,27 @@ class MainViewController: UIViewController{
         
         if daySelected == 2{
             
+            UIView.animate(withDuration: 0.3){ [self] in
+                weatherContainerView.alpha = 0
+                
+                
+                detailsContainerView.alpha = 1
+            }
+            
+            
             weatherContainerView.isHidden = true
             detailsContainerView.isHidden = false
             
             
         }else{
             clearDetails()
+            
+            UIView.animate(withDuration: 0.3){ [self] in
+                weatherContainerView.alpha = 1
+                detailsContainerView.alpha = 0
+            }
+            
+            
             weatherContainerView.isHidden = false
             detailsContainerView.isHidden = true
             setDetails()
@@ -165,7 +180,7 @@ class MainViewController: UIViewController{
             if !UIAccessibility.isReduceTransparencyEnabled {
                 view.backgroundColor = .clear
 
-                let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
+                let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
                 let blurEffectView = UIVisualEffectView(effect: nil)
                 blurEffectView.frame = self.view.bounds
                 blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -208,7 +223,7 @@ class MainViewController: UIViewController{
             if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
                 UIView.animate(withDuration: 0.3){
                     
-                    blurView.effect = UIBlurEffect(style: .systemUltraThinMaterial)
+                    blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
                     
                 }
                 
