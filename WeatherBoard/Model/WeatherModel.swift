@@ -8,7 +8,11 @@
 
 import Foundation
 
+
+
 struct WeatherModel{
+    
+    
     
     //MARK: global attributes
     let timeZone: Int
@@ -18,25 +22,79 @@ struct WeatherModel{
     let dt: Int
     let isCurrentLocation: Bool
     let doNotSave: Bool
-    let icon: String
     
     let conditionID: [Int]
     let temperature: [Double]
     let description: [String]
     
+    let fiveDayArray: [fiveDay]
     
+    //5day forecast
     
+    struct fiveDay{
+        
+        let conditionID: Int
+        
+        var conditionName: String{
+            return getIconName(conditionID)
+        }
+        
+        let description: String
+        
+        let temp: Double
+        var tempString: String{
+            return String(format: "%.0f", temp)
+        }
+        
+        let highTemp: Double
+        var highTempString: String{
+            return String(format: "%.0f", temp)
+        }
+        
+        let lowTemp: Double
+        var lowTempString: String{
+            return String(format: "%.0f", temp)
+        }
+        
+        let cloudCover: Int
+        var cloudCoverString: String{
+            return "\(cloudCover)%"
+        }
+        
+        let windSpeed: Double
+        var windSpeedString: String{
+            return "\(windSpeed)M/S"
+        }
+        
+        let windDirection: Double
+        var windDirectionString: String{
+            return windDirection.direction.rawValue
+        }
+        
+        let precip: Int
+        var precipString: String{
+            return String(precip)
+        }
+        
+        
+        let visibility: Int
+        // this is in metres
+        // below returns visibility string in KM
+        var visibilityString: String{
+            return String(format: "%.0f", Double(temp/1000))
+        }
+
+    }
+
     var tempString: [String] {
         return [String(format: "%.0f", temperature[0]),
-                String(format: "%.0f", temperature[1]),
-                String(format: "%.0f", temperature[2])]
+                String(format: "%.0f", temperature[1])]
     }
     
     var conditionName: [String] {
         
         return [getIconName(conditionID[0]),
-                getIconName(conditionID[1]),
-                getIconName(conditionID[2])]
+                getIconName(conditionID[1])]
         
     }
     
@@ -51,29 +109,20 @@ struct WeatherModel{
     
     var isDay: Bool {
         
-        if(dt>sunrise && dt<sunset){
-            return true
-        }else{
-            return false
-        }
+        return (dt>sunrise && dt<sunset) ? true : false
         
     }
     
     var isDayString: String{
         
-        if isDay{
-            return "day"
-        }else{
-            return "night"
-        }
+        return isDay ? "day" : "night"
         
     }
     
     var particleToDisplay: [String?]{
         
         return [getParticleName(conditionID[0]),
-                getParticleName(conditionID[1]),
-                getParticleName(conditionID[2])]
+                getParticleName(conditionID[1])]
         
     }
     
@@ -111,60 +160,81 @@ struct WeatherModel{
             }
         
     }
-    
-    func getIconName(_ conditionID: Int) -> String{
-        
-        //print(conditionID)
-        
-        switch conditionID{
-            
-            //add on night day after
-            
-            case 200...299:
-                return "thunderstorm"
-            
-            case 300...399:
-                return "rain"
-            
-            case 500...504:
-                return "rain_clouds"
-            
-            case 511:
-                return "snow"
-            
-            case 520...599:
-                return "shower_rain"
-            
-            case 600...699:
-                return "snow"
-            
-            case 700...780:
-                return "mist"
-            
-            case 781:
-                return "thunderstorm"
-        
-            case 800:
-                return "clear"
-        
-            case 801:
-                return "few_clouds"
-                
-            case 802...803:
-                return "scattered_clouds"
-                
-            case 804...804:
-                return "broken_clouds"
 
-            default:
-                return "scattered_clouds"
+}
+
+
+
+func getIconName(_ conditionID: Int) -> String{
+    
+    //print(conditionID)
+    
+    switch conditionID{
+        
+        //add on night day after
+        
+        case 200...299:
+            return "thunderstorm"
+        
+        case 300...399:
+            return "rain"
+        
+        case 500...504:
+            return "rain_clouds"
+        
+        case 511:
+            return "snow"
+        
+        case 520...599:
+            return "shower_rain"
+        
+        case 600...699:
+            return "snow"
+        
+        case 700...780:
+            return "mist"
+        
+        case 781:
+            return "thunderstorm"
+    
+        case 800:
+            return "clear"
+    
+        case 801:
+            return "few_clouds"
             
-        }
+        case 802...803:
+            return "scattered_clouds"
+            
+        case 804...804:
+            return "broken_clouds"
+
+        default:
+            return "scattered_clouds"
         
     }
     
-    
+}
 
+enum Direction: String {
+    case n, nne, ne, ene, e, ese, se, sse, s, ssw, sw, wsw, w, wnw, nw, nnw
+}
+
+extension Direction: CustomStringConvertible  {
+    static let all: [Direction] = [.n, .nne, .ne, .ene, .e, .ese, .se, .sse, .s, .ssw, .sw, .wsw, .w, .wnw, .nw, .nnw]
+    init(_ direction: Double) {
+        let index = Int((direction + 11.25).truncatingRemainder(dividingBy: 360) / 22.5)
+        self = Direction.all[index]
+    }
+    var description: String {
+        return rawValue.uppercased()
+    }
+}
+
+extension Double {
+    var direction: Direction {
+        return Direction(self)
+    }
 }
 
 extension Date {

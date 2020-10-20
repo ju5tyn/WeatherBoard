@@ -20,6 +20,22 @@ struct List: Decodable{
     let dt: Int
     let main: Main
     let weather: [Weather]
+    let clouds: Clouds
+    let wind: Wind
+    let pop: Int
+    let visibility: Int
+}
+
+struct Wind: Decodable{
+    
+    let speed: Double
+    let deg: Double
+    
+}
+
+struct Clouds: Decodable{
+    
+    let all: Int
     
 }
 
@@ -34,7 +50,9 @@ struct City: Decodable {
 struct Main: Decodable {
     
     let temp: Double
-    let feels_like: Double
+    let temp_min: Double
+    let temp_max: Double
+    
 }
 
 struct Weather: Decodable {
