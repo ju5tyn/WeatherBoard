@@ -43,17 +43,17 @@ struct WeatherModel{
         
         let temp: Double
         var tempString: String{
-            return String(format: "%.0f", temp)
+            return "\(String(format: "%.0f", temp))°"
         }
         
         let highTemp: Double
         var highTempString: String{
-            return String(format: "%.0f", temp)
+            return "\(String(format: "%.0f", temp))°"
         }
         
         let lowTemp: Double
         var lowTempString: String{
-            return String(format: "%.0f", temp)
+            return "\(String(format: "%.0f", temp))°"
         }
         
         let cloudCover: Int
@@ -71,7 +71,7 @@ struct WeatherModel{
             return windDirection.direction.rawValue
         }
         
-        let precip: Int
+        let precip: Double
         var precipString: String{
             return String(precip)
         }

@@ -28,8 +28,44 @@ class DetailsViewController: UIViewController {
         tableView.delegate = self
         
         tableView.register(UINib(nibName: "DetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableDetailsCell")
+        
         tableView.beginUpdates()
         tableView.endUpdates()
+        
+        
+        
+        
+    }
+    
+    func setWeatherDetails(using weatherModel: WeatherModel){
+        
+        var count = 0
+        
+        for day in weatherModel.fiveDayArray{
+            
+            let indexPath = IndexPath(row: count, section: 0)
+            
+            let cell = tableView.cellForRow(at: indexPath) as! DetailsTableViewCell
+            
+            //print(weatherModel.isDayString)
+            
+            cell.weatherImageView.setImage(UIImage(named: "icon_\(day.conditionName)_\(weatherModel.isDayString)"), animated: true)
+            
+            
+            cell.mainTempLabel.text = day.tempString
+            cell.highTempLabel.text = day.highTempString
+            cell.lowTempLabel.text = day.lowTempString
+            cell.conditionLabel.text = day.description
+            
+            if day.highTemp == day.lowTemp{
+                cell.highTempLabel.isHidden = false
+                cell.lowTempLabel.isHidden = false
+            }
+            
+            
+            
+            count+=1
+        }
         
         
         
@@ -57,13 +93,12 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableDetailsCell", for: indexPath) as! DetailsTableViewCell
         
         if indexPath.row == 0{
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-            
-            
-            
+            tableView.selectRow(at: indexPath,
+                                animated: true,
+                                scrollPosition: .top)
             cell.setBig()
-            
         }
+        
         
         return cell
         

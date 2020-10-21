@@ -108,15 +108,20 @@ class MenuViewController: UIViewController {
                 mainVC.locationManager.requestLocation()
                 mainVC.clearDetails()
                 
+                
             }else if let validCityName = menuItemPressedCityName{
                 if locationCellPressed{
                     print("boom shaka")
                     mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0, doNotSave: true)
                     mainVC.clearDetails()
+                    
+                    
                 }else{
                     mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0, doNotSave: false)
                     print("boooefhiuagebnogfao")
                     mainVC.clearDetails()
+                    
+                    
                 }
             }else if searchFull{
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0, doNotSave: false)

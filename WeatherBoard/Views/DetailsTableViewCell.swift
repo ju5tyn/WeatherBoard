@@ -20,6 +20,8 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var detailStack: UIStackView!
     
     
+    
+    
     //constraints
     @IBOutlet weak var dayLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainTempLabelTrailingConstraint: NSLayoutConstraint!
@@ -85,9 +87,10 @@ class DetailsTableViewCell: UITableViewCell {
             mainTempLabelTrailingConstraint.constant = 60
             dayLabelTopConstraint.constant = 100
             
+            dayLabel.alpha = 0.6
             detailStack.alpha = 1
-            highTempLabel.alpha = 1
-            lowTempLabel.alpha = 1
+            highTempLabel.alpha = 0.6
+            lowTempLabel.alpha = 0.6
             conditionLabel.alpha = 1
             layoutIfNeeded()
         }
@@ -109,13 +112,13 @@ class DetailsTableViewCell: UITableViewCell {
             mainTempLabel.font = mainTempLabel.font.withSize(25)
             
             
-            
             mainTempLabelTopConstraint.constant = 10
             mainTempLabelTrailingConstraint.constant = 96
             dayLabelTopConstraint.constant = 25
             
-            detailStack.alpha = 0
             
+            dayLabel.alpha = 1
+            detailStack.alpha = 0
             highTempLabel.alpha = 0
             lowTempLabel.alpha = 0
             conditionLabel.alpha = 0
@@ -129,3 +132,4 @@ class DetailsTableViewCell: UITableViewCell {
     
     
 }
+

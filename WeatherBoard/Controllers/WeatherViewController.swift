@@ -36,6 +36,8 @@ class WeatherViewController: UIViewController {
     
     func setWeatherDetails(using weatherModel: WeatherModel, day daySelected: Int){
         
+        
+        
         //sets tempLabel label to temperature followed by condition
         tempLabel.text = "\(weatherModel.tempString[daySelected])° \(weatherModel.description[daySelected])"
         

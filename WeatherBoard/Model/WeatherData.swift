@@ -22,7 +22,7 @@ struct List: Decodable{
     let weather: [Weather]
     let clouds: Clouds
     let wind: Wind
-    let pop: Int
+    let pop: Double
     let visibility: Int
 }
 

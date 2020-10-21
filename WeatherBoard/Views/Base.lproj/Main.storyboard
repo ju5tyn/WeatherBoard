@@ -150,6 +150,7 @@
                         <outlet property="hillView" destination="xgx-Ll-PVj" id="dbD-Ri-Qzz"/>
                         <outlet property="mainView" destination="gQ8-HG-zRf" id="104-8S-lni"/>
                         <outlet property="menuButton" destination="6X1-WS-ejl" id="d3L-mM-XSn"/>
+                        <outlet property="navButtons" destination="KYU-or-FRp" id="e78-lz-Okz"/>
                         <outlet property="todayButton" destination="loQ-k2-Fz5" id="CMg-p1-o4N"/>
                         <outlet property="tomorrowButton" destination="6Nc-9G-tHD" id="gbN-2D-XbU"/>
                         <outlet property="weatherContainerView" destination="q9T-eh-vLh" id="2IX-Tc-m07"/>

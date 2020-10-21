@@ -34,6 +34,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
     @IBOutlet weak var dayAfterButton: UIButton!
+    @IBOutlet weak var navButtons: UIStackView!
     
     //MARK: - Variables
     var daySelected: Int = 0
@@ -259,6 +260,7 @@ class MainViewController: UIViewController{
         weatherVC?.clearWeatherDetails()
         setGradientColor(color: "menu")
         removeParticles(from: view)
+        navButtons.isHidden = true
         
     }
     
@@ -268,21 +270,36 @@ class MainViewController: UIViewController{
         
         //if weather model has had contents populated
         if weatherModel != nil {
+    
+            navButtons.isHidden = false
             
-            //sets weather containerView details
-            weatherVC?.setWeatherDetails(using: weatherModel!, day: daySelected)
+            if (daySelected == 2){
+                detailsVC?.setWeatherDetails(using: weatherModel!)
+            }else{
+                //sets weather containerView details
+                weatherVC?.setWeatherDetails(using: weatherModel!, day: daySelected)
+                detailsVC?.setWeatherDetails(using: weatherModel!)
+            }
+            
             
             //sets gradient color with string based on condition and day/night
-            if menuOpen == false {
-                self.setGradientColor(color: "\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)")
+            if daySelected == 2{
+                if menuOpen == false {
+                    self.setGradientColor(color: "\(weatherModel!.conditionName[0])_\(weatherModel!.isDayString)")
+                }
+            }else{
+                if menuOpen == false {
+                    self.setGradientColor(color: "\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)")
+                }
+                if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
+                    emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                    setParticles(baseView: gradientView, emitterNode: emitterNode)
+                
+                }
             }
-            
+
             //if particleToDisplay not nil, will set emitternode to particle
-            if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
-                emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                setParticles(baseView: gradientView, emitterNode: emitterNode)
             
-            }
         }
     }
     
