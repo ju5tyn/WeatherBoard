@@ -17,13 +17,13 @@ struct WeatherData: Decodable {
 
 struct List: Decodable{
     
-    let dt: Int
+    let dt: Double
     let main: Main
     let weather: [Weather]
     let clouds: Clouds
     let wind: Wind
     let pop: Double
-    let visibility: Int
+    let visibility: Double
 }
 
 struct Wind: Decodable{

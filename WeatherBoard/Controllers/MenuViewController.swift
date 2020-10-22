@@ -47,7 +47,7 @@ class MenuViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        searchBar.becomeFirstResponder()
+        //searchBar.becomeFirstResponder()
     }
     
     //MARK: - Functions

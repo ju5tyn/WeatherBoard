@@ -19,7 +19,14 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var conditionLabel: UILabel!
     @IBOutlet weak var detailStack: UIStackView!
     
+    @IBOutlet weak var precipLabel: UILabel!
+    @IBOutlet weak var windDirectionImageView: UIImageView!
+    @IBOutlet weak var windDirectionLabel: UILabel!
+    @IBOutlet weak var windSpeedLabel: UILabel!
+    @IBOutlet weak var cloudCoverLabel: UILabel!
+    @IBOutlet weak var visibilityLabel: UILabel!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     //constraints
@@ -63,6 +70,7 @@ class DetailsTableViewCell: UITableViewCell {
 
         if selected{
             //WHEN BIG
+            
             setBig()
         }else{
             //WHEN SMALL
@@ -72,6 +80,8 @@ class DetailsTableViewCell: UITableViewCell {
     
     
     func setBig(){
+        
+        activityIndicator.style = .large
         
         UIView.animate(withDuration: 0.2){ [self] in
             self.imageWidthConstraint.constant = 100
@@ -88,17 +98,28 @@ class DetailsTableViewCell: UITableViewCell {
             dayLabelTopConstraint.constant = 100
             
             dayLabel.alpha = 0.6
-            detailStack.alpha = 1
+
             highTempLabel.alpha = 0.6
             lowTempLabel.alpha = 0.6
             conditionLabel.alpha = 1
             layoutIfNeeded()
         }
         
+        var count: Double = 0.2
+        for view in boxViews{
+            
+            UIView.animate(withDuration: 0.2, delay: count){
+                view.alpha = 1
+            }
+            count+=0.05
+            
+        }
+        layoutIfNeeded()
         
     }
     
     func setSmall(){
+        activityIndicator.style = .medium
         
         UIView.animate(withDuration: 0.2){ [self] in
             self.imageWidthConstraint.constant = 50
@@ -114,18 +135,21 @@ class DetailsTableViewCell: UITableViewCell {
             
             mainTempLabelTopConstraint.constant = 10
             mainTempLabelTrailingConstraint.constant = 96
-            dayLabelTopConstraint.constant = 25
+            dayLabelTopConstraint.constant = 15
             
             
             dayLabel.alpha = 1
-            detailStack.alpha = 0
+            for view in boxViews{
+                view.alpha = 0
+            }
             highTempLabel.alpha = 0
             lowTempLabel.alpha = 0
             conditionLabel.alpha = 0
             layoutIfNeeded()
         }
         
-            
+        
+        
         
         
     }

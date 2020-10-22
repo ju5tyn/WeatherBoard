@@ -258,6 +258,7 @@ class MainViewController: UIViewController{
     func clearDetails(){
         
         weatherVC?.clearWeatherDetails()
+        detailsVC?.clearWeatherDetails()
         setGradientColor(color: "menu")
         removeParticles(from: view)
         navButtons.isHidden = true

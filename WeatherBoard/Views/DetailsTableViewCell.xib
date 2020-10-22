@@ -101,14 +101,30 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xMk-UL-7Yp">
                                 <rect key="frame" x="78.5" y="0.0" width="67.5" height="100"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow_back" translatesAutoresizingMaskIntoConstraints="NO" id="KEF-kP-uq1">
-                                        <rect key="frame" x="16.5" y="18" width="35" height="34"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wind" translatesAutoresizingMaskIntoConstraints="NO" id="KEF-kP-uq1">
+                                        <rect key="frame" x="9" y="8" width="50" height="50"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGI-xo-54V">
+                                        <rect key="frame" x="21.5" y="57.5" width="24.5" height="18"/>
+                                        <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="40MPH" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chy-9u-eDJ">
+                                        <rect key="frame" x="13" y="75.5" width="41.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.29585830479452052" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="KEF-kP-uq1" firstAttribute="top" secondItem="xMk-UL-7Yp" secondAttribute="top" constant="18" id="LlP-XJ-t0r"/>
+                                    <constraint firstItem="Chy-9u-eDJ" firstAttribute="top" secondItem="gGI-xo-54V" secondAttribute="bottom" id="5fZ-cY-r53"/>
+                                    <constraint firstItem="KEF-kP-uq1" firstAttribute="top" secondItem="xMk-UL-7Yp" secondAttribute="top" constant="8" id="LlP-XJ-t0r"/>
                                     <constraint firstItem="KEF-kP-uq1" firstAttribute="centerX" secondItem="xMk-UL-7Yp" secondAttribute="centerX" id="T2o-IH-sp8"/>
+                                    <constraint firstItem="gGI-xo-54V" firstAttribute="centerX" secondItem="xMk-UL-7Yp" secondAttribute="centerX" id="Yoy-0g-0DP"/>
+                                    <constraint firstAttribute="bottom" secondItem="Chy-9u-eDJ" secondAttribute="bottom" constant="10" id="d95-el-LZt"/>
+                                    <constraint firstItem="Chy-9u-eDJ" firstAttribute="centerX" secondItem="xMk-UL-7Yp" secondAttribute="centerX" id="eQP-NB-deO"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BSp-2B-mdA">
@@ -117,10 +133,18 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="KhV-5F-BYt">
                                         <rect key="frame" x="15" y="22" width="38" height="28"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRI-Zr-dY7">
+                                        <rect key="frame" x="13.5" y="64" width="41" height="24"/>
+                                        <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.30011237157534243" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="KhV-5F-BYt" firstAttribute="top" secondItem="BSp-2B-mdA" secondAttribute="top" constant="22" id="4ah-Qt-Mqa"/>
+                                    <constraint firstAttribute="bottom" secondItem="pRI-Zr-dY7" secondAttribute="bottom" constant="12" id="YDT-s2-S1p"/>
+                                    <constraint firstItem="pRI-Zr-dY7" firstAttribute="centerX" secondItem="BSp-2B-mdA" secondAttribute="centerX" id="YgR-a5-1IX"/>
                                     <constraint firstItem="KhV-5F-BYt" firstAttribute="centerX" secondItem="BSp-2B-mdA" secondAttribute="centerX" id="hkF-B8-pYu"/>
                                 </constraints>
                             </view>
@@ -130,11 +154,19 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="remove_red_eye" translatesAutoresizingMaskIntoConstraints="NO" id="6BL-B8-62C">
                                         <rect key="frame" x="16" y="22" width="36" height="28"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20KM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuN-6K-64y">
+                                        <rect key="frame" x="6.5" y="64" width="55" height="24"/>
+                                        <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.30155714897260272" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="6BL-B8-62C" firstAttribute="top" secondItem="efF-Tm-7sx" secondAttribute="top" constant="22" id="KqB-6x-6zW"/>
+                                    <constraint firstAttribute="bottom" secondItem="cuN-6K-64y" secondAttribute="bottom" constant="12" id="TPM-lr-10S"/>
                                     <constraint firstItem="6BL-B8-62C" firstAttribute="centerX" secondItem="efF-Tm-7sx" secondAttribute="centerX" id="uyh-be-7Bv"/>
+                                    <constraint firstItem="cuN-6K-64y" firstAttribute="centerX" secondItem="efF-Tm-7sx" secondAttribute="centerX" id="xYA-mc-ewp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -158,11 +190,17 @@
                             <constraint firstAttribute="trailing" secondItem="efF-Tm-7sx" secondAttribute="trailing" id="zZ9-4S-bR7"/>
                         </constraints>
                     </stackView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="DRT-af-Dt8">
+                        <rect key="frame" x="303" y="20" width="20" height="20"/>
+                        <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="VHI-qo-BVa" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-30" id="1tJ-2r-XTs"/>
                     <constraint firstItem="XXU-Ro-fXD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="60m-91-t5D"/>
+                    <constraint firstItem="DRT-af-Dt8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Bk0-Ju-d5Q"/>
                     <constraint firstAttribute="height" constant="270" id="Cdb-7f-b0O"/>
+                    <constraint firstAttribute="trailing" secondItem="DRT-af-Dt8" secondAttribute="trailing" constant="40" id="Cnl-XH-r4Q"/>
                     <constraint firstItem="Ww9-se-nhM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="JtX-l8-hWO"/>
                     <constraint firstItem="srG-zE-DSO" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailing" constant="-30" id="RM7-ud-0Ho"/>
                     <constraint firstAttribute="trailing" secondItem="UYd-6Z-GaO" secondAttribute="trailing" constant="60" id="Vqq-7c-R7p"/>
@@ -182,6 +220,8 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="activityIndicator" destination="DRT-af-Dt8" id="7gw-xd-X6K"/>
+                <outlet property="cloudCoverLabel" destination="pRI-Zr-dY7" id="PbY-b7-q25"/>
                 <outlet property="cloudCoverView" destination="BSp-2B-mdA" id="RQF-hP-ohr"/>
                 <outlet property="conditionLabel" destination="2dQ-Mk-sA7" id="Z17-P3-CLL"/>
                 <outlet property="dayLabel" destination="Ww9-se-nhM" id="hT4-SC-6fR"/>
@@ -194,23 +234,28 @@
                 <outlet property="mainTempLabel" destination="UYd-6Z-GaO" id="jmy-OU-LuS"/>
                 <outlet property="mainTempLabelTopConstraint" destination="bbU-hK-8bk" id="ryS-cb-jCQ"/>
                 <outlet property="mainTempLabelTrailingConstraint" destination="Vqq-7c-R7p" id="62N-Ow-Ypn"/>
+                <outlet property="precipLabel" destination="Nxg-4T-v04" id="eLC-lQ-eeM"/>
                 <outlet property="precipView" destination="ahd-ka-zRk" id="kFX-oQ-k0o"/>
+                <outlet property="visibilityLabel" destination="cuN-6K-64y" id="Kgi-0l-zFs"/>
                 <outlet property="visibilityView" destination="efF-Tm-7sx" id="uJ3-0e-0Nz"/>
                 <outlet property="weatherImageView" destination="XXU-Ro-fXD" id="z3w-oV-jna"/>
+                <outlet property="windDirectionImageView" destination="KEF-kP-uq1" id="sXx-Zg-0tr"/>
+                <outlet property="windDirectionLabel" destination="gGI-xo-54V" id="R6O-EL-1vU"/>
+                <outlet property="windSpeedLabel" destination="Chy-9u-eDJ" id="v00-IC-Sq2"/>
                 <outlet property="windView" destination="xMk-UL-7Yp" id="nGU-Gm-uEO"/>
-                <outletCollection property="boxViews" destination="efF-Tm-7sx" collectionClass="NSMutableArray" id="10m-Nr-Vwp"/>
-                <outletCollection property="boxViews" destination="BSp-2B-mdA" collectionClass="NSMutableArray" id="lCq-Fk-Nee"/>
-                <outletCollection property="boxViews" destination="xMk-UL-7Yp" collectionClass="NSMutableArray" id="bI6-fd-NM8"/>
                 <outletCollection property="boxViews" destination="ahd-ka-zRk" collectionClass="NSMutableArray" id="bUW-3b-4Vo"/>
+                <outletCollection property="boxViews" destination="xMk-UL-7Yp" collectionClass="NSMutableArray" id="g5B-Rv-n6U"/>
+                <outletCollection property="boxViews" destination="BSp-2B-mdA" collectionClass="NSMutableArray" id="mUc-ee-Dky"/>
+                <outletCollection property="boxViews" destination="efF-Tm-7sx" collectionClass="NSMutableArray" id="IgU-w6-GbU"/>
             </connections>
             <point key="canvasLocation" x="183.33333333333334" y="175.11160714285714"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrow_back" width="35" height="34"/>
         <image name="cloud" width="38" height="28"/>
         <image name="icon_clear_day" width="140" height="140"/>
         <image name="remove_red_eye" width="36" height="28"/>
         <image name="water" width="37" height="44"/>
+        <image name="wind" width="50" height="50"/>
     </resources>
 </document>

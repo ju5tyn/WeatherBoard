@@ -19,7 +19,7 @@ struct WeatherModel{
     let cityName: String
     let sunrise: Int
     let sunset: Int
-    let dt: Int
+    let dt: Double
     let isCurrentLocation: Bool
     let doNotSave: Bool
     
@@ -34,6 +34,21 @@ struct WeatherModel{
     struct fiveDay{
         
         let conditionID: Int
+        
+        let dt: Double
+        
+        var dayString: String{
+            
+            let date = Date(timeIntervalSince1970: dt)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
+            dateFormatter.locale = NSLocale.current
+            dateFormatter.dateFormat = "EEEE" //Specify your format that you want
+            
+            return dateFormatter.string(from: date)
+            
+        }
+        
         
         var conditionName: String{
             return getIconName(conditionID)
@@ -63,25 +78,25 @@ struct WeatherModel{
         
         let windSpeed: Double
         var windSpeedString: String{
-            return "\(windSpeed)M/S"
+            return String(format: "%.1fM/S", Double(windSpeed))
         }
         
         let windDirection: Double
         var windDirectionString: String{
-            return windDirection.direction.rawValue
+            return windDirection.direction.description.uppercased()
         }
         
         let precip: Double
         var precipString: String{
-            return String(precip)
+            return "\(String(format: "%.0f", precip*100))%"
         }
         
         
-        let visibility: Int
+        let visibility: Double
         // this is in metres
         // below returns visibility string in KM
         var visibilityString: String{
-            return String(format: "%.0f", Double(temp/1000))
+            return String(format: "%.0fKM", Double(visibility/1000))
         }
 
     }
@@ -109,7 +124,7 @@ struct WeatherModel{
     
     var isDay: Bool {
         
-        return (dt>sunrise && dt<sunset) ? true : false
+        return (Int(dt)>sunrise && Int(dt)<sunset) ? true : false
         
     }
     
