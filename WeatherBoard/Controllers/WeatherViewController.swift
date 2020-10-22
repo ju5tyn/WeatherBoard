@@ -39,13 +39,15 @@ class WeatherViewController: UIViewController {
         
         
         //sets tempLabel label to temperature followed by condition
-        tempLabel.text = "\(weatherModel.tempString[daySelected])° \(weatherModel.description[daySelected])"
+        
+        tempLabel.text = "\(weatherModel.fiveDayArray[daySelected].tempString) \(weatherModel.fiveDayArray[daySelected].description)"
+        
         
         //sets time/location label to time in location followed by name of location
         timeLocationLabel.text = "\(weatherModel.timeString) - \(weatherModel.cityName)"
         
         //sets weather image to string based on condition and day/night
-        weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.conditionName[daySelected])_\(weatherModel.isDayString)"))
+        weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.fiveDayArray[daySelected].conditionName)_\(weatherModel.isDayString)"))
         
         activityIndicator.stopAnimating()
         

@@ -192,10 +192,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZm-fn-fpI">
-                                <rect key="frame" x="30" y="181" width="70" height="19"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="eXc-fj-chl"/>
-                                </constraints>
+                                <rect key="frame" x="30" y="181" width="58" height="19"/>
                                 <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -247,6 +244,7 @@
                             <constraint firstItem="1TO-c0-fHM" firstAttribute="leading" secondItem="hyJ-FP-r13" secondAttribute="leading" constant="21" id="fte-Ms-LP8"/>
                             <constraint firstItem="7n4-rz-feH" firstAttribute="top" secondItem="hyJ-FP-r13" secondAttribute="top" constant="36" id="hZN-sc-80f"/>
                             <constraint firstItem="tDP-OQ-yOe" firstAttribute="leading" secondItem="hyJ-FP-r13" secondAttribute="leading" constant="30" id="iha-Jo-2b0"/>
+                            <constraint firstItem="hyJ-FP-r13" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hZm-fn-fpI" secondAttribute="trailing" id="p8H-LT-Tx7"/>
                             <constraint firstItem="hZm-fn-fpI" firstAttribute="top" secondItem="1TO-c0-fHM" secondAttribute="bottom" constant="10" id="qv3-Ov-GjX"/>
                         </constraints>
                     </view>
@@ -294,7 +292,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yWN-VA-I3S">
-                                <rect key="frame" x="188.5" y="271" width="37" height="37"/>
+                                <rect key="frame" x="188.5" y="141" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
@@ -309,7 +307,7 @@
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="f0T-h4-VrU"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="top" secondItem="lJv-IT-U5x" secondAttribute="bottom" constant="18" id="hdm-YN-oOT"/>
                             <constraint firstItem="lJv-IT-U5x" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="oy1-Vq-orw"/>
-                            <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="1IU-mS-zSX" secondAttribute="centerY" constant="-50" id="wwm-K3-RRz"/>
+                            <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="1IU-mS-zSX" secondAttribute="centerY" constant="-180" id="wwm-K3-RRz"/>
                         </constraints>
                     </view>
                     <connections>

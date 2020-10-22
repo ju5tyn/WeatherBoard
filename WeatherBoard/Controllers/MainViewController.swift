@@ -92,8 +92,8 @@ class MainViewController: UIViewController{
         //Requests user location
         locationManager.requestWhenInUseAuthorization()
         
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.requestLocation()
-        
         clearDetails()
         
     }
@@ -133,7 +133,6 @@ class MainViewController: UIViewController{
             case "TOMORROW":
                 daySelected = 1
                 removeBlur()
-                
             default:
                 daySelected = 2
                 addBlur()
@@ -286,11 +285,11 @@ class MainViewController: UIViewController{
             //sets gradient color with string based on condition and day/night
             if daySelected == 2{
                 if menuOpen == false {
-                    self.setGradientColor(color: "\(weatherModel!.conditionName[0])_\(weatherModel!.isDayString)")
+                    self.setGradientColor(color: "\(weatherModel!.fiveDayArray[0].conditionName)_\(weatherModel!.isDayString)")
                 }
             }else{
                 if menuOpen == false {
-                    self.setGradientColor(color: "\(weatherModel!.conditionName[self.daySelected])_\(weatherModel!.isDayString)")
+                    self.setGradientColor(color: "\(weatherModel!.fiveDayArray[self.daySelected].conditionName)_\(weatherModel!.isDayString)")
                 }
                 if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
                     emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
@@ -420,7 +419,7 @@ extension MainViewController: WeatherManagerDelegate{
                         newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
                         
                         
-                        let colorName = "\(self.weatherModel!.conditionName[0])_\(self.weatherModel!.isDayString)"
+                        let colorName = "\(self.weatherModel!.fiveDayArray[0].conditionName)_\(self.weatherModel!.isDayString)"
                         newItem.topGradient = "button_\(colorName)_top"
                         newItem.bottomGradient = "button_\(colorName)_bottom"
                         

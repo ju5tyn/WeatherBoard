@@ -24,8 +24,6 @@ struct WeatherModel{
     let doNotSave: Bool
     
     let conditionID: [Int]
-    let temperature: [Double]
-    let description: [String]
     
     let fiveDayArray: [fiveDay]
     
@@ -99,18 +97,6 @@ struct WeatherModel{
             return String(format: "%.0fKM", Double(visibility/1000))
         }
 
-    }
-
-    var tempString: [String] {
-        return [String(format: "%.0f", temperature[0]),
-                String(format: "%.0f", temperature[1])]
-    }
-    
-    var conditionName: [String] {
-        
-        return [getIconName(conditionID[0]),
-                getIconName(conditionID[1])]
-        
     }
     
     //MARK: global calculated

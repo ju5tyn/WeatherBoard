@@ -32,7 +32,7 @@ struct WeatherManager {
     
     func fetchWeather(latitude: Double, longitude: Double, time: Int){
         let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
-        print(urlString)
+        print("ios gave locaiton")
         performRequest(with: urlString, time: time, isCurrentLocation: true, doNotSave: false)
     }
     
@@ -80,79 +80,27 @@ struct WeatherManager {
             let sunset = decodedData.city.sunset
             let sunrise = decodedData.city.sunrise
             let dt = decodedData.list[0].dt
+            let id = [decodedData.list[0].weather[0].id,
+                      decodedData.list[8].weather[0].id]
             
             //attributes today
             //weather[0] is only in array
-            //change list array number to count in 3 hour increments
-            let id = [decodedData.list[0].weather[0].id,
-                      decodedData.list[7].weather[0].id]
-            
-            let temp = [decodedData.list[0].main.temp, decodedData.list[7].main.temp]
-            
-            let description = [decodedData.list[0].weather[0].main, decodedData.list[7].weather[0].main]
-            
-            let fiveDayArray = [WeatherModel.fiveDay(conditionID: decodedData.list[0].weather[0].id,
-                                                     dt: decodedData.list[0].dt,
-                                                     description: decodedData.list[0].weather[0].main,
-                                                     temp: decodedData.list[0].main.temp,
-                                                     highTemp: decodedData.list[0].main.temp_max,
-                                                     lowTemp: decodedData.list[0].main.temp_min,
-                                                     cloudCover: decodedData.list[0].clouds.all,
-                                                     windSpeed: decodedData.list[0].wind.speed,
-                                                     windDirection: decodedData.list[0].wind.deg,
-                                                     precip: decodedData.list[0].pop,
-                                                     visibility: decodedData.list[0].visibility),
-                           
-                                WeatherModel.fiveDay(conditionID: decodedData.list[8].weather[0].id,
-                                                     dt: decodedData.list[8].dt,
-                                                     description: decodedData.list[8].weather[0].main,
-                                                     temp: decodedData.list[8].main.temp,
-                                                     highTemp: decodedData.list[8].main.temp_max,
-                                                     lowTemp: decodedData.list[8].main.temp_min,
-                                                     cloudCover: decodedData.list[8].clouds.all,
-                                                     windSpeed: decodedData.list[8].wind.speed,
-                                                     windDirection: decodedData.list[8].wind.deg,
-                                                     precip: decodedData.list[8].pop,
-                                                     visibility: decodedData.list[8].visibility),
-                           
-                                WeatherModel.fiveDay(conditionID: decodedData.list[16].weather[0].id,
-                                                     dt: decodedData.list[16].dt,
-                                                     description: decodedData.list[16].weather[0].main,
-                                                     temp: decodedData.list[16].main.temp,
-                                                     highTemp: decodedData.list[16].main.temp_max,
-                                                     lowTemp: decodedData.list[16].main.temp_min,
-                                                     cloudCover: decodedData.list[16].clouds.all,
-                                                     windSpeed: decodedData.list[16].wind.speed,
-                                                     windDirection: decodedData.list[16].wind.deg,
-                                                     precip: decodedData.list[16].pop,
-                                                     visibility: decodedData.list[16].visibility),
-                           
-                                WeatherModel.fiveDay(conditionID: decodedData.list[24].weather[0].id,
-                                                     dt: decodedData.list[24].dt,
-                                                     description: decodedData.list[24].weather[0].main,
-                                                     temp: decodedData.list[24].main.temp,
-                                                     highTemp: decodedData.list[24].main.temp_max,
-                                                     lowTemp: decodedData.list[24].main.temp_min,
-                                                     cloudCover: decodedData.list[24].clouds.all,
-                                                     windSpeed: decodedData.list[24].wind.speed,
-                                                     windDirection: decodedData.list[24].wind.deg,
-                                                     precip: decodedData.list[24].pop,
-                                                     visibility: decodedData.list[24].visibility),
-                           
-                                WeatherModel.fiveDay(conditionID: decodedData.list[32].weather[0].id,
-                                                     dt: decodedData.list[32].dt,
-                                                     description: decodedData.list[32].weather[0].main,
-                                                     temp: decodedData.list[32].main.temp,
-                                                     highTemp: decodedData.list[32].main.temp_max,
-                                                     lowTemp: decodedData.list[32].main.temp_min,
-                                                     cloudCover: decodedData.list[32].clouds.all,
-                                                     windSpeed: decodedData.list[32].wind.speed,
-                                                     windDirection: decodedData.list[32].wind.deg,
-                                                     precip: decodedData.list[32].pop,
-                                                     visibility: decodedData.list[32].visibility)
-                ]
+            let fiveDayArray = [getDay(decodedData: decodedData, timeNumber: 0),
+                                getDay(decodedData: decodedData, timeNumber: 8),
+                                getDay(decodedData: decodedData, timeNumber: 16),
+                                getDay(decodedData: decodedData, timeNumber: 24),
+                                getDay(decodedData: decodedData, timeNumber: 32)
+            ]
             //returns weather model to the caller
-            return WeatherModel(timeZone: timezone, cityName: cityName, sunrise: sunrise, sunset: sunset,  dt: dt, isCurrentLocation: isCurrentLocation, doNotSave: doNotSave, conditionID: id, temperature: temp, description: description, fiveDayArray: fiveDayArray)
+            return WeatherModel(timeZone: timezone,
+                                cityName: cityName,
+                                sunrise: sunrise,
+                                sunset: sunset,
+                                dt: dt,
+                                isCurrentLocation: isCurrentLocation,
+                                doNotSave: doNotSave,
+                                conditionID: id,
+                                fiveDayArray: fiveDayArray)
             
         } catch {
             delegate?.didFailWithError(error: error)
@@ -160,6 +108,25 @@ struct WeatherManager {
             return nil
         }
             
+        
+        
+    }
+    
+    func getDay(decodedData: WeatherData, timeNumber: Int) -> WeatherModel.fiveDay{
+        
+        return WeatherModel.fiveDay(conditionID: decodedData.list[timeNumber].weather[0].id,
+                                    dt: decodedData.list[timeNumber].dt,
+                                    description: decodedData.list[timeNumber].weather[0].main,
+                                    temp: decodedData.list[timeNumber].main.temp,
+                                    highTemp: decodedData.list[timeNumber].main.temp_max,
+                                    lowTemp: decodedData.list[timeNumber].main.temp_min,
+                                    cloudCover: decodedData.list[timeNumber].clouds.all,
+                                    windSpeed: decodedData.list[timeNumber].wind.speed,
+                                    windDirection: decodedData.list[timeNumber].wind.deg,
+                                    precip: decodedData.list[timeNumber].pop,
+                                    visibility: decodedData.list[timeNumber].visibility)
+        
+        
     }
     
 }
