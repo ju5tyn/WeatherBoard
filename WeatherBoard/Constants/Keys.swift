@@ -1,7 +1,9 @@
 
 struct Keys{
     
-    static let openweathermap = "ec980d3d1e8ec5ff4b26f46d33ef2979"
-    // bnruh
+    static let openweathermap = "d6dd557e1d3981a4a17aa513d77548dd"
+    // bruh this got leaked too
+    //having github problems
+    
     
 }
