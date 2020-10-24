@@ -23,7 +23,7 @@ DerivedData
 Pods
 
 # API keys
-WeatherBoard/Keys.swift
+WeatherBoard/Constants/Keys.swift
 
 # fastlane
 fastlane/report.xml

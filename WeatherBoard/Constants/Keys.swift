@@ -1,6 +1,6 @@
 
 struct Keys{
     
-    static let openweathermap = "fb176a844f5b6a958d77257732126dc5"
+    static let openweathermap = "ec980d3d1e8ec5ff4b26f46d33ef2979"
     
 }

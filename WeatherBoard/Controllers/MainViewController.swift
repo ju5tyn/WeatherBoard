@@ -74,7 +74,7 @@ class MainViewController: UIViewController{
         hillMask.frame = hillView.bounds
         hillView.mask = hillMask
 
-        //for gradients
+        //for gradientse
         gradientSetup()
         highlightButton(todayButton)
         
