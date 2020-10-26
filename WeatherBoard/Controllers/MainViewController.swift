@@ -387,7 +387,7 @@ extension MainViewController: CLLocationManagerDelegate{
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             
-            weatherManager.fetchWeather(latitude: lat, longitude: lon, time: daySelected)
+            weatherManager.fetchWeather(latitude: lat, longitude: lon)
             
         }
         

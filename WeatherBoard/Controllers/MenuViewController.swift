@@ -17,6 +17,7 @@ class MenuViewController: UIViewController {
     var searchFull: Bool = false
     var locationPressed: Bool = false
     var locationCellPressed: Bool = false
+    
     var menuItems: Results<MenuItem>?
     var menuItemPressedCityName: String?
     //realm
@@ -108,13 +109,10 @@ class MenuViewController: UIViewController {
                 mainVC.locationManager.requestLocation()
                 mainVC.clearDetails()
             }else if let validCityName = menuItemPressedCityName{
-                if locationCellPressed{
-                    mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0, doNotSave: true)
-                    mainVC.clearDetails()
-                }else{
-                    mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0, doNotSave: false)
-                    mainVC.clearDetails()
-                }
+                
+                mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0, doNotSave: locationCellPressed)
+                mainVC.clearDetails()
+                
             }else if searchFull{
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0, doNotSave: false)
                 mainVC.clearDetails()

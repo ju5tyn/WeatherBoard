@@ -26,18 +26,18 @@ struct WeatherManager {
     func fetchWeather(cityName: String, time: Int, doNotSave: Bool) {
         let urlString = "\(weatherURL)&q=\(cityName)"
         print(urlString)
-        performRequest(with: urlString, time: time, isCurrentLocation: false, doNotSave: doNotSave)
+        performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
         
     }
     
-    func fetchWeather(latitude: Double, longitude: Double, time: Int){
+    func fetchWeather(latitude: Double, longitude: Double){
         let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
         print("ios gave locaiton")
-        performRequest(with: urlString, time: time, isCurrentLocation: true, doNotSave: false)
+        performRequest(with: urlString, isCurrentLocation: true, doNotSave: false)
     }
     
     
-    func performRequest(with urlString: String, time: Int, isCurrentLocation: Bool, doNotSave: Bool) {
+    func performRequest(with urlString: String, isCurrentLocation: Bool, doNotSave: Bool) {
         //Create a url
         
         if let url = URL(string: urlString){
