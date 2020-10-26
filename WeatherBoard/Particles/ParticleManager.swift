@@ -30,7 +30,11 @@ func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
     emitterNode.position.y = skScene.frame.maxY
     emitterNode.particlePositionRange.dx = skScene.frame.width
     
+    
     baseView.addSubview(skView)
+    
+    
+    
     
 }
 
@@ -41,8 +45,8 @@ func removeParticles(from view: UIView) {
     
     
     if let viewWithTag = view.viewWithTag(1){
-        viewWithTag.removeFromSuperview()
         
+        viewWithTag.removeFromSuperview()
         
         print("Rain Removed")
     }else{

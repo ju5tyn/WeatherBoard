@@ -118,7 +118,7 @@ class MenuViewController: UIViewController {
                 mainVC.clearDetails()
             }
             mainVC.addBlur()
-            removeParticles(from: mainVC.gradientView)
+            //removeParticles(from: mainVC.gradientView)
         }
     }
     

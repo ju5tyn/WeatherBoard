@@ -53,10 +53,6 @@ class MainViewController: UIViewController{
     var weatherVC: WeatherViewController?
     var detailsVC: DetailsViewController?
     
-    
-    
-    
-    
     //MARK: - Delegate stuff
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
@@ -67,7 +63,7 @@ class MainViewController: UIViewController{
         
         //forces status bar to appear white
         overrideUserInterfaceStyle = .dark
-        
+
         //setup for mask of hill
         let hillMask = UIImageView()
         hillMask.image = UIImage(named: "hills")
@@ -93,6 +89,7 @@ class MainViewController: UIViewController{
         locationManager.requestWhenInUseAuthorization()
         
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+
         locationManager.requestLocation()
         clearDetails()
         
@@ -260,7 +257,7 @@ class MainViewController: UIViewController{
         weatherVC?.clearWeatherDetails()
         detailsVC?.clearWeatherDetails()
         setGradientColor(color: "menu")
-        removeParticles(from: view)
+        removeParticles(from: gradientView)
         navButtons.isHidden = true
         
     }
@@ -294,6 +291,7 @@ class MainViewController: UIViewController{
                 }
                 if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
                     emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                    removeParticles(from: gradientView)
                     setParticles(baseView: gradientView, emitterNode: emitterNode)
                 
                 }
