@@ -110,11 +110,11 @@ class MenuViewController: UIViewController {
                 mainVC.clearDetails()
             }else if let validCityName = menuItemPressedCityName{
                 
-                mainVC.weatherManager.fetchWeather(cityName: validCityName, time: 0, doNotSave: locationCellPressed)
+                mainVC.weatherManager.fetchWeather(cityName: validCityName, doNotSave: locationCellPressed)
                 mainVC.clearDetails()
                 
             }else if searchFull{
-                mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, time: 0, doNotSave: false)
+                mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
                 mainVC.clearDetails()
             }
             mainVC.addBlur()

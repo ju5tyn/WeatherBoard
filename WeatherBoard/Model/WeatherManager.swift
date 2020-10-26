@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
@@ -23,11 +24,28 @@ struct WeatherManager {
     
     //MARK: Fetch Weather
     
-    func fetchWeather(cityName: String, time: Int, doNotSave: Bool) {
-        let urlString = "\(weatherURL)&q=\(cityName)"
-        print(urlString)
-        performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
+    func fetchWeather(cityName: String, doNotSave: Bool) {
         
+        //converts search to lat+lon
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(cityName) { placemarks, error in
+            
+            let placemark = placemarks?.first
+            if let lat = placemark?.location?.coordinate.latitude, let lon = placemark?.location?.coordinate.longitude {
+                let urlString = "\(weatherURL)&lat=\(lat)&lon=\(lon)"
+                performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
+            
+            }else{
+                
+                //protection for if search fails. Might replace with a wrong location warning 
+                let urlString = "\(weatherURL)&q=\(cityName)"
+                performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
+                
+                
+            }
+            
+        }
+  
     }
     
     func fetchWeather(latitude: Double, longitude: Double){

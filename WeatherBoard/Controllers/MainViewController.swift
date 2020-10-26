@@ -143,8 +143,6 @@ class MainViewController: UIViewController{
             
             UIView.animate(withDuration: 0.3){ [self] in
                 weatherContainerView.alpha = 0
-                
-                
                 detailsContainerView.alpha = 1
             }
             
@@ -175,6 +173,9 @@ class MainViewController: UIViewController{
     
 //MARK: - Functions
     
+    
+    
+//MARK: Blur setup
     func blurSetup(){
         
             if !UIAccessibility.isReduceTransparencyEnabled {
