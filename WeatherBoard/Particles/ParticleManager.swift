@@ -32,9 +32,7 @@ func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
     
     
     baseView.addSubview(skView)
-    
-    
-    
+
     
 }
 

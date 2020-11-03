@@ -1,4 +1,5 @@
 PODS:
+  - LTMorphingLabel (0.9.2)
   - Realm (5.4.3):
     - Realm/Headers (= 5.4.3)
   - Realm/Headers (5.4.3)
@@ -6,17 +7,20 @@ PODS:
     - Realm (= 5.4.3)
 
 DEPENDENCIES:
+  - LTMorphingLabel
   - RealmSwift
 
 SPEC REPOS:
   trunk:
+    - LTMorphingLabel
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
+  LTMorphingLabel: cdd338db82477d9ee80893b813cbbd7989f97b06
   Realm: e3d5fcc50fd79ddf87a2d86301f6edbf57531f84
   RealmSwift: db608068eccc54bce47928e8118bde13c120c307
 
-PODFILE CHECKSUM: e0306266d14047ef3fa4469ec88e1e5295ee7482
+PODFILE CHECKSUM: 1ad408102b0049e2d0c297c5c3784a0a3e769eb1
 
 COCOAPODS: 1.9.3

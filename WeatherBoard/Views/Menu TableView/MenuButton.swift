@@ -36,6 +36,12 @@ class MenuButton: UIButton {
         self.isOpaque = false
         self.backgroundColor = .clear
         
+        titleLabel!.layer.shadowColor = UIColor.black.cgColor
+            titleLabel!.layer.shadowOffset = CGSize(width: 0, height: 2)
+        titleLabel!.layer.shadowOpacity = 0.4
+        titleLabel!.layer.shadowRadius = 5
+        titleLabel!.layer.masksToBounds = false
+        
         
     }
 

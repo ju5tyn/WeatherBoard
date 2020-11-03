@@ -68,49 +68,55 @@ class DetailsViewController: UIViewController {
             
             let indexPath = IndexPath(row: count, section: 0)
             
-            let cell = tableView.cellForRow(at: indexPath) as! DetailsTableViewCell
-
-            
-            cell.weatherImageView.isHidden = false
-            cell.activityIndicator.stopAnimating()
-            cell.mainTempLabel.isHidden = false
-            cell.highTempLabel.isHidden = false
-            cell.lowTempLabel.isHidden = false
-            cell.detailStack.isHidden = false
-            cell.conditionLabel.isHidden = false
-            
-            
-            
-            cell.weatherImageView.setImage(UIImage(named: "icon_\(day.conditionName)_\(weatherModel.isDayString)"), animated: true)
-            
-            
-            UIView.transition(with: cell.contentView, duration: 0.4, options: .transitionCrossDissolve, animations: {
-                if indexPath.row == 0{
-                    cell.dayLabel.text = "Today"
-                }else if indexPath.row == 1{
-                    cell.dayLabel.text = "Tomorrow"
-                }else{
-                    cell.dayLabel.text = day.dayString
-                }
-                cell.mainTempLabel.text = day.tempString
-                cell.highTempLabel.text = day.highTempString
-                cell.lowTempLabel.text = day.lowTempString
-                cell.conditionLabel.text = day.description
+            if let cell = tableView.cellForRow(at: indexPath) as? DetailsTableViewCell {
                 
-                cell.precipLabel.text = day.precipString
-                cell.windSpeedLabel.text = day.windSpeedString
-                cell.windDirectionLabel.text = day.windDirectionString
-                cell.cloudCoverLabel.text = day.cloudCoverString
-                cell.visibilityLabel.text = day.visibilityString
                 
-                //print(day.visibility)
-                
-            }, completion: nil)
-
-            if day.highTemp == day.lowTemp{
+                cell.weatherImageView.isHidden = false
+                cell.activityIndicator.stopAnimating()
+                cell.mainTempLabel.isHidden = false
                 cell.highTempLabel.isHidden = false
                 cell.lowTempLabel.isHidden = false
+                cell.detailStack.isHidden = false
+                cell.conditionLabel.isHidden = false
+                
+                
+                
+                cell.weatherImageView.setImage(UIImage(named: "icon_\(day.conditionName)_\(weatherModel.isDayString)"), animated: true)
+                
+                
+                UIView.transition(with: cell.contentView, duration: 0.4, options: .transitionCrossDissolve, animations: {
+                    if indexPath.row == 0{
+                        cell.dayLabel.text = "Today"
+                    }else if indexPath.row == 1{
+                        cell.dayLabel.text = "Tomorrow"
+                    }else{
+                        cell.dayLabel.text = day.dayString
+                    }
+                    cell.mainTempLabel.text = day.tempString
+                    cell.highTempLabel.text = day.highTempString
+                    cell.lowTempLabel.text = day.lowTempString
+                    cell.conditionLabel.text = day.description
+                    
+                    cell.precipLabel.text = day.precipString
+                    cell.windSpeedLabel.text = day.windSpeedString
+                    cell.windDirectionLabel.text = day.windDirectionString
+                    cell.cloudCoverLabel.text = day.cloudCoverString
+                    cell.visibilityLabel.text = day.visibilityString
+                    
+                    //print(day.visibility)
+                    
+                }, completion: nil)
+
+                if day.highTemp == day.lowTemp{
+                    cell.highTempLabel.isHidden = false
+                    cell.lowTempLabel.isHidden = false
+                }
             }
+
+            
+            
+            
+            
             count+=1
         }
         

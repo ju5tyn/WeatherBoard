@@ -7,5 +7,6 @@ target 'WeatherBoard' do
   
   # Pods for WeatherBoard
   pod 'RealmSwift'
+  pod 'LTMorphingLabel'
 
 end

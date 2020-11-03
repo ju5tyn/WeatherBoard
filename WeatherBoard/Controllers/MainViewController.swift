@@ -30,7 +30,7 @@ class MainViewController: UIViewController{
     //buttons
     @IBOutlet weak var menuButton: UIButton!
     
-    //timetravel Buttons
+    //nav Buttons
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
     @IBOutlet weak var dayAfterButton: UIButton!

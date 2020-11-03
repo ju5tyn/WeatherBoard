@@ -37,9 +37,9 @@ struct WeatherManager {
             
             }else{
                 
-                //protection for if search fails. Might replace with a wrong location warning 
-                let urlString = "\(weatherURL)&q=\(cityName)"
-                performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
+                //protection for if search fails. Might replace with a wrong location warning
+                //let urlString = "\(weatherURL)&q=\(cityName)"
+                //performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
                 
                 
             }

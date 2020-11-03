@@ -1,4 +1,5 @@
 import UIKit
+import LTMorphingLabel
 
 class WeatherViewController: UIViewController {
     
@@ -7,8 +8,8 @@ class WeatherViewController: UIViewController {
     
     //elements
     @IBOutlet weak var weatherImageView: UIImageView!
-    @IBOutlet weak var tempLabel: UILabel!
-    @IBOutlet weak var timeLocationLabel: UILabel!
+    @IBOutlet weak var tempLabel: LTMorphingLabel!
+    @IBOutlet weak var timeLocationLabel: LTMorphingLabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
@@ -17,6 +18,9 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tempLabel.morphingEffect = .evaporate
+        timeLocationLabel.morphingEffect = .evaporate
         
         tempLabel.textDropShadow()
         timeLocationLabel.textDropShadow()
@@ -39,12 +43,14 @@ class WeatherViewController: UIViewController {
         
         
         //sets tempLabel label to temperature followed by condition
-        
         tempLabel.text = "\(weatherModel.fiveDayArray[daySelected].tempString) \(weatherModel.fiveDayArray[daySelected].description)"
-        
-        
-        //sets time/location label to time in location followed by name of location
+                
+                //sets time/location label to time in location followed by name of location
         timeLocationLabel.text = "\(weatherModel.timeString) - \(weatherModel.cityName)"
+     
+        
+        
+        
         
         //sets weather image to string based on condition and day/night
         weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.fiveDayArray[daySelected].conditionName)_\(weatherModel.isDayString)"))
@@ -69,3 +75,5 @@ extension UIImageView{
         }, completion: nil)
     }
 }
+
+
