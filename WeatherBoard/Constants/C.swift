@@ -18,6 +18,8 @@ struct C {
         
         static let menuToMain = "toMain"
         static let mainToMenu = "toMenu"
+        static let mainToWeather = "toWeather"
+        static let mainToDetails = "toDetails"
         
     }
     

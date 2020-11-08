@@ -28,7 +28,6 @@ class DetailsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    
     //constraints
     @IBOutlet weak var dayLabelTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var mainTempLabelTrailingConstraint: NSLayoutConstraint!
@@ -55,89 +54,57 @@ class DetailsTableViewCell: UITableViewCell {
             box.layer.shadowRadius = 10
         }
         
-        if isSelected{
-            //WHEN BIG
-            setBig()
-        }else{
-            //WHEN SMALL
-            setSmall()
-        }
+        
+        isSelected ? setBig() : setSmall()
         
     }
 
+    //MARK: - Runs when Cell Selected
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        if selected{
-            //WHEN BIG
-            
-            setBig()
-        }else{
-            //WHEN SMALL
-            setSmall()
-        }
+        selected ? setBig() : setSmall()
     }
     
+    //MARK: - Set Big
     
     func setBig(){
-        
         activityIndicator.style = .large
         
         UIView.animate(withDuration: 0.2){ [self] in
             self.imageWidthConstraint.constant = 100
             self.imageHeightConstraint.constant = 100
-            
             self.setNeedsLayout()
-            
             mainTempLabel.font = mainTempLabel.font.withSize(50)
-            
-            
-            
             mainTempLabelTopConstraint.constant = 100
             mainTempLabelTrailingConstraint.constant = 60
             dayLabelTopConstraint.constant = 100
-            
             dayLabel.alpha = 0.6
-
             highTempLabel.alpha = 0.6
             lowTempLabel.alpha = 0.6
             conditionLabel.alpha = 1
             layoutIfNeeded()
         }
-        
         var count: Double = 0.2
         for view in boxViews{
-            
             UIView.animate(withDuration: 0.2, delay: count){
                 view.alpha = 1
             }
             count+=0.05
-            
         }
         layoutIfNeeded()
-        
     }
     
+    //MARK: - Set Small
     func setSmall(){
         activityIndicator.style = .medium
-        
         UIView.animate(withDuration: 0.2){ [self] in
             self.imageWidthConstraint.constant = 50
             self.imageHeightConstraint.constant = 50
-            
-            
-            
             self.setNeedsLayout()
-        
-        
             mainTempLabel.font = mainTempLabel.font.withSize(25)
-            
-            
             mainTempLabelTopConstraint.constant = 10
             mainTempLabelTrailingConstraint.constant = 96
             dayLabelTopConstraint.constant = 15
-            
-            
             dayLabel.alpha = 1
             for view in boxViews{
                 view.alpha = 0
@@ -147,13 +114,6 @@ class DetailsTableViewCell: UITableViewCell {
             conditionLabel.alpha = 0
             layoutIfNeeded()
         }
-        
-        
-        
-        
-        
     }
-    
-    
 }
 

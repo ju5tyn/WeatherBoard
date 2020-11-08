@@ -149,7 +149,7 @@ class MainViewController: UIViewController{
             
             
         }else{
-            clearDetails()
+            //clearDetails()
             
             UIView.animate(withDuration: 0.3){ [self] in
                 weatherContainerView.alpha = 1
