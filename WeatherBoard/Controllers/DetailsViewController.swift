@@ -13,28 +13,18 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var selectedCellIndexPath: IndexPath?
-    
     let selectedHeight: CGFloat = 300
     let deselectedHeight: CGFloat = 70
-    
     var firstLaunch: Bool = true
-    
-        
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        
         tableView.dataSource = self
         tableView.delegate = self
-        
         tableView.register(UINib(nibName: "DetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableDetailsCell")
-        
         tableView.beginUpdates()
         tableView.endUpdates()
-        
-        
-        
-        
+
     }
     
     func clearWeatherDetails(){
@@ -85,6 +75,7 @@ class DetailsViewController: UIViewController {
                 
                 
                 UIView.transition(with: cell.contentView, duration: 0.4, options: .transitionCrossDissolve, animations: {
+                    
                     if indexPath.row == 0{
                         cell.dayLabel.text = "Today"
                     }else if indexPath.row == 1{
@@ -92,6 +83,8 @@ class DetailsViewController: UIViewController {
                     }else{
                         cell.dayLabel.text = day.dayString
                     }
+                    
+                    
                     cell.mainTempLabel.text = day.tempString
                     cell.highTempLabel.text = day.highTempString
                     cell.lowTempLabel.text = day.lowTempString
@@ -112,16 +105,8 @@ class DetailsViewController: UIViewController {
                     cell.lowTempLabel.isHidden = false
                 }
             }
-
-            
-            
-            
-            
             count+=1
         }
-        
-        
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -140,17 +125,14 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableDetailsCell", for: indexPath) as! DetailsTableViewCell
         
         if indexPath.row == 0{
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
             cell.setBig()
         }
-        
-        
+
         return cell
         
     }
@@ -159,40 +141,22 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        if indexPath.row == 0 && firstLaunch{ return selectedHeight }
         
-        if indexPath.row == 0 && firstLaunch{
-                
-                return selectedHeight
-                
-            }
-        
-        
-        if selectedCellIndexPath == indexPath {
-                return selectedHeight
-        }else{
-            
-            return deselectedHeight
-        }
+        return (selectedCellIndexPath == indexPath) ? selectedHeight : deselectedHeight
         
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
-        if selectedCellIndexPath != nil && selectedCellIndexPath == indexPath {
-            selectedCellIndexPath = nil
-        } else {
-            selectedCellIndexPath = indexPath
-        }
+        selectedCellIndexPath = (selectedCellIndexPath != nil && selectedCellIndexPath == indexPath) ? nil : indexPath
 
-        
-        
         tableView.beginUpdates()
         tableView.endUpdates()
 
         if selectedCellIndexPath != nil {
-                // This ensures, that the cell is fully visible once expanded
+            // This ensures, that the cell is fully visible once expanded
             tableView.scrollToRow(at: indexPath, at: .none, animated: true)
         }
         
@@ -203,11 +167,7 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         
-        if tableView.cellForRow(at: indexPath)!.isSelected{
-            return nil
-        }else{
-            return indexPath
-        }
+        tableView.cellForRow(at: indexPath)!.isSelected ? nil : indexPath
         
     }
     

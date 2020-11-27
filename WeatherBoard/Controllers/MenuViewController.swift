@@ -117,18 +117,13 @@ class MenuViewController: UIViewController {
 extension MenuViewController: MenuTableViewCellDelegate{
     
     func didPressButton(with cityName: String, indexPath: IndexPath) {
-        
-        
+
         menuItemPressedCityName = cityName
         
         if menuItems![indexPath.row].isCurrentLocation != true {
-            
-            
-            
             do{
                 try realm.write{
                     realm.delete(menuItems![indexPath.row])
-                    
                 }
             }catch{
                 print(error)

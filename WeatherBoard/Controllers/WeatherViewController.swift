@@ -23,7 +23,7 @@ class WeatherViewController: UIViewController {
     }
     
     func clearWeatherDetails(){
-        print("details cleared")
+        
         weatherImageView.image = nil
         tempLabel.text = "Loading"
         timeLocationLabel.text = ""
