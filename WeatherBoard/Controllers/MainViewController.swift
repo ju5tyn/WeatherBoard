@@ -62,22 +62,16 @@ class MainViewController: UIViewController{
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //forces status bar to appear white
+ 
         overrideUserInterfaceStyle = .dark
-
+        weatherManager.delegate = self
+        locationManager.delegate = self
+        detailsContainerView.isHidden = true
+        
         addHill()
         addGradient()
         addTextShadow()
         highlightButton(todayButton)
-        
-        //delegate
-        weatherManager.delegate = self
-        locationManager.delegate = self
-        
-        detailsContainerView.isHidden = true
-        
-        
         getLocation()
         clearDetails()
         
@@ -125,24 +119,25 @@ class MainViewController: UIViewController{
                 removeBlur()
             default:
                 daySelected = 2
-                addBlur()
+                updateBlur()
         }
-        if daySelected == 2{
-            UIView.animate(withDuration: 0.3){ [self] in
-                weatherContainerView.alpha = 0
-                detailsContainerView.alpha = 1
-            }
-            weatherContainerView.isHidden = true
-            detailsContainerView.isHidden = false
-        }else{
-            UIView.animate(withDuration: 0.3){ [self] in
-                weatherContainerView.alpha = 1
-                detailsContainerView.alpha = 0
-            }
-            weatherContainerView.isHidden = false
-            detailsContainerView.isHidden = true
-            setDetails()
+        
+        daySelected == 2 ?
+            viewChange(hide: weatherContainerView, show: detailsContainerView, refresh: false)
+            :
+            viewChange(hide: detailsContainerView, show: weatherContainerView, refresh: true)
+        
+    }
+    
+    func viewChange(hide viewToHide: UIView, show viewToShow: UIView, refresh: Bool){
+        
+        UIView.animate(withDuration: 0.3){
+            viewToShow.alpha = 1
+            viewToHide.alpha = 0
         }
+        viewToShow.isHidden = false
+        viewToHide.isHidden = true
+        refresh ? setDetails() : nil
     }
     
     
@@ -224,6 +219,9 @@ class MainViewController: UIViewController{
     
 //MARK: - UI FUNCTIONS
     
+    
+    //MARK: App Launch Functions
+    
     func addHill(){
         
         //setup for mask of hill
@@ -243,41 +241,38 @@ class MainViewController: UIViewController{
 
     }
     
-
-    
-    //MARK: Blur setup
-        func blurSetup(){
-                if !UIAccessibility.isReduceTransparencyEnabled {
-                    view.backgroundColor = .clear
-                    
-                    let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-                    let blurEffectView = UIVisualEffectView(effect: nil)
-                    blurEffectView.frame = self.view.bounds
-                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                    
-                    let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-                    let vibrancyView = UIVisualEffectView(effect: nil)
-                    vibrancyView.frame = self.view.bounds
-                    vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                    
-                    blurEffectView.tag = 2
-                    
-                    view.insertSubview(blurEffectView, at: 2)
-                    blurEffectView.contentView.addSubview(vibrancyView)
-                    //blurEffectView.contentView.insertSubview(vibrancyView, aboveSubview: view.viewWithTag(2)!)
-                    
-                    UIView.animate(withDuration: 0.4){
-                        blurEffectView.effect = blurEffect
-                        vibrancyView.effect = vibrancyEffect
-                    }
-                } else {
-                    view.backgroundColor = .clear
+    //Adds blur to the uiview
+    func addBlur(){
+            if !UIAccessibility.isReduceTransparencyEnabled {
+                view.backgroundColor = .clear
+                
+                let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+                let blurEffectView = UIVisualEffectView(effect: nil)
+                blurEffectView.frame = self.view.bounds
+                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                
+                let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+                let vibrancyView = UIVisualEffectView(effect: nil)
+                vibrancyView.frame = self.view.bounds
+                vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                
+                blurEffectView.tag = 2
+                
+                view.insertSubview(blurEffectView, at: 2)
+                blurEffectView.contentView.addSubview(vibrancyView)
+                //blurEffectView.contentView.insertSubview(vibrancyView, aboveSubview: view.viewWithTag(2)!)
+                
+                UIView.animate(withDuration: 0.4){
+                    blurEffectView.effect = blurEffect
+                    vibrancyView.effect = vibrancyEffect
                 }
-            
-        }
+            } else {
+                view.backgroundColor = .clear
+            }
+        
+    }
     
-    //MARK: gradient setup
-    //sets gradient up for initial app launch. Should only be called on app launch
+    //Sets gradient up for initial app launch
     func addGradient(){
     
         gradient.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height)*0.8)
@@ -299,11 +294,9 @@ class MainViewController: UIViewController{
     
     
     
+    //MARK: Other Functions
+
     
-    
-    
-    
-    //MARK: Set button alpha
     //Highlights currently selected button
     func highlightButton(_ buttonToHighlight: UIButton){
         todayButton.alpha = 0.5
@@ -312,20 +305,17 @@ class MainViewController: UIViewController{
         buttonToHighlight.alpha = 1
     }
     
-    //MARK: setGradientColor
+    
     //sets color of gradient to string passed in. Should match asset in asssets folder
     func setGradientColor(color: String){
-        
         gradient.colors = [
             UIColor(named: "grad_\(color)_bottom")!.cgColor,
             UIColor(named: "grad_\(color)_top")!.cgColor
         ]
-        
         hillGradient.colors = [
             UIColor(named: "hill_\(color)_bottom")!.cgColor,
             UIColor(named: "hill_\(color)_top")!.cgColor
         ]
-        
     }
     
 
@@ -337,14 +327,14 @@ class MainViewController: UIViewController{
         }
     }
     
-    func addBlur(){
+    func updateBlur(){
         if daySelected == 2{
             if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
                 UIView.animate(withDuration: 0.3){
                     blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
                 }
             }else{
-                blurSetup()
+                addBlur()
             }
         }
     }

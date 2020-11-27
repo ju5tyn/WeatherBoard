@@ -89,10 +89,12 @@
 		3A0885D224E9A3BD006C3DCF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3AAD20B32514D2D2002AF7BA /* Particles */,
 				3A0885D324E9A3DD006C3DCF /* SF-Compact-Text-Semibold.otf */,
 				3A0885D524E9A47B006C3DCF /* SF-Compact-Text-Bold.otf */,
 			);
 			name = Resources;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		3A0885D724E9AF76006C3DCF /* Views */ = {
@@ -101,7 +103,9 @@
 				3A33324324CCE3420053C0F7 /* Main.storyboard */,
 				3ACAA2DC25309CA900377451 /* DetailsTableViewCell.xib */,
 				3ACAA2DB25309CA900377451 /* DetailsTableViewCell.swift */,
-				3AD73188253DBF45009B3A92 /* Menu TableView */,
+				3AF6CEF8251E21B2005D39CA /* MenuTableViewCell.xib */,
+				3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */,
+				3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -109,6 +113,7 @@
 		3A0885D824E9AF90006C3DCF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3AD3881624FAAC72009528EF /* ParticleManager.swift */,
 				3A33324124CCE3420053C0F7 /* MainViewController.swift */,
 				3A2A1538252F53AC004A8672 /* WeatherViewController.swift */,
 				3ACAA2D825307EDE00377451 /* DetailsViewController.swift */,
@@ -132,10 +137,9 @@
 			isa = PBXGroup;
 			children = (
 				3A33323C24CCE3420053C0F7 /* WeatherBoard */,
-				3A33323B24CCE3420053C0F7 /* Products */,
-				3A0885D224E9A3BD006C3DCF /* Resources */,
 				948890A2592330103FBEDCA9 /* Pods */,
 				876956A8F259223E16C6A0E8 /* Frameworks */,
+				3A33323B24CCE3420053C0F7 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -155,11 +159,11 @@
 				3A3A8ECE253CB778006CF764 /* Constants */,
 				3A0885D924E9AFB6006C3DCF /* Model */,
 				3A0885D724E9AF76006C3DCF /* Views */,
-				3AAD20B32514D2D2002AF7BA /* Particles */,
 				3A0885D824E9AF90006C3DCF /* Controllers */,
 				3A33324624CCE3470053C0F7 /* Assets.xcassets */,
 				3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */,
 				3A33324B24CCE3470053C0F7 /* Info.plist */,
+				3A0885D224E9A3BD006C3DCF /* Resources */,
 			);
 			path = WeatherBoard;
 			sourceTree = "<group>";
@@ -176,7 +180,6 @@
 		3AAD20B32514D2D2002AF7BA /* Particles */ = {
 			isa = PBXGroup;
 			children = (
-				3AD3881624FAAC72009528EF /* ParticleManager.swift */,
 				3AAD20B52514D9CC002AF7BA /* StarParticle.sks */,
 				3AAD20B62514D9D2002AF7BA /* StormParticle.sks */,
 				3ADCEEBA24F668E700A6A672 /* RainParticle.sks */,
@@ -184,16 +187,6 @@
 				3A0E7655253DE48700C3D96D /* StarParticleCloudy.sks */,
 			);
 			path = Particles;
-			sourceTree = "<group>";
-		};
-		3AD73188253DBF45009B3A92 /* Menu TableView */ = {
-			isa = PBXGroup;
-			children = (
-				3AF6CEF8251E21B2005D39CA /* MenuTableViewCell.xib */,
-				3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */,
-				3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */,
-			);
-			path = "Menu TableView";
 			sourceTree = "<group>";
 		};
 		876956A8F259223E16C6A0E8 /* Frameworks */ = {
