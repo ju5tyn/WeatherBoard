@@ -105,7 +105,7 @@ class MenuViewController: UIViewController {
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
                 mainVC.clearDetails()
             }
-            mainVC.addBlur()
+            mainVC.updateBlur()
             //removeParticles(from: mainVC.gradientView)
         }
     }
