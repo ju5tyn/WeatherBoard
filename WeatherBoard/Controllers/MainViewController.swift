@@ -1,32 +1,19 @@
-//
-//  ViewController.swift
-//  WeatherBoard
-//
-//  Created by Justyn Henman on 25/07/2020.
-//  Copyright © 2020 Justyn Henman. All rights reserved.
-//
-
 import UIKit
 import CoreLocation
 import SpriteKit
 import RealmSwift
 
-
-
-
 class MainViewController: UIViewController{
     
 
     //MARK: - IBOutlets
-    
     //views
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var gradientView: UIView!
     @IBOutlet weak var hillView: UIView!
     @IBOutlet weak var weatherContainerView: UIView!
     @IBOutlet weak var detailsContainerView: UIView!
-    
-    
+
     //buttons
     @IBOutlet weak var menuButton: UIButton!
     
@@ -87,10 +74,9 @@ class MainViewController: UIViewController{
         
         //Requests user location
         locationManager.requestWhenInUseAuthorization()
-        
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-
         locationManager.requestLocation()
+        
         clearDetails()
         
     }
@@ -120,9 +106,6 @@ class MainViewController: UIViewController{
         //Highlights button that was pressed
         highlightButton(sender)
         //Clears details, changes day selection, then sets details
-        
-        
-        
         switch sender.titleLabel!.text{
             case "TODAY":
                 daySelected = 0
@@ -133,104 +116,42 @@ class MainViewController: UIViewController{
             default:
                 daySelected = 2
                 addBlur()
-                
         }
-        
         if daySelected == 2{
-            
             UIView.animate(withDuration: 0.3){ [self] in
                 weatherContainerView.alpha = 0
                 detailsContainerView.alpha = 1
             }
-            
-            
             weatherContainerView.isHidden = true
             detailsContainerView.isHidden = false
-            
-            
         }else{
-            //clearDetails()
-            
             UIView.animate(withDuration: 0.3){ [self] in
                 weatherContainerView.alpha = 1
                 detailsContainerView.alpha = 0
             }
-            
-            
             weatherContainerView.isHidden = false
             detailsContainerView.isHidden = true
             setDetails()
-            
         }
-        
-        
-        
-        
     }
     
-//MARK: - Functions
     
     
     
-//MARK: Blur setup
-    func blurSetup(){
-        
-            if !UIAccessibility.isReduceTransparencyEnabled {
-                view.backgroundColor = .clear
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//MARK: - FUNCTIONS
+    
+    
+    
 
-                let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-                let blurEffectView = UIVisualEffectView(effect: nil)
-                blurEffectView.frame = self.view.bounds
-                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                
-                let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-                let vibrancyView = UIVisualEffectView(effect: nil)
-                vibrancyView.frame = self.view.bounds
-                vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                
-                blurEffectView.tag = 2
-                
-                view.insertSubview(blurEffectView, at: 2)
-                blurEffectView.contentView.addSubview(vibrancyView)
-                //blurEffectView.contentView.insertSubview(vibrancyView, aboveSubview: view.viewWithTag(2)!)
-                
-                UIView.animate(withDuration: 0.4){
-                    blurEffectView.effect = blurEffect
-                    vibrancyView.effect = vibrancyEffect
-                }
-                
-                
-                
-            } else {
-                view.backgroundColor = .clear
-            }
-        
-    }
-    
-    func removeBlur(){
-        if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
-            UIView.animate(withDuration: 0.3){
-                blurView.effect = nil
-            }
-            
-        }
-    }
-    
-    func addBlur(){
-        if daySelected == 2{
-            if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
-                UIView.animate(withDuration: 0.3){
-                    
-                    blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-                    
-                }
-                
-            }else{
-                blurSetup()
-            }
-        }
-        
-    }
     
     //MARK: Set button alpha
     //Highlights currently selected button
@@ -240,35 +161,23 @@ class MainViewController: UIViewController{
         dayAfterButton.alpha = 0.5
         buttonToHighlight.alpha = 1
     }
-    
-    //MARK: Set button color UNUSED
-    func setButtonColor(_ color: UIColor){
-        todayButton.titleLabel!.textColor = color
-        tomorrowButton.titleLabel!.textColor = color
-        dayAfterButton.titleLabel!.textColor = color
-        
-    }
-    
-    
+ 
     //MARK: clearDetails
     //resets weather details to empty
     func clearDetails(){
-        
         weatherVC?.clearWeatherDetails()
         detailsVC?.clearWeatherDetails()
         setGradientColor(color: "menu")
         removeParticles(from: gradientView)
         navButtons.isHidden = true
-        
     }
     
     //MARK: setDetails
     //sets weather details to contents of weathermodel
     func setDetails(){
-        
         //if weather model has had contents populated
         if weatherModel != nil {
-    
+
             navButtons.isHidden = false
             
             if (daySelected == 2){
@@ -302,12 +211,18 @@ class MainViewController: UIViewController{
         }
     }
     
-    //MARK: toggleHide
-    //Hides all elements from current view
-    //For when menu is opened
-    func toggleHide() {
-        mainView.isHidden = false
-    }
+
+    
+    
+    
+    
+    
+    
+    
+    
+//MARK: - BACKGROUND EFFECTS
+    
+    
     
     //MARK: setGradientColor
     //sets color of gradient to string passed in. Should match asset in asssets folder
@@ -343,28 +258,83 @@ class MainViewController: UIViewController{
         
     }
     
-
+    //MARK: Blur setup
+        func blurSetup(){
+                if !UIAccessibility.isReduceTransparencyEnabled {
+                    view.backgroundColor = .clear
+                    
+                    let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+                    let blurEffectView = UIVisualEffectView(effect: nil)
+                    blurEffectView.frame = self.view.bounds
+                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    
+                    let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+                    let vibrancyView = UIVisualEffectView(effect: nil)
+                    vibrancyView.frame = self.view.bounds
+                    vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    
+                    blurEffectView.tag = 2
+                    
+                    view.insertSubview(blurEffectView, at: 2)
+                    blurEffectView.contentView.addSubview(vibrancyView)
+                    //blurEffectView.contentView.insertSubview(vibrancyView, aboveSubview: view.viewWithTag(2)!)
+                    
+                    UIView.animate(withDuration: 0.4){
+                        blurEffectView.effect = blurEffect
+                        vibrancyView.effect = vibrancyEffect
+                    }
+                } else {
+                    view.backgroundColor = .clear
+                }
+            
+        }
+        
+        func removeBlur(){
+            if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
+                UIView.animate(withDuration: 0.3){
+                    blurView.effect = nil
+                }
+            }
+        }
+        
+        func addBlur(){
+            if daySelected == 2{
+                if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
+                    UIView.animate(withDuration: 0.3){
+                        blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+                    }
+                }else{
+                    blurSetup()
+                }
+            }
+        }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     //MARK: - Segues
     //Called on segue to menu
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == C.segues.mainToMenu{
-            
-            //let menuVC = segue.destination as! MenuViewController
-            
-            //temp code to show particles permenantly
-            //menuVC.particlesWereShown = true
-            
-        }else if segue.identifier == "mainToWeather"{
-            
-            weatherVC = segue.destination as? WeatherViewController
-            
-            
-        }else if segue.identifier == "mainToDetails"{
-            
-            detailsVC = segue.destination as? DetailsViewController
-            
+        
+        switch segue.identifier{
+            case C.segues.mainToWeather:
+                weatherVC = segue.destination as? WeatherViewController
+            case C.segues.mainToDetails:
+                detailsVC = segue.destination as? DetailsViewController
+            default:
+                break
         }
     }
     
@@ -397,6 +367,17 @@ extension MainViewController: CLLocationManagerDelegate{
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
 
 //MARK: - WeatherManagerDelegate
 
@@ -445,9 +426,6 @@ extension MainViewController: WeatherManagerDelegate{
         
     }
 }
-
-
-
 
 //MARK: - EXT Label
 

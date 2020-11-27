@@ -28,12 +28,8 @@ class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         loadMenuItems()
-        //print(realm.configuration.fileURL?.absoluteURL)
-        
-        //dismisses keyboard when tapped off
         self.hideKeyboardWhenTappedAround()
         
-        //forces status bar to be lightt text
         overrideUserInterfaceStyle = .dark
 
         searchBar.delegate = self
@@ -55,14 +51,8 @@ class MenuViewController: UIViewController {
     
     func loadMenuItems(){
         //loads tableview items from realm, then reloads tableview
-        
-        
         menuItems = realm.objects(MenuItem.self).sorted(byKeyPath: "date", ascending: false).sorted(byKeyPath: "isCurrentLocation", ascending: false)
-        
-        
-        
         tableView.reloadData()
-        
     }
     
 
@@ -70,11 +60,8 @@ class MenuViewController: UIViewController {
     
     //Back button pressed
     @IBAction func backButtonPressed(_ sender: UIButton) {
-        
-        
         //Sends back to main view
         performSegue(withIdentifier: C.segues.menuToMain, sender: self)
-        
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
@@ -102,9 +89,10 @@ class MenuViewController: UIViewController {
             
             let mainVC = segue.destination as! MainViewController
             mainVC.menuOpen.toggle()
-            mainVC.toggleHide()
+            mainVC.mainView.isHidden = false
             mainVC.setDetails()
 
+            
             if locationPressed{
                 mainVC.locationManager.requestLocation()
                 mainVC.clearDetails()
