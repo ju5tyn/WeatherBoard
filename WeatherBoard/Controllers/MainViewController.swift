@@ -6,7 +6,8 @@ import RealmSwift
 class MainViewController: UIViewController{
     
 
-    //MARK: - IBOutlets
+    //MARK: - OUTLETS
+    
     //views
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var gradientView: UIView!
@@ -23,7 +24,13 @@ class MainViewController: UIViewController{
     @IBOutlet weak var dayAfterButton: UIButton!
     @IBOutlet weak var navButtons: UIStackView!
     
-    //MARK: - Variables
+    
+
+    
+    //MARK: - VARIABLES
+    
+    
+    
     var daySelected: Int = 0
     var menuOpen: Bool = false
     
@@ -32,18 +39,26 @@ class MainViewController: UIViewController{
     let hillGradient = CAGradientLayer()
     var emitterNode = SKEmitterNode()
     
-    //MARK: Realm
+    //Realm
     let realm = try! Realm()
     var menuItems: Results<MenuItem>?
     
-    //MARK: - Container views
+    //Container views
     var weatherVC: WeatherViewController?
     var detailsVC: DetailsViewController?
     
-    //MARK: - Delegate stuff
+    //Delegate stuff
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
 
+    
+    
+    
+    
+    
+    
+    
+    
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,20 +66,10 @@ class MainViewController: UIViewController{
         //forces status bar to appear white
         overrideUserInterfaceStyle = .dark
 
-        //setup for mask of hill
-        let hillMask = UIImageView()
-        hillMask.image = UIImage(named: "hills")
-        hillMask.frame = hillView.bounds
-        hillView.mask = hillMask
-
-        //for gradientse
-        gradientSetup()
+        addHill()
+        addGradient()
+        addTextShadow()
         highlightButton(todayButton)
-        
-        //drop shadows for uilabels
-        todayButton.titleLabel?.textDropShadow()
-        tomorrowButton.titleLabel?.textDropShadow()
-        dayAfterButton.titleLabel?.textDropShadow()
         
         //delegate
         weatherManager.delegate = self
@@ -72,14 +77,19 @@ class MainViewController: UIViewController{
         
         detailsContainerView.isHidden = true
         
-        //Requests user location
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-        locationManager.requestLocation()
         
+        getLocation()
         clearDetails()
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     //MARK: - Buttons
@@ -149,18 +159,14 @@ class MainViewController: UIViewController{
     
 //MARK: - FUNCTIONS
     
-    
-    
-
-    
-    //MARK: Set button alpha
-    //Highlights currently selected button
-    func highlightButton(_ buttonToHighlight: UIButton){
-        todayButton.alpha = 0.5
-        tomorrowButton.alpha = 0.5
-        dayAfterButton.alpha = 0.5
-        buttonToHighlight.alpha = 1
+    func getLocation(){
+        //Requests user location
+                locationManager.requestWhenInUseAuthorization()
+                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+                locationManager.requestLocation()
     }
+    
+ 
  
     //MARK: clearDetails
     //resets weather details to empty
@@ -177,16 +183,12 @@ class MainViewController: UIViewController{
     func setDetails(){
         //if weather model has had contents populated
         if weatherModel != nil {
-
+            
             navButtons.isHidden = false
             
-            if (daySelected == 2){
-                detailsVC?.setWeatherDetails(using: weatherModel!)
-            }else{
-                //sets weather containerView details
-                weatherVC?.setWeatherDetails(using: weatherModel!, day: daySelected)
-                detailsVC?.setWeatherDetails(using: weatherModel!)
-            }
+            weatherVC?.setWeatherDetails(using: weatherModel!, day: daySelected)
+            detailsVC?.setWeatherDetails(using: weatherModel!)
+            
             
             
             //sets gradient color with string based on condition and day/night
@@ -220,43 +222,28 @@ class MainViewController: UIViewController{
     
     
     
-//MARK: - BACKGROUND EFFECTS
+//MARK: - UI FUNCTIONS
     
-    
-    
-    //MARK: setGradientColor
-    //sets color of gradient to string passed in. Should match asset in asssets folder
-    func setGradientColor(color: String){
+    func addHill(){
         
-        gradient.colors = [
-            UIColor(named: "grad_\(color)_bottom")!.cgColor,
-            UIColor(named: "grad_\(color)_top")!.cgColor
-        ]
-        
-        hillGradient.colors = [
-            UIColor(named: "hill_\(color)_bottom")!.cgColor,
-            UIColor(named: "hill_\(color)_top")!.cgColor
-        ]
+        //setup for mask of hill
+        let hillMask = UIImageView()
+        hillMask.image = UIImage(named: "hills")
+        hillMask.frame = hillView.bounds
+        hillView.mask = hillMask
         
     }
     
-    //MARK: gradientSetup
-    //sets gradient up for initial app launch. Should only be called on app launch
-    func gradientSetup(){
     
-        gradient.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height)*0.8)
-        gradientView.layer.addSublayer(gradient)
-        gradient.startPoint = CGPoint(x: 0.5, y: 1)
-        gradient.endPoint = CGPoint(x: 0.5, y: 0)
-        
-        hillGradient.frame = hillView.bounds
-        hillView.layer.addSublayer(hillGradient)
-        hillGradient.startPoint = CGPoint(x: 0.5, y: 1)
-        hillGradient.endPoint = CGPoint(x: 0.5, y: 0)
-        
-        setGradientColor(color: "menu")
-        
+    //Add drop shadows for UILabels
+    func addTextShadow(){
+        todayButton.titleLabel?.textDropShadow()
+        tomorrowButton.titleLabel?.textDropShadow()
+        dayAfterButton.titleLabel?.textDropShadow()
+
     }
+    
+
     
     //MARK: Blur setup
         func blurSetup(){
@@ -288,26 +275,79 @@ class MainViewController: UIViewController{
                 }
             
         }
+    
+    //MARK: gradient setup
+    //sets gradient up for initial app launch. Should only be called on app launch
+    func addGradient(){
+    
+        gradient.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height)*0.8)
+        gradientView.layer.addSublayer(gradient)
+        gradient.startPoint = CGPoint(x: 0.5, y: 1)
+        gradient.endPoint = CGPoint(x: 0.5, y: 0)
         
-        func removeBlur(){
+        hillGradient.frame = hillView.bounds
+        hillView.layer.addSublayer(hillGradient)
+        hillGradient.startPoint = CGPoint(x: 0.5, y: 1)
+        hillGradient.endPoint = CGPoint(x: 0.5, y: 0)
+        
+        setGradientColor(color: "menu")
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //MARK: Set button alpha
+    //Highlights currently selected button
+    func highlightButton(_ buttonToHighlight: UIButton){
+        todayButton.alpha = 0.5
+        tomorrowButton.alpha = 0.5
+        dayAfterButton.alpha = 0.5
+        buttonToHighlight.alpha = 1
+    }
+    
+    //MARK: setGradientColor
+    //sets color of gradient to string passed in. Should match asset in asssets folder
+    func setGradientColor(color: String){
+        
+        gradient.colors = [
+            UIColor(named: "grad_\(color)_bottom")!.cgColor,
+            UIColor(named: "grad_\(color)_top")!.cgColor
+        ]
+        
+        hillGradient.colors = [
+            UIColor(named: "hill_\(color)_bottom")!.cgColor,
+            UIColor(named: "hill_\(color)_top")!.cgColor
+        ]
+        
+    }
+    
+
+    func removeBlur(){
+        if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
+            UIView.animate(withDuration: 0.3){
+                blurView.effect = nil
+            }
+        }
+    }
+    
+    func addBlur(){
+        if daySelected == 2{
             if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
                 UIView.animate(withDuration: 0.3){
-                    blurView.effect = nil
+                    blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
                 }
+            }else{
+                blurSetup()
             }
         }
-        
-        func addBlur(){
-            if daySelected == 2{
-                if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
-                    UIView.animate(withDuration: 0.3){
-                        blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-                    }
-                }else{
-                    blurSetup()
-                }
-            }
-        }
+    }
     
     
     
@@ -324,7 +364,9 @@ class MainViewController: UIViewController{
     
     
     
-    //MARK: - Segues
+//MARK: - SEGUES
+    
+    
     //Called on segue to menu
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -345,7 +387,19 @@ class MainViewController: UIViewController{
 }
 
 
-//MARK: - Location Manager
+
+
+
+
+
+
+
+
+//MARK: - EXTENSIONS
+
+
+
+//MARK: Location
 
 extension MainViewController: CLLocationManagerDelegate{
     
@@ -379,7 +433,9 @@ extension MainViewController: CLLocationManagerDelegate{
 
 
 
-//MARK: - WeatherManagerDelegate
+
+
+//MARK: WeatherManagerDelegate
 
 extension MainViewController: WeatherManagerDelegate{
    
@@ -427,7 +483,7 @@ extension MainViewController: WeatherManagerDelegate{
     }
 }
 
-//MARK: - EXT Label
+//MARK: EXT Label
 
 extension UILabel {
     func textDropShadow() {
