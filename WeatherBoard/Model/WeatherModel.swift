@@ -11,7 +11,7 @@ import Foundation
 
 
 struct WeatherModel{
-    
+    //edit
     //MARK: global attributes
     let timeZone: Int
     let cityName: String
