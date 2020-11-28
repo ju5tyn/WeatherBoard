@@ -220,6 +220,10 @@ class MainViewController: UIViewController{
 //MARK: - UI FUNCTIONS
     
     
+    
+    
+    
+    
     //MARK: App Launch Functions
     
     func addHill(){
@@ -260,8 +264,7 @@ class MainViewController: UIViewController{
                 
                 view.insertSubview(blurEffectView, at: 2)
                 blurEffectView.contentView.addSubview(vibrancyView)
-                //blurEffectView.contentView.insertSubview(vibrancyView, aboveSubview: view.viewWithTag(2)!)
-                
+
                 UIView.animate(withDuration: 0.4){
                     blurEffectView.effect = blurEffect
                     vibrancyView.effect = vibrancyEffect
@@ -295,6 +298,52 @@ class MainViewController: UIViewController{
     
     
     //MARK: Other Functions
+
+    //MARK: AddParticles
+    func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
+
+        let skView = SKView(frame: CGRect(x:0, y:-200, width: baseView.frame.width, height: baseView.frame.height))
+        let skScene = SKScene(size: baseView.frame.size)
+        skScene.backgroundColor = .clear
+        skScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        skScene.addChild(emitterNode)
+        skView.backgroundColor = .clear
+        skView.presentScene(skScene)
+        skView.isUserInteractionEnabled = false
+        skView.tag = 1
+        emitterNode.position.y = skScene.frame.maxY
+        emitterNode.particlePositionRange.dx = skScene.frame.width
+        baseView.addSubview(skView)
+    }
+
+
+    //MARK: RemoveParticles
+    func removeParticles(from view: UIView) {
+        if let viewWithTag = view.viewWithTag(1){
+            viewWithTag.removeFromSuperview()
+            print("Particles Removed")
+        }else{
+            print("Error removinig Particles")
+        }
+        
+    }
+
+    func hideParticles(view: UIView) {
+        if let viewWithTag = view.viewWithTag(1){
+            viewWithTag.isHidden = true
+        }else{
+            print("Error Hiding particles")
+        }
+        
+    }
+    func showParticles(view: UIView) {
+        if let viewWithTag = view.viewWithTag(1){
+            viewWithTag.isHidden = false
+        }else{
+            print("Error Showing particles")
+        }
+    }
+    
 
     
     //Highlights currently selected button

@@ -37,11 +37,9 @@ struct WeatherManager {
             
             }else{
                 
-                print("BIG ERROR")
-                //protection for if search fails. Might replace with a wrong location warning
-                //let urlString = "\(weatherURL)&q=\(cityName)"
-                //performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
-                
+                if let e = error{
+                    print(e.localizedDescription)
+                }
                 
             }
             

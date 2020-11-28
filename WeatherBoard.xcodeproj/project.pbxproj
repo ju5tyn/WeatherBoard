@@ -30,7 +30,6 @@
 		3ACAA2D925307EDE00377451 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAA2D825307EDE00377451 /* DetailsViewController.swift */; };
 		3ACAA2DD25309CA900377451 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAA2DB25309CA900377451 /* DetailsTableViewCell.swift */; };
 		3ACAA2DE25309CA900377451 /* DetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACAA2DC25309CA900377451 /* DetailsTableViewCell.xib */; };
-		3AD3881724FAAC72009528EF /* ParticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AD3881624FAAC72009528EF /* ParticleManager.swift */; };
 		3ADCEEBB24F668E700A6A672 /* RainParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3ADCEEBA24F668E700A6A672 /* RainParticle.sks */; };
 		3AF224542512C1E400371CA4 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF224532512C1E400371CA4 /* C.swift */; };
 		3AF6CEF9251E21B2005D39CA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */; };
@@ -64,7 +63,6 @@
 		3ACAA2D825307EDE00377451 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		3ACAA2DB25309CA900377451 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3ACAA2DC25309CA900377451 /* DetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTableViewCell.xib; sourceTree = "<group>"; };
-		3AD3881624FAAC72009528EF /* ParticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleManager.swift; sourceTree = "<group>"; };
 		3ADCEEBA24F668E700A6A672 /* RainParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RainParticle.sks; sourceTree = "<group>"; };
 		3AF224532512C1E400371CA4 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,7 +111,6 @@
 		3A0885D824E9AF90006C3DCF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3AD3881624FAAC72009528EF /* ParticleManager.swift */,
 				3A33324124CCE3420053C0F7 /* MainViewController.swift */,
 				3A2A1538252F53AC004A8672 /* WeatherViewController.swift */,
 				3ACAA2D825307EDE00377451 /* DetailsViewController.swift */,
@@ -361,7 +358,6 @@
 				3A0885DF24E9AFE9006C3DCF /* WeatherData.swift in Sources */,
 				3A2A1539252F53AC004A8672 /* WeatherViewController.swift in Sources */,
 				3A0885DD24E9AFDA006C3DCF /* WeatherModel.swift in Sources */,
-				3AD3881724FAAC72009528EF /* ParticleManager.swift in Sources */,
 				3ACAA2DD25309CA900377451 /* DetailsTableViewCell.swift in Sources */,
 				3ACAA2D925307EDE00377451 /* DetailsViewController.swift in Sources */,
 			);

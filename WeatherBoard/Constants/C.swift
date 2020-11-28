@@ -12,6 +12,7 @@ struct C {
     
     static let mainURL = "https://api.openweathermap.org/data/2.5/forecast?units=metric&appid="
     
+    static let newURL = "https://api.openweathermap.org/data/2.5/onecall?units=metric&appid="
     
     
     struct segues{
