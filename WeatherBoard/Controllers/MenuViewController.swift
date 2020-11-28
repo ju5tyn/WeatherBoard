@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import CoreLocation
 
 class MenuViewController: UIViewController {
 
@@ -88,6 +89,7 @@ class MenuViewController: UIViewController {
         if segue.identifier == C.segues.menuToMain{
             
             let mainVC = segue.destination as! MainViewController
+            
             mainVC.menuOpen.toggle()
             mainVC.mainView.isHidden = false
             mainVC.setDetails()
@@ -102,6 +104,7 @@ class MenuViewController: UIViewController {
                 mainVC.clearDetails()
                 
             }else if searchFull{
+                
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
                 mainVC.clearDetails()
             }
@@ -149,13 +152,30 @@ extension MenuViewController: UISearchBarDelegate {
         
         if (searchBar.text != ""){
             searchFull = true
+            //checks to see if search text is valid
+            CLGeocoder().geocodeAddressString(searchBar.text!) { (placemark, error) in
+                if let e = error{
+                    self.searchBar.text = ""
+                    self.searchBar.placeholder = "Invalid Location"
+                    print(e.localizedDescription)
+                }else{
+                    self.performSegue(withIdentifier: C.segues.menuToMain, sender: self)
+                }
+            }
             
-            performSegue(withIdentifier: C.segues.menuToMain, sender: self)
+
+                
+            
+            
             
         }else{
             print("No text in ")
         }
         
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.placeholder = "Search for a location"
     }
     
 }

@@ -446,6 +446,15 @@ extension MainViewController: CLLocationManagerDelegate{
         
         if let location = locations.last{
             
+            do{
+                try self.realm.write{
+                    let oldLocations = self.realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
+                    self.realm.delete(oldLocations)
+                }
+            }catch{
+                print(error)
+            }
+            
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             
@@ -486,6 +495,9 @@ extension MainViewController: WeatherManagerDelegate{
             
             if self.weatherModel?.doNotSave != true{
                 //writes the city name to realm
+                
+                
+                
                 do{
                     try self.realm.write{
                         
@@ -495,6 +507,7 @@ extension MainViewController: WeatherManagerDelegate{
                         
                         
                         let colorName = "\(self.weatherModel!.fiveDayArray[0].conditionName)_\(self.weatherModel!.isDayString)"
+                        
                         newItem.topGradient = "button_\(colorName)_top"
                         newItem.bottomGradient = "button_\(colorName)_bottom"
                         
@@ -503,6 +516,8 @@ extension MainViewController: WeatherManagerDelegate{
                 }catch{
                     print(error)
                 }
+                
+                
                 //realm end
             }
             self.setDetails()
