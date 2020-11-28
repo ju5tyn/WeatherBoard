@@ -24,7 +24,7 @@ struct WeatherManager {
     
     //MARK: Fetch Weather
     
-    func fetchWeather(cityName: String, doNotSave: Bool) {
+    func fetchWeather(cityName: String, doNotSave: Bool){
         
         //converts search to lat+lon
         let geocoder = CLGeocoder()
@@ -37,6 +37,7 @@ struct WeatherManager {
             
             }else{
                 
+                print("BIG ERROR")
                 //protection for if search fails. Might replace with a wrong location warning
                 //let urlString = "\(weatherURL)&q=\(cityName)"
                 //performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
