@@ -54,7 +54,7 @@ class DetailsViewController: UIViewController {
         
         var count = 0
         
-        for day in weatherModel.fiveDayArray{
+        for day in weatherModel.daily{
             
             let indexPath = IndexPath(row: count, section: 0)
             
@@ -71,7 +71,7 @@ class DetailsViewController: UIViewController {
                 
                 
                 
-                cell.weatherImageView.setImage(UIImage(named: "icon_\(day.conditionName)_\(weatherModel.isDayString)"), animated: true)
+                cell.weatherImageView.setImage(UIImage(named: "icon_\(day.conditionName)_\(weatherModel.current.isDayString)"), animated: true)
                 
                 
                 UIView.transition(with: cell.contentView, duration: 0.4, options: .transitionCrossDissolve, animations: {
@@ -88,13 +88,13 @@ class DetailsViewController: UIViewController {
                     cell.mainTempLabel.text = day.tempString
                     cell.highTempLabel.text = day.highTempString
                     cell.lowTempLabel.text = day.lowTempString
-                    cell.conditionLabel.text = day.description
+                    cell.conditionLabel.text = day.conditionName.rawValue
                     
                     cell.precipLabel.text = day.precipString
                     cell.windSpeedLabel.text = day.windSpeedString
                     cell.windDirectionLabel.text = day.windDirectionString
                     cell.cloudCoverLabel.text = day.cloudCoverString
-                    cell.visibilityLabel.text = day.visibilityString
+                    //cell.visibilityLabel.text = day.visibilityString
                     
                     //print(day.visibility)
                     

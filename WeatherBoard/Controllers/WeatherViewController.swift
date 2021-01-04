@@ -34,12 +34,23 @@ class WeatherViewController: UIViewController {
     func setWeatherDetails(using weatherModel: WeatherModel, day daySelected: Int){
  
         //sets tempLabel label to temperature followed by condition
-        tempLabel.text = "\(weatherModel.fiveDayArray[daySelected].tempString) \(weatherModel.fiveDayArray[daySelected].description)"
-                //sets time/location label to time in location followed by name of location
-        timeLocationLabel.text = "\(weatherModel.timeString) - \(weatherModel.cityName)"
+        if daySelected == 0 {
+            tempLabel.text = "\(weatherModel.current.tempString) \(weatherModel.daily[0].conditionName)"
 
-        //sets weather image to string based on condition and day/night
-        weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.fiveDayArray[daySelected].conditionName)_\(weatherModel.isDayString)"))
+            //sets weather image to string based on condition and day/night
+            weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.current.conditionName)_\(weatherModel.current.isDayString)"))
+
+        }else if daySelected == 1 {
+            
+            tempLabel.text = "\(weatherModel.daily[1].tempString) \(weatherModel.daily[1].conditionName)"
+ 
+            //sets weather image to string based on condition and day/night
+            weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.daily[1].conditionName)_\(weatherModel.current.isDayString)"))
+        }
+        
+        //sets time/location label to time in location followed by name of location
+        timeLocationLabel.text = "\(weatherModel.timeString) - \(String(describing: weatherModel.locationName))"
+        
         
         activityIndicator.stopAnimating()
         

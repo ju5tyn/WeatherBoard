@@ -34,7 +34,7 @@
 		3AF224542512C1E400371CA4 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF224532512C1E400371CA4 /* C.swift */; };
 		3AF6CEF9251E21B2005D39CA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */; };
 		3AF6CEFA251E21B2005D39CA /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF6CEF8251E21B2005D39CA /* MenuTableViewCell.xib */; };
-		E94E93B3ED1048FCCA9EEC60 /* Pods_WeatherBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8434AF77621CFF2307A8449 /* Pods_WeatherBoard.framework */; };
+		A48CB838E6D8CFCB3E00EAAE /* Pods_WeatherBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF02EDF624512461411F9D49 /* Pods_WeatherBoard.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,9 +67,9 @@
 		3AF224532512C1E400371CA4 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		3AF6CEF8251E21B2005D39CA /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
-		B737AAFAF4A423BC18976D37 /* Pods-WeatherBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherBoard.release.xcconfig"; path = "Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard.release.xcconfig"; sourceTree = "<group>"; };
-		B8434AF77621CFF2307A8449 /* Pods_WeatherBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F5738CFAF6E6779990D85E40 /* Pods-WeatherBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherBoard.debug.xcconfig"; path = "Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard.debug.xcconfig"; sourceTree = "<group>"; };
+		3EAEF2CD239BC49092AC5608 /* Pods-WeatherBoard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherBoard.release.xcconfig"; path = "Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard.release.xcconfig"; sourceTree = "<group>"; };
+		5D1C943B04103B5104332817 /* Pods-WeatherBoard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherBoard.debug.xcconfig"; path = "Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard.debug.xcconfig"; sourceTree = "<group>"; };
+		CF02EDF624512461411F9D49 /* Pods_WeatherBoard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherBoard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E94E93B3ED1048FCCA9EEC60 /* Pods_WeatherBoard.framework in Frameworks */,
+				A48CB838E6D8CFCB3E00EAAE /* Pods_WeatherBoard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +135,8 @@
 			children = (
 				3A33323C24CCE3420053C0F7 /* WeatherBoard */,
 				948890A2592330103FBEDCA9 /* Pods */,
-				876956A8F259223E16C6A0E8 /* Frameworks */,
 				3A33323B24CCE3420053C0F7 /* Products */,
+				5F2D913EEBC52BAB95F0E6BA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,10 +186,10 @@
 			path = Particles;
 			sourceTree = "<group>";
 		};
-		876956A8F259223E16C6A0E8 /* Frameworks */ = {
+		5F2D913EEBC52BAB95F0E6BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B8434AF77621CFF2307A8449 /* Pods_WeatherBoard.framework */,
+				CF02EDF624512461411F9D49 /* Pods_WeatherBoard.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,8 +197,8 @@
 		948890A2592330103FBEDCA9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F5738CFAF6E6779990D85E40 /* Pods-WeatherBoard.debug.xcconfig */,
-				B737AAFAF4A423BC18976D37 /* Pods-WeatherBoard.release.xcconfig */,
+				5D1C943B04103B5104332817 /* Pods-WeatherBoard.debug.xcconfig */,
+				3EAEF2CD239BC49092AC5608 /* Pods-WeatherBoard.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -210,12 +210,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A33324E24CCE3470053C0F7 /* Build configuration list for PBXNativeTarget "WeatherBoard" */;
 			buildPhases = (
+				38328E0A847F04BE1C7E71C7 /* [CP] Check Pods Manifest.lock */,
 				3A8257CA25713BC60079D324 /* ShellScript */,
-				E99EB3390D9ECE6B933D4254 /* [CP] Check Pods Manifest.lock */,
 				3A33323624CCE3420053C0F7 /* Sources */,
 				3A33323724CCE3420053C0F7 /* Frameworks */,
 				3A33323824CCE3420053C0F7 /* Resources */,
-				4F6CAEAC9028A13CC144F2AC /* [CP] Embed Pods Frameworks */,
+				E3E38D20112E40CFA20DDB44 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -282,41 +282,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A8257CA25713BC60079D324 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\nelse\n    echo \"SwiftLint is not installed\"\nfi\n";
-		};
-		4F6CAEAC9028A13CC144F2AC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E99EB3390D9ECE6B933D4254 /* [CP] Check Pods Manifest.lock */ = {
+		38328E0A847F04BE1C7E71C7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -336,6 +302,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3A8257CA25713BC60079D324 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint autocorrect\nelse\n    echo \"SwiftLint is not installed\"\nfi\n";
+		};
+		E3E38D20112E40CFA20DDB44 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeatherBoard/Pods-WeatherBoard-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -501,14 +501,15 @@
 		};
 		3A33324F24CCE3470053C0F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F5738CFAF6E6779990D85E40 /* Pods-WeatherBoard.debug.xcconfig */;
+			baseConfigurationReference = 5D1C943B04103B5104332817 /* Pods-WeatherBoard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "SF-Compact-Text-Semibold.otf SF-Compact-Text-Bold.otf";
 				DEVELOPMENT_TEAM = KR9D699PKJ;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = WeatherBoard/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -522,14 +523,15 @@
 		};
 		3A33325024CCE3470053C0F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B737AAFAF4A423BC18976D37 /* Pods-WeatherBoard.release.xcconfig */;
+			baseConfigurationReference = 3EAEF2CD239BC49092AC5608 /* Pods-WeatherBoard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "SF-Compact-Text-Semibold.otf SF-Compact-Text-Bold.otf";
 				DEVELOPMENT_TEAM = KR9D699PKJ;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = WeatherBoard/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

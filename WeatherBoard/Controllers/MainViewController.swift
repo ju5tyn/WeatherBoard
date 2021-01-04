@@ -189,18 +189,37 @@ class MainViewController: UIViewController{
             //sets gradient color with string based on condition and day/night
             if daySelected == 2{
                 if menuOpen == false {
-                    self.setGradientColor(color: "\(weatherModel!.fiveDayArray[0].conditionName)_\(weatherModel!.isDayString)")
+                    self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
                 }
             }else{
                 if menuOpen == false {
-                    self.setGradientColor(color: "\(weatherModel!.fiveDayArray[self.daySelected].conditionName)_\(weatherModel!.isDayString)")
+                    
+                    if self.daySelected == 0 {
+                        self.setGradientColor(color: "\(weatherModel!.current.conditionName)_\(weatherModel!.current.isDayString)")
+                    }else{
+                        self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
+                    }
+                    
+                    
                 }
-                if let particleToDisplay = weatherModel?.particleToDisplay[self.daySelected]{
-                    emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                    removeParticles(from: gradientView)
-                    setParticles(baseView: gradientView, emitterNode: emitterNode)
                 
+                if self.daySelected == 0{
+                    if let particleToDisplay = weatherModel?.current.particle{
+                        emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                        removeParticles(from: gradientView)
+                        setParticles(baseView: gradientView, emitterNode: emitterNode)
+                    
+                    }
+                }else {
+                    if let particleToDisplay = weatherModel?.current.particle{
+                        emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                        removeParticles(from: gradientView)
+                        setParticles(baseView: gradientView, emitterNode: emitterNode)
+                    
+                    }
                 }
+                
+                
             }
 
             //if particleToDisplay not nil, will set emitternode to particle
@@ -502,11 +521,14 @@ extension MainViewController: WeatherManagerDelegate{
                     try self.realm.write{
                         
                         let newItem = MenuItem()
-                        newItem.cityName = self.weatherModel?.cityName
+                        newItem.cityName = self.weatherModel?.locationName
+
+                        
+                        
                         newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
                         
                         
-                        let colorName = "\(self.weatherModel!.fiveDayArray[0].conditionName)_\(self.weatherModel!.isDayString)"
+                        let colorName = "\(self.weatherModel!.current.conditionName)_\(self.weatherModel!.current.isDayString)"
                         
                         newItem.topGradient = "button_\(colorName)_top"
                         newItem.bottomGradient = "button_\(colorName)_bottom"
