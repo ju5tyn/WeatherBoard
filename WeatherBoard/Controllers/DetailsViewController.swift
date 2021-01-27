@@ -9,14 +9,14 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     var selectedCellIndexPath: IndexPath?
     let selectedHeight: CGFloat = 300
     let deselectedHeight: CGFloat = 70
     var firstLaunch: Bool = true
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -24,7 +24,7 @@ class DetailsViewController: UIViewController {
         tableView.register(UINib(nibName: "DetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableDetailsCell")
         tableView.beginUpdates()
         tableView.endUpdates()
-
+        
     }
     
     func clearWeatherDetails(){
@@ -88,18 +88,15 @@ class DetailsViewController: UIViewController {
                     cell.mainTempLabel.text = day.tempString
                     cell.highTempLabel.text = day.highTempString
                     cell.lowTempLabel.text = day.lowTempString
-                    cell.conditionLabel.text = day.conditionName.rawValue
-                    
+                    cell.conditionLabel.text = day.main
                     cell.precipLabel.text = day.precipString
                     cell.windSpeedLabel.text = day.windSpeedString
                     cell.windDirectionLabel.text = day.windDirectionString
                     cell.cloudCoverLabel.text = day.cloudCoverString
                     //cell.visibilityLabel.text = day.visibilityString
                     
-                    //print(day.visibility)
-                    
                 }, completion: nil)
-
+                
                 if day.highTemp == day.lowTemp{
                     cell.highTempLabel.isHidden = false
                     cell.lowTempLabel.isHidden = false
@@ -125,14 +122,14 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableDetailsCell", for: indexPath) as! DetailsTableViewCell
         
         if indexPath.row == 0{
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
             cell.setBig()
         }
-
+        
         return cell
         
     }
@@ -151,10 +148,10 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         selectedCellIndexPath = (selectedCellIndexPath != nil && selectedCellIndexPath == indexPath) ? nil : indexPath
-
+        
         tableView.beginUpdates()
         tableView.endUpdates()
-
+        
         if selectedCellIndexPath != nil {
             // This ensures, that the cell is fully visible once expanded
             tableView.scrollToRow(at: indexPath, at: .none, animated: true)

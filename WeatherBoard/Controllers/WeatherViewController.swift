@@ -1,5 +1,6 @@
 import UIKit
 import LTMorphingLabel
+import CoreLocation
 
 class WeatherViewController: UIViewController {
 
@@ -35,21 +36,28 @@ class WeatherViewController: UIViewController {
  
         //sets tempLabel label to temperature followed by condition
         if daySelected == 0 {
-            tempLabel.text = "\(weatherModel.current.tempString) \(weatherModel.daily[0].conditionName)"
+            tempLabel.text = "\(weatherModel.current.tempString) \(weatherModel.daily[0].main)"
 
             //sets weather image to string based on condition and day/night
             weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.current.conditionName)_\(weatherModel.current.isDayString)"))
 
         }else if daySelected == 1 {
             
-            tempLabel.text = "\(weatherModel.daily[1].tempString) \(weatherModel.daily[1].conditionName)"
+            tempLabel.text = "\(weatherModel.daily[1].tempString) \(weatherModel.daily[1].main)"
  
             //sets weather image to string based on condition and day/night
             weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.daily[1].conditionName)_\(weatherModel.current.isDayString)"))
         }
         
-        //sets time/location label to time in location followed by name of location
-        timeLocationLabel.text = "\(weatherModel.timeString) - \(String(describing: weatherModel.locationName))"
+        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: weatherModel.lat, longitude: weatherModel.lon), completionHandler: { placemarks, error in
+            
+            if let name = placemarks?.first?.locality {
+                self.timeLocationLabel.text = "\(weatherModel.timeString) - \(name)"
+            }
+            
+            
+            
+        })
         
         
         activityIndicator.stopAnimating()

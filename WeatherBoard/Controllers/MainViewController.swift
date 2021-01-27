@@ -5,7 +5,7 @@ import RealmSwift
 
 class MainViewController: UIViewController{
     
-
+    
     //MARK: - OUTLETS
     
     //views
@@ -14,7 +14,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var hillView: UIView!
     @IBOutlet weak var weatherContainerView: UIView!
     @IBOutlet weak var detailsContainerView: UIView!
-
+    
     //buttons
     @IBOutlet weak var menuButton: UIButton!
     
@@ -25,7 +25,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var navButtons: UIStackView!
     
     
-
+    
     
     //MARK: - VARIABLES
     
@@ -50,7 +50,7 @@ class MainViewController: UIViewController{
     //Delegate stuff
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
-
+    
     
     
     
@@ -62,7 +62,7 @@ class MainViewController: UIViewController{
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
- 
+        
         overrideUserInterfaceStyle = .dark
         weatherManager.delegate = self
         locationManager.delegate = self
@@ -152,17 +152,17 @@ class MainViewController: UIViewController{
     
     
     
-//MARK: - FUNCTIONS
+    //MARK: - FUNCTIONS
     
     func getLocation(){
         //Requests user location
-                locationManager.requestWhenInUseAuthorization()
-                locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-                locationManager.requestLocation()
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.requestLocation()
     }
     
- 
- 
+    
+    
     //MARK: clearDetails
     //resets weather details to empty
     func clearDetails(){
@@ -208,26 +208,25 @@ class MainViewController: UIViewController{
                         emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
                         removeParticles(from: gradientView)
                         setParticles(baseView: gradientView, emitterNode: emitterNode)
-                    
+                        
                     }
                 }else {
                     if let particleToDisplay = weatherModel?.current.particle{
                         emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
                         removeParticles(from: gradientView)
                         setParticles(baseView: gradientView, emitterNode: emitterNode)
-                    
+                        
                     }
                 }
                 
                 
             }
-
+            
             //if particleToDisplay not nil, will set emitternode to particle
             
         }
     }
     
-
     
     
     
@@ -236,7 +235,8 @@ class MainViewController: UIViewController{
     
     
     
-//MARK: - UI FUNCTIONS
+    
+    //MARK: - UI FUNCTIONS
     
     
     
@@ -261,42 +261,42 @@ class MainViewController: UIViewController{
         todayButton.titleLabel?.textDropShadow()
         tomorrowButton.titleLabel?.textDropShadow()
         dayAfterButton.titleLabel?.textDropShadow()
-
+        
     }
     
     //Adds blur to the uiview
     func addBlur(){
-            if !UIAccessibility.isReduceTransparencyEnabled {
-                view.backgroundColor = .clear
-                
-                let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
-                let blurEffectView = UIVisualEffectView(effect: nil)
-                blurEffectView.frame = self.view.bounds
-                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                
-                let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-                let vibrancyView = UIVisualEffectView(effect: nil)
-                vibrancyView.frame = self.view.bounds
-                vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                
-                blurEffectView.tag = 2
-                
-                view.insertSubview(blurEffectView, at: 2)
-                blurEffectView.contentView.addSubview(vibrancyView)
-
-                UIView.animate(withDuration: 0.4){
-                    blurEffectView.effect = blurEffect
-                    vibrancyView.effect = vibrancyEffect
-                }
-            } else {
-                view.backgroundColor = .clear
+        if !UIAccessibility.isReduceTransparencyEnabled {
+            view.backgroundColor = .clear
+            
+            let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
+            let blurEffectView = UIVisualEffectView(effect: nil)
+            blurEffectView.frame = self.view.bounds
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+            let vibrancyView = UIVisualEffectView(effect: nil)
+            vibrancyView.frame = self.view.bounds
+            vibrancyView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            
+            blurEffectView.tag = 2
+            
+            view.insertSubview(blurEffectView, at: 2)
+            blurEffectView.contentView.addSubview(vibrancyView)
+            
+            UIView.animate(withDuration: 0.4){
+                blurEffectView.effect = blurEffect
+                vibrancyView.effect = vibrancyEffect
             }
+        } else {
+            view.backgroundColor = .clear
+        }
         
     }
     
     //Sets gradient up for initial app launch
     func addGradient(){
-    
+        
         gradient.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height)*0.8)
         gradientView.layer.addSublayer(gradient)
         gradient.startPoint = CGPoint(x: 0.5, y: 1)
@@ -317,10 +317,10 @@ class MainViewController: UIViewController{
     
     
     //MARK: Other Functions
-
+    
     //MARK: AddParticles
     func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
-
+        
         let skView = SKView(frame: CGRect(x:0, y:-200, width: baseView.frame.width, height: baseView.frame.height))
         let skScene = SKScene(size: baseView.frame.size)
         skScene.backgroundColor = .clear
@@ -334,24 +334,24 @@ class MainViewController: UIViewController{
         emitterNode.particlePositionRange.dx = skScene.frame.width
         baseView.addSubview(skView)
     }
-
-
+    
+    
     //MARK: RemoveParticles
     func removeParticles(from view: UIView) {
         if let viewWithTag = view.viewWithTag(1){
             viewWithTag.removeFromSuperview()
             print("Particles Removed")
         }else{
-            print("Error removinig Particles")
+            print("❌ Error Removing Particles")
         }
         
     }
-
+    
     func hideParticles(view: UIView) {
         if let viewWithTag = view.viewWithTag(1){
             viewWithTag.isHidden = true
         }else{
-            print("Error Hiding particles")
+            print("❌ Error Hiding particles")
         }
         
     }
@@ -359,11 +359,11 @@ class MainViewController: UIViewController{
         if let viewWithTag = view.viewWithTag(1){
             viewWithTag.isHidden = false
         }else{
-            print("Error Showing particles")
+            print("❌ Error Showing particles")
         }
     }
     
-
+    
     
     //Highlights currently selected button
     func highlightButton(_ buttonToHighlight: UIButton){
@@ -386,7 +386,7 @@ class MainViewController: UIViewController{
         ]
     }
     
-
+    
     func removeBlur(){
         if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
             UIView.animate(withDuration: 0.3){
@@ -422,7 +422,7 @@ class MainViewController: UIViewController{
     
     
     
-//MARK: - SEGUES
+    //MARK: - SEGUES
     
     
     //Called on segue to menu
@@ -441,7 +441,7 @@ class MainViewController: UIViewController{
     @IBAction func unwind(_ segue: UIStoryboardSegue) {
     }
     
-
+    
 }
 
 
@@ -505,30 +505,28 @@ extension MainViewController: CLLocationManagerDelegate{
 //MARK: WeatherManagerDelegate
 
 extension MainViewController: WeatherManagerDelegate{
-   
+    
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel){
         
         weatherModel = weather
+        
         //sets this view's weather model to data from weathermanager
         DispatchQueue.main.async {
             
             if self.weatherModel?.doNotSave != true{
                 //writes the city name to realm
                 
-                
-                
                 do{
                     try self.realm.write{
                         
                         let newItem = MenuItem()
                         newItem.cityName = self.weatherModel?.locationName
-
-                        
-                        
                         newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
                         
-                        
                         let colorName = "\(self.weatherModel!.current.conditionName)_\(self.weatherModel!.current.isDayString)"
+                        
+                        newItem.lat = self.weatherModel?.lat ?? 0.0
+                        newItem.lat = self.weatherModel?.lat ?? 0.0
                         
                         newItem.topGradient = "button_\(colorName)_top"
                         newItem.bottomGradient = "button_\(colorName)_bottom"
@@ -538,8 +536,6 @@ extension MainViewController: WeatherManagerDelegate{
                 }catch{
                     print(error)
                 }
-                
-                
                 //realm end
             }
             self.setDetails()
@@ -553,7 +549,7 @@ extension MainViewController: WeatherManagerDelegate{
         let failedAlert = UIAlertController(title: "Invalid Weather Location", message: "Please enter valid location", preferredStyle: .actionSheet)
         
         failedAlert.show(self, sender: self)
-        print("error getting data")
+        print("❌ Error: Invalid Location")
         
         
     }
@@ -568,7 +564,7 @@ extension UILabel {
         self.layer.shadowOpacity = 0.3
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
     }
-
+    
     static func createCustomLabel() -> UILabel {
         let label = UILabel()
         label.textDropShadow()

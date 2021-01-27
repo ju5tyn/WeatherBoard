@@ -11,7 +11,7 @@ import RealmSwift
 import CoreLocation
 
 class MenuViewController: UIViewController {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -32,7 +32,7 @@ class MenuViewController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         
         overrideUserInterfaceStyle = .dark
-
+        
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -44,7 +44,7 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         //searchBar.becomeFirstResponder()
     }
     
@@ -56,7 +56,7 @@ class MenuViewController: UIViewController {
         tableView.reloadData()
     }
     
-
+    
     //MARK: - Buttons
     
     //Back button pressed
@@ -92,24 +92,24 @@ class MenuViewController: UIViewController {
             
             mainVC.menuOpen.toggle()
             mainVC.mainView.isHidden = false
-            mainVC.setDetails()
-
             
             if locationPressed{
                 mainVC.locationManager.requestLocation()
                 mainVC.clearDetails()
-            }else if let validCityName = menuItemPressedCityName{
                 
+            }else if let validCityName = menuItemPressedCityName{
                 mainVC.weatherManager.fetchWeather(cityName: validCityName, doNotSave: locationCellPressed)
                 mainVC.clearDetails()
                 
             }else if searchFull{
-                
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
                 mainVC.clearDetails()
+                
+            } else {
+                mainVC.setDetails()
             }
+            
             mainVC.updateBlur()
-            //removeParticles(from: mainVC.gradientView)
         }
     }
     
@@ -120,7 +120,7 @@ class MenuViewController: UIViewController {
 extension MenuViewController: MenuTableViewCellDelegate{
     
     func didPressButton(with cityName: String, indexPath: IndexPath) {
-
+        
         menuItemPressedCityName = cityName
         
         if menuItems![indexPath.row].isCurrentLocation != true {
@@ -163,8 +163,8 @@ extension MenuViewController: UISearchBarDelegate {
                 }
             }
             
-
-                
+            
+            
             
             
             
@@ -191,7 +191,7 @@ extension UIViewController {
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
-
+    
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -211,6 +211,22 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableMenuCell", for: indexPath) as! MenuTableViewCell
         
         cell.delegate = self
+        
+        /*
+         let lat = (menuItems?[indexPath.row].lat)!
+         let lon = (menuItems?[indexPath.row].lon)!
+         
+         DispatchQueue.main.async {
+         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: lat, longitude: lon), completionHandler: { placemarks, error in
+         if let name = placemarks?.first?.locality {
+         cell.menuLabel.text = name
+         }
+         })
+         
+         }
+         
+         */
+        
         cell.menuLabel.text = menuItems?[indexPath.row].cityName
         cell.menuButton.bottomGradient = menuItems?[indexPath.row].bottomGradient
         cell.menuButton.topGradient = menuItems?[indexPath.row].topGradient

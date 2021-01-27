@@ -35,7 +35,7 @@ class MenuTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         
         
         // Configure the view for the selected state
@@ -45,12 +45,12 @@ class MenuTableViewCell: UITableViewCell {
         if
             let collectionView = superview as? UITableView,
             let index = collectionView.indexPath(for: self)
-                {
-                if let validLabel = menuLabel.text{
-                    
-                    delegate?.didPressButton(with: validLabel, indexPath: index)
-                }
+        {
+            if let validLabel = menuLabel.text{
+                
+                delegate?.didPressButton(with: validLabel, indexPath: index)
             }
+        }
         
         
         
