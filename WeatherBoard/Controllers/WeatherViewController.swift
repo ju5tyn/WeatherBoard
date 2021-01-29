@@ -51,7 +51,11 @@ class WeatherViewController: UIViewController {
         
         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: weatherModel.lat, longitude: weatherModel.lon), completionHandler: { placemarks, error in
             
+            
+            
             if let name = placemarks?.first?.locality {
+                self.timeLocationLabel.text = "\(weatherModel.timeString) - \(name)"
+            } else if let name = placemarks?.first?.country {
                 self.timeLocationLabel.text = "\(weatherModel.timeString) - \(name)"
             }
             

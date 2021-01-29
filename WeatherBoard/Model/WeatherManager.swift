@@ -84,89 +84,37 @@ struct WeatherManager {
         
     }
     
-    /*
-     func parseJSON(_ data: Data, isCurrentLocation: Bool, doNotSave: Bool) -> WeatherModel? {
-     
-     let decoder = JSONDecoder()
-     do {
-     let decodedData = try decoder.decode(WeatherData.self, from: data)
-     
-     //global attributes
-     let timezone = decodedData.city.timezone
-     let cityName = decodedData.city.name
-     //sunset/sunrise and dt times don't change much, so made global
-     let sunset = decodedData.city.sunset
-     let sunrise = decodedData.city.sunrise
-     let dt = decodedData.list[0].dt
-     let id = [decodedData.list[0].weather[0].id,
-     decodedData.list[8].weather[0].id]
-     
-     //attributes today
-     //weather[0] is only in array
-     let fiveDayArray = [getDay(decodedData: decodedData, timeNumber: 0),
-     getDay(decodedData: decodedData, timeNumber: 8),
-     getDay(decodedData: decodedData, timeNumber: 16),
-     getDay(decodedData: decodedData, timeNumber: 24),
-     getDay(decodedData: decodedData, timeNumber: 32)
-     ]
-     //returns weather model to the caller
-     return WeatherModel(timeZone: timezone,
-     cityName: cityName,
-     sunrise: sunrise,
-     sunset: sunset,
-     dt: dt,
-     isCurrentLocation: isCurrentLocation,
-     doNotSave: doNotSave,
-     conditionID: id,
-     fiveDayArray: fiveDayArray)
-     
-     } catch {
-     delegate?.didFailWithError(error: error)
-     print(error)
-     return nil
-     }
-     
-     
-     
-     }
-     
-     func getDay(decodedData: WeatherData, timeNumber: Int) -> WeatherModel.fiveDay{
-     
-     return WeatherModel.fiveDay(conditionID: decodedData.list[timeNumber].weather[0].id,
-     dt: decodedData.list[timeNumber].dt,
-     description: decodedData.list[timeNumber].weather[0].main,
-     temp: decodedData.list[timeNumber].main.temp,
-     highTemp: decodedData.list[timeNumber].main.temp_max,
-     lowTemp: decodedData.list[timeNumber].main.temp_min,
-     cloudCover: decodedData.list[timeNumber].clouds.all,
-     windSpeed: decodedData.list[timeNumber].wind.speed,
-     windDirection: decodedData.list[timeNumber].wind.deg,
-     precip: decodedData.list[timeNumber].pop,
-     visibility: decodedData.list[timeNumber].visibility)
-     
-     
-     }
-     */
+
+
     func parseJSON(_ data: Data, isCurrentLocation: Bool, doNotSave: Bool) -> WeatherModel? {
         
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: data)
             
+            
+            
+            
+            
             return WeatherModel(lat: decodedData.lat,
                                 lon: decodedData.lon,
                                 timeZoneOffset: decodedData.timezone_offset,
-                                isCurrentLocation: false,
-                                doNotSave: false,
+                                isCurrentLocation: isCurrentLocation,
+                                doNotSave: doNotSave,
                                 current: getCurrent(decodedData),
                                 daily: getDailyArray(decodedData)
             )
+            
         } catch {
             //delegate?.didFailWithError(error: error)
             print(error)
             return nil
         }
     }
+    
+
+    
+    //current day data
     
     func getCurrent(_ decodedData: WeatherData) -> WeatherModel.Current{
         
@@ -180,6 +128,8 @@ struct WeatherManager {
                                     temp: data.temp
         )
     }
+    
+    //5 day forecast array
     
     func getDailyArray(_ decodedData: WeatherData) -> [WeatherModel.Daily]{
         var array: [WeatherModel.Daily] = []

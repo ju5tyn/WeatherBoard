@@ -157,7 +157,7 @@ class MainViewController: UIViewController{
     func getLocation(){
         //Requests user location
         locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+        locationManager.desiredAccuracy = kCLLocationAccuracyReduced
         locationManager.requestLocation()
     }
     
@@ -515,27 +515,38 @@ extension MainViewController: WeatherManagerDelegate{
             
             if self.weatherModel?.doNotSave != true{
                 //writes the city name to realm
-                
-                do{
-                    try self.realm.write{
-                        
-                        let newItem = MenuItem()
-                        newItem.cityName = self.weatherModel?.locationName
-                        newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
-                        
-                        let colorName = "\(self.weatherModel!.current.conditionName)_\(self.weatherModel!.current.isDayString)"
-                        
-                        newItem.lat = self.weatherModel?.lat ?? 0.0
-                        newItem.lat = self.weatherModel?.lat ?? 0.0
-                        
-                        newItem.topGradient = "button_\(colorName)_top"
-                        newItem.bottomGradient = "button_\(colorName)_bottom"
-                        
-                        self.realm.add(newItem)
+                let location = CLLocation(latitude: self.weatherModel!.lat, longitude: self.weatherModel!.lon)
+
+                CLGeocoder().reverseGeocodeLocation(location, completionHandler: { placemarks, error in
+                    
+                    self.realm.beginWrite()
+                    
+                    let newItem = MenuItem()
+                    newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
+                    
+                    let colorName = "\(self.weatherModel!.current.conditionName)_\(self.weatherModel!.current.isDayString)"
+ 
+                    newItem.topGradient = "button_\(colorName)_top"
+                    newItem.bottomGradient = "button_\(colorName)_bottom"
+                    
+                    
+                    newItem.cityName = placemarks?.first?.locality
+                    
+                    if newItem.cityName == nil {
+                        newItem.cityName = placemarks?.first?.country
                     }
-                }catch{
-                    print(error)
-                }
+                    
+                    
+                    self.realm.add(newItem)
+                    
+                    do{
+                        try self.realm.commitWrite()
+                    } catch {
+                        print(error)
+                    }
+                })
+                
+                
                 //realm end
             }
             self.setDetails()

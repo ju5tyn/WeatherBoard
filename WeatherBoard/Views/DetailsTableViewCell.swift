@@ -58,7 +58,7 @@ class DetailsTableViewCell: UITableViewCell {
         isSelected ? setBig() : setSmall()
         
     }
-
+    
     //MARK: - Runs when Cell Selected
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
