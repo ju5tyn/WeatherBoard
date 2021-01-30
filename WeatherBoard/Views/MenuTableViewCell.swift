@@ -31,7 +31,12 @@ class MenuTableViewCell: UITableViewCell {
         menuLabel.textDropShadow()
         //locationIcon.isHidden = true
         
+        locationIcon.addShadow()
+        //menuButton.addShadow()
+        
     }
+    
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

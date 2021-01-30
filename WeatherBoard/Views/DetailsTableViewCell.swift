@@ -46,12 +46,16 @@ class DetailsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        conditionLabel.textDropShadow()
+        dayLabel.textDropShadow()
+        mainTempLabel.textDropShadow()
+        
         for box in boxViews{
             box.layer.cornerRadius = 10
-            box.layer.shadowColor = UIColor.black.cgColor
-            box.layer.shadowOpacity = 0.5
+            //box.layer.shadowColor = UIColor.black.cgColor
+            box.layer.shadowOpacity = 0.3
             box.layer.shadowOffset = .init(width: 0, height: 1)
-            box.layer.shadowRadius = 10
+            box.layer.shadowRadius = 5
         }
         
         

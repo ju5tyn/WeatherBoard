@@ -51,6 +51,10 @@ struct WeatherModel{
         let main: String
         let description: String
         
+        var isDay: Bool { return (dt>sunrise && dt<sunset) ? true : false }
+        
+        var particle: String? { return getParticleName(id, isDay) }
+        
         var conditionName: ConditionNames { return getConditionName(id) }
         var conditionString: String {
             conditionName.rawValue

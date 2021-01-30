@@ -106,6 +106,31 @@
                                             <segue destination="Lth-WC-o03" kind="embed" identifier="toDetails" id="YSA-aV-YE0"/>
                                         </connections>
                                     </containerView>
+                                    <view alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="xJs-cJ-fXL">
+                                        <rect key="frame" x="70" y="34" width="75" height="24"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EP-0N-rK0" customClass="LTMorphingLabel">
+                                                <rect key="frame" x="6" y="4.5" width="63" height="15"/>
+                                                <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.2427566225165563" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="8EP-0N-rK0" firstAttribute="centerY" secondItem="xJs-cJ-fXL" secondAttribute="centerY" id="5gw-JA-K8t"/>
+                                            <constraint firstItem="8EP-0N-rK0" firstAttribute="leading" secondItem="xJs-cJ-fXL" secondAttribute="leading" constant="6" id="6dI-qh-v2Z"/>
+                                            <constraint firstAttribute="height" constant="24" id="I6A-TN-JZl"/>
+                                            <constraint firstItem="8EP-0N-rK0" firstAttribute="top" secondItem="xJs-cJ-fXL" secondAttribute="top" constant="4.5" id="ddb-gd-pcr"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="rOD-ct-4EN"/>
+                                            <constraint firstAttribute="trailing" secondItem="8EP-0N-rK0" secondAttribute="trailing" constant="6" id="xzc-Kf-iTT"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <integer key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -113,6 +138,8 @@
                                     <constraint firstItem="q9T-eh-vLh" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" id="6z1-Jw-oc5"/>
                                     <constraint firstAttribute="bottom" secondItem="KYU-or-FRp" secondAttribute="bottom" constant="30" id="77r-2H-QEb"/>
                                     <constraint firstAttribute="trailing" secondItem="q9T-eh-vLh" secondAttribute="trailing" id="90N-bT-hIp"/>
+                                    <constraint firstItem="xJs-cJ-fXL" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" constant="70" id="9TO-a7-3dX"/>
+                                    <constraint firstItem="xJs-cJ-fXL" firstAttribute="top" secondItem="gQ8-HG-zRf" secondAttribute="top" constant="34" id="IuQ-00-XSO"/>
                                     <constraint firstItem="6X1-WS-ejl" firstAttribute="top" secondItem="gQ8-HG-zRf" secondAttribute="top" constant="35" id="Ufw-Tk-ZPK"/>
                                     <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="IYJ-Ui-El7" secondAttribute="bottom" constant="10" id="iFY-Qm-hRh"/>
                                     <constraint firstItem="6X1-WS-ejl" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" constant="30" id="oWN-hX-6zP"/>
@@ -147,6 +174,9 @@
                         <outlet property="detailsContainerView" destination="IYJ-Ui-El7" id="jfk-Ny-y0t"/>
                         <outlet property="gradientView" destination="B2f-a6-7Oa" id="ymw-Gy-h1L"/>
                         <outlet property="hillView" destination="xgx-Ll-PVj" id="dbD-Ri-Qzz"/>
+                        <outlet property="locationLabel" destination="8EP-0N-rK0" id="0wE-2H-Xw2"/>
+                        <outlet property="locationLabelLeadingConstraint" destination="9TO-a7-3dX" id="saT-P7-PQ8"/>
+                        <outlet property="locationLabelView" destination="xJs-cJ-fXL" id="UeE-hM-o7O"/>
                         <outlet property="mainView" destination="gQ8-HG-zRf" id="104-8S-lni"/>
                         <outlet property="menuButton" destination="6X1-WS-ejl" id="d3L-mM-XSn"/>
                         <outlet property="navButtons" destination="KYU-or-FRp" id="e78-lz-Okz"/>
@@ -191,7 +221,7 @@
                                 </scopeButtonTitles>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZm-fn-fpI">
-                                <rect key="frame" x="30" y="181" width="63" height="20"/>
+                                <rect key="frame" x="30" y="181" width="63" height="19"/>
                                 <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -206,7 +236,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="4" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aNd-QS-4El">
-                                <rect key="frame" x="25" y="209" width="364" height="300"/>
+                                <rect key="frame" x="25" y="208" width="364" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="kVd-PS-Q1Y"/>
@@ -384,6 +414,9 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="8EP-0N-rK0">
+            <size key="intrinsicContentSize" width="63" height="18"/>
+        </designable>
         <designable name="NZ7-Qx-hdu"/>
         <designable name="a5I-8U-sGI"/>
     </designables>

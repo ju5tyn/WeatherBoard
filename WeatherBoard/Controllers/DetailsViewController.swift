@@ -12,6 +12,9 @@ class DetailsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    
+    
+    
     var selectedCellIndexPath: IndexPath?
     let selectedHeight: CGFloat = 300
     let deselectedHeight: CGFloat = 70
