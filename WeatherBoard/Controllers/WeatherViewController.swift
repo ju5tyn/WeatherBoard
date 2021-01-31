@@ -32,7 +32,7 @@ class WeatherViewController: UIViewController {
         
     }
     
-    func setWeatherDetails(using weatherModel: WeatherModel, day daySelected: Int, locationName: String){
+    func setWeatherDetails(using weatherModel: WeatherModel, day daySelected: Int){
         
         //sets tempLabel label to temperature followed by condition
         if daySelected == 0 {
@@ -49,7 +49,7 @@ class WeatherViewController: UIViewController {
             weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.daily[1].conditionName)_\(weatherModel.current.isDayString)"))
         }
         
-        self.timeLocationLabel.text = "\(weatherModel.timeString) - \(locationName)"
+        self.timeLocationLabel.text = "\(weatherModel.timeString) - \(weatherModel.locationName!)"
         
         
         

@@ -24,6 +24,8 @@ struct WeatherModel{
     let current : Current
     let daily: [Daily]
     
+    var locationName: String? = ""
+    
     //5day forecast
     
     struct Current{
@@ -52,7 +54,6 @@ struct WeatherModel{
         let description: String
         
         var isDay: Bool { return (dt>sunrise && dt<sunset) ? true : false }
-        
         var particle: String? { return getParticleName(id, isDay) }
         
         var conditionName: ConditionNames { return getConditionName(id) }
