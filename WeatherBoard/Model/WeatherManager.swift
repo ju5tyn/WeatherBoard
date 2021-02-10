@@ -33,6 +33,7 @@ struct WeatherManager {
             let placemark = placemarks?.first
             if let lat = placemark?.location?.coordinate.latitude, let lon = placemark?.location?.coordinate.longitude {
                 let urlString = "\(weatherURL)&lat=\(lat)&lon=\(lon)"
+                print(urlString)
                 performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
                 
             }else{
@@ -144,9 +145,9 @@ struct WeatherManager {
         
         return WeatherModel.Daily(id: data.weather[0].id,
                                   main: data.weather[0].main, description: data.weather[0].description,
-                                  dt: data.dt,
-                                  sunrise: data.sunrise,
-                                  sunset: data.sunset,
+                                  dt: decodedData.current.dt,
+                                  sunrise: decodedData.current.sunrise,
+                                  sunset: decodedData.current.sunset,
                                   temp: data.temp.day,
                                   highTemp: data.temp.max,
                                   lowTemp: data.temp.min,

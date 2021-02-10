@@ -4,20 +4,14 @@ import CoreLocation
 
 struct WeatherModel{
     
+    //MARK: - Data
+    
     let lat: Double
     let lon: Double
-    
-    //backup location name
-    //var typedName: String
-
-    //converts search to lat+lon
     let timeZoneOffset: Int
     var timeString: String { return Date(timeInterval: TimeInterval(timeZoneOffset),
                                          since: Date()).UTCTimeString
     }
-    
-    //NEEDS CITY NAME ADDED THROUGH GEOCODING
-    
     let isCurrentLocation: Bool
     let doNotSave: Bool
     
@@ -26,7 +20,8 @@ struct WeatherModel{
     
     var locationName: String? = ""
     
-    //5day forecast
+    
+    //MARK: Current
     
     struct Current{
         
@@ -37,6 +32,7 @@ struct WeatherModel{
         var isDayString: String { return isDay ? "day" : "night" }
         var conditionName: ConditionNames { return getConditionName(id) }
         var particle: String? { return getParticleName(id, isDay) }
+        var fullName: String? { return getFullName(id, isDay) }
         
         let dt: Int
         let sunrise: Int
@@ -45,7 +41,20 @@ struct WeatherModel{
         
         var tempString: String{ return "\(String(format: "%.0f", temp))°" }
         
+        var isSunset: Bool {
+            let sunsetRange = (sunset-2000)...(sunset+2000)
+            return (sunsetRange.contains(dt) && ((conditionName == .clear) || conditionName == .few_clouds || conditionName == .scattered_clouds)) ? true : false
+        }
+        
+        var isSunrise: Bool {
+            let sunriseRange = (sunrise-2000)...(sunrise+2000)
+            return (sunriseRange.contains(dt) && ((conditionName == .clear) || conditionName == .few_clouds || conditionName == .scattered_clouds)) ? true : false
+        }
+        
+        
     }
+    
+    //MARK: Daily
     
     struct Daily{
         
@@ -57,9 +66,9 @@ struct WeatherModel{
         var particle: String? { return getParticleName(id, isDay) }
         
         var conditionName: ConditionNames { return getConditionName(id) }
-        var conditionString: String {
-            conditionName.rawValue
-        }
+        var conditionString: String { conditionName.rawValue }
+        var fullName: String? { return getFullName(id, isDay) }
+        var smallName: String? { return getSmallName(id, isDay)}
         
         let dt: Int
         let sunrise: Int
@@ -71,12 +80,13 @@ struct WeatherModel{
         let windSpeed: Double
         let windDirection: Double
         let precip: Double
+        
         //let visibility: Double //this is in metres
         
         var dayString: String { return convertToDayString(dt) }
         var tempString: String { return "\(String(format: "%.0f", temp))°" }
-        var highTempString: String { return "\(String(format: "%.0f", temp))°" }
-        var lowTempString: String { return "\(String(format: "%.0f", temp))°" }
+        var highTempString: String { return "\(String(format: "%.0f", highTemp))°" }
+        var lowTempString: String { return "\(String(format: "%.0f", lowTemp))°" }
         var cloudCoverString: String { return "\(cloudCover)%" }
         var windSpeedString: String { return String(format: "%.1fM/S", Double(windSpeed)) }
         var windDirectionString: String { return windDirection.direction.description.uppercased() }
@@ -85,8 +95,11 @@ struct WeatherModel{
     }
     
 }
+//MARK: - Functions
 
-//MARK: - Format date
+
+
+//MARK:  Format date
 func convertToDayString(_ dt: Int) -> String{
     
     let date = Date(timeIntervalSince1970: TimeInterval(dt))
@@ -137,6 +150,61 @@ func getConditionName(_ id: Int) -> ConditionNames{
             return .scattered_clouds
     }
 }
+
+
+//MARK: Get Full Condition name
+func getFullName(_ conditionID: Int, _ isDay: Bool) -> String? {
+    switch getConditionName(conditionID){
+        case .thunderstorm:
+            return "Storm"
+        case .rain:
+            return "Drizzle"
+        case .rain_clouds:
+            return "Rain"
+        case .shower_rain:
+            return "Showers"
+        case .snow:
+            return "Snow"
+        case .mist:
+            return "Mist"
+        case .clear:
+            return "Clear"
+        case .few_clouds:
+            return "Partly Cloudy"
+        case .scattered_clouds:
+            return "Cloudy"
+        case .broken_clouds:
+            return "Cloudy"
+    }
+}
+
+
+//MARK: Get Smaller Condition name
+func getSmallName(_ conditionID: Int, _ isDay: Bool) -> String? {
+    switch getConditionName(conditionID){
+        case .thunderstorm:
+            return "Storm"
+        case .rain:
+            return "Drizzle"
+        case .rain_clouds:
+            return "Rain"
+        case .shower_rain:
+            return "Showers"
+        case .snow:
+            return "Snow"
+        case .mist:
+            return "Mist"
+        case .clear:
+            return "Clear"
+        case .few_clouds:
+            return "Cloudy"
+        case .scattered_clouds:
+            return "Cloudy"
+        case .broken_clouds:
+            return "Cloudy"
+    }
+}
+
 //MARK: Get Particle Name
 func getParticleName(_ conditionID: Int, _ isDay: Bool) -> String? {
     switch getConditionName(conditionID){
@@ -149,14 +217,14 @@ func getParticleName(_ conditionID: Int, _ isDay: Bool) -> String? {
         case .clear, .few_clouds:
             return isDay ? nil : C.particles.starParticle
         case .scattered_clouds, .broken_clouds:
-            return isDay ? nil : C.particles.starParticleCloudy
+            return isDay ? nil : C.particles.starParticle
         default:
             return nil
     }
 }
 
 
-//MARK: - Wind direction calculation
+//MARK:  Calculate wind direction
 enum Direction: String {
     case n, nne, ne, ene, e, ese, se, sse, s, ssw, sw, wsw, w, wnw, nw, nnw
 }
@@ -178,7 +246,7 @@ extension Double {
     }
 }
 
-//MARK: - Dateformatter
+//MARK:  Format date as time
 
 extension Date {
     

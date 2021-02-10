@@ -50,12 +50,14 @@ class DetailsTableViewCell: UITableViewCell {
         dayLabel.textDropShadow()
         mainTempLabel.textDropShadow()
         
+        
         for box in boxViews{
             box.layer.cornerRadius = 10
             //box.layer.shadowColor = UIColor.black.cgColor
             box.layer.shadowOpacity = 0.3
             box.layer.shadowOffset = .init(width: 0, height: 1)
             box.layer.shadowRadius = 5
+            box.layer.masksToBounds = false
         }
         
         
@@ -73,6 +75,7 @@ class DetailsTableViewCell: UITableViewCell {
     
     func setBig(){
         activityIndicator.style = .large
+        conditionLabel.layer.masksToBounds = false
         
         UIView.animate(withDuration: 0.2){ [self] in
             self.imageWidthConstraint.constant = 100
@@ -100,6 +103,9 @@ class DetailsTableViewCell: UITableViewCell {
     
     //MARK: - Set Small
     func setSmall(){
+        
+        conditionLabel.layer.masksToBounds = false
+        
         activityIndicator.style = .medium
         UIView.animate(withDuration: 0.2){ [self] in
             self.imageWidthConstraint.constant = 50

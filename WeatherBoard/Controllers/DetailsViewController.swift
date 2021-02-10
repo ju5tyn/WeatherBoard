@@ -89,16 +89,31 @@ class DetailsViewController: UIViewController {
                     
                     
                     cell.mainTempLabel.text = day.tempString
-                    cell.highTempLabel.text = day.highTempString
-                    cell.lowTempLabel.text = day.lowTempString
-                    cell.conditionLabel.text = day.main
+                    
+                    cell.conditionLabel.text = day.smallName
                     cell.precipLabel.text = day.precipString
                     cell.windSpeedLabel.text = day.windSpeedString
                     cell.windDirectionLabel.text = day.windDirectionString
                     cell.cloudCoverLabel.text = day.cloudCoverString
                     //cell.visibilityLabel.text = day.visibilityString
                     
+                    //print(day.highTemp, day.lowTemp)
+                    
+                    if (day.highTemp != day.lowTemp){
+                        cell.highTempLabel.text = day.highTempString
+                        cell.lowTempLabel.text = day.lowTempString
+                    }else{
+                        
+                        cell.highTempLabel.text = ""
+                        cell.lowTempLabel.text = ""
+                    }
+                    
+                    
+                    
+                    
+                    
                 }, completion: nil)
+                
                 
                 if day.highTemp == day.lowTemp{
                     cell.highTempLabel.isHidden = false

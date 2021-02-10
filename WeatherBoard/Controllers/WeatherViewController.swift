@@ -36,26 +36,20 @@ class WeatherViewController: UIViewController {
         
         //sets tempLabel label to temperature followed by condition
         if daySelected == 0 {
-            tempLabel.text = "\(weatherModel.current.tempString) \(weatherModel.daily[0].main)"
+            tempLabel.text = "\(weatherModel.current.tempString) \(weatherModel.current.fullName!)"
             
             //sets weather image to string based on condition and day/night
             weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.current.conditionName)_\(weatherModel.current.isDayString)"))
             
         }else if daySelected == 1 {
             
-            tempLabel.text = "\(weatherModel.daily[1].tempString) \(weatherModel.daily[1].main)"
+            tempLabel.text = "\(weatherModel.daily[1].tempString) \(weatherModel.daily[1].fullName!)"
             
             //sets weather image to string based on condition and day/night
             weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.daily[1].conditionName)_\(weatherModel.current.isDayString)"))
         }
         
         self.timeLocationLabel.text = "\(weatherModel.timeString) - \(weatherModel.locationName!)"
-        
-        
-        
-        
-        
-        
         
         activityIndicator.stopAnimating()
         

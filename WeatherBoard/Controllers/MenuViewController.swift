@@ -91,7 +91,11 @@ class MenuViewController: UIViewController {
             let mainVC = segue.destination as! MainViewController
             
             mainVC.menuOpen.toggle()
-            mainVC.mainView.isHidden = false
+            //mainVC.mainView.isHidden = false
+            UIView.animate(withDuration: 0.5) {
+                mainVC.mainView.alpha = 1
+            }
+            
             
             if locationPressed{
                 mainVC.locationManager.requestLocation()
@@ -211,21 +215,6 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableMenuCell", for: indexPath) as! MenuTableViewCell
         
         cell.delegate = self
-        
-        /*
-         let lat = (menuItems?[indexPath.row].lat)!
-         let lon = (menuItems?[indexPath.row].lon)!
-         
-         DispatchQueue.main.async {
-         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: lat, longitude: lon), completionHandler: { placemarks, error in
-         if let name = placemarks?.first?.locality {
-         cell.menuLabel.text = name
-         }
-         })
-         
-         }
-         
-         */
         
         cell.menuLabel.text = menuItems?[indexPath.row].cityName
         cell.menuButton.bottomGradient = menuItems?[indexPath.row].bottomGradient

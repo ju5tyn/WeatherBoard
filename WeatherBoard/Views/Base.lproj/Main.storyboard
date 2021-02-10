@@ -107,10 +107,10 @@
                                         </connections>
                                     </containerView>
                                     <view alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="xJs-cJ-fXL">
-                                        <rect key="frame" x="70" y="34" width="75" height="24"/>
+                                        <rect key="frame" x="70" y="34" width="70.5" height="24"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EP-0N-rK0" customClass="LTMorphingLabel">
-                                                <rect key="frame" x="6" y="4.5" width="63" height="15"/>
+                                                <rect key="frame" x="6" y="4.5" width="58.5" height="15"/>
                                                 <fontDescription key="fontDescription" name="SFCompactText-Bold" family="SF Compact Text" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -183,7 +183,7 @@
                         <outlet property="todayButton" destination="loQ-k2-Fz5" id="CMg-p1-o4N"/>
                         <outlet property="tomorrowButton" destination="6Nc-9G-tHD" id="gbN-2D-XbU"/>
                         <outlet property="weatherContainerView" destination="q9T-eh-vLh" id="2IX-Tc-m07"/>
-                        <segue destination="Ujs-7t-r3k" kind="presentation" identifier="toMenu" modalPresentationStyle="overFullScreen" modalTransitionStyle="coverVertical" id="xTC-aY-veb"/>
+                        <segue destination="Ujs-7t-r3k" kind="presentation" identifier="toMenu" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="xTC-aY-veb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -257,7 +257,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hyJ-FP-r13"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="tDP-OQ-yOe" firstAttribute="top" secondItem="tHG-eM-E5a" secondAttribute="bottom" constant="-26" id="1uz-oF-DYy"/>
                             <constraint firstItem="hyJ-FP-r13" firstAttribute="trailing" secondItem="7n4-rz-feH" secondAttribute="trailing" constant="30" id="21U-Hc-VuL"/>
@@ -277,6 +277,7 @@
                             <constraint firstItem="hZm-fn-fpI" firstAttribute="top" secondItem="1TO-c0-fHM" secondAttribute="bottom" constant="10" id="qv3-Ov-GjX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="aF1-yq-C47"/>
                     <connections>
                         <outlet property="searchBar" destination="1TO-c0-fHM" id="e2m-yP-sOv"/>
                         <outlet property="tableView" destination="aNd-QS-4El" id="1zt-gC-wom"/>
@@ -415,7 +416,7 @@
     </scenes>
     <designables>
         <designable name="8EP-0N-rK0">
-            <size key="intrinsicContentSize" width="63" height="18"/>
+            <size key="intrinsicContentSize" width="58.5" height="17.5"/>
         </designable>
         <designable name="NZ7-Qx-hdu"/>
         <designable name="a5I-8U-sGI"/>

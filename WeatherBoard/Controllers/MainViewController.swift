@@ -77,13 +77,10 @@ class MainViewController: UIViewController{
         
         addHill()
         addGradient()
-        addTextShadow()
+        addShadows()
         highlightButton(todayButton)
         getLocation()
         clearDetails()
-        
-        menuButton.addShadow()
-        locationLabel.addShadow()
         
         
     }
@@ -106,7 +103,12 @@ class MainViewController: UIViewController{
         removeBlur()
         setGradientColor(color: "menu")
         hideParticles(view: view)
-        mainView.isHidden = true
+        
+        UIView.animate(withDuration: 0.2) {
+            self.mainView.alpha = 0.0
+        }
+        //mainView.isHidden = true
+        
         menuOpen.toggle()
         
     }
@@ -140,6 +142,199 @@ class MainViewController: UIViewController{
             viewChange(hide: detailsContainerView, show: weatherContainerView, refresh: true)
         
     }
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //MARK: - FUNCTIONS
+    
+    func getLocation(){
+        //Requests user location
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyReduced
+        locationManager.requestLocation()
+    }
+    
+    
+    
+    //MARK: clearDetails
+    //resets weather details to empty
+    func clearDetails(){
+        animateLocationLabelOut()
+        weatherVC?.clearWeatherDetails()
+        detailsVC?.clearWeatherDetails()
+        setGradientColor(color: "menu")
+        removeParticles(from: gradientView)
+        hideNavButtons(hidden: true)
+    }
+    
+    //MARK: Change details
+    
+    func changeDetails() {
+        if weatherModel?.locationName != nil {
+            
+            weatherVC?.setWeatherDetails(using: weatherModel!, day: daySelected)
+            detailsVC?.setWeatherDetails(using: weatherModel!)
+            
+            locationLabel.text = weatherModel?.locationName?.uppercased()
+
+            //sets gradient color with string based on condition and day/night
+            if daySelected == 2{
+                if menuOpen == false {
+
+                    self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
+                    animateLocationLabelIn()
+                }
+            }else{
+                if menuOpen == false {
+                    
+                    if self.daySelected == 0 {
+                        
+                        if weatherModel!.current.isSunset{
+                            self.setGradientColor(color: "sunset")
+                        }else if weatherModel!.current.isSunrise{
+                            self.setGradientColor(color: "sunrise")
+                        }else{
+                            self.setGradientColor(color: "\(weatherModel!.current.conditionName)_\(weatherModel!.current.isDayString)")
+                        }
+                    }else{
+
+                        self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
+                    }
+                }
+            }
+            //print(daySelected)
+            
+            /*
+            if self.daySelected == 0{
+                if let particleToDisplay = weatherModel?.current.particle{
+                    
+                    let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                    
+                    if (emitterNode.particleTexture != newNode.particleTexture) {
+
+                        emitterNode = newNode
+                        removeParticles(from: gradientView)
+                        setParticles(baseView: gradientView, emitterNode: emitterNode)
+                    }
+                }
+            }else {
+                print(weatherModel?.daily[1].particle ?? "loll")
+                print("epic")
+                if let particleToDisplay = weatherModel?.daily[1].particle{
+                    
+                    let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                    
+                    if (emitterNode.particleTexture != newNode.particleTexture) {
+                        
+                        emitterNode = newNode
+                        removeParticles(from: gradientView)
+                        setParticles(baseView: gradientView, emitterNode: emitterNode)
+                    }
+ 
+                }
+            }
+            */
+            
+            if self.daySelected == 0{
+                if let particleToDisplay = weatherModel?.current.particle{
+                    
+                    emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                    removeParticles(from: gradientView)
+                    setParticles(baseView: gradientView, emitterNode: emitterNode)
+                    
+                }else {
+                    removeParticles(from: gradientView)
+                    //setParticles(baseView: gradientView, emitterNode: emitterNode)
+                }
+            }else {
+                if let particleToDisplay = weatherModel?.daily[1].particle{
+                    
+                    //let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                    //emitterNode = newNode
+                    emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                    removeParticles(from: gradientView)
+                    setParticles(baseView: gradientView, emitterNode: emitterNode)
+                    
+ 
+                }else {
+                    removeParticles(from: gradientView)
+                    //setParticles(baseView: gradientView, emitterNode: emitterNode)
+                }
+            }
+            
+        } else {
+            //catches error from spamming buttons
+            print("error")
+        }
+    }
+    
+    
+    //MARK: setDetails
+    //sets weather details to contents of weathermodel
+    func setDetails(){
+        if weatherModel != nil {
+            hideNavButtons(hidden: false)
+            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: weatherModel!.lat, longitude: weatherModel!.lon), completionHandler: { [self] placemarks, error in
+                
+                var locationName: String? = placemarks?.first?.locality
+                if locationName == nil {
+                    locationName = placemarks?.first?.country
+                }
+                self.weatherModel?.locationName = locationName
+                
+                
+                /*
+                if self.daySelected == 0{
+                    if let particleToDisplay = weatherModel?.current.particle{
+                        
+                        let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                        emitterNode = newNode
+                        removeParticles(from: gradientView)
+                        setParticles(baseView: gradientView, emitterNode: emitterNode)
+                        
+                    }
+                }else {
+                    if let particleToDisplay = weatherModel?.daily[1].particle{
+                        
+                        let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                        emitterNode = newNode
+                        removeParticles(from: gradientView)
+                        setParticles(baseView: gradientView, emitterNode: emitterNode)
+                        
+     
+                    }
+            }
+ */
+                //print(weatherModel?.locationName)
+                changeDetails()
+                
+            }
+            )
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //MARK: - UI FUNCTIONS
     
     func animateLocationLabelIn(){
         
@@ -185,128 +380,6 @@ class MainViewController: UIViewController{
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //MARK: - FUNCTIONS
-    
-    func getLocation(){
-        //Requests user location
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-        locationManager.requestLocation()
-    }
-    
-    
-    
-    //MARK: clearDetails
-    //resets weather details to empty
-    func clearDetails(){
-        animateLocationLabelOut()
-        weatherVC?.clearWeatherDetails()
-        detailsVC?.clearWeatherDetails()
-        setGradientColor(color: "menu")
-        removeParticles(from: gradientView)
-        navButtons.isHidden = true
-    }
-    
-    
-    func changeDetails() {
-        if weatherModel?.locationName != nil {
-            
-            weatherVC?.setWeatherDetails(using: weatherModel!, day: daySelected)
-            detailsVC?.setWeatherDetails(using: weatherModel!)
-            
-            locationLabel.text = weatherModel?.locationName?.uppercased()
-            
-            //sets gradient color with string based on condition and day/night
-            if daySelected == 2{
-                if menuOpen == false {
-                    self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
-                    animateLocationLabelIn()
-                }
-            }else{
-                if menuOpen == false {
-                    
-                    if self.daySelected == 0 {
-                        self.setGradientColor(color: "\(weatherModel!.current.conditionName)_\(weatherModel!.current.isDayString)")
-                    }else{
-                        self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
-                        
-                    }
-                    
-                    
-                }
-                
-                if self.daySelected == 0{
-                    if let particleToDisplay = weatherModel?.current.particle{
-                        emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                        removeParticles(from: gradientView)
-                        setParticles(baseView: gradientView, emitterNode: emitterNode)
-                        
-                    }
-                }else {
-                    if let particleToDisplay = weatherModel?.daily[1].particle{
-                        emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                        removeParticles(from: gradientView)
-                        setParticles(baseView: gradientView, emitterNode: emitterNode)
-                        
-                    }
-                }
-                
-                
-            }
-            
-        } else {
-            //catches error from spamming buttons
-            print("error")
-        }
-    }
-    
-    
-    //MARK: setDetails
-    //sets weather details to contents of weathermodel
-    func setDetails(){
-        if weatherModel != nil {
-            navButtons.isHidden = false
-            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: weatherModel!.lat, longitude: weatherModel!.lon), completionHandler: { [self] placemarks, error in
-                
-                var locationName: String? = placemarks?.first?.locality
-                if locationName == nil {
-                    locationName = placemarks?.first?.country
-                }
-                self.weatherModel?.locationName = locationName
-                
-                print(weatherModel?.locationName)
-                changeDetails()
-                
-            }
-            )
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    //MARK: - UI FUNCTIONS
-    
-    
-    
-    
-    
-    
     //MARK: App Launch Functions
     
     func addHill(){
@@ -321,10 +394,12 @@ class MainViewController: UIViewController{
     
     
     //Add drop shadows for UILabels
-    func addTextShadow(){
+    func addShadows(){
         todayButton.titleLabel?.textDropShadow()
         tomorrowButton.titleLabel?.textDropShadow()
         dayAfterButton.titleLabel?.textDropShadow()
+        menuButton.addShadow()
+        locationLabel.addShadow()
         
     }
     
@@ -382,7 +457,10 @@ class MainViewController: UIViewController{
     
     //MARK: Other Functions
     
-    //MARK: AddParticles
+    
+    
+    
+    //MARK: Particles
     func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
         
         let skView = SKView(frame: CGRect(x:0, y:-200, width: baseView.frame.width, height: baseView.frame.height))
@@ -399,8 +477,7 @@ class MainViewController: UIViewController{
         baseView.addSubview(skView)
     }
     
-    
-    //MARK: RemoveParticles
+
     func removeParticles(from view: UIView) {
         if let viewWithTag = view.viewWithTag(1){
             viewWithTag.removeFromSuperview()
@@ -435,6 +512,21 @@ class MainViewController: UIViewController{
         tomorrowButton.alpha = 0.5
         dayAfterButton.alpha = 0.5
         buttonToHighlight.alpha = 1
+    }
+    
+    func hideNavButtons(hidden: Bool){
+        if hidden{
+            UIView.animate(withDuration: 0.9){
+                self.navButtons.alpha = 0.0
+            }
+            navButtons.isHidden = true
+        }else{
+            navButtons.isHidden = false
+            UIView.animate(withDuration: 0.3){
+                self.navButtons.alpha = 1.0
+            }
+            
+        }
     }
     
     
@@ -503,6 +595,7 @@ class MainViewController: UIViewController{
     }
     
     @IBAction func unwind(_ segue: UIStoryboardSegue) {
+
     }
     
     
@@ -588,7 +681,17 @@ extension MainViewController: WeatherManagerDelegate{
                     let newItem = MenuItem()
                     newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
                     
-                    let colorName = "\(self.weatherModel!.current.conditionName)_\(self.weatherModel!.current.isDayString)"
+                    var colorName = "menu"
+                    
+                    if (self.weatherModel!.current.isSunset){
+                        colorName = "sunset"
+                    } else if (self.weatherModel!.current.isSunrise){
+                        colorName = "sunrise"
+                    }else{
+                        colorName = "\(self.weatherModel!.current.conditionName)_\(self.weatherModel!.current.isDayString)"
+                    }
+                    
+                    
                     
                     newItem.topGradient = "button_\(colorName)_top"
                     newItem.bottomGradient = "button_\(colorName)_bottom"
