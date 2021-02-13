@@ -14,6 +14,7 @@ class MenuViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var bottomButtons: [UIButton]!
     
     var searchFull: Bool = false
     var locationPressed: Bool = false
@@ -39,6 +40,11 @@ class MenuViewController: UIViewController {
         
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableMenuCell")
         
+        for button in bottomButtons{
+            button.alpha = 0
+        }
+        
+        
         tableView.reloadData()
     }
     
@@ -46,6 +52,22 @@ class MenuViewController: UIViewController {
         super.viewWillAppear(animated)
         
         //searchBar.becomeFirstResponder()
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        
+        var count: Double = 0.0
+        for button in bottomButtons{
+            UIView.animate(withDuration: 0.5, delay: count){
+                button.alpha = 1
+            }
+            //count+=0.1
+        }
+        
     }
     
     //MARK: - Functions
@@ -83,9 +105,44 @@ class MenuViewController: UIViewController {
         
     }
     
+    @IBAction func aboutButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: C.segues.menuToAbout, sender: self)
+    }
+    
+    @IBAction func settingsButtonPressed(_ sender: UIButton) {
+        
+    }
+    
+    
+    
+    
+    
     //MARK: - Prepare for segue
     
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        switch segue.identifier{
+            case C.segues.menuToAbout:
+                let aboutVC = segue.destination as! AboutViewController
+            case C.segues.menuToMain:
+                exitMenu(segue)
+            case .none:
+                break
+            case .some(_):
+                break
+        }
+        
+        
+        
+    }
+    
+    @IBAction func unwind(_ segue: UIStoryboardSegue) {
+
+    }
+    
+    private func exitMenu(_ segue: UIStoryboardSegue) {
         if segue.identifier == C.segues.menuToMain{
             
             let mainVC = segue.destination as! MainViewController
@@ -95,8 +152,6 @@ class MenuViewController: UIViewController {
             UIView.animate(withDuration: 0.5) {
                 mainVC.mainView.alpha = 1
             }
-            
-            
             if locationPressed{
                 mainVC.locationManager.requestLocation()
                 mainVC.clearDetails()
@@ -104,12 +159,11 @@ class MenuViewController: UIViewController {
             }else if let validCityName = menuItemPressedCityName{
                 mainVC.weatherManager.fetchWeather(cityName: validCityName, doNotSave: locationCellPressed)
                 mainVC.clearDetails()
-                
             }else if searchFull{
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
                 mainVC.clearDetails()
                 
-            } else {
+            }else{
                 mainVC.setDetails()
             }
             
@@ -118,6 +172,17 @@ class MenuViewController: UIViewController {
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
 
 //MARK: - MenuTableViewCell Delegate methods
 
@@ -144,6 +209,8 @@ extension MenuViewController: MenuTableViewCellDelegate{
         
     }
 }
+
+
 
 //MARK: - UISearchBar Delegate Methods
 

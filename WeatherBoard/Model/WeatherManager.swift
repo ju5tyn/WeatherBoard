@@ -20,7 +20,7 @@ struct WeatherManager {
     
     var delegate: WeatherManagerDelegate?
     
-    let weatherURL = "\(C.newURL)\(Keys.openweathermap)"
+    let weatherURL = "\(C.mainURL)\(Keys.openweathermap)\(C.units.metric)"
     
     //MARK: Fetch Weather
     
@@ -144,8 +144,8 @@ struct WeatherManager {
         let data = decodedData.daily[day]
         
         return WeatherModel.Daily(id: data.weather[0].id,
-                                  main: data.weather[0].main, description: data.weather[0].description,
-                                  dt: decodedData.current.dt,
+                                  main: data.weather[0].main, description: data.weather[0].description, currentDt: decodedData.current.dt,
+                                  dt: data.dt,
                                   sunrise: decodedData.current.sunrise,
                                   sunset: decodedData.current.sunset,
                                   temp: data.temp.day,

@@ -62,7 +62,7 @@ struct WeatherModel{
         let main: String
         let description: String
         
-        var isDay: Bool { return (dt>sunrise && dt<sunset) ? true : false }
+        var isDay: Bool { return (currentDt>sunrise && currentDt<sunset) ? true : false }
         var particle: String? { return getParticleName(id, isDay) }
         
         var conditionName: ConditionNames { return getConditionName(id) }
@@ -70,7 +70,8 @@ struct WeatherModel{
         var fullName: String? { return getFullName(id, isDay) }
         var smallName: String? { return getSmallName(id, isDay)}
         
-        let dt: Int
+        let currentDt: Int // date time for now
+        let dt: Int // date time for this day
         let sunrise: Int
         let sunset: Int
         let temp: Double
@@ -107,6 +108,9 @@ func convertToDayString(_ dt: Int) -> String{
     dateFormatter.timeZone = TimeZone(abbreviation: "GMT") //Set timezone that you want
     dateFormatter.locale = NSLocale.current
     dateFormatter.dateFormat = "EEEE" //Specify your format that you want
+    
+    print(dateFormatter.string(from: date))
+    
     return dateFormatter.string(from: date)
     
 }

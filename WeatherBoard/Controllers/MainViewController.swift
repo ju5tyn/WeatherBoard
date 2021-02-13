@@ -25,12 +25,19 @@ class MainViewController: UIViewController{
     @IBOutlet weak var dayAfterButton: UIButton!
     @IBOutlet weak var navButtons: UIStackView!
     
+    //constraints
+    @IBOutlet weak var navButtonsBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hillViewHeightConstraint: NSLayoutConstraint!
+    
     
     
     //Location label header
     @IBOutlet weak var locationLabelView: UIView!
     @IBOutlet weak var locationLabel: LTMorphingLabel!
     @IBOutlet weak var locationLabelLeadingConstraint: NSLayoutConstraint!
+    
+    
+    
     
     
     //MARK: - VARIABLES
@@ -81,6 +88,8 @@ class MainViewController: UIViewController{
         highlightButton(todayButton)
         getLocation()
         clearDetails()
+        
+        
         
         
     }
@@ -384,11 +393,16 @@ class MainViewController: UIViewController{
     
     func addHill(){
         
+        hillViewHeightConstraint.constant = (self.view.bounds.height)*0.4
+        
         //setup for mask of hill
         let hillMask = UIImageView()
         hillMask.image = UIImage(named: "hills")
         hillMask.frame = hillView.bounds
+        hillMask.sizeToFit()
         hillView.mask = hillMask
+        hillView.sizeToFit()
+        
         
     }
     
@@ -463,7 +477,7 @@ class MainViewController: UIViewController{
     //MARK: Particles
     func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
         
-        let skView = SKView(frame: CGRect(x:0, y:-200, width: baseView.frame.width, height: baseView.frame.height))
+        let skView = SKView(frame: CGRect(x:0, y:-200, width: baseView.frame.width, height: baseView.frame.height+200))
         let skScene = SKScene(size: baseView.frame.size)
         skScene.backgroundColor = .clear
         skScene.anchorPoint = CGPoint(x: 0.5, y: 0.5)

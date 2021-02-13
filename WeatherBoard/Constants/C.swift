@@ -9,10 +9,15 @@
 struct C {
     
     static let cellIdentifier = "MenuCell"
+     
+    static let mainURL = "https://api.openweathermap.org/data/2.5/onecall?&appid="
     
-    static let mainURL = "https://api.openweathermap.org/data/2.5/forecast?units=metric&appid="
+    struct units{
+        static let metric = "&units=metric"
+        static let imperial = "&units=imperial"
+    }
     
-    static let newURL = "https://api.openweathermap.org/data/2.5/onecall?units=metric&appid="
+    
     
     
     struct segues{
@@ -21,6 +26,8 @@ struct C {
         static let mainToMenu = "toMenu"
         static let mainToWeather = "toWeather"
         static let mainToDetails = "toDetails"
+        static let menuToAbout = "toAbout"
+        static let aboutToMenu = "aboutToMenu"
         
     }
     

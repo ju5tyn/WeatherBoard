@@ -31,9 +31,7 @@ class DetailsViewController: UIViewController {
     }
     
     func clearWeatherDetails(){
-        
-        //var count = 0
-        
+
         for cell in tableView.visibleCells {
             
             let detailCell = cell as! DetailsTableViewCell
@@ -143,10 +141,14 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableDetailsCell", for: indexPath) as! DetailsTableViewCell
         
-        if indexPath.row == 0{
-            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
-            cell.setBig()
+        if firstLaunch{
+            if indexPath.row == 0{
+                tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                cell.setBig()
+            }
         }
+        
+
         
         return cell
         
