@@ -77,6 +77,12 @@ class MainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        print(UIFont(name: "Roboto-black", size: 10)!)
+        print(UIFont(name: "Roboto-Bold", size: 10)!)
+
+        
+        
         overrideUserInterfaceStyle = .dark
         weatherManager.delegate = self
         locationManager.delegate = self
@@ -89,7 +95,14 @@ class MainViewController: UIViewController{
         getLocation()
         clearDetails()
         
-        
+        for family: String in UIFont.familyNames
+               {
+                   print(family)
+                   for names: String in UIFont.fontNames(forFamilyName: family)
+                   {
+                       print("== \(names)")
+                   }
+               }
         
         
     }

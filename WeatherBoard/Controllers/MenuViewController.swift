@@ -60,9 +60,9 @@ class MenuViewController: UIViewController {
         
         
         
-        var count: Double = 0.0
+        //var count: Double = 0.0
         for button in bottomButtons{
-            UIView.animate(withDuration: 0.5, delay: count){
+            UIView.animate(withDuration: 0.5, delay: 0){
                 button.alpha = 1
             }
             //count+=0.1

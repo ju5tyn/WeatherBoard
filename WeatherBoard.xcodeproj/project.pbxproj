@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A0885D424E9A3DD006C3DCF /* SF-Compact-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A0885D324E9A3DD006C3DCF /* SF-Compact-Text-Semibold.otf */; };
-		3A0885D624E9A47C006C3DCF /* SF-Compact-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3A0885D524E9A47B006C3DCF /* SF-Compact-Text-Bold.otf */; };
 		3A0885DB24E9AFC5006C3DCF /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DA24E9AFC4006C3DCF /* WeatherManager.swift */; };
 		3A0885DD24E9AFDA006C3DCF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */; };
 		3A0885DF24E9AFE9006C3DCF /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */; };
@@ -22,6 +20,8 @@
 		3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */; };
 		3A3724C9251F4C1900CB6FE6 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */; };
 		3A3724CD251F7CAA00CB6FE6 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3724CC251F7CAA00CB6FE6 /* MenuItem.swift */; };
+		3A561D4D25D94A7E0051412F /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A561D4B25D94A7E0051412F /* Roboto-Bold.ttf */; };
+		3A561D4E25D94A7E0051412F /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A561D4C25D94A7E0051412F /* Roboto-Black.ttf */; };
 		3A70730025D533F400C3DBF2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7072FF25D533F400C3DBF2 /* AboutViewController.swift */; };
 		3A81D3D424EC16BD0082A1CF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */; };
 		3A8B132C2510279C00029EEB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8B132B2510279C00029EEB /* Keys.swift */; };
@@ -39,8 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A0885D324E9A3DD006C3DCF /* SF-Compact-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Semibold.otf"; sourceTree = "<group>"; };
-		3A0885D524E9A47B006C3DCF /* SF-Compact-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Bold.otf"; sourceTree = "<group>"; };
 		3A0885DA24E9AFC4006C3DCF /* WeatherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
@@ -56,6 +54,9 @@
 		3A33324B24CCE3470053C0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		3A3724CC251F7CAA00CB6FE6 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		3A561D4025D947780051412F /* WeatherBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherBoard.entitlements; sourceTree = "<group>"; };
+		3A561D4B25D94A7E0051412F /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = SOURCE_ROOT; };
+		3A561D4C25D94A7E0051412F /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = SOURCE_ROOT; };
 		3A7072FF25D533F400C3DBF2 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3A8B132B2510279C00029EEB /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
@@ -90,8 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				3AAD20B32514D2D2002AF7BA /* Particles */,
-				3A0885D324E9A3DD006C3DCF /* SF-Compact-Text-Semibold.otf */,
-				3A0885D524E9A47B006C3DCF /* SF-Compact-Text-Bold.otf */,
 			);
 			name = Resources;
 			path = ..;
@@ -154,6 +153,7 @@
 		3A33323C24CCE3420053C0F7 /* WeatherBoard */ = {
 			isa = PBXGroup;
 			children = (
+				3A561D4025D947780051412F /* WeatherBoard.entitlements */,
 				3A33323D24CCE3420053C0F7 /* AppDelegate.swift */,
 				3A33323F24CCE3420053C0F7 /* SceneDelegate.swift */,
 				3A3A8ECE253CB778006CF764 /* Constants */,
@@ -163,6 +163,8 @@
 				3A33324624CCE3470053C0F7 /* Assets.xcassets */,
 				3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */,
 				3A33324B24CCE3470053C0F7 /* Info.plist */,
+				3A561D4C25D94A7E0051412F /* Roboto-Black.ttf */,
+				3A561D4B25D94A7E0051412F /* Roboto-Bold.ttf */,
 				3A0885D224E9A3BD006C3DCF /* Resources */,
 			);
 			path = WeatherBoard;
@@ -267,15 +269,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A561D4D25D94A7E0051412F /* Roboto-Bold.ttf in Resources */,
+				3A561D4E25D94A7E0051412F /* Roboto-Black.ttf in Resources */,
 				3AAD20BC2514DA7E002AF7BA /* SnowParticle.sks in Resources */,
 				3AF6CEFA251E21B2005D39CA /* MenuTableViewCell.xib in Resources */,
 				3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */,
 				3A33324724CCE3470053C0F7 /* Assets.xcassets in Resources */,
-				3A0885D624E9A47C006C3DCF /* SF-Compact-Text-Bold.otf in Resources */,
 				3ACAA2DE25309CA900377451 /* DetailsTableViewCell.xib in Resources */,
 				3A9E14852515F96C000E62AE /* StormParticle.sks in Resources */,
 				3A0E765A253DFAE200C3D96D /* StarParticleCloudy.sks in Resources */,
-				3A0885D424E9A3DD006C3DCF /* SF-Compact-Text-Semibold.otf in Resources */,
 				3A9E14842515F96A000E62AE /* StarParticle.sks in Resources */,
 				3A33324524CCE3420053C0F7 /* Main.storyboard in Resources */,
 				3ADCEEBB24F668E700A6A672 /* RainParticle.sks in Resources */,
@@ -508,8 +510,10 @@
 			baseConfigurationReference = 5D1C943B04103B5104332817 /* Pods-WeatherBoard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WeatherBoard/WeatherBoard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "SF-Compact-Text-Semibold.otf SF-Compact-Text-Bold.otf";
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_ASSET_PATHS = "Roboto-Black.ttf Roboto-Bold.ttf";
 				DEVELOPMENT_TEAM = KR9D699PKJ;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = WeatherBoard/Info.plist;
@@ -531,8 +535,10 @@
 			baseConfigurationReference = 3EAEF2CD239BC49092AC5608 /* Pods-WeatherBoard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WeatherBoard/WeatherBoard.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "SF-Compact-Text-Semibold.otf SF-Compact-Text-Bold.otf";
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_ASSET_PATHS = "Roboto-Black.ttf Roboto-Bold.ttf";
 				DEVELOPMENT_TEAM = KR9D699PKJ;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				INFOPLIST_FILE = WeatherBoard/Info.plist;
