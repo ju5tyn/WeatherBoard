@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="375px" height="332px" viewBox="0 0 375 332" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>MENU </title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="375" height="332"></rect>
+    </defs>
+    <g id="MENU-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="hills">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <g id="Mask"></g>
+            <path d="M-52,60.977503 C-38.7155563,51.602245 -28.8620815,44.8643831 -22.4395753,40.7639171 C12.8298183,18.2460801 60.2401461,-0.658390418 98.6005864,0.0175855458 C153.064944,0.977339816 196.83663,30.6315351 226.677233,52.7363187 C294.681411,99.0243908 361.455667,101.771452 427,60.977503 L406.200513,333 C301.959821,333 226.818858,333 180.777625,333 C134.736392,333 68.0667919,333 -19.2311743,333 L-52,60.977503 Z" fill="#000000" mask="url(#mask-2)"></path>
+        </g>
+    </g>
+</svg>

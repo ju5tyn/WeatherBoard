@@ -110,7 +110,7 @@ class MenuViewController: UIViewController {
     }
     
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: C.segues.menuToSettings, sender: self)
     }
     
     
@@ -128,6 +128,8 @@ class MenuViewController: UIViewController {
                 let aboutVC = segue.destination as! AboutViewController
             case C.segues.menuToMain:
                 exitMenu(segue)
+            case C.segues.menuToSettings:
+                let settingsVC = segue.destination as! SettingsViewController
             case .none:
                 break
             case .some(_):

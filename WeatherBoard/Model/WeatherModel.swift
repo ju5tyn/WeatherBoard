@@ -109,7 +109,7 @@ func convertToDayString(_ dt: Int) -> String{
     dateFormatter.locale = NSLocale.current
     dateFormatter.dateFormat = "EEEE" //Specify your format that you want
     
-    print(dateFormatter.string(from: date))
+    //print(dateFormatter.string(from: date))
     
     return dateFormatter.string(from: date)
     

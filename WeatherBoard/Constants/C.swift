@@ -17,6 +17,11 @@ struct C {
         static let imperial = "&units=imperial"
     }
     
+    struct defaults{
+        static let units = "units"
+        static let defaultToGPS = "defaultTolocation"
+        static let defaultLocation = "defaultLocation"
+    }
     
     
     
@@ -27,7 +32,7 @@ struct C {
         static let mainToWeather = "toWeather"
         static let mainToDetails = "toDetails"
         static let menuToAbout = "toAbout"
-        static let aboutToMenu = "aboutToMenu"
+        static let menuToSettings = "toSettings"
         
     }
     

@@ -19,16 +19,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        let defaults = UserDefaults.standard
         
-        
-        do{
-            try realm.write{
-                let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
-                realm.delete(oldLocations)
+        if(defaults.integer(forKey: C.defaults.defaultToGPS) == 0){
+            do{
+                try realm.write{
+                    let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
+                    realm.delete(oldLocations)
+                }
+            }catch{
+                print(error)
             }
-        }catch{
-            print(error)
         }
+        
+        
         
         
         

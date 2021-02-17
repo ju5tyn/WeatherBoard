@@ -28,6 +28,9 @@ class MainViewController: UIViewController{
     //constraints
     @IBOutlet weak var navButtonsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var hillViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hillViewBottomConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var hillViewWidthConstraint: NSLayoutConstraint!
+    
     
     
     
@@ -65,10 +68,7 @@ class MainViewController: UIViewController{
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
     
-    
-    
-    
-    
+    let defaults = UserDefaults.standard
     
     
     
@@ -77,15 +77,16 @@ class MainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //self.view.superview?.autoresizesSubviews = true
         
-        print(UIFont(name: "Roboto-black", size: 10)!)
-        print(UIFont(name: "Roboto-Bold", size: 10)!)
-
-        
+        hillViewHeightConstraint.constant = ((self.view.bounds.height))*0.4
+        //hillViewWidthConstraint.constant = (UIScreen.screens[0].bounds.width)
         
         overrideUserInterfaceStyle = .dark
-        weatherManager.delegate = self
-        locationManager.delegate = self
+        
+        weatherManager.delegate     = self
+        locationManager.delegate    = self
+        
         detailsContainerView.isHidden = true
         
         addHill()
@@ -95,16 +96,7 @@ class MainViewController: UIViewController{
         getLocation()
         clearDetails()
         
-        for family: String in UIFont.familyNames
-               {
-                   print(family)
-                   for names: String in UIFont.fontNames(forFamilyName: family)
-                   {
-                       print("== \(names)")
-                   }
-               }
-        
-        
+
     }
     
     
@@ -129,7 +121,6 @@ class MainViewController: UIViewController{
         UIView.animate(withDuration: 0.2) {
             self.mainView.alpha = 0.0
         }
-        //mainView.isHidden = true
         
         menuOpen.toggle()
         
@@ -182,10 +173,21 @@ class MainViewController: UIViewController{
     //MARK: - FUNCTIONS
     
     func getLocation(){
+        
         //Requests user location
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyReduced
-        locationManager.requestLocation()
+        
+        let previousLocationName = defaults.string(forKey: C.defaults.defaultLocation)
+        
+        if ((previousLocationName != nil) && (defaults.integer(forKey: C.defaults.defaultToGPS) == 1)){
+            weatherManager.fetchWeather(cityName: previousLocationName!, doNotSave: true)
+        }else{
+            locationManager.requestLocation()
+        }
+        
+        
+        
     }
     
     
@@ -236,38 +238,7 @@ class MainViewController: UIViewController{
                     }
                 }
             }
-            //print(daySelected)
-            
-            /*
-            if self.daySelected == 0{
-                if let particleToDisplay = weatherModel?.current.particle{
-                    
-                    let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                    
-                    if (emitterNode.particleTexture != newNode.particleTexture) {
 
-                        emitterNode = newNode
-                        removeParticles(from: gradientView)
-                        setParticles(baseView: gradientView, emitterNode: emitterNode)
-                    }
-                }
-            }else {
-                print(weatherModel?.daily[1].particle ?? "loll")
-                print("epic")
-                if let particleToDisplay = weatherModel?.daily[1].particle{
-                    
-                    let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                    
-                    if (emitterNode.particleTexture != newNode.particleTexture) {
-                        
-                        emitterNode = newNode
-                        removeParticles(from: gradientView)
-                        setParticles(baseView: gradientView, emitterNode: emitterNode)
-                    }
- 
-                }
-            }
-            */
             
             if self.daySelected == 0{
                 if let particleToDisplay = weatherModel?.current.particle{
@@ -316,30 +287,6 @@ class MainViewController: UIViewController{
                 }
                 self.weatherModel?.locationName = locationName
                 
-                
-                /*
-                if self.daySelected == 0{
-                    if let particleToDisplay = weatherModel?.current.particle{
-                        
-                        let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                        emitterNode = newNode
-                        removeParticles(from: gradientView)
-                        setParticles(baseView: gradientView, emitterNode: emitterNode)
-                        
-                    }
-                }else {
-                    if let particleToDisplay = weatherModel?.daily[1].particle{
-                        
-                        let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                        emitterNode = newNode
-                        removeParticles(from: gradientView)
-                        setParticles(baseView: gradientView, emitterNode: emitterNode)
-                        
-     
-                    }
-            }
- */
-                //print(weatherModel?.locationName)
                 changeDetails()
                 
             }
@@ -405,16 +352,22 @@ class MainViewController: UIViewController{
     //MARK: App Launch Functions
     
     func addHill(){
-        
-        hillViewHeightConstraint.constant = (self.view.bounds.height)*0.4
-        
+
         //setup for mask of hill
         let hillMask = UIImageView()
+        
+        
+        hillMask.frame = CGRect.init(x: 0, y: 0, width: UIScreen.screens[0].bounds.width, height: UIScreen.screens[0].bounds.height*0.4)
+        
         hillMask.image = UIImage(named: "hills")
-        hillMask.frame = hillView.bounds
-        hillMask.sizeToFit()
+        //hillMask.contentMode = .scaleToFill
+        //hillMask.
+        hillMask.clipsToBounds = false
+
+        hillView.autoresizesSubviews = true
         hillView.mask = hillMask
-        hillView.sizeToFit()
+        hillView.clipsToBounds = false
+        hillView.contentMode = .scaleToFill
         
         
     }
@@ -731,6 +684,12 @@ extension MainViewController: WeatherManagerDelegate{
                     }
                     
                     
+                    // USERDEFAULTS
+                    let defaults = UserDefaults.standard
+                    defaults.setValue(newItem.cityName, forKey: C.defaults.defaultLocation)
+                    // ============
+                    
+                    
                     self.realm.add(newItem)
                     
                     do{
@@ -742,6 +701,10 @@ extension MainViewController: WeatherManagerDelegate{
                 
                 
                 //realm end
+                
+                
+                
+                
             }
             self.setDetails()
             
@@ -787,4 +750,16 @@ extension UIView {
     }
     
     
+}
+
+extension UIDevice {
+    /// Returns `true` if the device has a notch
+    var hasNotch: Bool {
+        guard #available(iOS 11.0, *), let window = UIApplication.shared.windows.filter({$0.isKeyWindow}).first else { return false }
+        if UIDevice.current.orientation.isPortrait {
+            return window.safeAreaInsets.top >= 44
+        } else {
+            return window.safeAreaInsets.left > 0 || window.safeAreaInsets.right > 0
+        }
+    }
 }

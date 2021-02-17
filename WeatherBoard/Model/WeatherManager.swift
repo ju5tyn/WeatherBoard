@@ -16,15 +16,34 @@ protocol WeatherManagerDelegate {
 
 
 
+
 struct WeatherManager {
+    
     
     var delegate: WeatherManagerDelegate?
     
-    let weatherURL = "\(C.mainURL)\(Keys.openweathermap)\(C.units.metric)"
     
     //MARK: Fetch Weather
     
+    func getUnits() -> String{
+        
+        let defaults = UserDefaults.standard
+
+        switch defaults.integer(forKey: C.defaults.units){
+            case 0:
+                return C.units.metric
+            case 1:
+                return C.units.imperial
+            default:
+                return C.units.metric
+        }
+    }
+    
+    
     func fetchWeather(cityName: String, doNotSave: Bool){
+        
+        let weatherURL = "\(C.mainURL)\(Keys.openweathermap)\(getUnits())"
+        
         
         //converts search to lat+lon
         let geocoder = CLGeocoder()
@@ -49,6 +68,9 @@ struct WeatherManager {
     }
     
     func fetchWeather(latitude: Double, longitude: Double){
+        
+        let weatherURL = "\(C.mainURL)\(Keys.openweathermap)\(getUnits())"
+        
         let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
         print("Location Granted 📍")
         performRequest(with: urlString, isCurrentLocation: true, doNotSave: false)
@@ -92,7 +114,6 @@ struct WeatherManager {
         let decoder = JSONDecoder()
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: data)
-            
             
             
             
@@ -142,6 +163,8 @@ struct WeatherManager {
     func getDaily(_ decodedData: WeatherData, _ day: Int) -> WeatherModel.Daily{
         
         let data = decodedData.daily[day]
+        
+        
         
         return WeatherModel.Daily(id: data.weather[0].id,
                                   main: data.weather[0].main, description: data.weather[0].description, currentDt: decodedData.current.dt,
