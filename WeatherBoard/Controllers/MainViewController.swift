@@ -366,8 +366,7 @@ class MainViewController: UIViewController{
 
         hillView.autoresizesSubviews = true
         hillView.mask = hillMask
-        hillView.clipsToBounds = false
-        hillView.contentMode = .scaleToFill
+        
         
         
     }
@@ -421,7 +420,7 @@ class MainViewController: UIViewController{
         gradient.startPoint = CGPoint(x: 0.5, y: 1)
         gradient.endPoint = CGPoint(x: 0.5, y: 0)
         
-        hillGradient.frame = hillView.bounds
+        hillGradient.frame = CGRect.init(x: 0, y: 0, width: UIScreen.screens[0].bounds.width, height: UIScreen.screens[0].bounds.height*0.4)
         hillView.layer.addSublayer(hillGradient)
         hillGradient.startPoint = CGPoint(x: 0.5, y: 1)
         hillGradient.endPoint = CGPoint(x: 0.5, y: 0)

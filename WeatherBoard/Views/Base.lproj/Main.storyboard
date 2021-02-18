@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_7" orientation="portrait" appearance="light"/>
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -21,29 +21,29 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B2f-a6-7Oa">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xgx-Ll-PVj">
-                                <rect key="frame" x="0.0" y="546" width="428" height="380"/>
+                                <rect key="frame" x="0.0" y="464" width="390" height="380"/>
                                 <color key="backgroundColor" red="0.92890157539999996" green="0.35048459240000002" blue="0.24468537409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="380" id="ZgS-r3-DMw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQ8-HG-zRf">
-                                <rect key="frame" x="0.0" y="44" width="428" height="848"/>
+                                <rect key="frame" x="0.0" y="44" width="390" height="766"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="KYU-or-FRp">
-                                        <rect key="frame" x="50.666666666666657" y="798.33333333333337" width="327" height="29"/>
+                                        <rect key="frame" x="31.666666666666657" y="716.33333333333337" width="327" height="29"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="loQ-k2-Fz5">
                                                 <rect key="frame" x="0.0" y="0.0" width="99.666666666666671" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <state key="normal" title="TODAY">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -61,7 +61,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="6Nc-9G-tHD">
                                                 <rect key="frame" x="113.66666666666666" y="0.0" width="99.666666666666657" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="TOMORROW">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -78,7 +78,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XED-g8-fVk">
                                                 <rect key="frame" x="227.33333333333334" y="0.0" width="99.666666666666657" height="29"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="MORE">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -103,13 +103,13 @@
                                         </connections>
                                     </button>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9T-eh-vLh" userLabel="Weather Container View">
-                                        <rect key="frame" x="0.0" y="69" width="428" height="719.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="69" width="390" height="637.33333333333337"/>
                                         <connections>
                                             <segue destination="Bhn-df-gEc" kind="embed" identifier="toWeather" id="xNx-Lg-mLK"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYJ-Ui-El7">
-                                        <rect key="frame" x="0.0" y="69" width="428" height="719.33333333333337"/>
+                                        <rect key="frame" x="0.0" y="69" width="390" height="637.33333333333337"/>
                                         <connections>
                                             <segue destination="Lth-WC-o03" kind="embed" identifier="toDetails" id="YSA-aV-YE0"/>
                                         </connections>
@@ -206,7 +206,7 @@
             <objects>
                 <viewController id="Ujs-7t-r3k" customClass="MenuViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ekx-BO-bJj">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tDP-OQ-yOe">
@@ -218,13 +218,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherBoard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHG-eM-E5a">
-                                <rect key="frame" x="137.33333333333331" y="77" width="153.33333333333331" height="28"/>
+                                <rect key="frame" x="118.33333333333333" y="77" width="153.33333333333337" height="28"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for a location" translatesAutoresizingMaskIntoConstraints="NO" id="1TO-c0-fHM">
-                                <rect key="frame" x="21" y="115" width="386" height="56"/>
+                                <rect key="frame" x="21" y="115" width="348" height="56"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="search" textContentType="location"/>
                                 <scopeButtonTitles>
                                     <string>Accuweather</string>
@@ -238,7 +238,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-rz-feH">
-                                <rect key="frame" x="374" y="80" width="24" height="24"/>
+                                <rect key="frame" x="336" y="80" width="24" height="24"/>
                                 <state key="normal" backgroundImage="location_white_24pt"/>
                                 <connections>
                                     <action selector="locationButton:" destination="Ve1-YK-Ghw" eventType="touchUpInside" id="ukT-dT-2lo"/>
@@ -247,19 +247,20 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="4" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aNd-QS-4El">
-                                <rect key="frame" x="25" y="209" width="378" height="300"/>
+                                <rect key="frame" x="25" y="209" width="340" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="340" id="dBc-ud-9e8"/>
                                     <constraint firstAttribute="height" constant="300" id="kVd-PS-Q1Y"/>
                                 </constraints>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="MenuCell" rowHeight="70" id="hmC-oJ-qIb" customClass="MenuTableViewCell" customModule="WeatherBoard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="378" height="70"/>
+                                        <rect key="frame" x="0.0" y="28" width="340" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hmC-oJ-qIb" id="AcO-00-aTC">
-                                            <rect key="frame" x="0.0" y="0.0" width="378" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="340" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -267,10 +268,10 @@
                                 <sections/>
                             </tableView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="FRW-pl-q5M">
-                                <rect key="frame" x="30" y="832" width="368" height="50"/>
+                                <rect key="frame" x="30" y="750" width="330" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orj-CU-aat">
-                                        <rect key="frame" x="0.0" y="0.0" width="176.66666666666666" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="50"/>
                                         <color key="backgroundColor" name="menu_grey_button"/>
                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
                                         <state key="normal" title="Settings">
@@ -289,7 +290,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VLe-hz-54r">
-                                        <rect key="frame" x="191.66666666666663" y="0.0" width="176.33333333333337" height="50"/>
+                                        <rect key="frame" x="172.66666666666663" y="0.0" width="157.33333333333337" height="50"/>
                                         <color key="backgroundColor" name="menu_grey_button"/>
                                         <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="20"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -357,7 +358,7 @@
             <objects>
                 <viewController id="IEk-2k-jWX" customClass="SettingsViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XG6-LW-WTJ">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n6P-AE-1jn">
@@ -369,7 +370,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GX-x8-2sv">
-                                <rect key="frame" x="170" y="77" width="88.333333333333314" height="28"/>
+                                <rect key="frame" x="151" y="77" width="88.333333333333314" height="28"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -384,7 +385,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gpI-EU-oWL">
-                                <rect key="frame" x="258" y="134" width="140" height="46"/>
+                                <rect key="frame" x="220" y="134" width="140" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="8Th-1S-cLi"/>
                                     <constraint firstAttribute="height" constant="45" id="Ycl-0c-tFT"/>
@@ -400,7 +401,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mIJ-MV-EV7">
-                                <rect key="frame" x="258" y="204" width="140" height="46"/>
+                                <rect key="frame" x="220" y="204" width="140" height="46"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="WCt-2U-PLv"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="140" id="aCi-Gr-S30"/>
@@ -456,7 +457,7 @@
             <objects>
                 <viewController id="8Sg-x1-bUm" customClass="AboutViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ndq-uO-cc4">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XU0-g7-4OS">
@@ -468,25 +469,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zdg-OL-GYh">
-                                <rect key="frame" x="181.33333333333334" y="77" width="65.333333333333343" height="28"/>
+                                <rect key="frame" x="162.33333333333334" y="77" width="65.333333333333343" height="28"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherBoard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGO-VO-Oac">
-                                <rect key="frame" x="118.33333333333333" y="267" width="191.66666666666669" height="35"/>
+                                <rect key="frame" x="98.666666666666686" y="267" width="193" height="35"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ver 1.0.0 (0)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wKk-qk-lu0">
-                                <rect key="frame" x="158" y="302" width="112" height="24"/>
+                                <rect key="frame" x="139" y="302" width="112" height="24"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="0.80199710264900659" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="full_icon" translatesAutoresizingMaskIntoConstraints="NO" id="9DX-eb-aNK">
-                                <rect key="frame" x="164" y="147" width="100" height="100"/>
+                                <rect key="frame" x="145" y="147" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="EMU-I6-dI5"/>
                                     <constraint firstAttribute="height" constant="100" id="XH1-YA-HI0"/>
@@ -531,11 +532,11 @@
             <objects>
                 <viewController title="Weather View Controller" id="Bhn-df-gEc" customClass="WeatherViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1IU-mS-zSX">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="719.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="637.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ7-Qx-hdu" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
-                                <rect key="frame" x="20" y="252" width="388" height="23"/>
+                                <rect key="frame" x="16" y="252" width="358" height="23"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="23" id="9Mk-EC-Xb9"/>
                                 </constraints>
@@ -555,14 +556,14 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lJv-IT-U5x">
-                                <rect key="frame" x="144" y="84" width="140" height="140"/>
+                                <rect key="frame" x="125" y="84" width="140" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="3al-3g-Ad2"/>
                                     <constraint firstAttribute="height" constant="140" id="frC-tJ-fzC"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-8U-sGI" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
-                                <rect key="frame" x="20" y="242" width="388" height="0.0"/>
+                                <rect key="frame" x="16" y="242" width="358" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -579,7 +580,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="yWN-VA-I3S">
-                                <rect key="frame" x="195.66666666666666" y="161.33333333333334" width="37" height="37"/>
+                                <rect key="frame" x="176.66666666666666" y="135.66666666666666" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
@@ -588,13 +589,13 @@
                             <constraint firstItem="NZ7-Qx-hdu" firstAttribute="trailing" secondItem="1IU-mS-zSX" secondAttribute="trailingMargin" id="3kh-7o-P18"/>
                             <constraint firstAttribute="trailingMargin" secondItem="a5I-8U-sGI" secondAttribute="trailing" id="6jh-yd-jmb"/>
                             <constraint firstItem="NZ7-Qx-hdu" firstAttribute="top" secondItem="a5I-8U-sGI" secondAttribute="bottom" constant="10" id="IWT-Cj-rcq"/>
-                            <constraint firstItem="yWN-VA-I3S" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="PME-cl-U0T"/>
+                            <constraint firstItem="yWN-VA-I3S" firstAttribute="centerX" secondItem="lJv-IT-U5x" secondAttribute="centerX" id="PME-cl-U0T"/>
                             <constraint firstItem="NZ7-Qx-hdu" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="Tbz-Ra-EZj"/>
                             <constraint firstItem="lJv-IT-U5x" firstAttribute="top" secondItem="1IU-mS-zSX" secondAttribute="topMargin" constant="40" id="WXY-Vl-Wsg"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="f0T-h4-VrU"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="top" secondItem="lJv-IT-U5x" secondAttribute="bottom" constant="18" id="hdm-YN-oOT"/>
                             <constraint firstItem="lJv-IT-U5x" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="oy1-Vq-orw"/>
-                            <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="1IU-mS-zSX" secondAttribute="centerY" constant="-180" id="wwm-K3-RRz"/>
+                            <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="lJv-IT-U5x" secondAttribute="centerY" id="wwm-K3-RRz"/>
                         </constraints>
                     </view>
                     <connections>
@@ -613,20 +614,20 @@
             <objects>
                 <viewController title="Details View Controller" id="Lth-WC-o03" customClass="DetailsViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IvF-hv-MxF">
-                        <rect key="frame" x="0.0" y="0.0" width="428" height="719.33333333333337"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="637.33333333333337"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" delaysContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OmM-FJ-Lfr">
-                                <rect key="frame" x="0.0" y="0.0" width="428" height="719.33333333333337"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="637.33333333333337"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailsCell" id="AxX-Ne-AsF">
-                                        <rect key="frame" x="0.0" y="28" width="428" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="390" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AxX-Ne-AsF" id="Rpw-HV-BO1">
-                                            <rect key="frame" x="0.0" y="0.0" width="428" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
