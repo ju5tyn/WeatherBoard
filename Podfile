@@ -8,5 +8,5 @@ target 'WeatherBoard' do
   # Pods for WeatherBoard
   pod 'RealmSwift'
   pod 'LTMorphingLabel'
-
+  pod 'Google-Mobile-Ads-SDK'
 end

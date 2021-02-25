@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A0272B025E26EF4000E6BD4 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A0272AE25E26EF4000E6BD4 /* Roboto-Bold.ttf */; };
+		3A0272B125E26EF4000E6BD4 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A0272AF25E26EF4000E6BD4 /* Roboto-Black.ttf */; };
 		3A0885DB24E9AFC5006C3DCF /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DA24E9AFC4006C3DCF /* WeatherManager.swift */; };
 		3A0885DD24E9AFDA006C3DCF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */; };
 		3A0885DF24E9AFE9006C3DCF /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */; };
@@ -18,21 +20,22 @@
 		3A33324524CCE3420053C0F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A33324324CCE3420053C0F7 /* Main.storyboard */; };
 		3A33324724CCE3470053C0F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A33324624CCE3470053C0F7 /* Assets.xcassets */; };
 		3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */; };
-		3A3724C9251F4C1900CB6FE6 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */; };
+		3A3724C9251F4C1900CB6FE6 /* MenuButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3724C8251F4C1900CB6FE6 /* MenuButtonStyle.swift */; };
 		3A3724CD251F7CAA00CB6FE6 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3724CC251F7CAA00CB6FE6 /* MenuItem.swift */; };
-		3A561D4D25D94A7E0051412F /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A561D4B25D94A7E0051412F /* Roboto-Bold.ttf */; };
-		3A561D4E25D94A7E0051412F /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A561D4C25D94A7E0051412F /* Roboto-Black.ttf */; };
 		3A70730025D533F400C3DBF2 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A7072FF25D533F400C3DBF2 /* AboutViewController.swift */; };
 		3A81D3D424EC16BD0082A1CF /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */; };
+		3A851F6425E049820093BAE4 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A851F6325E049820093BAE4 /* StoreKit.framework */; };
 		3A8B132C2510279C00029EEB /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8B132B2510279C00029EEB /* Keys.swift */; };
 		3A99845225DA9B16000ED153 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A99845125DA9B16000ED153 /* SettingsViewController.swift */; };
 		3A99845F25DB15B0000ED153 /* Pods_WeatherBoard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF02EDF624512461411F9D49 /* Pods_WeatherBoard.framework */; };
 		3A9E14842515F96A000E62AE /* StarParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD20B52514D9CC002AF7BA /* StarParticle.sks */; };
 		3A9E14852515F96C000E62AE /* StormParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD20B62514D9D2002AF7BA /* StormParticle.sks */; };
 		3AAD20BC2514DA7E002AF7BA /* SnowParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3AAD20BB2514DA7E002AF7BA /* SnowParticle.sks */; };
+		3AB1956B25E29448008BD8E2 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB1956A25E29448008BD8E2 /* DataManager.swift */; };
 		3ACAA2D925307EDE00377451 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAA2D825307EDE00377451 /* DetailsViewController.swift */; };
 		3ACAA2DD25309CA900377451 /* DetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACAA2DB25309CA900377451 /* DetailsTableViewCell.swift */; };
 		3ACAA2DE25309CA900377451 /* DetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3ACAA2DC25309CA900377451 /* DetailsTableViewCell.xib */; };
+		3ACE4FF425DFD7FD007AC078 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ACE4FF325DFD7FD007AC078 /* ButtonStyle.swift */; };
 		3ADCEEBB24F668E700A6A672 /* RainParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3ADCEEBA24F668E700A6A672 /* RainParticle.sks */; };
 		3AF224542512C1E400371CA4 /* C.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF224532512C1E400371CA4 /* C.swift */; };
 		3AF6CEF9251E21B2005D39CA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */; };
@@ -40,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A0272AE25E26EF4000E6BD4 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		3A0272AF25E26EF4000E6BD4 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		3A0885DA24E9AFC4006C3DCF /* WeatherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
@@ -53,21 +58,22 @@
 		3A33324624CCE3470053C0F7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A33324924CCE3470053C0F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A33324B24CCE3470053C0F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		3A3724C8251F4C1900CB6FE6 /* MenuButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonStyle.swift; sourceTree = "<group>"; };
 		3A3724CC251F7CAA00CB6FE6 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		3A561D4025D947780051412F /* WeatherBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherBoard.entitlements; sourceTree = "<group>"; };
-		3A561D4B25D94A7E0051412F /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "WeatherBoard/Fonts/Roboto-Bold.ttf"; sourceTree = SOURCE_ROOT; };
-		3A561D4C25D94A7E0051412F /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "WeatherBoard/Fonts/Roboto-Black.ttf"; sourceTree = SOURCE_ROOT; };
 		3A7072FF25D533F400C3DBF2 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		3A81D3D324EC16BD0082A1CF /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		3A851F6325E049820093BAE4 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3A8B132B2510279C00029EEB /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		3A99845125DA9B16000ED153 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3AAD20B52514D9CC002AF7BA /* StarParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarParticle.sks; sourceTree = "<group>"; };
 		3AAD20B62514D9D2002AF7BA /* StormParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StormParticle.sks; sourceTree = "<group>"; };
 		3AAD20BB2514DA7E002AF7BA /* SnowParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SnowParticle.sks; sourceTree = "<group>"; };
+		3AB1956A25E29448008BD8E2 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		3ACAA2D825307EDE00377451 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		3ACAA2DB25309CA900377451 /* DetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3ACAA2DC25309CA900377451 /* DetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsTableViewCell.xib; sourceTree = "<group>"; };
+		3ACE4FF325DFD7FD007AC078 /* ButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 		3ADCEEBA24F668E700A6A672 /* RainParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RainParticle.sks; sourceTree = "<group>"; };
 		3AF224532512C1E400371CA4 /* C.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C.swift; sourceTree = "<group>"; };
 		3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -83,19 +89,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A99845F25DB15B0000ED153 /* Pods_WeatherBoard.framework in Frameworks */,
+				3A851F6425E049820093BAE4 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A0272AC25E26EAB000E6BD4 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				3A33323D24CCE3420053C0F7 /* AppDelegate.swift */,
+				3A33323F24CCE3420053C0F7 /* SceneDelegate.swift */,
+				3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */,
+				3A0885D224E9A3BD006C3DCF /* Resources */,
+				3A3A8ECE253CB778006CF764 /* Constants */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
 		3A0885D224E9A3BD006C3DCF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3A33324624CCE3470053C0F7 /* Assets.xcassets */,
+				3A99845525DB1194000ED153 /* Fonts */,
 				3AAD20B32514D2D2002AF7BA /* Particles */,
 			);
 			name = Resources;
-			path = ..;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		3A0885D724E9AF76006C3DCF /* Views */ = {
@@ -106,7 +127,8 @@
 				3ACAA2DB25309CA900377451 /* DetailsTableViewCell.swift */,
 				3AF6CEF8251E21B2005D39CA /* MenuTableViewCell.xib */,
 				3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */,
-				3A3724C8251F4C1900CB6FE6 /* MenuButton.swift */,
+				3A3724C8251F4C1900CB6FE6 /* MenuButtonStyle.swift */,
+				3ACE4FF325DFD7FD007AC078 /* ButtonStyle.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -128,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				3A0885DA24E9AFC4006C3DCF /* WeatherManager.swift */,
+				3AB1956A25E29448008BD8E2 /* DataManager.swift */,
 				3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */,
 				3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */,
 				3A3724CC251F7CAA00CB6FE6 /* MenuItem.swift */,
@@ -157,17 +180,11 @@
 			isa = PBXGroup;
 			children = (
 				3A561D4025D947780051412F /* WeatherBoard.entitlements */,
-				3A33323D24CCE3420053C0F7 /* AppDelegate.swift */,
-				3A33323F24CCE3420053C0F7 /* SceneDelegate.swift */,
-				3A3A8ECE253CB778006CF764 /* Constants */,
+				3A33324B24CCE3470053C0F7 /* Info.plist */,
 				3A0885D924E9AFB6006C3DCF /* Model */,
 				3A0885D724E9AF76006C3DCF /* Views */,
 				3A0885D824E9AF90006C3DCF /* Controllers */,
-				3A33324624CCE3470053C0F7 /* Assets.xcassets */,
-				3A33324824CCE3470053C0F7 /* LaunchScreen.storyboard */,
-				3A33324B24CCE3470053C0F7 /* Info.plist */,
-				3A99845525DB1194000ED153 /* Fonts */,
-				3A0885D224E9A3BD006C3DCF /* Resources */,
+				3A0272AC25E26EAB000E6BD4 /* SupportFiles */,
 			);
 			path = WeatherBoard;
 			sourceTree = "<group>";
@@ -184,8 +201,8 @@
 		3A99845525DB1194000ED153 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				3A561D4C25D94A7E0051412F /* Roboto-Black.ttf */,
-				3A561D4B25D94A7E0051412F /* Roboto-Bold.ttf */,
+				3A0272AF25E26EF4000E6BD4 /* Roboto-Black.ttf */,
+				3A0272AE25E26EF4000E6BD4 /* Roboto-Bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -205,6 +222,7 @@
 		5F2D913EEBC52BAB95F0E6BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A851F6325E049820093BAE4 /* StoreKit.framework */,
 				CF02EDF624512461411F9D49 /* Pods_WeatherBoard.framework */,
 			);
 			name = Frameworks;
@@ -280,8 +298,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A561D4D25D94A7E0051412F /* Roboto-Bold.ttf in Resources */,
-				3A561D4E25D94A7E0051412F /* Roboto-Black.ttf in Resources */,
+				3A0272B025E26EF4000E6BD4 /* Roboto-Bold.ttf in Resources */,
 				3AAD20BC2514DA7E002AF7BA /* SnowParticle.sks in Resources */,
 				3AF6CEFA251E21B2005D39CA /* MenuTableViewCell.xib in Resources */,
 				3A33324A24CCE3470053C0F7 /* LaunchScreen.storyboard in Resources */,
@@ -290,6 +307,7 @@
 				3A9E14852515F96C000E62AE /* StormParticle.sks in Resources */,
 				3A0E765A253DFAE200C3D96D /* StarParticleCloudy.sks in Resources */,
 				3A9E14842515F96A000E62AE /* StarParticle.sks in Resources */,
+				3A0272B125E26EF4000E6BD4 /* Roboto-Black.ttf in Resources */,
 				3A33324524CCE3420053C0F7 /* Main.storyboard in Resources */,
 				3ADCEEBB24F668E700A6A672 /* RainParticle.sks in Resources */,
 			);
@@ -370,12 +388,14 @@
 				3A3724CD251F7CAA00CB6FE6 /* MenuItem.swift in Sources */,
 				3AF6CEF9251E21B2005D39CA /* MenuTableViewCell.swift in Sources */,
 				3A33324024CCE3420053C0F7 /* SceneDelegate.swift in Sources */,
-				3A3724C9251F4C1900CB6FE6 /* MenuButton.swift in Sources */,
+				3A3724C9251F4C1900CB6FE6 /* MenuButtonStyle.swift in Sources */,
 				3A0885DF24E9AFE9006C3DCF /* WeatherData.swift in Sources */,
 				3A2A1539252F53AC004A8672 /* WeatherViewController.swift in Sources */,
 				3A99845225DA9B16000ED153 /* SettingsViewController.swift in Sources */,
 				3A0885DD24E9AFDA006C3DCF /* WeatherModel.swift in Sources */,
+				3AB1956B25E29448008BD8E2 /* DataManager.swift in Sources */,
 				3ACAA2DD25309CA900377451 /* DetailsTableViewCell.swift in Sources */,
+				3ACE4FF425DFD7FD007AC078 /* ButtonStyle.swift in Sources */,
 				3A70730025D533F400C3DBF2 /* AboutViewController.swift in Sources */,
 				3ACAA2D925307EDE00377451 /* DetailsViewController.swift in Sources */,
 			);
@@ -439,6 +459,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -499,6 +520,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

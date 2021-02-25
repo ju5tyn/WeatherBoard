@@ -115,9 +115,6 @@ struct WeatherManager {
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: data)
             
-            
-            
-            
             return WeatherModel(lat: decodedData.lat,
                                 lon: decodedData.lon,
                                 timeZoneOffset: decodedData.timezone_offset,
@@ -128,7 +125,7 @@ struct WeatherManager {
             )
             
         } catch {
-            //delegate?.didFailWithError(error: error)
+            delegate?.didFailWithError(error: error)
             print(error)
             return nil
         }
@@ -182,6 +179,10 @@ struct WeatherManager {
         )
         
     }
+    
+    
+    
+    
     
 }
 

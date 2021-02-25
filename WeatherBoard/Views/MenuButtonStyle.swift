@@ -8,14 +8,11 @@
 
 import UIKit
 import CoreGraphics
-import RealmSwift
 
-//MARK: Realm
-let realm = try! Realm()
-var menuItems: Results<MenuItem>?
 
-class MenuButton: UIButton {
+class MenuButtonStyle: UIButton {
     
+
     var hue: CGFloat
     var saturation: CGFloat
     var brightness: CGFloat
@@ -24,6 +21,9 @@ class MenuButton: UIButton {
     var bottomGradient: String?
     
     required init?(coder aDecoder: NSCoder) {
+        
+        
+        
         self.hue = 0.5
         self.saturation = 0.5
         self.brightness = 0.5
@@ -86,11 +86,7 @@ class MenuButton: UIButton {
             
         }
         
-        
-        
-        
-        
-        // 4
+
         if state != .highlighted {
             context.saveGState()
             context.setFillColor(outerColor.cgColor)
@@ -109,16 +105,7 @@ class MenuButton: UIButton {
             
         }
         
-        // Outer Path Gradient:
-        
-        // 1
-        //let outerTop = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
-        
-        //let outerBottom = UIColor(hue: hue, saturation: saturation, brightness: brightness * 0.8, alpha: 1.0)
-        
-        
-        
-        // 2
+
         context.saveGState()
         context.addPath(outerPath)
         context.clip()
@@ -157,6 +144,7 @@ class MenuButton: UIButton {
     }
     
 }
+
 
 extension UIView {
     func createRoundedRectPath(for rect: CGRect, radius: CGFloat) -> CGMutablePath {

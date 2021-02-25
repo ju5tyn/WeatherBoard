@@ -29,11 +29,8 @@ class MainViewController: UIViewController{
     @IBOutlet weak var navButtonsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var hillViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hillViewBottomConstraint: NSLayoutConstraint!
-    //@IBOutlet weak var hillViewWidthConstraint: NSLayoutConstraint!
     
-    
-    
-    
+
     //Location label header
     @IBOutlet weak var locationLabelView: UIView!
     @IBOutlet weak var locationLabel: LTMorphingLabel!
@@ -45,9 +42,7 @@ class MainViewController: UIViewController{
     
     //MARK: - VARIABLES
     
-    
-    
-    
+
     var daySelected: Int = 0
     var menuOpen: Bool = false
     
@@ -92,7 +87,7 @@ class MainViewController: UIViewController{
         addHill()
         addGradient()
         addShadows()
-        highlightButton(todayButton)
+        highlightNavButton(todayButton)
         getLocation()
         clearDetails()
         
@@ -108,9 +103,7 @@ class MainViewController: UIViewController{
     
     //MARK: - Buttons
     
-    
-    
-    //MARK: Menu Pressed
+
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: C.segues.mainToMenu, sender: self)
@@ -127,15 +120,13 @@ class MainViewController: UIViewController{
     }
     
     
-    //MARK: Time Travel Pressed
-    
-    @IBAction func timeTravelButtonPressed(_ sender: UIButton) {
+    @IBAction func navButtonPressed(_ sender: UIButton) {
         
         //Highlights button that was pressed
-        highlightButton(sender)
+        highlightNavButton(sender)
         //Clears details, changes day selection, then sets details
         switch sender.titleLabel!.text{
-            case "TODAY":
+            case "CURRENT":
                 daySelected = 0
                 removeBlur()
                 animateLocationLabelOut()
@@ -160,16 +151,6 @@ class MainViewController: UIViewController{
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     //MARK: - FUNCTIONS
     
     func getLocation(){
@@ -185,14 +166,11 @@ class MainViewController: UIViewController{
         }else{
             locationManager.requestLocation()
         }
-        
-        
-        
+  
     }
     
     
-    
-    //MARK: clearDetails
+
     //resets weather details to empty
     func clearDetails(){
         animateLocationLabelOut()
@@ -202,9 +180,7 @@ class MainViewController: UIViewController{
         removeParticles(from: gradientView)
         hideNavButtons(hidden: true)
     }
-    
-    //MARK: Change details
-    
+ 
     func changeDetails() {
         if weatherModel?.locationName != nil {
             
@@ -273,8 +249,8 @@ class MainViewController: UIViewController{
         }
     }
     
+
     
-    //MARK: setDetails
     //sets weather details to contents of weathermodel
     func setDetails(){
         if weatherModel != nil {
@@ -303,7 +279,7 @@ class MainViewController: UIViewController{
     
     
     
-    //MARK: - UI FUNCTIONS
+    //MARK:  UI FUNCTIONS
     
     func animateLocationLabelIn(){
         
@@ -313,23 +289,22 @@ class MainViewController: UIViewController{
             self.locationLabelLeadingConstraint.constant = 70
             self.locationLabelView.superview?.layoutIfNeeded()
         }
-        //locationLabelView.isHidden = false
-        
+
     }
     
     func animateLocationLabelOut(){
-        
+
         UIView.animate(withDuration: 0.2){
             self.locationLabelView.alpha = 0
-            
             self.locationLabelLeadingConstraint.constant = 50
             self.locationLabelView.setNeedsLayout()
             self.locationLabelView.superview?.layoutIfNeeded()
             
         }
-        //locationLabelView.isHidden = true
-        
+
     }
+    
+
     
     
     
@@ -355,13 +330,10 @@ class MainViewController: UIViewController{
 
         //setup for mask of hill
         let hillMask = UIImageView()
-        
-        
+
         hillMask.frame = CGRect.init(x: 0, y: 0, width: UIScreen.screens[0].bounds.width, height: UIScreen.screens[0].bounds.height*0.4)
         
         hillMask.image = UIImage(named: "hills")
-        //hillMask.contentMode = .scaleToFill
-        //hillMask.
         hillMask.clipsToBounds = false
 
         hillView.autoresizesSubviews = true
@@ -486,7 +458,7 @@ class MainViewController: UIViewController{
     
     
     //Highlights currently selected button
-    func highlightButton(_ buttonToHighlight: UIButton){
+    func highlightNavButton(_ buttonToHighlight: UIButton){
         todayButton.alpha = 0.5
         tomorrowButton.alpha = 0.5
         dayAfterButton.alpha = 0.5
@@ -644,69 +616,13 @@ extension MainViewController: WeatherManagerDelegate{
     
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel){
         
-        weatherModel = weather
+        self.weatherModel = weather
+        let dataManager = DataManager()
         
         //sets this view's weather model to data from weathermanager
         DispatchQueue.main.async {
-            
-            if self.weatherModel?.doNotSave != true{
-                //writes the city name to realm
-                let location = CLLocation(latitude: self.weatherModel!.lat, longitude: self.weatherModel!.lon)
-                
-                CLGeocoder().reverseGeocodeLocation(location, completionHandler: { placemarks, error in
-                    
-                    self.realm.beginWrite()
-                    
-                    let newItem = MenuItem()
-                    newItem.isCurrentLocation = self.weatherModel!.isCurrentLocation
-                    
-                    var colorName = "menu"
-                    
-                    if (self.weatherModel!.current.isSunset){
-                        colorName = "sunset"
-                    } else if (self.weatherModel!.current.isSunrise){
-                        colorName = "sunrise"
-                    }else{
-                        colorName = "\(self.weatherModel!.current.conditionName)_\(self.weatherModel!.current.isDayString)"
-                    }
-                    
-                    
-                    
-                    newItem.topGradient = "button_\(colorName)_top"
-                    newItem.bottomGradient = "button_\(colorName)_bottom"
-                    
-                    
-                    newItem.cityName = placemarks?.first?.locality
-                    
-                    if newItem.cityName == nil {
-                        newItem.cityName = placemarks?.first?.country
-                    }
-                    
-                    
-                    // USERDEFAULTS
-                    let defaults = UserDefaults.standard
-                    defaults.setValue(newItem.cityName, forKey: C.defaults.defaultLocation)
-                    // ============
-                    
-                    
-                    self.realm.add(newItem)
-                    
-                    do{
-                        try self.realm.commitWrite()
-                    } catch {
-                        print(error)
-                    }
-                })
-                
-                
-                //realm end
-                
-                
-                
-                
-            }
+            dataManager.saveWeatherModel(weather)
             self.setDetails()
-            
         }
     }
     
@@ -722,7 +638,7 @@ extension MainViewController: WeatherManagerDelegate{
     }
 }
 
-//MARK: EXT Label
+//MARK: Extensions
 
 extension UILabel {
     func textDropShadow() {

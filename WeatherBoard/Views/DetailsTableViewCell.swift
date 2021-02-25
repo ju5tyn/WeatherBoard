@@ -74,8 +74,7 @@ class DetailsTableViewCell: UITableViewCell {
     }
     
     
-    
-    
+
     
     //MARK: - Set Big
     

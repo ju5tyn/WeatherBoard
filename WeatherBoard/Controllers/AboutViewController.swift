@@ -1,11 +1,3 @@
-//
-//  AboutViewController.swift
-//  WeatherBoard
-//
-//  Created by Justyn Henman on 11/02/2021.
-//  Copyright © 2021 Justyn Henman. All rights reserved.
-//
-
 import UIKit
 
 class AboutViewController: UIViewController {
@@ -14,30 +6,32 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var appLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     
-    let appVersion  = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-    let appBuild    = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
-    
+
     override func viewDidLoad(){
         super.viewDidLoad()
-        titleLabel.alpha    = 0
-        iconImage.alpha     = 0
-        appLabel.alpha      = 0
-        versionLabel.alpha  = 0
         
+        setAlpha()
+        
+        let appVersion  = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        let appBuild    = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         versionLabel.text = "Ver \(appVersion ?? "-") (\(appBuild ?? "-"))"
         
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addBlur()
     }
     
-    @IBAction func backButtonPressed(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+
+    func setAlpha() {
+        titleLabel.alpha    = 0
+        iconImage.alpha     = 0
+        appLabel.alpha      = 0
+        versionLabel.alpha  = 0
     }
     
-
     
     //Adds blur to the uiview
     func addBlur(){
@@ -78,6 +72,10 @@ class AboutViewController: UIViewController {
             view.backgroundColor = .clear
         }
         
+    }
+    
+    @IBAction func backButtonPressed(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     

@@ -1,11 +1,3 @@
-//
-//  SettingsViewController.swift
-//  WeatherBoard
-//
-//  Created by Justyn Henman on 15/02/2021.
-//  Copyright © 2021 Justyn Henman. All rights reserved.
-//
-
 import UIKit
 
 class SettingsViewController: UIViewController {
@@ -19,41 +11,51 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var defaultLocationPicker: UISegmentedControl!
     @IBOutlet weak var defaultLocationLabel: UILabel!
     
+    @IBOutlet weak var adsButton: ButtonStyle!
+    @IBOutlet weak var adsLabel: UILabel!
+    @IBOutlet weak var adsButtonSpinner: UIActivityIndicatorView!
+    
+    
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setAlpha()
+        adsButtonSetup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewSetup()
+    }
+    
+
+    
+    func adsButtonSetup(){
+        
+        adsButton.topGradient = "remove_top"
+        adsButton.bottomGradient = "remove_bottom"
+        adsButtonSpinner.stopAnimating()
+        adsButton.titleLabel?.alpha = 1
+        
+    }
+    
+    func setAlpha(){
         
         titleLabel.alpha            = 0
         unitsPicker.alpha           = 0
         unitsLabel.alpha            = 0
         defaultLocationLabel.alpha  = 0
         defaultLocationPicker.alpha = 0
-
-        unitsPicker.selectedSegmentIndex = defaults.integer(forKey: C.defaults.units)
-        defaultLocationPicker.selectedSegmentIndex = defaults.integer(forKey: C.defaults.defaultToGPS)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        addBlur()
-    }
-    
-    @IBAction func unitsPicker(_ sender: UISegmentedControl) {
-        
-        let val = sender.selectedSegmentIndex == 1 ? 1 : 0
-        defaults.setValue(val, forKey: C.defaults.units)
+        adsButton.alpha             = 0
+        adsLabel.alpha              = 0
         
     }
     
-    @IBAction func defaultLocationPicker(_ sender: UISegmentedControl) {
+    func viewSetup(){
         
-        let val = sender.selectedSegmentIndex == 1 ? 1 : 0
-        defaults.setValue(val, forKey: C.defaults.defaultToGPS)
-        
-    }
-    
-    func addBlur(){
         if !UIAccessibility.isReduceTransparencyEnabled {
             view.backgroundColor = .clear
             
@@ -89,21 +91,49 @@ class SettingsViewController: UIViewController {
             }
             UIView.animate(withDuration: 0.2, delay: 0.6){
                 self.defaultLocationLabel.alpha = 1
-                self.unitsPicker.alpha = 1
+                self.unitsPicker.alpha          = 1
             }
             UIView.animate(withDuration: 0.2, delay: 0.7){
                 self.defaultLocationPicker.alpha = 1
+                self.adsLabel.alpha       = 1
+            }
+            UIView.animate(withDuration: 0.2, delay: 0.8){
+                self.adsButton.alpha        = 1
             }
             
         } else {
-            view.backgroundColor = .clear
+            view.backgroundColor = .darkGray
         }
         
     }
-
+    
     
     @IBAction func backButtonPressed(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func unitsPicker(_ sender: UISegmentedControl) {
+        
+        let val = sender.selectedSegmentIndex == 1 ? 1 : 0
+        defaults.setValue(val, forKey: C.defaults.units)
+        
+    }
+    
+    @IBAction func defaultLocationPicker(_ sender: UISegmentedControl) {
+        
+        let val = sender.selectedSegmentIndex == 1 ? 1 : 0
+        defaults.setValue(val, forKey: C.defaults.defaultToGPS)
+        
+    }
+    
+    @IBAction func removeAdsButtonPressed(_ sender: ButtonStyle) {
+        
+        UIView.animate(withDuration: 0.1) {
+            sender.titleLabel?.alpha = 0
+        }
+        sender.topGradient = "grad_menu_bottom"
+        sender.bottomGradient = "grad_menu_top"
+        self.adsButtonSpinner.startAnimating()
     }
     
 }

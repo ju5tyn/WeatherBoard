@@ -8,8 +8,9 @@
 
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //MARK: Realm
@@ -17,11 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var menuItems: Results<MenuItem>?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // Google admob setup
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers = [ "894eac13dde30d727b53a35d27b7850e" ];
         
-        let defaults = UserDefaults.standard
-        
-        if(defaults.integer(forKey: C.defaults.defaultToGPS) == 0){
+        if (UserDefaults.standard.integer(forKey: C.defaults.defaultToGPS) == 0){
             do{
                 try realm.write{
                     let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
@@ -31,27 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print(error)
             }
         }
-        
-        
-        
-        
-        
-        
         return true
     }
 
-    // MARK: UISceneSession Lifecycle
-
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-        // Called when a new scene session is being created.
-        // Use this method to select a configuration to create the new scene with.
+ 
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Called when the user discards a scene session.
-        // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
-        // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+        
         do{
             try realm.write{
                 let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)

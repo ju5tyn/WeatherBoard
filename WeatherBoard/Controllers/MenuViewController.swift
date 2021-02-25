@@ -9,12 +9,18 @@
 import UIKit
 import RealmSwift
 import CoreLocation
+import GoogleMobileAds
 
 class MenuViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var bottomButtons: [UIButton]!
+    @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var adLabel: UILabel!
+    @IBOutlet weak var adBackground: UIView!
+    @IBOutlet weak var adSpinner: UIActivityIndicatorView!
+    
     
     var searchFull: Bool = false
     var locationPressed: Bool = false
@@ -22,61 +28,119 @@ class MenuViewController: UIViewController {
     
     var menuItems: Results<MenuItem>?
     var menuItemPressedCityName: String?
-    //realm
+
     let realm = try! Realm()
-    
+ 
     //MARK: - AppDelegate functions
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setAlpha()
         loadMenuItems()
-        self.hideKeyboardWhenTappedAround()
+        hideKeyboardWhenTappedAround()
         
         overrideUserInterfaceStyle = .dark
         
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        bannerView.delegate = self
         
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableMenuCell")
-        
-        for button in bottomButtons{
-            button.alpha = 0
-        }
-        
-        
         tableView.reloadData()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        //searchBar.becomeFirstResponder()
+        bannerView.adUnitID = Keys.admobUnitID
+        bannerView.rootViewController = self
+
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
-        
-        //var count: Double = 0.0
+        if true{
+            loadBannerAd()
+        }else{
+            
+        }
+
         for button in bottomButtons{
             UIView.animate(withDuration: 0.5, delay: 0){
                 button.alpha = 1
             }
-            //count+=0.1
         }
-        
     }
+    
+    
+    
+    
+    
+    
+    
+    
     
     //MARK: - Functions
     
+
+    func setAlpha(){
+        
+        for btn in bottomButtons{
+            btn.alpha = 0
+        }
+        adBackground.alpha = 0
+        adLabel.alpha = 0
+        //bannerView.alpha = 0
+    }
+    
+    func loadBannerAd() {
+
+        bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(bannerView.frame.width)
+        bannerView.load(GADRequest())
+
+        UIView.animate(withDuration: 0.5, delay: 0){
+            self.adBackground.alpha = 1
+            self.adLabel.alpha = 1
+        }
+    }
+    
+
     func loadMenuItems(){
         //loads tableview items from realm, then reloads tableview
         menuItems = realm.objects(MenuItem.self).sorted(byKeyPath: "date", ascending: false).sorted(byKeyPath: "isCurrentLocation", ascending: false)
         tableView.reloadData()
     }
+    
+    
+    private func exitMenu(_ segue: UIStoryboardSegue) {
+        if segue.identifier == C.segues.menuToMain{
+            
+            let mainVC = segue.destination as! MainViewController
+            
+            mainVC.menuOpen.toggle()
+            //mainVC.mainView.isHidden = false
+            UIView.animate(withDuration: 0.5) {
+                mainVC.mainView.alpha = 1
+            }
+            if locationPressed{
+                mainVC.locationManager.requestLocation()
+                mainVC.clearDetails()
+                
+            }else if let validCityName = menuItemPressedCityName{
+                mainVC.weatherManager.fetchWeather(cityName: validCityName, doNotSave: locationCellPressed)
+                mainVC.clearDetails()
+            }else if searchFull{
+                mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
+                mainVC.clearDetails()
+                
+            }else{
+                mainVC.setDetails()
+            }
+            
+            mainVC.updateBlur()
+        }
+    }
+    
     
     
     //MARK: - Buttons
@@ -125,11 +189,11 @@ class MenuViewController: UIViewController {
         
         switch segue.identifier{
             case C.segues.menuToAbout:
-                let aboutVC = segue.destination as! AboutViewController
+                _ = segue.destination as! AboutViewController
             case C.segues.menuToMain:
                 exitMenu(segue)
             case C.segues.menuToSettings:
-                let settingsVC = segue.destination as! SettingsViewController
+                _ = segue.destination as! SettingsViewController
             case .none:
                 break
             case .some(_):
@@ -144,34 +208,7 @@ class MenuViewController: UIViewController {
 
     }
     
-    private func exitMenu(_ segue: UIStoryboardSegue) {
-        if segue.identifier == C.segues.menuToMain{
-            
-            let mainVC = segue.destination as! MainViewController
-            
-            mainVC.menuOpen.toggle()
-            //mainVC.mainView.isHidden = false
-            UIView.animate(withDuration: 0.5) {
-                mainVC.mainView.alpha = 1
-            }
-            if locationPressed{
-                mainVC.locationManager.requestLocation()
-                mainVC.clearDetails()
-                
-            }else if let validCityName = menuItemPressedCityName{
-                mainVC.weatherManager.fetchWeather(cityName: validCityName, doNotSave: locationCellPressed)
-                mainVC.clearDetails()
-            }else if searchFull{
-                mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
-                mainVC.clearDetails()
-                
-            }else{
-                mainVC.setDetails()
-            }
-            
-            mainVC.updateBlur()
-        }
-    }
+
     
 }
 
@@ -235,12 +272,7 @@ extension MenuViewController: UISearchBarDelegate {
                     self.performSegue(withIdentifier: C.segues.menuToMain, sender: self)
                 }
             }
-            
-            
-            
-            
-            
-            
+
         }else{
             print("No text in ")
         }
@@ -254,20 +286,23 @@ extension MenuViewController: UISearchBarDelegate {
 }
 
 
-
-//MARK: - Keyboard dismiss code
-
-extension UIViewController {
+//MARK: - GADBannerView Delegate
+extension MenuViewController: GADBannerViewDelegate{
     
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 0.4, animations: {
+            bannerView.alpha = 1
+        })
     }
     
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        adSpinner.stopAnimating()
+        adLabel.text = "error loading ad".uppercased()
     }
+    
+    
 }
 
 
@@ -297,4 +332,22 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
         return cell
     }
     
+
+}
+
+
+
+//MARK: - Keyboard dismiss code
+
+extension UIViewController {
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

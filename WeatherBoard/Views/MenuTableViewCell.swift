@@ -16,9 +16,10 @@ protocol MenuTableViewCellDelegate {
 }
 
 class MenuTableViewCell: UITableViewCell {
-    @IBOutlet weak var menuButton: MenuButton!
+    @IBOutlet weak var menuButton: MenuButtonStyle!
     @IBOutlet weak var menuLabel: UILabel!
     @IBOutlet weak var locationIcon: UIImageView!
+    @IBOutlet weak var deleteButton: ButtonStyle!
     
     
     var delegate: MenuTableViewCellDelegate?
@@ -29,11 +30,21 @@ class MenuTableViewCell: UITableViewCell {
         backgroundColor = UIColor.clear
         
         menuLabel.textDropShadow()
-        //locationIcon.isHidden = true
-        
         locationIcon.addShadow()
-        //menuButton.addShadow()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.normalTap))
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.longTap))
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(self.longTap))
+        
+        menuButton.addGestureRecognizer(tapGesture)
+        //menuButton.addGestureRecognizer(longGesture)
+        menuButton.addGestureRecognizer(swipeGesture)
+        
+        deleteButton.topGradient = "delete_top"
+        deleteButton.bottomGradient = "delete_bottom"
+        deleteButton.cornerRadius = 12
+        //deleteButton.isHidden = true
+
     }
     
     
@@ -43,7 +54,7 @@ class MenuTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func menuButtonPressed(_ sender: MenuButton) {
+    @objc func normalTap(_ sender: UIGestureRecognizer) {
         if
             let collectionView = superview as? UITableView,
             let index = collectionView.indexPath(for: self)
@@ -53,10 +64,31 @@ class MenuTableViewCell: UITableViewCell {
                 delegate?.didPressButton(with: validLabel, indexPath: index)
             }
         }
+
+    }
+    
+    @objc func longTap(_ sender: UIGestureRecognizer){
         
-        
+        if sender.state == .ended {
+                print("UIGestureRecognizerStateEnded")
+                //Do Whatever You want on End of Gesture
+            }
+            else if sender.state == .began {
+                print("UIGestureRecognizerStateBegan.")
+                //Do Whatever You want on Began of Gesture
+            }
         
     }
+    
+    @objc func swipeTap(_ sender: UIGestureRecognizer){
+        
+        print("epic")
+        
+    }
+    
+    
+    
+    
     
     
     

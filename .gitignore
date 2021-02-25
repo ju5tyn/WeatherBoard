@@ -24,6 +24,7 @@ Pods
 
 # API keys
 WeatherBoard/Constants/Keys.swift
+WeatherBoard/Info.plist
 
 # fastlane
 fastlane/report.xml
