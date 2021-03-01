@@ -17,6 +17,7 @@ struct WeatherModel{
     
     let current : Current
     let daily: [Daily]
+    let hourly: [Hourly]
     
     var locationName: String? = ""
     
@@ -52,6 +53,29 @@ struct WeatherModel{
         }
         
         
+    }
+    
+    struct Hourly{
+        
+        let id: Int
+        let main: String
+        let description: String
+        let currentDt: Int // date time for now
+        let dt: Int // date time for this day
+        let sunrise: Int
+        let sunset: Int
+        let temp: Double
+        
+        var tempString: String{ return "\(String(format: "%.0f", temp))°" }
+        var isDay: Bool { return (dt>sunrise && dt<sunset) ? true : false }
+        var isDayString: String { return isDay ? "day" : "night" }
+        var conditionName: ConditionNames { return getConditionName(id) }
+        var particle: String? { return getParticleName(id, isDay) }
+        
+        let rain: Double?
+        let clouds: Int
+
+
     }
     
     //MARK: Daily

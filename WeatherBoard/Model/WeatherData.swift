@@ -8,7 +8,31 @@ struct WeatherData: Decodable {
     let timezone_offset: Int
     
     let current: Current
+    let hourly: [Hourly]
     let daily: [Daily]
+    
+}
+
+
+struct Hourly: Decodable {
+    
+    let dt: Int
+    let temp: Double
+    let clouds: Int
+    
+    let weather: [Weather]
+    
+    let pop: Double
+    let rain: Rain?
+    
+}
+
+
+
+struct Rain: Decodable{
+    
+    let one: Double
+    private enum CodingKeys: String, CodingKey { case one = "1h"} //since owa object name contains int, add here
     
 }
 

@@ -121,7 +121,8 @@ struct WeatherManager {
                                 isCurrentLocation: isCurrentLocation,
                                 doNotSave: doNotSave,
                                 current: getCurrent(decodedData),
-                                daily: getDailyArray(decodedData)
+                                daily: getDailyArray(decodedData),
+                                hourly: getHourlyArray(decodedData)
             )
             
         } catch {
@@ -150,6 +151,34 @@ struct WeatherManager {
     
     //5 day forecast array
     
+    func getHourlyArray(_ decodedData: WeatherData) -> [WeatherModel.Hourly]{
+        var array: [WeatherModel.Hourly] = []
+        for hour in 0...12{ array.append(getHourly(decodedData, hour))}
+        return array
+        
+    }
+    
+    func getHourly(_ decodedData: WeatherData, _ hour: Int) -> WeatherModel.Hourly {
+        
+        let hourData = decodedData.hourly[hour]
+        
+        return WeatherModel.Hourly(id: hourData.weather[0].id,
+                                   main: hourData.weather[0].main,
+                                   description: hourData.weather[0].description,
+                                   currentDt: decodedData.current.dt,
+                                   dt: hourData.dt,
+                                   sunrise: decodedData.current.sunrise,
+                                   sunset: decodedData.current.sunset,
+                                   temp: hourData.temp,
+                                   rain: hourData.rain?.one,
+                                   clouds: hourData.clouds
+        )
+        
+        
+        
+    }
+    
+    
     func getDailyArray(_ decodedData: WeatherData) -> [WeatherModel.Daily]{
         var array: [WeatherModel.Daily] = []
         for day in 0...4{ array.append(getDaily(decodedData, day)) }
@@ -159,22 +188,24 @@ struct WeatherManager {
     
     func getDaily(_ decodedData: WeatherData, _ day: Int) -> WeatherModel.Daily{
         
-        let data = decodedData.daily[day]
+        let dailyData = decodedData.daily[day]
         
         
         
-        return WeatherModel.Daily(id: data.weather[0].id,
-                                  main: data.weather[0].main, description: data.weather[0].description, currentDt: decodedData.current.dt,
-                                  dt: data.dt,
+        return WeatherModel.Daily(id: dailyData.weather[0].id,
+                                  main: dailyData.weather[0].main,
+                                  description: dailyData.weather[0].description,
+                                  currentDt: decodedData.current.dt,
+                                  dt: dailyData.dt,
                                   sunrise: decodedData.current.sunrise,
                                   sunset: decodedData.current.sunset,
-                                  temp: data.temp.day,
-                                  highTemp: data.temp.max,
-                                  lowTemp: data.temp.min,
-                                  cloudCover: data.clouds,
-                                  windSpeed: data.wind_speed,
-                                  windDirection: data.wind_deg,
-                                  precip: data.pop
+                                  temp: dailyData.temp.day,
+                                  highTemp: dailyData.temp.max,
+                                  lowTemp: dailyData.temp.min,
+                                  cloudCover: dailyData.clouds,
+                                  windSpeed: dailyData.wind_speed,
+                                  windDirection: dailyData.wind_deg,
+                                  precip: dailyData.pop
                                   //visibility: data.visibility
         )
         

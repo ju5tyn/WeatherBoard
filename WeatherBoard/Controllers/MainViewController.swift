@@ -126,7 +126,7 @@ class MainViewController: UIViewController{
         highlightNavButton(sender)
         //Clears details, changes day selection, then sets details
         switch sender.titleLabel!.text{
-            case "CURRENT":
+            case "TODAY":
                 daySelected = 0
                 removeBlur()
                 animateLocationLabelOut()
