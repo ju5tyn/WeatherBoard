@@ -45,7 +45,12 @@ struct DataManager {
                 newItem.bottomGradient = "button_\(colorName)_bottom"
                 
                 newItem.cityName = placemarks?.first?.country
-                newItem.cityName = placemarks?.first?.locality // will default to country if none supplied
+                
+                if let locality = placemarks?.first?.locality{
+                    newItem.cityName = locality // will default to country if none supplied
+                }
+                
+                
 
                 // USERDEFAULTS
                 let defaults = UserDefaults.standard

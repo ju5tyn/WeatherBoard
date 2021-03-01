@@ -20,6 +20,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var adLabel: UILabel!
     @IBOutlet weak var adBackground: UIView!
     @IBOutlet weak var adSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var recentsLabel: UILabel!
     
     
     var searchFull: Bool = false
@@ -51,6 +52,8 @@ class MenuViewController: UIViewController {
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableMenuCell")
         tableView.reloadData()
         
+        recentsLabel.isHidden = false
+        
         bannerView.adUnitID = Keys.admobUnitID
         bannerView.rootViewController = self
 
@@ -59,7 +62,7 @@ class MenuViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if true{
+        if false{
             loadBannerAd()
         }else{
             
@@ -247,8 +250,64 @@ extension MenuViewController: MenuTableViewCellDelegate{
         performSegue(withIdentifier: C.segues.menuToMain, sender: self)
         
     }
+    
+    func didPressDelete(with cityName: String, indexPath: IndexPath) {
+        
+        
+        do{
+            try realm.write{
+                realm.delete(menuItems![indexPath.row])
+            }
+        }catch{
+            print(error)
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableMenuCell", for: indexPath) as! MenuTableViewCell
+        
+        cell.menuButton.setNeedsDisplay()
+        
+        
+        UIView.animate(withDuration: 0.3) {
+            self.loadMenuItems()
+        }
+        
+        //self.tableView.reloadData(with: .middle)
+        
+       // var count = 0
+        
+        for cell in tableView.visibleCells as! [MenuTableViewCell] {
+            cell.menuButton.setNeedsDisplay()
+            cell.hideButton()
+            UIView.transition(with: cell, duration: 0.4, options: .transitionFlipFromTop, animations: {}, completion: nil)
+  
+        }
+        
+//        for cell in tableView.visibleCells as! [MenuTableViewCell] {
+//            DispatchQueue.main.async {
+//                UIView.animate(withDuration: 1, delay: TimeInterval(count)) {
+//                    UIView.transition(with: cell, duration: 0.4, options: .transitionFlipFromTop, animations: {cell.isHidden = false}, completion: nil)
+//                }
+//
+//                count+=1
+//            }
+//
+//
+//        }
+        
+//        UIView.transition(with: tableView, duration: 0.4, options: .transitionFlipFromRight, animations: {self.tableView.reloadData()}, completion: nil)
+//
+        
+
+        tableView.layoutSubviews()
+        
+    }
 }
 
+extension UITableView {
+    func reloadData(with animation: UITableView.RowAnimation) {
+        reloadSections(IndexSet(integersIn: 0..<numberOfSections), with: animation)
+    }
+}
 
 
 //MARK: - UISearchBar Delegate Methods
@@ -312,11 +371,17 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //if number of menu items lower than 4, return that number of menu items
+        if menuItems?.count == 0{
+            recentsLabel.isHidden = true
+        }
+        
         return(menuItems?.count ?? 0 < 4 ? menuItems?.count ?? 0 : 4)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableMenuCell", for: indexPath) as! MenuTableViewCell
+        
+        cell.deleteButton.isHidden = true
         
         cell.delegate = self
         

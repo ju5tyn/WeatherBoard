@@ -27,10 +27,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xts-qQ-3DO">
-                                <rect key="frame" x="0.0" y="0.0" width="265" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="245" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQF-Xm-Wh2" customClass="MenuButtonStyle" customModule="WeatherBoard" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="265" height="60"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="245" height="60"/>
                                         <color key="backgroundColor" systemColor="systemTealColor"/>
                                         <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,7 +51,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="gQF-Xm-Wh2" secondAttribute="bottom" id="0db-Jz-8uu"/>
                                     <constraint firstItem="gQF-Xm-Wh2" firstAttribute="leading" secondItem="xts-qQ-3DO" secondAttribute="leading" id="23b-YT-ln6"/>
@@ -62,17 +62,20 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ad0-ba-LcG" customClass="ButtonStyle" customModule="WeatherBoard" customModuleProvider="target">
-                                <rect key="frame" x="260" y="0.0" width="60" height="60"/>
+                                <rect key="frame" x="240" y="0.0" width="80" height="60"/>
                                 <color key="backgroundColor" red="0.92890157539999996" green="0.35048459240000002" blue="0.023490646260000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Kok-gr-qev"/>
+                                    <constraint firstAttribute="width" constant="80" id="Kok-gr-qev"/>
                                 </constraints>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal">
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="small"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
+                                    <imageReference key="image" image="trash.fill" catalog="system" symbolScale="medium"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default" weight="semibold"/>
                                 </state>
+                                <connections>
+                                    <action selector="deletePressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7TB-ec-hSQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -97,16 +100,14 @@
                 <outlet property="locationIcon" destination="LKb-vt-bJy" id="dwV-jG-XxM"/>
                 <outlet property="menuButton" destination="gQF-Xm-Wh2" id="eGw-10-rqa"/>
                 <outlet property="menuLabel" destination="7wk-bg-04g" id="8hq-py-QAW"/>
+                <outlet property="stackView" destination="FSm-Oi-yob" id="BER-9q-xZC"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="149.66517857142856"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="location_white_24pt" width="24" height="24"/>
-        <image name="xmark" catalog="system" width="128" height="113"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <image name="trash.fill" catalog="system" width="121" height="128"/>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
