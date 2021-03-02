@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Black.ttf">
+            <string>Roboto-Black</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="TV4-Lh-8Yt" customClass="ReusableWeatherView" customModule="WeatherBoard" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yME-U9-GfQ" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
+                    <rect key="frame" x="20" y="293" width="374" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="23" id="AVv-or-W2k"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="morphingProgress">
+                            <real key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="morphingDuration">
+                            <real key="value" value="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="morphingCharacterDelay">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GMh-P4-Ao9">
+                    <rect key="frame" x="137" y="84" width="140" height="140"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="140" id="M7C-Mk-wTg"/>
+                        <constraint firstAttribute="height" constant="140" id="cIc-An-Lf4"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RsI-nq-0gr" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
+                    <rect key="frame" x="20" y="242" width="374" height="41"/>
+                    <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="35"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="morphingProgress">
+                            <real key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="morphingDuration">
+                            <real key="value" value="0.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="morphingCharacterDelay">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Cea-1A-PB9">
+                    <rect key="frame" x="188.5" y="135.5" width="37" height="37"/>
+                    <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="62R-k2-xk6"/>
+            <constraints>
+                <constraint firstItem="Cea-1A-PB9" firstAttribute="centerY" secondItem="GMh-P4-Ao9" secondAttribute="centerY" id="2cl-Z9-zoS"/>
+                <constraint firstItem="GMh-P4-Ao9" firstAttribute="top" secondItem="TV4-Lh-8Yt" secondAttribute="topMargin" constant="40" id="3dI-CU-ce5"/>
+                <constraint firstItem="GMh-P4-Ao9" firstAttribute="centerX" secondItem="TV4-Lh-8Yt" secondAttribute="centerX" id="BSn-1e-9A3"/>
+                <constraint firstItem="yME-U9-GfQ" firstAttribute="leading" secondItem="TV4-Lh-8Yt" secondAttribute="leadingMargin" id="Cbw-WX-1ES"/>
+                <constraint firstItem="yME-U9-GfQ" firstAttribute="top" secondItem="RsI-nq-0gr" secondAttribute="bottom" constant="10" id="IUf-3j-gEm"/>
+                <constraint firstAttribute="trailingMargin" secondItem="RsI-nq-0gr" secondAttribute="trailing" id="O7s-dl-EzQ"/>
+                <constraint firstItem="RsI-nq-0gr" firstAttribute="top" secondItem="GMh-P4-Ao9" secondAttribute="bottom" constant="18" id="Ogd-dH-NGl"/>
+                <constraint firstItem="Cea-1A-PB9" firstAttribute="centerX" secondItem="GMh-P4-Ao9" secondAttribute="centerX" id="dGa-qi-jEB"/>
+                <constraint firstItem="RsI-nq-0gr" firstAttribute="leading" secondItem="TV4-Lh-8Yt" secondAttribute="leadingMargin" id="iw5-ce-Spa"/>
+                <constraint firstItem="yME-U9-GfQ" firstAttribute="trailing" secondItem="TV4-Lh-8Yt" secondAttribute="trailingMargin" id="jPd-1h-XEc"/>
+            </constraints>
+            <connections>
+                <outlet property="activityIndicator" destination="Cea-1A-PB9" id="JFV-df-OpP"/>
+                <outlet property="tempLabel" destination="RsI-nq-0gr" id="asP-wv-BZE"/>
+                <outlet property="timeLocationLabel" destination="yME-U9-GfQ" id="NSL-k6-2gC"/>
+                <outlet property="weatherImageView" destination="GMh-P4-Ao9" id="Odw-xW-aVQ"/>
+            </connections>
+            <point key="canvasLocation" x="135" y="731"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="RsI-nq-0gr">
+            <size key="intrinsicContentSize" width="126.5" height="41.5"/>
+        </designable>
+        <designable name="yME-U9-GfQ"/>
+    </designables>
+</document>

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3A0272B025E26EF4000E6BD4 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A0272AE25E26EF4000E6BD4 /* Roboto-Bold.ttf */; };
 		3A0272B125E26EF4000E6BD4 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A0272AF25E26EF4000E6BD4 /* Roboto-Black.ttf */; };
+		3A02D93225EEA0D4008A6F16 /* ReusableWeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A02D93125EEA0D4008A6F16 /* ReusableWeatherView.xib */; };
+		3A02D93525EEA11C008A6F16 /* ReusableWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A02D93425EEA11C008A6F16 /* ReusableWeatherView.swift */; };
 		3A0885DB24E9AFC5006C3DCF /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DA24E9AFC4006C3DCF /* WeatherManager.swift */; };
 		3A0885DD24E9AFDA006C3DCF /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */; };
 		3A0885DF24E9AFE9006C3DCF /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */; };
@@ -45,6 +47,8 @@
 /* Begin PBXFileReference section */
 		3A0272AE25E26EF4000E6BD4 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		3A0272AF25E26EF4000E6BD4 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		3A02D93125EEA0D4008A6F16 /* ReusableWeatherView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReusableWeatherView.xib; sourceTree = "<group>"; };
+		3A02D93425EEA11C008A6F16 /* ReusableWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableWeatherView.swift; sourceTree = "<group>"; };
 		3A0885DA24E9AFC4006C3DCF /* WeatherManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
@@ -126,6 +130,8 @@
 				3ACAA2DC25309CA900377451 /* DetailsTableViewCell.xib */,
 				3ACAA2DB25309CA900377451 /* DetailsTableViewCell.swift */,
 				3AF6CEF8251E21B2005D39CA /* MenuTableViewCell.xib */,
+				3A02D93125EEA0D4008A6F16 /* ReusableWeatherView.xib */,
+				3A02D93425EEA11C008A6F16 /* ReusableWeatherView.swift */,
 				3AF6CEF7251E21B2005D39CA /* MenuTableViewCell.swift */,
 				3A3724C8251F4C1900CB6FE6 /* MenuButtonStyle.swift */,
 				3ACE4FF325DFD7FD007AC078 /* ButtonStyle.swift */,
@@ -298,6 +304,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A02D93225EEA0D4008A6F16 /* ReusableWeatherView.xib in Resources */,
 				3A0272B025E26EF4000E6BD4 /* Roboto-Bold.ttf in Resources */,
 				3AAD20BC2514DA7E002AF7BA /* SnowParticle.sks in Resources */,
 				3AF6CEFA251E21B2005D39CA /* MenuTableViewCell.xib in Resources */,
@@ -393,6 +400,7 @@
 				3A2A1539252F53AC004A8672 /* WeatherViewController.swift in Sources */,
 				3A99845225DA9B16000ED153 /* SettingsViewController.swift in Sources */,
 				3A0885DD24E9AFDA006C3DCF /* WeatherModel.swift in Sources */,
+				3A02D93525EEA11C008A6F16 /* ReusableWeatherView.swift in Sources */,
 				3AB1956B25E29448008BD8E2 /* DataManager.swift in Sources */,
 				3ACAA2DD25309CA900377451 /* DetailsTableViewCell.swift in Sources */,
 				3ACE4FF425DFD7FD007AC078 /* ButtonStyle.swift in Sources */,

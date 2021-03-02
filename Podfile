@@ -9,4 +9,6 @@ target 'WeatherBoard' do
   pod 'RealmSwift'
   pod 'LTMorphingLabel'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'ZSegmentedControl'
+  pod 'fluid-slider'
 end

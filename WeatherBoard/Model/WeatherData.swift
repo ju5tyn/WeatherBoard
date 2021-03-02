@@ -31,8 +31,8 @@ struct Hourly: Decodable {
 
 struct Rain: Decodable{
     
-    let one: Double
-    private enum CodingKeys: String, CodingKey { case one = "1h"} //since owa object name contains int, add here
+    let value: Double
+    private enum CodingKeys: String, CodingKey { case value = "1h"} //since owa object name contains int, add here
     
 }
 

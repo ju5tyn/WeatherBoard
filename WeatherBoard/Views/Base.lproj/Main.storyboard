@@ -140,29 +140,19 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <slider hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="67B-Uh-VL8">
-                                        <rect key="frame" x="28" y="666.33333333333337" width="334" height="31"/>
-                                        <color key="minimumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="maximumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <color key="thumbTintColor" white="1" alpha="0.29938431291390727" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="IYJ-Ui-El7" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" id="0MX-Oa-hV9"/>
-                                    <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="67B-Uh-VL8" secondAttribute="bottom" constant="20" id="4hC-ie-Git"/>
                                     <constraint firstItem="q9T-eh-vLh" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" id="6z1-Jw-oc5"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="KYU-or-FRp" secondAttribute="bottomMargin" multiplier="2:5" constant="30" id="77r-2H-QEb"/>
                                     <constraint firstAttribute="trailing" secondItem="q9T-eh-vLh" secondAttribute="trailing" id="90N-bT-hIp"/>
                                     <constraint firstItem="xJs-cJ-fXL" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" constant="70" id="9TO-a7-3dX"/>
                                     <constraint firstItem="q9T-eh-vLh" firstAttribute="centerY" secondItem="gQ8-HG-zRf" secondAttribute="centerY" id="Ft8-eb-e9G"/>
                                     <constraint firstItem="xJs-cJ-fXL" firstAttribute="top" secondItem="gQ8-HG-zRf" secondAttribute="top" constant="34" id="IuQ-00-XSO"/>
-                                    <constraint firstAttribute="trailing" secondItem="67B-Uh-VL8" secondAttribute="trailing" constant="30" id="LSr-DE-wEa"/>
                                     <constraint firstItem="IYJ-Ui-El7" firstAttribute="centerY" secondItem="gQ8-HG-zRf" secondAttribute="centerY" id="M02-WW-pFU"/>
                                     <constraint firstItem="6X1-WS-ejl" firstAttribute="top" secondItem="gQ8-HG-zRf" secondAttribute="top" constant="35" id="Ufw-Tk-ZPK"/>
-                                    <constraint firstItem="67B-Uh-VL8" firstAttribute="centerX" secondItem="gQ8-HG-zRf" secondAttribute="centerX" id="b6E-Ie-Sh9"/>
                                     <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="IYJ-Ui-El7" secondAttribute="bottom" constant="10" id="iFY-Qm-hRh"/>
-                                    <constraint firstItem="67B-Uh-VL8" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" constant="30" id="nPe-ME-HMI"/>
                                     <constraint firstItem="6X1-WS-ejl" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" constant="30" id="oWN-hX-6zP"/>
                                     <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="q9T-eh-vLh" secondAttribute="bottom" constant="10" id="pHd-dQ-6RH"/>
                                     <constraint firstItem="IYJ-Ui-El7" firstAttribute="top" secondItem="6X1-WS-ejl" secondAttribute="bottom" constant="10" id="rNR-Ip-e3q"/>

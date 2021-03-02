@@ -170,7 +170,7 @@ struct WeatherManager {
                                    sunrise: decodedData.current.sunrise,
                                    sunset: decodedData.current.sunset,
                                    temp: hourData.temp,
-                                   rain: hourData.rain?.one,
+                                   rain: hourData.rain?.value,
                                    clouds: hourData.clouds
         )
         

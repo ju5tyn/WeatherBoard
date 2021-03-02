@@ -1,4 +1,6 @@
 PODS:
+  - fluid-slider (1.1.0):
+    - pop
   - Google-Mobile-Ads-SDK (8.0.0):
     - GoogleAppMeasurement (~> 7.0)
     - GoogleUserMessagingPlatform (~> 1.1)
@@ -32,41 +34,51 @@ PODS:
     - nanopb/encode (= 2.30907.0)
   - nanopb/decode (2.30907.0)
   - nanopb/encode (2.30907.0)
+  - pop (1.0.12)
   - PromisesObjC (1.2.12)
   - Realm (5.4.3):
     - Realm/Headers (= 5.4.3)
   - Realm/Headers (5.4.3)
   - RealmSwift (5.4.3):
     - Realm (= 5.4.3)
+  - ZSegmentedControl (0.0.3)
 
 DEPENDENCIES:
+  - fluid-slider
   - Google-Mobile-Ads-SDK
   - LTMorphingLabel
   - RealmSwift
+  - ZSegmentedControl
 
 SPEC REPOS:
   trunk:
+    - fluid-slider
     - Google-Mobile-Ads-SDK
     - GoogleAppMeasurement
     - GoogleUserMessagingPlatform
     - GoogleUtilities
     - LTMorphingLabel
     - nanopb
+    - pop
     - PromisesObjC
     - Realm
     - RealmSwift
+    - ZSegmentedControl
 
 SPEC CHECKSUMS:
+  fluid-slider: 68037ac7247f16a89f3e24ff5d0167c8eea6f50b
   Google-Mobile-Ads-SDK: 9509c62617e8d77e2524833eed0b73dd028f0bc6
   GoogleAppMeasurement: c542a2feaac9ab98fd074e8f1a02c3585bbfbd47
   GoogleUserMessagingPlatform: b168e8c46cd8f92aa3e34b584c4ca78a411ce367
   GoogleUtilities: 31c5b01f978a70c6cff2afc6272b3f1921614b43
   LTMorphingLabel: cdd338db82477d9ee80893b813cbbd7989f97b06
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   Realm: e3d5fcc50fd79ddf87a2d86301f6edbf57531f84
   RealmSwift: db608068eccc54bce47928e8118bde13c120c307
+  ZSegmentedControl: 2eeb2eca88f15ae75589eff9be8db65797df9ccc
 
-PODFILE CHECKSUM: 6b028e867b931d2eaf1c931be8389121a24e4dae
+PODFILE CHECKSUM: e3d30d26b3e6154fb73fadcae4fedb287cfff7bd
 
 COCOAPODS: 1.10.1
