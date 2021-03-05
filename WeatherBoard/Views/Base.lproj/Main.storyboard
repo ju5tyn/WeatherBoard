@@ -42,7 +42,7 @@
                                         <rect key="frame" x="121.66666666666669" y="716.33333333333337" width="147" height="29"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="loQ-k2-Fz5">
-                                                <rect key="frame" x="0.0" y="0.0" width="2" height="29"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,7 +60,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="6Nc-9G-tHD">
-                                                <rect key="frame" x="52" y="0.0" width="0.0" height="29"/>
+                                                <rect key="frame" x="50" y="0.0" width="0.0" height="29"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -78,7 +78,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XED-g8-fVk">
-                                                <rect key="frame" x="101.99999999999999" y="0.0" width="45.000000000000014" height="29"/>
+                                                <rect key="frame" x="99.999999999999986" y="0.0" width="47.000000000000014" height="29"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="MORE">
@@ -116,10 +116,10 @@
                                         </connections>
                                     </containerView>
                                     <view alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="xJs-cJ-fXL">
-                                        <rect key="frame" x="70" y="34" width="70.666666666666686" height="24"/>
+                                        <rect key="frame" x="70" y="34" width="70.333333333333314" height="24"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EP-0N-rK0" customClass="LTMorphingLabel">
-                                                <rect key="frame" x="5.9999999999999964" y="4.6666666666666714" width="58.666666666666657" height="15"/>
+                                                <rect key="frame" x="6.0000000000000036" y="4.6666666666666714" width="58.333333333333343" height="15"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -221,7 +221,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherBoard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHG-eM-E5a">
-                                <rect key="frame" x="118.00000000000001" y="77" width="154.33333333333337" height="28"/>
+                                <rect key="frame" x="118.33333333333333" y="77" width="153.33333333333337" height="28"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -426,7 +426,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GX-x8-2sv">
-                                <rect key="frame" x="149.66666666666666" y="77" width="91" height="28"/>
+                                <rect key="frame" x="151" y="77" width="88.333333333333314" height="28"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -471,7 +471,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXd-yW-Zp9">
-                                <rect key="frame" x="34" y="216" width="133.33333333333334" height="21"/>
+                                <rect key="frame" x="34" y="216" width="132" height="21"/>
                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -495,7 +495,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Ads" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOi-nx-nGt">
-                                <rect key="frame" x="33.000000000000007" y="287" width="101.66666666666669" height="21"/>
+                                <rect key="frame" x="33" y="287" width="103" height="21"/>
                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -674,6 +674,15 @@
                                 <rect key="frame" x="176.66666666666666" y="135.66666666666666" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hf1-6j-YWt" customClass="ZSegmentedControl" customModule="ZSegmentedControl">
+                                <rect key="frame" x="45" y="596.66666666666663" width="300" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Gti-Ci-xga"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="PLK-6n-Whw"/>
+                                    <constraint firstAttribute="width" constant="300" id="Y6e-kq-SIO"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Q5y-5l-goy"/>
                         <constraints>
@@ -686,11 +695,14 @@
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="f0T-h4-VrU"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="top" secondItem="lJv-IT-U5x" secondAttribute="bottom" constant="18" id="hdm-YN-oOT"/>
                             <constraint firstItem="lJv-IT-U5x" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="oy1-Vq-orw"/>
+                            <constraint firstItem="Q5y-5l-goy" firstAttribute="bottom" secondItem="hf1-6j-YWt" secondAttribute="bottom" id="rol-zb-qVQ"/>
+                            <constraint firstItem="hf1-6j-YWt" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="tGa-bq-2sT"/>
                             <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="lJv-IT-U5x" secondAttribute="centerY" id="wwm-K3-RRz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="yWN-VA-I3S" id="XCn-Ci-VLp"/>
+                        <outlet property="segmentedControl" destination="hf1-6j-YWt" id="qGc-zJ-ZEn"/>
                         <outlet property="tempLabel" destination="a5I-8U-sGI" id="FjJ-nZ-mEL"/>
                         <outlet property="timeLocationLabel" destination="NZ7-Qx-hdu" id="4XX-Td-igL"/>
                         <outlet property="weatherImageView" destination="lJv-IT-U5x" id="s0P-dx-02A"/>
@@ -698,7 +710,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dBR-qi-Z84" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="769" y="803"/>
+            <point key="canvasLocation" x="764.61538461538464" y="802.96208530805688"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="erl-UF-CSe">
@@ -754,7 +766,7 @@
     </scenes>
     <designables>
         <designable name="8EP-0N-rK0">
-            <size key="intrinsicContentSize" width="58.666666666666664" height="17.666666666666668"/>
+            <size key="intrinsicContentSize" width="58.333333333333336" height="17.666666666666668"/>
         </designable>
         <designable name="NZ7-Qx-hdu"/>
         <designable name="a5I-8U-sGI">

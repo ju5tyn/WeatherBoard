@@ -53,7 +53,7 @@
 		3A0885DC24E9AFDA006C3DCF /* WeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		3A0885DE24E9AFE9006C3DCF /* WeatherData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		3A0E7655253DE48700C3D96D /* StarParticleCloudy.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StarParticleCloudy.sks; sourceTree = "<group>"; };
-		3A2A1538252F53AC004A8672 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		3A2A1538252F53AC004A8672 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3A33323A24CCE3420053C0F7 /* WeatherBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A33323D24CCE3420053C0F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A33323F24CCE3420053C0F7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };

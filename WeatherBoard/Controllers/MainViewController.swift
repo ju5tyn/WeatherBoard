@@ -3,6 +3,7 @@ import CoreLocation
 import SpriteKit
 import RealmSwift
 import LTMorphingLabel
+import ZSegmentedControl
 
 class MainViewController: UIViewController{
     
@@ -62,6 +63,8 @@ class MainViewController: UIViewController{
     //Delegate stuff
     var weatherManager = WeatherManager()
     let locationManager = CLLocationManager()
+    
+    
     
     let defaults = UserDefaults.standard
     
@@ -180,6 +183,7 @@ class MainViewController: UIViewController{
         removeParticles(from: gradientView)
         hideNavButtons(hidden: true)
     }
+    
  
     func changeDetails() {
         if weatherModel?.locationName != nil {
@@ -538,6 +542,7 @@ class MainViewController: UIViewController{
         switch segue.identifier{
             case C.segues.mainToWeather:
                 weatherVC = segue.destination as? WeatherViewController
+
             case C.segues.mainToDetails:
                 detailsVC = segue.destination as? DetailsViewController
             default:
@@ -546,6 +551,15 @@ class MainViewController: UIViewController{
     }
     
     @IBAction func unwind(_ segue: UIStoryboardSegue) {
+        
+        switch segue.identifier{
+            case C.segues.mainToWeather:
+                weatherVC = segue.destination as? WeatherViewController
+            case C.segues.mainToDetails:
+                detailsVC = segue.destination as? DetailsViewController
+            default:
+                break
+        }
 
     }
     
@@ -562,6 +576,7 @@ class MainViewController: UIViewController{
 
 
 //MARK: - EXTENSIONS
+
 
 
 
