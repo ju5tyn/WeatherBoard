@@ -38,11 +38,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gQ8-HG-zRf">
                                 <rect key="frame" x="0.0" y="44" width="390" height="766"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Io4-Jo-IvA">
+                                        <rect key="frame" x="26" y="704.66666666666663" width="338" height="1"/>
+                                        <color key="backgroundColor" white="1" alpha="0.29969474340000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="wNB-Uz-XTK"/>
+                                        </constraints>
+                                    </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="KYU-or-FRp">
-                                        <rect key="frame" x="121.66666666666669" y="716.33333333333337" width="147" height="29"/>
+                                        <rect key="frame" x="121.66666666666669" y="725.66666666666663" width="147" height="31"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="loQ-k2-Fz5">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="29"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,7 +67,7 @@
                                                 </connections>
                                             </button>
                                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="6Nc-9G-tHD">
-                                                <rect key="frame" x="50" y="0.0" width="0.0" height="29"/>
+                                                <rect key="frame" x="50" y="0.0" width="0.0" height="31"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -78,7 +85,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XED-g8-fVk">
-                                                <rect key="frame" x="99.999999999999986" y="0.0" width="47.000000000000014" height="29"/>
+                                                <rect key="frame" x="99.999999999999986" y="0.0" width="47.000000000000014" height="31"/>
                                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="16"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="MORE">
@@ -95,22 +102,31 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="IoW-PA-RSk"/>
+                                        </constraints>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6X1-WS-ejl">
-                                        <rect key="frame" x="30" y="35" width="24" height="14.666666666666664"/>
-                                        <state key="normal" backgroundImage="menu_24pt_white"/>
+                                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6X1-WS-ejl">
+                                        <rect key="frame" x="30" y="35" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="97D-pl-NC1"/>
+                                            <constraint firstAttribute="width" constant="24" id="q8W-fw-7m9"/>
+                                        </constraints>
+                                        <state key="normal" image="menu_24pt_white" backgroundImage="menu_24pt_white">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                                        </state>
                                         <connections>
                                             <action selector="menuButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7RF-xx-Oyl"/>
                                         </connections>
                                     </button>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9T-eh-vLh" userLabel="Weather Container View">
-                                        <rect key="frame" x="0.0" y="59.666666666666686" width="390" height="646.66666666666652"/>
+                                        <rect key="frame" x="0.0" y="69" width="390" height="636.66666666666663"/>
                                         <connections>
                                             <segue destination="Bhn-df-gEc" kind="embed" identifier="toWeather" id="xNx-Lg-mLK"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYJ-Ui-El7">
-                                        <rect key="frame" x="0.0" y="59.666666666666686" width="390" height="646.66666666666652"/>
+                                        <rect key="frame" x="0.0" y="69" width="390" height="636.66666666666663"/>
                                         <connections>
                                             <segue destination="Lth-WC-o03" kind="embed" identifier="toDetails" id="YSA-aV-YE0"/>
                                         </connections>
@@ -144,17 +160,20 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="IYJ-Ui-El7" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" id="0MX-Oa-hV9"/>
+                                    <constraint firstAttribute="trailing" secondItem="Io4-Jo-IvA" secondAttribute="trailing" constant="26" id="6pJ-JV-xWF"/>
                                     <constraint firstItem="q9T-eh-vLh" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" id="6z1-Jw-oc5"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="KYU-or-FRp" secondAttribute="bottomMargin" multiplier="2:5" constant="30" id="77r-2H-QEb"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="KYU-or-FRp" secondAttribute="bottomMargin" multiplier="2:5" constant="20" id="77r-2H-QEb"/>
                                     <constraint firstAttribute="trailing" secondItem="q9T-eh-vLh" secondAttribute="trailing" id="90N-bT-hIp"/>
                                     <constraint firstItem="xJs-cJ-fXL" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" constant="70" id="9TO-a7-3dX"/>
                                     <constraint firstItem="q9T-eh-vLh" firstAttribute="centerY" secondItem="gQ8-HG-zRf" secondAttribute="centerY" id="Ft8-eb-e9G"/>
                                     <constraint firstItem="xJs-cJ-fXL" firstAttribute="top" secondItem="gQ8-HG-zRf" secondAttribute="top" constant="34" id="IuQ-00-XSO"/>
+                                    <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="Io4-Jo-IvA" secondAttribute="bottom" constant="20" id="IzS-Yc-MI0"/>
                                     <constraint firstItem="IYJ-Ui-El7" firstAttribute="centerY" secondItem="gQ8-HG-zRf" secondAttribute="centerY" id="M02-WW-pFU"/>
                                     <constraint firstItem="6X1-WS-ejl" firstAttribute="top" secondItem="gQ8-HG-zRf" secondAttribute="top" constant="35" id="Ufw-Tk-ZPK"/>
-                                    <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="IYJ-Ui-El7" secondAttribute="bottom" constant="10" id="iFY-Qm-hRh"/>
+                                    <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="IYJ-Ui-El7" secondAttribute="bottom" constant="20" id="iFY-Qm-hRh"/>
+                                    <constraint firstItem="Io4-Jo-IvA" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" constant="26" id="jgq-Kv-gCl"/>
                                     <constraint firstItem="6X1-WS-ejl" firstAttribute="leading" secondItem="gQ8-HG-zRf" secondAttribute="leading" constant="30" id="oWN-hX-6zP"/>
-                                    <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="q9T-eh-vLh" secondAttribute="bottom" constant="10" id="pHd-dQ-6RH"/>
+                                    <constraint firstItem="KYU-or-FRp" firstAttribute="top" secondItem="q9T-eh-vLh" secondAttribute="bottom" constant="20" id="pHd-dQ-6RH"/>
                                     <constraint firstItem="IYJ-Ui-El7" firstAttribute="top" secondItem="6X1-WS-ejl" secondAttribute="bottom" constant="10" id="rNR-Ip-e3q"/>
                                     <constraint firstItem="q9T-eh-vLh" firstAttribute="top" secondItem="6X1-WS-ejl" secondAttribute="bottom" constant="10" id="s7i-vA-jV5"/>
                                     <constraint firstItem="KYU-or-FRp" firstAttribute="centerX" secondItem="gQ8-HG-zRf" secondAttribute="centerX" id="t8M-Kx-PYL"/>
@@ -566,7 +585,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherBoard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGO-VO-Oac">
-                                <rect key="frame" x="98.666666666666686" y="267" width="193" height="35"/>
+                                <rect key="frame" x="99.333333333333329" y="267" width="191.66666666666669" height="35"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -623,7 +642,7 @@
             <objects>
                 <viewController title="Weather View Controller" id="Bhn-df-gEc" customClass="WeatherViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1IU-mS-zSX">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="646.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="636.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ7-Qx-hdu" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
@@ -675,7 +694,7 @@
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hf1-6j-YWt" customClass="ZSegmentedControl" customModule="ZSegmentedControl">
-                                <rect key="frame" x="45" y="596.66666666666663" width="300" height="50"/>
+                                <rect key="frame" x="45" y="581.66666666666663" width="300" height="50"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Gti-Ci-xga"/>
@@ -695,7 +714,7 @@
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="f0T-h4-VrU"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="top" secondItem="lJv-IT-U5x" secondAttribute="bottom" constant="18" id="hdm-YN-oOT"/>
                             <constraint firstItem="lJv-IT-U5x" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="oy1-Vq-orw"/>
-                            <constraint firstItem="Q5y-5l-goy" firstAttribute="bottom" secondItem="hf1-6j-YWt" secondAttribute="bottom" id="rol-zb-qVQ"/>
+                            <constraint firstItem="Q5y-5l-goy" firstAttribute="bottom" secondItem="hf1-6j-YWt" secondAttribute="bottom" constant="5" id="rol-zb-qVQ"/>
                             <constraint firstItem="hf1-6j-YWt" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="tGa-bq-2sT"/>
                             <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="lJv-IT-U5x" secondAttribute="centerY" id="wwm-K3-RRz"/>
                         </constraints>
@@ -717,11 +736,11 @@
             <objects>
                 <viewController title="Details View Controller" id="Lth-WC-o03" customClass="DetailsViewController" customModule="WeatherBoard" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IvF-hv-MxF">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="646.66666666666663"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="636.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" delaysContentTouches="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="109" estimatedRowHeight="70" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="OmM-FJ-Lfr">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="646.66666666666663"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="636.66666666666663"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="separatorColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

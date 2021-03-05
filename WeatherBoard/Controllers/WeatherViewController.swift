@@ -26,7 +26,7 @@ class WeatherViewController: UIViewController{
         timeLocationLabel.textDropShadow()
         
         //segmentedControl.delegate = self
-        segmentedControl.setTitles([""], style: .adaptiveSpace(15))
+        segmentedControl.clearsContextBeforeDrawing = true
         setupSegmentedControl()
 
 
