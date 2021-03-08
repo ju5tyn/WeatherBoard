@@ -15,8 +15,21 @@
                     <view key="view" contentMode="scaleToFill" id="vA5-W0-wxV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherBoard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bto-9a-RQg">
+                                <rect key="frame" x="28" y="324" width="358" height="42"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="GF8-fY-CrG"/>
                         <color key="backgroundColor" name="hill_menu_bottom"/>
+                        <constraints>
+                            <constraint firstItem="Bto-9a-RQg" firstAttribute="top" secondItem="GF8-fY-CrG" secondAttribute="top" constant="280" id="Xhc-1l-ARl"/>
+                            <constraint firstItem="GF8-fY-CrG" firstAttribute="trailing" secondItem="Bto-9a-RQg" secondAttribute="trailing" constant="28" id="cTV-lA-o9w"/>
+                            <constraint firstItem="Bto-9a-RQg" firstAttribute="leading" secondItem="GF8-fY-CrG" secondAttribute="leading" constant="28" id="qZK-aB-W0d"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

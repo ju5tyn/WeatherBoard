@@ -66,7 +66,7 @@ class WeatherViewController: UIViewController{
         
         weatherImageView.image = nil
         tempLabel.text = "Loading"
-        timeLocationLabel.text = ""
+        timeLocationLabel.text = " "
         activityIndicator.startAnimating()
         
     }
@@ -74,19 +74,13 @@ class WeatherViewController: UIViewController{
     //version OG
     func setWeatherDetails(using weatherModel: WeatherModel, day daySelected: Int){
         
-        
-        
         //sets tempLabel label to temperature followed by condition
         if daySelected == 0 {
 
-
-
-        
-        
-            tempLabel.text = "\(weatherModel.hourly[0].tempString) \(weatherModel.current.fullName!)"
+            tempLabel.text = "\(weatherModel.current.tempString) \(weatherModel.current.fullName!)"
             
             //sets weather image to string based on condition and day/night
-            weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.hourly[0].conditionName)_\(weatherModel.hourly[0].isDayString)"))
+            weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.current.conditionName)_\(weatherModel.current.isDayString)"))
             
         }else if daySelected == 1 {
 

@@ -23,6 +23,10 @@ class SettingsViewController: UIViewController {
 
         setAlpha()
         adsButtonSetup()
+        
+        unitsPicker.selectedSegmentIndex = defaults.integer(forKey: C.defaults.units)
+        defaultLocationPicker.selectedSegmentIndex = defaults.integer(forKey: C.defaults.defaultToGPS)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

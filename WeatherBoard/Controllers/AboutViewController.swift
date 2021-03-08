@@ -5,6 +5,8 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var appLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet weak var textView: UIView!
+    @IBOutlet weak var paperImage: UIImageView!
     
 
     override func viewDidLoad(){
@@ -16,6 +18,10 @@ class AboutViewController: UIViewController {
         let appBuild    = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
         versionLabel.text = "Ver \(appVersion ?? "-") (\(appBuild ?? "-"))"
         
+        textView.addShadow()
+        
+        paperImage.image = UIImage(named: "paper-texture")!.resizableImage(withCapInsets: .zero,
+                                                                           resizingMode: .tile)
     }
     
     
@@ -30,6 +36,7 @@ class AboutViewController: UIViewController {
         iconImage.alpha     = 0
         appLabel.alpha      = 0
         versionLabel.alpha  = 0
+        textView.alpha      = 0
     }
     
     
@@ -55,23 +62,21 @@ class AboutViewController: UIViewController {
             blurEffectView.contentView.addSubview(vibrancyView)
             
             UIView.animate(withDuration: 0.2, delay: 0.05){
-                blurEffectView.effect = blurEffect
-                vibrancyView.effect = vibrancyEffect
-                
+                blurEffectView.effect   = blurEffect
+                vibrancyView.effect     = vibrancyEffect
             }
             UIView.animate(withDuration: 0.2, delay: 0.3){
                 self.titleLabel.alpha = 1
-
             }
             UIView.animate(withDuration: 0.2, delay: 0.5){
-                self.iconImage.alpha = 1
-                self.appLabel.alpha = 1
+                self.iconImage.alpha    = 1
+                self.appLabel.alpha     = 1
                 self.versionLabel.alpha = 1
+                self.textView.alpha     = 1
             }
         } else {
             view.backgroundColor = .clear
         }
-        
     }
     
     @IBAction func backButtonPressed(_ sender: UIButton) {

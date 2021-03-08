@@ -85,6 +85,8 @@ class DetailsViewController: UIViewController {
                         cell.dayLabel.text = day.dayString
                     }
                     
+                    //cell.dayLabel.text = cell.dayLabel.text?.uppercased()
+                    
                     
                     cell.mainTempLabel.text = day.tempString
                     

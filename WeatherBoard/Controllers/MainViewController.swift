@@ -16,6 +16,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var hillView: UIView!
     @IBOutlet weak var weatherContainerView: UIView!
     @IBOutlet weak var detailsContainerView: UIView!
+    @IBOutlet weak var separatorView: UIView!
     
     //buttons
     @IBOutlet weak var menuButton: UIButton!
@@ -85,7 +86,8 @@ class MainViewController: UIViewController{
         weatherManager.delegate     = self
         locationManager.delegate    = self
         
-        detailsContainerView.isHidden = true
+        detailsContainerView.isHidden   = true
+        separatorView.isHidden          = true
         
         addHill()
         addGradient()
