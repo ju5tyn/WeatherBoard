@@ -96,11 +96,58 @@ class MainViewController: UIViewController{
         getLocation()
         clearDetails()
         
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
+        swipeLeft.direction = .left
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
+        swipeRight.direction = .right
+        
+        self.view.addGestureRecognizer(swipeRight)
+        self.view.addGestureRecognizer(swipeLeft)
 
     }
     
+    @objc func swipedLeft(){
+        print("lol")
+        if daySelected<2{
+            daySelected+=1
+            
+            switch daySelected{
+                case 0:
+                    navButtonPressed(todayButton)
+                case 1:
+                    navButtonPressed(tomorrowButton)
+                case 2:
+                    navButtonPressed(dayAfterButton)
+                default:
+                    print("error")
+            }
+        }
+        
+        
+    }
     
-    
+    @objc func swipedRight(){
+        print("lol")
+        if daySelected>0{
+            daySelected-=1
+        
+            
+            switch daySelected{
+                case 0:
+                    navButtonPressed(todayButton)
+                case 1:
+                    navButtonPressed(tomorrowButton)
+                case 2:
+                    navButtonPressed(dayAfterButton)
+                default:
+                    print("error")
+            }
+        }
+        
+        
+    }
     
     
     

@@ -13,8 +13,6 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     
-    
-    
     var selectedCellIndexPath: IndexPath?
     let selectedHeight: CGFloat = 300
     let deselectedHeight: CGFloat = 70
@@ -22,33 +20,29 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UINib(nibName: "DetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableDetailsCell")
+        
+        tableView.dataSource    = self
+        tableView.delegate      = self
+        
+        
+        let nib = UINib(nibName: "DetailsTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "ReusableDetailsCell")
         tableView.beginUpdates()
         tableView.endUpdates()
-        
+
     }
+    
+
     
     func clearWeatherDetails(){
 
-        for cell in tableView.visibleCells {
+        for c in tableView.visibleCells {
             
-            let detailCell = cell as! DetailsTableViewCell
-            
+            let cell = c as! DetailsTableViewCell
             UIView.animate(withDuration: 0.2){
-                detailCell.weatherImageView.isHidden = true
-                detailCell.activityIndicator.startAnimating()
-                detailCell.mainTempLabel.isHidden = true
-                detailCell.highTempLabel.isHidden = true
-                detailCell.lowTempLabel.isHidden = true
-                detailCell.detailStack.isHidden = true
-                detailCell.conditionLabel.isHidden = true
+                cell.setViews(hidden: true)
             }
-            
         }
-        
-        
     }
     
     func setWeatherDetails(using weatherModel: WeatherModel){
@@ -61,21 +55,11 @@ class DetailsViewController: UIViewController {
             
             if let cell = tableView.cellForRow(at: indexPath) as? DetailsTableViewCell {
                 
-                
-                cell.weatherImageView.isHidden = false
-                cell.activityIndicator.stopAnimating()
-                cell.mainTempLabel.isHidden = false
-                cell.highTempLabel.isHidden = false
-                cell.lowTempLabel.isHidden = false
-                cell.detailStack.isHidden = false
-                cell.conditionLabel.isHidden = false
-                
-                
-                
-                cell.weatherImageView.setImage(UIImage(named: "icon_\(day.conditionName)_\(weatherModel.current.isDayString)"), animated: true)
-                
+                cell.setViews(hidden: false)
                 
                 UIView.transition(with: cell.contentView, duration: 0.4, options: .transitionCrossDissolve, animations: {
+                    
+                    cell.setData(with: day, isDayString: weatherModel.current.isDayString)
                     
                     if indexPath.row == 0{
                         cell.dayLabel.text = "Today"
@@ -85,40 +69,7 @@ class DetailsViewController: UIViewController {
                         cell.dayLabel.text = day.dayString
                     }
                     
-                    //cell.dayLabel.text = cell.dayLabel.text?.uppercased()
-                    
-                    
-                    cell.mainTempLabel.text = day.tempString
-                    
-                    cell.conditionLabel.text = day.smallName
-                    cell.precipLabel.text = day.precipString
-                    cell.windSpeedLabel.text = day.windSpeedString
-                    cell.windDirectionLabel.text = day.windDirectionString
-                    cell.cloudCoverLabel.text = day.cloudCoverString
-                    //cell.visibilityLabel.text = day.visibilityString
-                    
-                    //print(day.highTemp, day.lowTemp)
-                    
-                    if (day.highTemp != day.lowTemp){
-                        cell.highTempLabel.text = day.highTempString
-                        cell.lowTempLabel.text = day.lowTempString
-                    }else{
-                        
-                        cell.highTempLabel.text = ""
-                        cell.lowTempLabel.text = ""
-                    }
-                    
-                    
-                    
-                    
-                    
                 }, completion: nil)
-                
-                
-                if day.highTemp == day.lowTemp{
-                    cell.highTempLabel.isHidden = false
-                    cell.lowTempLabel.isHidden = false
-                }
             }
             count+=1
         }

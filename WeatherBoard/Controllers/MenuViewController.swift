@@ -31,6 +31,8 @@ class MenuViewController: UIViewController {
     var menuItemPressedCityName: String?
 
     let realm = try! Realm()
+    
+    var shouldReload = false
  
     //MARK: - AppDelegate functions
     
@@ -136,6 +138,11 @@ class MenuViewController: UIViewController {
                 mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
                 mainVC.clearDetails()
                 
+            }else if shouldReload{
+                
+                mainVC.weatherManager.fetchWeather(cityName: (mainVC.weatherModel?.locationName)!, doNotSave: true)
+                mainVC.clearDetails()
+                
             }else{
                 mainVC.setDetails()
             }
@@ -178,6 +185,7 @@ class MenuViewController: UIViewController {
     
     @IBAction func settingsButtonPressed(_ sender: UIButton) {
         performSegue(withIdentifier: C.segues.menuToSettings, sender: self)
+        shouldReload = true
     }
     
     

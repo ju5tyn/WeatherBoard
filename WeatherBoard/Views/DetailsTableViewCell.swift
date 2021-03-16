@@ -46,21 +46,7 @@ class DetailsTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        conditionLabel.textDropShadow()
-        dayLabel.textDropShadow()
-        mainTempLabel.textDropShadow()
-        
-        
-        for box in boxViews{
-            box.layer.cornerRadius = 10
-            //box.layer.shadowColor = UIColor.black.cgColor
-            box.layer.shadowOpacity = 0.3
-            box.layer.shadowOffset = .init(width: 0, height: 1)
-            box.layer.shadowRadius = 5
-            box.layer.masksToBounds = false
-        }
-        
-        
+        setupDisplay()
         isSelected ? setBig() : setSmall()
         
     }
@@ -69,34 +55,99 @@ class DetailsTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        
         selected ? setBig() : setSmall()
+        
+    }
+    
+    func setupDisplay(){
+        
+        conditionLabel.textDropShadow()
+        dayLabel.textDropShadow()
+        mainTempLabel.textDropShadow()
+        
+        for box in boxViews{
+            box.layer.cornerRadius  = 10
+            box.layer.shadowOpacity = 0.3
+            box.layer.shadowOffset  = .init(width: 0, height: 1)
+            box.layer.shadowRadius  = 5
+            box.layer.masksToBounds = false
+        }
+        
     }
     
     
+    
+    
+    
+    func setViews(hidden: Bool){
+        
+        hidden ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+
+        weatherImageView.isHidden  = hidden
+        mainTempLabel.isHidden     = hidden
+        highTempLabel.isHidden     = hidden
+        lowTempLabel.isHidden      = hidden
+        detailStack.isHidden       = hidden
+        conditionLabel.isHidden    = hidden
+
+    }
+    
+    
+    func setData(with day: WeatherModel.Daily, isDayString: String){
+        
+        weatherImageView.setImage(UIImage(named: "icon_\(day.conditionName)_\(isDayString)"), animated: true)
+
+        mainTempLabel.text      = day.tempString
+        conditionLabel.text     = day.smallName
+        precipLabel.text        = day.precipString
+        windSpeedLabel.text     = day.windSpeedString
+        windDirectionLabel.text = day.windDirectionString
+        cloudCoverLabel.text    = day.cloudCoverString
+        //cell.visibilityLabel.text = day.visibilityString
+
+        if (day.highTemp != day.lowTemp){
+            highTempLabel.text = day.highTempString
+            lowTempLabel.text = day.lowTempString
+        }else{
+            highTempLabel.text = ""
+            lowTempLabel.text = ""
+            highTempLabel.isHidden = true
+            lowTempLabel.isHidden  = true
+        }
+        
+    }
 
     
     //MARK: - Set Big
     
     func setBig(){
+        
         activityIndicator.style = .large
         conditionLabel.layer.masksToBounds = false
         
         UIView.animate(withDuration: 0.2){ [self] in
-            self.imageWidthConstraint.constant = 100
+            
+            self.imageWidthConstraint.constant  = 100
             self.imageHeightConstraint.constant = 100
+            
             self.setNeedsLayout()
+            
             mainTempLabel.font = mainTempLabel.font.withSize(50)
-            mainTempLabelTopConstraint.constant = 100
-            mainTempLabelTrailingConstraint.constant = 60
-            dayLabelTopConstraint.constant = 100
-            dayLabel.alpha = 0.6
-            highTempLabel.alpha = 0.6
-            lowTempLabel.alpha = 0.6
-            conditionLabel.alpha = 1
+            
+            mainTempLabelTopConstraint.constant         = 100
+            mainTempLabelTrailingConstraint.constant    = 60
+            dayLabelTopConstraint.constant              = 100
+            
+            dayLabel.alpha          = 0.6
+            highTempLabel.alpha     = 0.6
+            lowTempLabel.alpha      = 0.6
+            conditionLabel.alpha    = 1
+            
             layoutIfNeeded()
         }
         var count: Double = 0.2
+        
+        //Animation for boxViews
         for view in boxViews{
             UIView.animate(withDuration: 0.2, delay: count){
                 view.alpha = 1
@@ -106,27 +157,36 @@ class DetailsTableViewCell: UITableViewCell {
         layoutIfNeeded()
     }
     
+    
+    
+    
     //MARK: - Set Small
     func setSmall(){
         
+        activityIndicator.style = .medium
         conditionLabel.layer.masksToBounds = false
         
-        activityIndicator.style = .medium
         UIView.animate(withDuration: 0.2){ [self] in
-            self.imageWidthConstraint.constant = 50
+            self.imageWidthConstraint.constant  = 50
             self.imageHeightConstraint.constant = 50
+            
             self.setNeedsLayout()
+            
             mainTempLabel.font = mainTempLabel.font.withSize(25)
+            
             mainTempLabelTopConstraint.constant = 10
             mainTempLabelTrailingConstraint.constant = 96
             dayLabelTopConstraint.constant = 15
-            dayLabel.alpha = 1
+            
+            dayLabel.alpha          = 1
+            highTempLabel.alpha     = 0
+            lowTempLabel.alpha      = 0
+            conditionLabel.alpha    = 0
+            
             for view in boxViews{
                 view.alpha = 0
             }
-            highTempLabel.alpha = 0
-            lowTempLabel.alpha = 0
-            conditionLabel.alpha = 0
+
             layoutIfNeeded()
         }
     }
