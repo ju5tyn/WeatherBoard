@@ -6,7 +6,24 @@
 //  Copyright © 2020 Justyn Henman. All rights reserved.
 //
 
+//Enum for pages, easier to read than previous int system used
+enum Pages: CaseIterable {
+    case today, tomorrow, more
+    
+    mutating func next() {
+        let allCases = type(of: self).allCases
+        self = allCases[(allCases.firstIndex(of: self)! + 1) % allCases.count]
+    }
+    
+    mutating func prev() {
+        let allCases = type(of: self).allCases
+        self = allCases[(allCases.firstIndex(of: self)! - 1) % allCases.count]
+    }
+}
+
 struct C {
+    
+    
     
     static let cellIdentifier = "MenuCell"
      

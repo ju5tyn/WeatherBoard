@@ -413,6 +413,7 @@
                         <outlet property="adBackground" destination="x4a-YY-waH" id="Ae3-ee-7Q4"/>
                         <outlet property="adLabel" destination="Yk5-gw-Wa3" id="MDq-jw-INK"/>
                         <outlet property="adSpinner" destination="ngW-ez-a4V" id="K4b-NR-txH"/>
+                        <outlet property="backButton" destination="tDP-OQ-yOe" id="k8n-h2-OX3"/>
                         <outlet property="bannerView" destination="R9g-jp-U1I" id="zaP-H7-rPr"/>
                         <outlet property="recentsLabel" destination="hZm-fn-fpI" id="4Ou-bK-d3c"/>
                         <outlet property="searchBar" destination="1TO-c0-fHM" id="e2m-yP-sOv"/>

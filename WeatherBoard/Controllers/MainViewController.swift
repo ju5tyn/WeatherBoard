@@ -5,6 +5,9 @@ import RealmSwift
 import LTMorphingLabel
 import ZSegmentedControl
 
+
+
+
 class MainViewController: UIViewController{
     
     
@@ -44,8 +47,9 @@ class MainViewController: UIViewController{
     
     //MARK: - VARIABLES
     
+    
 
-    var daySelected: Int = 0 {
+    var pageSelected: Pages = .today {
         didSet{
             switchPage()
         }
@@ -81,11 +85,8 @@ class MainViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.view.superview?.autoresizesSubviews = true
-        
         hillViewHeightConstraint.constant = ((self.view.bounds.height))*0.4
-        //hillViewWidthConstraint.constant = (UIScreen.screens[0].bounds.width)
-        
+ 
         overrideUserInterfaceStyle = .dark
         
         weatherManager.delegate     = self
@@ -101,7 +102,7 @@ class MainViewController: UIViewController{
         getLocation()
         clearDetails()
         addGestures()
-        
+
         
 
     }
@@ -120,37 +121,34 @@ class MainViewController: UIViewController{
     }
 
     @objc func swipedLeft(){
-        if daySelected<2{
-            daySelected+=1
+        if pageSelected != .more{
+            pageSelected.next()
         }
     }
     
     @objc func swipedRight(){
-        if daySelected>0{
-            daySelected-=1
+        if pageSelected != .today{
+            pageSelected.prev()
         }
     }
     
     func switchPage(){
         
-        switch daySelected{
-            case 0:
+        switch pageSelected{
+            case .today:
                 removeBlur()
-                animateLocationLabelOut()
                 highlightNavButton(.today)
-            case 1:
+            case .tomorrow:
                 removeBlur()
-                animateLocationLabelOut()
                 highlightNavButton(.tomorrow)
-            case 2:
+            case .more:
                 updateBlur()
-                animateLocationLabelIn()
                 highlightNavButton(.more)
-            default:
-                print("error")
         }
         
-        daySelected == 2 ?
+        setLocationLabel(hidden: pageSelected != .more) //hides location label if not on MORE page
+        
+        pageSelected == .more ?
             viewChange(hide: weatherContainerView, show: detailsContainerView, refresh: false)
             :
             viewChange(hide: detailsContainerView, show: weatherContainerView, refresh: true)
@@ -168,10 +166,17 @@ class MainViewController: UIViewController{
 
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
+        openMenu()
+        
+    }
+    
+    func openMenu(){
+        
+
         self.performSegue(withIdentifier: C.segues.mainToMenu, sender: self)
         removeBlur()
         setGradientColor(color: "menu")
-        hideParticles(view: view)
+        setParticles(view: view, hidden: true)
         
         UIView.animate(withDuration: 0.2) {
             self.mainView.alpha = 0.0
@@ -184,16 +189,15 @@ class MainViewController: UIViewController{
     
     @IBAction func navButtonPressed(_ sender: UIButton) {
         
-        //Highlights button that was pressed
-        
-        //Clears details, changes day selection, then sets details
         switch sender.titleLabel!.text{
             case "TODAY":
-                daySelected = 0
+                pageSelected = .today
             case "TOMORROW":
-                daySelected = 1
+                pageSelected = .tomorrow
+            case "MORE":
+                pageSelected = .more
             default:
-                daySelected = 2
+                print("error in nav buttons")
         }
         
         
@@ -225,7 +229,7 @@ class MainViewController: UIViewController{
 
     //resets weather details to empty
     func clearDetails(){
-        animateLocationLabelOut()
+        setLocationLabel(hidden: true)
         weatherVC?.clearWeatherDetails()
         detailsVC?.clearWeatherDetails()
         setGradientColor(color: "menu")
@@ -237,22 +241,20 @@ class MainViewController: UIViewController{
     func changeDetails() {
         if weatherModel?.locationName != nil {
             
-            weatherVC?.setWeatherDetails(using: weatherModel!, day: daySelected)
+            weatherVC?.setWeatherDetails(using: weatherModel!, page: pageSelected)
             detailsVC?.setWeatherDetails(using: weatherModel!)
             
             locationLabel.text = weatherModel?.locationName?.uppercased()
 
             //sets gradient color with string based on condition and day/night
-            if daySelected == 2{
-                if menuOpen == false {
+            if !menuOpen{
+                if pageSelected == .more{
 
                     self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
-                    animateLocationLabelIn()
-                }
-            }else{
-                if menuOpen == false {
-                    
-                    if self.daySelected == 0 {
+                    setLocationLabel(hidden: false)
+                
+                }else{
+                    if self.pageSelected == .today {
                         
                         if weatherModel!.current.isSunset{
                             self.setGradientColor(color: "sunset")
@@ -262,19 +264,17 @@ class MainViewController: UIViewController{
                             self.setGradientColor(color: "\(weatherModel!.current.conditionName)_\(weatherModel!.current.isDayString)")
                         }
                     }else{
-
                         self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
                     }
                 }
             }
-
             
-            if self.daySelected == 0{
+            if self.pageSelected == .today{
                 if let particleToDisplay = weatherModel?.current.particle{
                     
                     emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
                     removeParticles(from: gradientView)
-                    setParticles(baseView: gradientView, emitterNode: emitterNode)
+                    addParticles(baseView: gradientView, emitterNode: emitterNode)
                     
                 }else {
                     removeParticles(from: gradientView)
@@ -287,7 +287,7 @@ class MainViewController: UIViewController{
                     //emitterNode = newNode
                     emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
                     removeParticles(from: gradientView)
-                    setParticles(baseView: gradientView, emitterNode: emitterNode)
+                    addParticles(baseView: gradientView, emitterNode: emitterNode)
                     
  
                 }else {
@@ -297,8 +297,7 @@ class MainViewController: UIViewController{
             }
             
         } else {
-            //catches error from spamming buttons
-            print("error")
+            print("error1!! WIDFIFIAUIU")
         }
     }
     
@@ -334,33 +333,19 @@ class MainViewController: UIViewController{
     
     //MARK:  UI FUNCTIONS
     
-    func animateLocationLabelIn(){
+    func setLocationLabel(hidden: Bool){
         
         UIView.animate(withDuration: 0.2){
-            self.locationLabelView.alpha = 1
-            self.locationLabelView.setNeedsLayout()
-            self.locationLabelLeadingConstraint.constant = 70
-            self.locationLabelView.superview?.layoutIfNeeded()
-        }
-
-    }
-    
-    func animateLocationLabelOut(){
-
-        UIView.animate(withDuration: 0.2){
-            self.locationLabelView.alpha = 0
-            self.locationLabelLeadingConstraint.constant = 50
+            self.locationLabelView.alpha = hidden ? 0 : 1
+            self.locationLabelLeadingConstraint.constant = hidden ? 50 : 70
             self.locationLabelView.setNeedsLayout()
             self.locationLabelView.superview?.layoutIfNeeded()
-            
         }
-
+        
+        
     }
     
 
-    
-    
-    
     
     func viewChange(hide viewToHide: UIView, show viewToShow: UIView, refresh: Bool){
         
@@ -372,6 +357,8 @@ class MainViewController: UIViewController{
         viewToShow.isHidden = false
         viewToHide.isHidden = true
         refresh ? changeDetails() : nil
+        
+        
     }
     
     
@@ -465,7 +452,7 @@ class MainViewController: UIViewController{
     
     
     //MARK: Particles
-    func setParticles(baseView: UIView, emitterNode: SKEmitterNode) {
+    func addParticles(baseView: UIView, emitterNode: SKEmitterNode) {
         
         let skView = SKView(frame: CGRect(x:0, y:-200, width: baseView.frame.width, height: baseView.frame.height+200))
         let skScene = SKScene(size: baseView.frame.size)
@@ -487,26 +474,20 @@ class MainViewController: UIViewController{
             viewWithTag.removeFromSuperview()
             print("Particles Removed")
         }else{
-            print("❌ Error Removing Particles")
+            print("⚠️ Error Removing Particles")
         }
         
     }
     
-    func hideParticles(view: UIView) {
+    func setParticles(view: UIView, hidden: Bool){
         if let viewWithTag = view.viewWithTag(1){
-            viewWithTag.isHidden = true
+            viewWithTag.isHidden = hidden
         }else{
-            print("❌ Error Hiding particles")
-        }
-        
-    }
-    func showParticles(view: UIView) {
-        if let viewWithTag = view.viewWithTag(1){
-            viewWithTag.isHidden = false
-        }else{
-            print("❌ Error Showing particles")
+            print("⚠️ Error Hiding particles")
         }
     }
+    
+    
     
     enum Buttons {
         case today
@@ -528,9 +509,6 @@ class MainViewController: UIViewController{
             case .more:
                 dayAfterButton.alpha = 1
         }
-        
-        
-        
     }
     
     func hideNavButtons(hidden: Bool){
@@ -571,7 +549,7 @@ class MainViewController: UIViewController{
     }
     
     func updateBlur(){
-        if daySelected == 2{
+        if pageSelected == .more{
             if let blurView = view.viewWithTag(2) as? UIVisualEffectView{
                 UIView.animate(withDuration: 0.3){
                     blurView.effect = UIBlurEffect(style: .systemUltraThinMaterialDark)
@@ -651,7 +629,6 @@ extension MainViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]){
         
         if let location = locations.last{
-            
             do{
                 try self.realm.write{
                     let oldLocations = self.realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
@@ -671,7 +648,23 @@ extension MainViewController: CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error:Error){
-        print(error)
+        print(error.localizedDescription)
+        print("MIKE PENIS NOT HAPPY")
+        
+        DispatchQueue.main.async {
+            let failedAlert = UIAlertController(title: "Error loading Weather", message: error.localizedDescription, preferredStyle: .actionSheet)
+            
+            failedAlert.addAction(UIAlertAction(title: "Go to Menu", style: .default, handler: {_ in
+                self.openMenu()
+            }))
+            
+            self.present(failedAlert, animated: true)
+            
+            self.weatherVC?.tempLabel.text = "Error"
+            self.weatherVC?.activityIndicator.isHidden = true
+            
+        }
+        
     }
     
 }
@@ -706,12 +699,26 @@ extension MainViewController: WeatherManagerDelegate{
     }
     
     func didFailWithError(error: Error){
-        print(error)
+        print(error.localizedDescription)
         
-        let failedAlert = UIAlertController(title: "Invalid Weather Location", message: "Please enter valid location", preferredStyle: .actionSheet)
-        
-        failedAlert.show(self, sender: self)
         print("❌ Error: Invalid Location")
+        
+        DispatchQueue.main.async {
+            let failedAlert = UIAlertController(title: "Error loading Weather", message: error.localizedDescription, preferredStyle: .actionSheet)
+            
+            failedAlert.addAction(UIAlertAction(title: "Go to Menu", style: .default, handler: {_ in
+                self.openMenu()
+            }))
+            
+            self.present(failedAlert, animated: true)
+            
+            self.weatherVC?.tempLabel.text = "Error"
+            self.weatherVC?.activityIndicator.isHidden = true
+
+            
+        }
+        
+        
         
         
     }

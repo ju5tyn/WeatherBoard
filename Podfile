@@ -10,5 +10,4 @@ target 'WeatherBoard' do
   pod 'LTMorphingLabel'
   pod 'Google-Mobile-Ads-SDK'
   pod 'ZSegmentedControl'
-  pod 'fluid-slider'
 end

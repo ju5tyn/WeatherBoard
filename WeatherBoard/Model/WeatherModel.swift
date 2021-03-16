@@ -53,6 +53,7 @@ struct WeatherModel{
         }
         
         
+        
     }
     
     struct Hourly{

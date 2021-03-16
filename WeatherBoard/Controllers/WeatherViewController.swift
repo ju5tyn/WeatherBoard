@@ -72,17 +72,17 @@ class WeatherViewController: UIViewController{
     }
     
     //version OG
-    func setWeatherDetails(using weatherModel: WeatherModel, day daySelected: Int){
+    func setWeatherDetails(using weatherModel: WeatherModel, page pageSelected: Pages){
         
         //sets tempLabel label to temperature followed by condition
-        if daySelected == 0 {
+        if pageSelected == .today {
 
             tempLabel.text = "\(weatherModel.current.tempString) \(weatherModel.current.fullName!)"
             
             //sets weather image to string based on condition and day/night
             weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.current.conditionName)_\(weatherModel.current.isDayString)"))
             
-        }else if daySelected == 1 {
+        }else if pageSelected == .tomorrow {
 
             tempLabel.text = "\(weatherModel.daily[1].tempString) \(weatherModel.daily[1].fullName!)"
 

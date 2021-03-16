@@ -16,28 +16,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherBoard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bto-9a-RQg">
-                                <rect key="frame" x="28" y="324" width="358" height="42"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="9nj-hg-r9a">
+                                <rect key="frame" x="87" y="323" width="240" height="45"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GF8-fY-CrG"/>
                         <color key="backgroundColor" name="hill_menu_bottom"/>
                         <constraints>
-                            <constraint firstItem="Bto-9a-RQg" firstAttribute="top" secondItem="GF8-fY-CrG" secondAttribute="top" constant="280" id="Xhc-1l-ARl"/>
-                            <constraint firstItem="GF8-fY-CrG" firstAttribute="trailing" secondItem="Bto-9a-RQg" secondAttribute="trailing" constant="28" id="cTV-lA-o9w"/>
-                            <constraint firstItem="Bto-9a-RQg" firstAttribute="leading" secondItem="GF8-fY-CrG" secondAttribute="leading" constant="28" id="qZK-aB-W0d"/>
+                            <constraint firstItem="9nj-hg-r9a" firstAttribute="leading" secondItem="GF8-fY-CrG" secondAttribute="leading" constant="87" id="6Eu-5u-wmt"/>
+                            <constraint firstItem="9nj-hg-r9a" firstAttribute="top" secondItem="GF8-fY-CrG" secondAttribute="top" constant="279" id="R6B-ve-7HW"/>
+                            <constraint firstItem="GF8-fY-CrG" firstAttribute="trailing" secondItem="9nj-hg-r9a" secondAttribute="trailing" constant="87" id="V8B-cu-GSy"/>
+                            <constraint firstItem="GF8-fY-CrG" firstAttribute="bottom" secondItem="9nj-hg-r9a" secondAttribute="bottom" constant="494" id="fA8-07-hn8"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Logo" width="826" height="146"/>
         <namedColor name="hill_menu_bottom">
             <color red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

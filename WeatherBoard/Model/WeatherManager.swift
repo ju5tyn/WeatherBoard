@@ -43,8 +43,7 @@ struct WeatherManager {
     func fetchWeather(cityName: String, doNotSave: Bool){
         
         let weatherURL = "\(C.mainURL)\(Keys.openweathermap)\(getUnits())"
-        
-        
+
         //converts search to lat+lon
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(cityName) { placemarks, error in
@@ -56,9 +55,9 @@ struct WeatherManager {
                 performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
                 
             }else{
-                
                 if let e = error{
                     print(e.localizedDescription)
+                    self.delegate?.didFailWithError(error: e)
                 }
                 
             }

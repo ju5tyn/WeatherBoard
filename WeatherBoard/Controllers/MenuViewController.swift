@@ -21,6 +21,7 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var adBackground: UIView!
     @IBOutlet weak var adSpinner: UIActivityIndicatorView!
     @IBOutlet weak var recentsLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     
     var searchFull: Bool = false
@@ -118,6 +119,9 @@ class MenuViewController: UIViewController {
     
     
     private func exitMenu(_ segue: UIStoryboardSegue) {
+        
+        backButton.isEnabled = true
+        
         if segue.identifier == C.segues.menuToMain{
             
             let mainVC = segue.destination as! MainViewController
