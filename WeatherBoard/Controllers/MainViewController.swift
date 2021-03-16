@@ -45,7 +45,12 @@ class MainViewController: UIViewController{
     //MARK: - VARIABLES
     
 
-    var daySelected: Int = 0
+    var daySelected: Int = 0 {
+        didSet{
+            switchPage()
+        }
+
+    }
     var menuOpen: Bool = false
     
     var weatherModel: WeatherModel?
@@ -92,59 +97,64 @@ class MainViewController: UIViewController{
         addHill()
         addGradient()
         addShadows()
-        highlightNavButton(todayButton)
+        highlightNavButton(.today)
         getLocation()
         clearDetails()
+        addGestures()
         
         
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
-        swipeLeft.direction = .left
+
+    }
+    
+    func addGestures(){
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
+        let swipeLeft   = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
+        let swipeRight  = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
+        
+        swipeLeft.direction  = .left
         swipeRight.direction = .right
         
         self.view.addGestureRecognizer(swipeRight)
         self.view.addGestureRecognizer(swipeLeft)
-
+        
     }
-    
+
     @objc func swipedLeft(){
-        print("lol")
         if daySelected<2{
             daySelected+=1
-            
-            switch daySelected{
-                case 0:
-                    navButtonPressed(todayButton)
-                case 1:
-                    navButtonPressed(tomorrowButton)
-                case 2:
-                    navButtonPressed(dayAfterButton)
-                default:
-                    print("error")
-            }
         }
-        
-        
     }
     
     @objc func swipedRight(){
-        print("lol")
         if daySelected>0{
             daySelected-=1
-        
-            
-            switch daySelected{
-                case 0:
-                    navButtonPressed(todayButton)
-                case 1:
-                    navButtonPressed(tomorrowButton)
-                case 2:
-                    navButtonPressed(dayAfterButton)
-                default:
-                    print("error")
-            }
         }
+    }
+    
+    func switchPage(){
+        
+        switch daySelected{
+            case 0:
+                removeBlur()
+                animateLocationLabelOut()
+                highlightNavButton(.today)
+            case 1:
+                removeBlur()
+                animateLocationLabelOut()
+                highlightNavButton(.tomorrow)
+            case 2:
+                updateBlur()
+                animateLocationLabelIn()
+                highlightNavButton(.more)
+            default:
+                print("error")
+        }
+        
+        daySelected == 2 ?
+            viewChange(hide: weatherContainerView, show: detailsContainerView, refresh: false)
+            :
+            viewChange(hide: detailsContainerView, show: weatherContainerView, refresh: true)
+        
         
         
     }
@@ -175,27 +185,17 @@ class MainViewController: UIViewController{
     @IBAction func navButtonPressed(_ sender: UIButton) {
         
         //Highlights button that was pressed
-        highlightNavButton(sender)
+        
         //Clears details, changes day selection, then sets details
         switch sender.titleLabel!.text{
             case "TODAY":
                 daySelected = 0
-                removeBlur()
-                animateLocationLabelOut()
             case "TOMORROW":
                 daySelected = 1
-                removeBlur()
-                animateLocationLabelOut()
             default:
                 daySelected = 2
-                updateBlur()
-                animateLocationLabelIn()
         }
         
-        daySelected == 2 ?
-            viewChange(hide: weatherContainerView, show: detailsContainerView, refresh: false)
-            :
-            viewChange(hide: detailsContainerView, show: weatherContainerView, refresh: true)
         
     }
     
@@ -508,14 +508,29 @@ class MainViewController: UIViewController{
         }
     }
     
-    
-    
+    enum Buttons {
+        case today
+        case tomorrow
+        case more
+    }
     //Highlights currently selected button
-    func highlightNavButton(_ buttonToHighlight: UIButton){
+    func highlightNavButton(_ buttonToHighlight: Buttons){
+        
         todayButton.alpha = 0.5
         tomorrowButton.alpha = 0.5
         dayAfterButton.alpha = 0.5
-        buttonToHighlight.alpha = 1
+        
+        switch buttonToHighlight{
+            case .today:
+                todayButton.alpha = 1
+            case .tomorrow:
+                tomorrowButton.alpha = 1
+            case .more:
+                dayAfterButton.alpha = 1
+        }
+        
+        
+        
     }
     
     func hideNavButtons(hidden: Bool){

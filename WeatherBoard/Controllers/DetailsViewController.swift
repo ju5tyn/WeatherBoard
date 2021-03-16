@@ -12,7 +12,6 @@ class DetailsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    
     var selectedCellIndexPath: IndexPath?
     let selectedHeight: CGFloat = 300
     let deselectedHeight: CGFloat = 70
@@ -77,9 +76,7 @@ class DetailsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         firstLaunch = false
-        
     }
     
 }
@@ -101,8 +98,6 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             }
         }
         
-
-        
         return cell
         
     }
@@ -114,7 +109,7 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
         if indexPath.row == 0 && firstLaunch{ return selectedHeight }
         
         return (selectedCellIndexPath == indexPath) ? selectedHeight : deselectedHeight
-        
+        //return deselectedHeight
         
     }
     
@@ -129,9 +124,6 @@ extension DetailsViewController: UITableViewDataSource, UITableViewDelegate{
             // This ensures, that the cell is fully visible once expanded
             tableView.scrollToRow(at: indexPath, at: .none, animated: true)
         }
-        
-        
-        
         
     }
     

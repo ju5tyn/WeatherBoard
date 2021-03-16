@@ -95,7 +95,8 @@ class DetailsTableViewCell: UITableViewCell {
     
     func setData(with day: WeatherModel.Daily, isDayString: String){
         
-        weatherImageView.setImage(UIImage(named: "icon_\(day.conditionName)_\(isDayString)"), animated: true)
+        let weatherImage = UIImage(named: "icon_\(day.conditionName)_\(isDayString)")
+        weatherImageView.setImage(weatherImage, animated: true)
 
         mainTempLabel.text      = day.tempString
         conditionLabel.text     = day.smallName
@@ -106,13 +107,17 @@ class DetailsTableViewCell: UITableViewCell {
         //cell.visibilityLabel.text = day.visibilityString
 
         if (day.highTemp != day.lowTemp){
-            highTempLabel.text = day.highTempString
-            lowTempLabel.text = day.lowTempString
+            
+            highTempLabel.text      = day.highTempString
+            lowTempLabel.text       = day.lowTempString
+            
         }else{
-            highTempLabel.text = ""
-            lowTempLabel.text = ""
-            highTempLabel.isHidden = true
-            lowTempLabel.isHidden  = true
+            
+            highTempLabel.text      = ""
+            lowTempLabel.text       = ""
+            highTempLabel.isHidden  = true
+            lowTempLabel.isHidden   = true
+            
         }
         
     }
@@ -154,6 +159,7 @@ class DetailsTableViewCell: UITableViewCell {
             }
             count+=0.05
         }
+        
         layoutIfNeeded()
     }
     
