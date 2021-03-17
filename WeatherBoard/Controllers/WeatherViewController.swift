@@ -27,7 +27,7 @@ class WeatherViewController: UIViewController{
         
         //segmentedControl.delegate = self
         segmentedControl.clearsContextBeforeDrawing = true
-        setupSegmentedControl()
+        //setupSegmentedControl()
 
 
     }
@@ -59,7 +59,14 @@ class WeatherViewController: UIViewController{
     }
     
 
-
+    func showAlertScreen(){
+        
+        clearWeatherDetails()
+        tempLabel.text               = "(ノಠ益ಠ)ノ彡┻━┻"
+        timeLocationLabel.text       = "An error occurred"
+        activityIndicator.stopAnimating()
+        
+    }
     
     
     func clearWeatherDetails(){

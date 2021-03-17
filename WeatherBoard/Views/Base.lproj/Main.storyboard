@@ -808,6 +808,11 @@
                             <constraint firstItem="hf1-6j-YWt" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="tGa-bq-2sT"/>
                             <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="lJv-IT-U5x" secondAttribute="centerY" id="wwm-K3-RRz"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="hf1-6j-YWt"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="yWN-VA-I3S" id="XCn-Ci-VLp"/>

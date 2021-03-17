@@ -238,6 +238,7 @@ class MainViewController: UIViewController{
     }
     
     
+    //use when loading data from existing weathermodel
     func changeDetails() {
         
         weatherVC?.setWeatherDetails(using: weatherModel!, page: pageSelected)
@@ -301,6 +302,7 @@ class MainViewController: UIViewController{
     
     
     //sets weather details to contents of weathermodel
+    //Use when loading new weatherModel
     func setDetails(){
         if weatherModel != nil {
             hideNavButtons(hidden: false)
@@ -570,7 +572,7 @@ class MainViewController: UIViewController{
         
         DispatchQueue.main.async {
             
-            let failedAlert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+            let failedAlert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
             failedAlert.title = "Error loading weather"
             if let errorMessage = error?.localizedDescription {
@@ -587,12 +589,7 @@ class MainViewController: UIViewController{
             
             self.present(failedAlert, animated: true)
             
-            self.weatherVC?.clearWeatherDetails()
-            self.weatherVC?.tempLabel.text               = "(ノಠ益ಠ)ノ彡┻━┻"
-            self.weatherVC?.timeLocationLabel.text       = "An error occurred"
-            //self.weatherVC?.activityIndicator.isHidden   = true
-            self.weatherVC?.activityIndicator.stopAnimating()
-            
+            self.weatherVC?.showAlertScreen()
             self.setGradientColor(color: "delete")
             
         }
