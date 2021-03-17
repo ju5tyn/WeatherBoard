@@ -148,7 +148,8 @@ class MenuViewController: UIViewController {
                 mainVC.clearDetails()
                 
             }else{
-                mainVC.setDetails()
+                
+                mainVC.changeDetails()
             }
             
             mainVC.updateBlur()

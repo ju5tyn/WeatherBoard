@@ -35,7 +35,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var hillViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hillViewBottomConstraint: NSLayoutConstraint!
     
-
+    
     //Location label header
     @IBOutlet weak var locationLabelView: UIView!
     @IBOutlet weak var locationLabel: LTMorphingLabel!
@@ -48,12 +48,12 @@ class MainViewController: UIViewController{
     //MARK: - VARIABLES
     
     
-
+    
     var pageSelected: Pages = .today {
         didSet{
             switchPage()
         }
-
+        
     }
     var menuOpen: Bool = false
     
@@ -86,7 +86,7 @@ class MainViewController: UIViewController{
         super.viewDidLoad()
         
         hillViewHeightConstraint.constant = ((self.view.bounds.height))*0.4
- 
+        
         overrideUserInterfaceStyle = .dark
         
         weatherManager.delegate     = self
@@ -102,9 +102,9 @@ class MainViewController: UIViewController{
         getLocation()
         clearDetails()
         addGestures()
-
         
-
+        
+        
     }
     
     func addGestures(){
@@ -119,7 +119,7 @@ class MainViewController: UIViewController{
         self.view.addGestureRecognizer(swipeLeft)
         
     }
-
+    
     @objc func swipedLeft(){
         if pageSelected != .more{
             pageSelected.next()
@@ -163,7 +163,7 @@ class MainViewController: UIViewController{
     
     //MARK: - Buttons
     
-
+    
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
         openMenu()
@@ -172,7 +172,7 @@ class MainViewController: UIViewController{
     
     func openMenu(){
         
-
+        
         self.performSegue(withIdentifier: C.segues.mainToMenu, sender: self)
         removeBlur()
         setGradientColor(color: "menu")
@@ -203,7 +203,7 @@ class MainViewController: UIViewController{
         
     }
     
-
+    
     
     
     
@@ -222,11 +222,11 @@ class MainViewController: UIViewController{
         }else{
             locationManager.requestLocation()
         }
-  
+        
     }
     
     
-
+    
     //resets weather details to empty
     func clearDetails(){
         setLocationLabel(hidden: true)
@@ -237,71 +237,68 @@ class MainViewController: UIViewController{
         hideNavButtons(hidden: true)
     }
     
- 
+    
     func changeDetails() {
-        if weatherModel?.locationName != nil {
-            
-            weatherVC?.setWeatherDetails(using: weatherModel!, page: pageSelected)
-            detailsVC?.setWeatherDetails(using: weatherModel!)
-            
-            locationLabel.text = weatherModel?.locationName?.uppercased()
-
-            //sets gradient color with string based on condition and day/night
-            if !menuOpen{
-                if pageSelected == .more{
-
-                    self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
-                    setLocationLabel(hidden: false)
+        
+        weatherVC?.setWeatherDetails(using: weatherModel!, page: pageSelected)
+        detailsVC?.setWeatherDetails(using: weatherModel!)
+        
+        locationLabel.text = weatherModel?.locationName?.uppercased()
+        
+        //sets gradient color with string based on condition and day/night
+        if !menuOpen{
+            if pageSelected == .more{
                 
-                }else{
-                    if self.pageSelected == .today {
-                        
-                        if weatherModel!.current.isSunset{
-                            self.setGradientColor(color: "sunset")
-                        }else if weatherModel!.current.isSunrise{
-                            self.setGradientColor(color: "sunrise")
-                        }else{
-                            self.setGradientColor(color: "\(weatherModel!.current.conditionName)_\(weatherModel!.current.isDayString)")
-                        }
+                self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
+                setLocationLabel(hidden: false)
+                
+            }else{
+                if self.pageSelected == .today {
+                    
+                    if weatherModel!.current.isSunset{
+                        self.setGradientColor(color: "sunset")
+                    }else if weatherModel!.current.isSunrise{
+                        self.setGradientColor(color: "sunrise")
                     }else{
-                        self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
+                        self.setGradientColor(color: "\(weatherModel!.current.conditionName)_\(weatherModel!.current.isDayString)")
                     }
+                }else{
+                    self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
                 }
             }
-            
-            if self.pageSelected == .today{
-                if let particleToDisplay = weatherModel?.current.particle{
-                    
-                    emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                    removeParticles(from: gradientView)
-                    addParticles(baseView: gradientView, emitterNode: emitterNode)
-                    
-                }else {
-                    removeParticles(from: gradientView)
-                    //setParticles(baseView: gradientView, emitterNode: emitterNode)
-                }
-            }else {
-                if let particleToDisplay = weatherModel?.daily[1].particle{
-                    
-                    //let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                    //emitterNode = newNode
-                    emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                    removeParticles(from: gradientView)
-                    addParticles(baseView: gradientView, emitterNode: emitterNode)
-                    
- 
-                }else {
-                    removeParticles(from: gradientView)
-                    //setParticles(baseView: gradientView, emitterNode: emitterNode)
-                }
-            }
-            
-        } else {
-            print("error1!! WIDFIFIAUIU")
         }
+        
+        if self.pageSelected == .today{
+            if let particleToDisplay = weatherModel?.current.particle{
+                
+                emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                removeParticles(from: gradientView)
+                addParticles(baseView: gradientView, emitterNode: emitterNode)
+                
+            }else {
+                removeParticles(from: gradientView)
+                //setParticles(baseView: gradientView, emitterNode: emitterNode)
+            }
+        }else {
+            if let particleToDisplay = weatherModel?.daily[1].particle{
+                
+                //let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                //emitterNode = newNode
+                emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
+                removeParticles(from: gradientView)
+                addParticles(baseView: gradientView, emitterNode: emitterNode)
+                
+                
+            }else {
+                removeParticles(from: gradientView)
+                //setParticles(baseView: gradientView, emitterNode: emitterNode)
+            }
+        }
+        
+        
     }
     
-
+    
     
     //sets weather details to contents of weathermodel
     func setDetails(){
@@ -315,10 +312,17 @@ class MainViewController: UIViewController{
                 }
                 self.weatherModel?.locationName = locationName
                 
-                changeDetails()
-                
+                if weatherModel?.locationName != nil {
+                    changeDetails()
+                } else {
+                    showAlert(with: nil)
+                }
             }
             )
+        } else {
+            
+            showAlert(with: nil)
+            
         }
     }
     
@@ -345,7 +349,7 @@ class MainViewController: UIViewController{
         
     }
     
-
+    
     
     func viewChange(hide viewToHide: UIView, show viewToShow: UIView, refresh: Bool){
         
@@ -367,15 +371,15 @@ class MainViewController: UIViewController{
     //MARK: App Launch Functions
     
     func addHill(){
-
+        
         //setup for mask of hill
         let hillMask = UIImageView()
-
+        
         hillMask.frame = CGRect.init(x: 0, y: 0, width: UIScreen.screens[0].bounds.width, height: UIScreen.screens[0].bounds.height*0.4)
         
         hillMask.image = UIImage(named: "hills")
         hillMask.clipsToBounds = false
-
+        
         hillView.autoresizesSubviews = true
         hillView.mask = hillMask
         
@@ -468,7 +472,7 @@ class MainViewController: UIViewController{
         baseView.addSubview(skView)
     }
     
-
+    
     func removeParticles(from view: UIView) {
         if let viewWithTag = view.viewWithTag(1){
             viewWithTag.removeFromSuperview()
@@ -562,7 +566,40 @@ class MainViewController: UIViewController{
     
     
     
-    
+    func showAlert(with error: Error?){
+        
+        DispatchQueue.main.async {
+            
+            let failedAlert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+            
+            failedAlert.title = "Error loading weather"
+            if let errorMessage = error?.localizedDescription {
+                failedAlert.message = errorMessage
+            }else{
+                failedAlert.message = "An unknown error occured"
+            }
+
+            failedAlert.addAction(UIAlertAction(title: "Go to Menu",
+                                                style: .destructive,
+                                                handler: {_ in
+                                                    self.openMenu()
+                                                }))
+            
+            self.present(failedAlert, animated: true)
+            
+            self.weatherVC?.clearWeatherDetails()
+            self.weatherVC?.tempLabel.text               = "(ノಠ益ಠ)ノ彡┻━┻"
+            self.weatherVC?.timeLocationLabel.text       = "An error occurred"
+            //self.weatherVC?.activityIndicator.isHidden   = true
+            self.weatherVC?.activityIndicator.stopAnimating()
+            
+            self.setGradientColor(color: "delete")
+            
+        }
+        
+        
+        
+    }
     
     
     
@@ -584,7 +621,7 @@ class MainViewController: UIViewController{
         switch segue.identifier{
             case C.segues.mainToWeather:
                 weatherVC = segue.destination as? WeatherViewController
-
+                
             case C.segues.mainToDetails:
                 detailsVC = segue.destination as? DetailsViewController
             default:
@@ -602,7 +639,7 @@ class MainViewController: UIViewController{
             default:
                 break
         }
-
+        
     }
     
     
@@ -651,20 +688,8 @@ extension MainViewController: CLLocationManagerDelegate{
         print(error.localizedDescription)
         print("MIKE PENIS NOT HAPPY")
         
-        DispatchQueue.main.async {
-            let failedAlert = UIAlertController(title: "Error loading Weather", message: error.localizedDescription, preferredStyle: .actionSheet)
-            
-            failedAlert.addAction(UIAlertAction(title: "Go to Menu", style: .default, handler: {_ in
-                self.openMenu()
-            }))
-            
-            self.present(failedAlert, animated: true)
-            
-            self.weatherVC?.tempLabel.text = "Error"
-            self.weatherVC?.activityIndicator.isHidden = true
-            
-        }
         
+        showAlert(with: error)
     }
     
 }
@@ -703,20 +728,7 @@ extension MainViewController: WeatherManagerDelegate{
         
         print("❌ Error: Invalid Location")
         
-        DispatchQueue.main.async {
-            let failedAlert = UIAlertController(title: "Error loading Weather", message: error.localizedDescription, preferredStyle: .actionSheet)
-            
-            failedAlert.addAction(UIAlertAction(title: "Go to Menu", style: .default, handler: {_ in
-                self.openMenu()
-            }))
-            
-            self.present(failedAlert, animated: true)
-            
-            self.weatherVC?.tempLabel.text = "Error"
-            self.weatherVC?.activityIndicator.isHidden = true
-
-            
-        }
+        showAlert(with: error)
         
         
         
