@@ -10,9 +10,8 @@ import UIKit
 
 protocol MenuTableViewCellDelegate {
     
-    func didPressButton(with cityName: String, indexPath: IndexPath)
-    func didPressDelete(with cityName: String, indexPath: IndexPath)
-    
+    func didPressButton(with cellTitle: String, cellType: MenuTableViewCell.CellType, indexPath: IndexPath)
+    func didPressDelete(with cellTitle: String, indexPath: IndexPath)
     
 }
 
@@ -23,6 +22,21 @@ class MenuTableViewCell: UITableViewCell {
     @IBOutlet weak var deleteButton: ButtonStyle!
     @IBOutlet weak var stackView: UIStackView!
     
+    enum CellType {
+        case recent
+        case searchResult
+    }
+    
+    var allowDeletion: Bool
+    var cellType: CellType?
+    
+    
+    required init?(coder: NSCoder){
+        
+        self.allowDeletion = true
+        super.init(coder: coder)
+        
+    }
     
     var delegate: MenuTableViewCellDelegate?
     
@@ -45,7 +59,6 @@ class MenuTableViewCell: UITableViewCell {
         menuButton.addGestureRecognizer(swipeLeft)
         menuButton.addGestureRecognizer(swipeRight)
             
-        
         deleteButton.topGradient = "delete_top"
         deleteButton.bottomGradient = "delete_bottom"
         deleteButton.cornerRadius = 12
@@ -83,7 +96,7 @@ class MenuTableViewCell: UITableViewCell {
         {
             if let validLabel = menuLabel.text{
                 
-                delegate?.didPressButton(with: validLabel, indexPath: index)
+                delegate?.didPressButton(with: validLabel, cellType: cellType!, indexPath: index)
             }
         }
 
@@ -91,28 +104,26 @@ class MenuTableViewCell: UITableViewCell {
     
     @objc func swipedLeft(_ sender: UIGestureRecognizer){
         
-        if sender.state == .ended {
-            print("UIGestureRecognizerStateEnded")
-            
-            
-            
-            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
+        if allowDeletion{
+            if sender.state == .ended {
+                print("UIGestureRecognizerStateEnded")
                 
-                if self.deleteButton.isHidden{
-                    self.deleteButton.isHidden = false
+                
+                
+                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
+                    
+                    if self.deleteButton.isHidden{
+                        self.deleteButton.isHidden = false
+                    }
+                    self.deleteButton.alpha = 1
+                    self.stackView.layoutIfNeeded()
                 }
-                self.deleteButton.alpha = 1
-                self.stackView.layoutIfNeeded()
-                
-                
-                
-            }
 
-        }else if sender.state == .began {
-            print("UIGestureRecognizerStateBegan.")
-            //Do Whatever You want on Began of Gesture
+            }else if sender.state == .began {
+                print("UIGestureRecognizerStateBegan.")
+                //Do Whatever You want on Began of Gesture
+            }
         }
-        
     }
     
     @objc func swipedRight(_ sender: UIGestureRecognizer){

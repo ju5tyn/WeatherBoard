@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "hill_mask copy.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "auto-scaling" : "auto"
+  }
+}

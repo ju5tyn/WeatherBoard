@@ -10,6 +10,26 @@ import UIKit
 import RealmSwift
 import CoreLocation
 import GoogleMobileAds
+import MapKit
+import LTMorphingLabel
+
+protocol MenuViewControllerDelegate {
+    
+    func menuViewControllerDidEnd(_ menuViewController: MenuViewController)
+    
+    func menuViewControllerDidRequestLocation(_ menuViewController: MenuViewController)
+    
+    func menuViewControllerDidSearchResultPressed(_ menuViewController: MenuViewController,
+                                              lat: Double,
+                                              lon: Double)
+    
+    func menuViewControllerDidRecentPressed(_ menuViewController: MenuViewController, lat: Double, lon: Double)
+    
+    func menuViewControllerDidRequestReload(_ menuViewController: MenuViewController)
+    
+    func menuViewControllerDidDismissWithNoRequest(_ menuViewController: MenuViewController)
+    
+}
 
 class MenuViewController: UIViewController {
     
@@ -20,7 +40,8 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var adLabel: UILabel!
     @IBOutlet weak var adBackground: UIView!
     @IBOutlet weak var adSpinner: UIActivityIndicatorView!
-    @IBOutlet weak var recentsLabel: UILabel!
+    @IBOutlet weak var recentsLabel: LTMorphingLabel!
+    
     @IBOutlet weak var backButton: UIButton!
     
     
@@ -30,17 +51,26 @@ class MenuViewController: UIViewController {
     
     var menuItems: Results<MenuItem>?
     var menuItemPressedCityName: String?
+    var menuItemPressedLat: Double?
+    var menuItemPressedLon: Double?
+    
 
     let realm = try! Realm()
     
     var shouldReload = false
- 
+
+    var searchCompleter = MKLocalSearchCompleter()
+    var searchResults = [MKLocalSearchCompletion]()
+    var delegate: MenuViewControllerDelegate?
+    
     //MARK: - AppDelegate functions
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        recentsLabel.isHidden = false
+        recentsLabel.morphingEffect = .scale
         setAlpha()
         loadMenuItems()
         hideKeyboardWhenTappedAround()
@@ -51,11 +81,11 @@ class MenuViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         bannerView.delegate = self
+        searchCompleter.delegate = self
         
         tableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "ReusableMenuCell")
         tableView.reloadData()
         
-        recentsLabel.isHidden = false
         
         bannerView.adUnitID = Keys.admobUnitID
         bannerView.rootViewController = self
@@ -120,39 +150,47 @@ class MenuViewController: UIViewController {
     
     private func exitMenu(_ segue: UIStoryboardSegue) {
         
-        backButton.isEnabled = true
+        //backButton.isEnabled = true
+        delegate?.menuViewControllerDidEnd(self)
         
         if segue.identifier == C.segues.menuToMain{
             
             let mainVC = segue.destination as! MainViewController
             
-            mainVC.menuOpen.toggle()
-            //mainVC.mainView.isHidden = false
-            UIView.animate(withDuration: 0.5) {
-                mainVC.mainView.alpha = 1
-            }
-            if locationPressed{
-                mainVC.locationManager.requestLocation()
-                mainVC.clearDetails()
-                
-            }else if let validCityName = menuItemPressedCityName{
-                mainVC.weatherManager.fetchWeather(cityName: validCityName, doNotSave: locationCellPressed)
-                mainVC.clearDetails()
-            }else if searchFull{
-                mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
-                mainVC.clearDetails()
-                
-            }else if shouldReload{
-                
-                mainVC.weatherManager.fetchWeather(cityName: (mainVC.weatherModel?.locationName)!, doNotSave: true)
-                mainVC.clearDetails()
-                
-            }else{
-                
-                mainVC.changeDetails()
-            }
-            
-            mainVC.updateBlur()
+//            mainVC.menuOpen.toggle()
+//            //mainVC.mainView.isHidden = false
+//            UIView.animate(withDuration: 0.5) {
+//                mainVC.mainView.alpha = 1
+//            }
+//
+//            if locationPressed{
+//
+//                delegate?.menuViewControllerDidRequestLocation(self)
+//
+//            }else if (menuItemPressedLat != nil && menuItemPressedLon != nil){
+//                print("USED LOCATION CELL")
+//                mainVC.weatherManager.fetchWeather(latitude: menuItemPressedLat!, longitude: menuItemPressedLon!, doNotSave: locationCellPressed)
+//            }else if let validCityName = menuItemPressedCityName{
+//                print("USED CITY NAME")
+//                mainVC.weatherManager.fetchWeather(cityName: validCityName, doNotSave: locationCellPressed)
+//                mainVC.clearDetails()
+//            }else if searchFull{
+//                print("USED SEARCH SHIT")
+//                mainVC.weatherManager.fetchWeather(cityName: searchBar.text!, doNotSave: false)
+//                mainVC.clearDetails()
+//
+//            }else if shouldReload{
+//                print("USED SHOULOD RELOAD")
+//                mainVC.weatherManager.fetchWeather(cityName: (mainVC.weatherModel?.locationName)!, doNotSave: true)
+//                mainVC.clearDetails()
+//
+//            }else{
+//
+//                mainVC.changeDetails()
+//            }
+//
+//            print("USED SHIT SEGUE INSTEAD OF CHAD DELEGETAE")
+//            mainVC.updateBlur()
         }
     }
     
@@ -163,24 +201,14 @@ class MenuViewController: UIViewController {
     //Back button pressed
     @IBAction func backButtonPressed(_ sender: UIButton) {
         //Sends back to main view
-        performSegue(withIdentifier: C.segues.menuToMain, sender: self)
+        delegate?.menuViewControllerDidDismissWithNoRequest(self)
+        //performSegue(withIdentifier: C.segues.menuToMain, sender: self)
     }
     
     @IBAction func locationButtonPressed(_ sender: UIButton) {
         
-        
-        do{
-            try realm.write{
-                let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
-                realm.delete(oldLocations)
-            }
-        }catch{
-            print(error)
-        }
-        locationPressed.toggle()
-        //Sends back to main view
-        performSegue(withIdentifier: C.segues.menuToMain, sender: self)
-        
+        delegate?.menuViewControllerDidRequestLocation(self)
+        //self.dismiss(animated: true, completion: nil)
         
     }
     
@@ -206,10 +234,10 @@ class MenuViewController: UIViewController {
         switch segue.identifier{
             case C.segues.menuToAbout:
                 _ = segue.destination as! AboutViewController
-            case C.segues.menuToMain:
-                exitMenu(segue)
             case C.segues.menuToSettings:
                 _ = segue.destination as! SettingsViewController
+            case C.segues.menuToMain:
+                exitMenu(segue)
             case .none:
                 break
             case .some(_):
@@ -243,29 +271,54 @@ class MenuViewController: UIViewController {
 
 extension MenuViewController: MenuTableViewCellDelegate{
     
-    func didPressButton(with cityName: String, indexPath: IndexPath) {
-        
-        menuItemPressedCityName = cityName
-        
-        if menuItems![indexPath.row].isCurrentLocation != true {
-            do{
-                try realm.write{
-                    realm.delete(menuItems![indexPath.row])
+
+    func didPressButton(with cellTitle: String, cellType:MenuTableViewCell.CellType, indexPath: IndexPath) {
+          
+        switch cellType{
+            case .recent:
+                let item = menuItems![indexPath.row]
+                
+                if menuItems?[indexPath.row].isCurrentLocation == true {
+//                    locationCellPressed = true
+                    //DO SOMETHING WITH THE VALUE SUCH AS DONOTSAVE
+                    
+                }else{
+
+                    self.delegate?.menuViewControllerDidRecentPressed(self, lat: item.lat, lon: item.lon)
+                    do{
+                        try realm.write{ realm.delete(item) }
+                    }catch{
+                        print(error)
+                    }
                 }
-            }catch{
-                print(error)
-            }
-        }else{
-            locationCellPressed = true
+                
+                
+//                DispatchQueue.main.async {
+//                    self.performSegue(withIdentifier: C.segues.menuToMain, sender: self)
+//                }
+                
+                
+            case .searchResult:
+                
+                let result = searchResults[indexPath.row]
+                let searchRequest = MKLocalSearch.Request(completion: result)
+                
+                let search = MKLocalSearch(request: searchRequest)
+                search.start { (response, error) in
+                    guard let coordinate = response?.mapItems[0].placemark.coordinate else {
+                        return
+                    }
+                    guard (response?.mapItems[0].name) != nil else {
+                        return
+                    }
+                    self.delegate?.menuViewControllerDidSearchResultPressed(self,
+                                                                       lat: coordinate.latitude,
+                                                                       lon: coordinate.longitude)
+                }
         }
-        
-        //Sends back to main view
-        performSegue(withIdentifier: C.segues.menuToMain, sender: self)
-        
     }
     
-    func didPressDelete(with cityName: String, indexPath: IndexPath) {
-        
+    func didPressDelete(with cellTitle: String, indexPath: IndexPath) {
         
         do{
             try realm.write{
@@ -279,46 +332,27 @@ extension MenuViewController: MenuTableViewCellDelegate{
         
         cell.menuButton.setNeedsDisplay()
         
+        self.loadMenuItems()
         
-        UIView.animate(withDuration: 0.3) {
-            self.loadMenuItems()
-        }
-        
-        //self.tableView.reloadData(with: .middle)
-        
-       // var count = 0
-        
-        for cell in tableView.visibleCells as! [MenuTableViewCell] {
-            cell.menuButton.setNeedsDisplay()
-            cell.hideButton()
-            UIView.transition(with: cell, duration: 0.4, options: .transitionFlipFromTop, animations: {}, completion: nil)
-  
-        }
-        
-//        for cell in tableView.visibleCells as! [MenuTableViewCell] {
-//            DispatchQueue.main.async {
-//                UIView.animate(withDuration: 1, delay: TimeInterval(count)) {
-//                    UIView.transition(with: cell, duration: 0.4, options: .transitionFlipFromTop, animations: {cell.isHidden = false}, completion: nil)
-//                }
-//
-//                count+=1
-//            }
-//
-//
-//        }
-        
-//        UIView.transition(with: tableView, duration: 0.4, options: .transitionFlipFromRight, animations: {self.tableView.reloadData()}, completion: nil)
-//
-        
-
+        tableView.reloadData(shouldAnimate: true)
         tableView.layoutSubviews()
         
     }
 }
 
 extension UITableView {
-    func reloadData(with animation: UITableView.RowAnimation) {
-        reloadSections(IndexSet(integersIn: 0..<numberOfSections), with: animation)
+
+    func reloadData(shouldAnimate: Bool){
+        self.reloadData()
+        
+        if shouldAnimate{
+            for cell in self.visibleCells as! [MenuTableViewCell] {
+                cell.menuButton.setNeedsDisplay()
+                cell.hideButton()
+                UIView.transition(with: cell, duration: 0.4, options: .transitionFlipFromTop, animations: {}, completion: nil)
+            }
+        }
+        
     }
 }
 
@@ -327,36 +361,124 @@ extension UITableView {
 
 extension MenuViewController: UISearchBarDelegate {
     
+    
+    //🔍CLICKED
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        print(searchBar.text ?? "The moon")
-        searchBar.endEditing(true)
         
-        if (searchBar.text != ""){
-            searchFull = true
-            //checks to see if search text is valid
-            CLGeocoder().geocodeAddressString(searchBar.text!) { (placemark, error) in
-                if let e = error{
-                    self.searchBar.text = ""
-                    self.searchBar.placeholder = "Invalid Location"
-                    print(e.localizedDescription)
-                }else{
-                    self.performSegue(withIdentifier: C.segues.menuToMain, sender: self)
-                }
-            }
+        
+        
+//        print(searchBar.text ?? "The moon")
+//        searchBar.endEditing(true)
+//
+        //dismissKeyboard()
+//        if (searchBar.text != ""){
+//            searchFull = true
+//            //checks to see if search text is valid
+//            CLGeocoder().geocodeAddressString(searchBar.text!) { (placemark, error) in
+//                if let e = error{
+//                    self.searchBar.text = ""
+//                    self.searchBar.placeholder = "Invalid Location"
+//                    print(e.localizedDescription)
+//                }else{
+//                    self.performSegue(withIdentifier: C.segues.menuToMain, sender: self)
+//                }
+//            }
+//
+//        }else{
+//            print("No text in ")
+//        }
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("cancelcllilcked")
+        recentsLabel.text = "Recents"
+        if (searchBar.text != "" && searchBar.searchTextField.isEditing) {
+            tableView.reloadData(shouldAnimate: true)
+        }
+    }
 
-        }else{
-            print("No text in ")
+    
+    //SEARCH BAR BEGIN EDITING
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.placeholder = "Search for a location"
+        
+        print("didbeginediting")
+        if searchBar.text != "" {
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.querySearch(_:)), object: searchBar)
+            perform(#selector(self.querySearch(_:)), with: searchBar, afterDelay: 0.2)
+        }
+    }
+    
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        recentsLabel.text = "Recents"
+        if (searchBar.text != "") {
+            tableView.reloadData(shouldAnimate: true)
         }
         
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.placeholder = "Search for a location"
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText != "" {
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.querySearch(_:)), object: searchBar)
+            perform(#selector(self.querySearch(_:)), with: searchBar, afterDelay: 0.5)
+        }else{
+            recentsLabel.text = "Recents"
+            tableView.reloadData(shouldAnimate: true)
+        }
     }
+
+    @objc func querySearch(_ searchBar: UISearchBar) {
+        recentsLabel.text = "Results"
+        
+        if searchCompleter.queryFragment != searchBar.text{
+            searchCompleter.queryFragment = searchBar.text!
+        }else{
+            tableView.reloadData(shouldAnimate: true)
+        }
+        
+        
+    }
+    
+    
+    
     
 }
 
+//MARK: - MapKit Search Completer Delegate
+extension MenuViewController: MKLocalSearchCompleterDelegate{
+    
+    func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
+        
+        completer.resultTypes = .address
+        completer.pointOfInterestFilter = .none
+        searchResults = completer.results.filter{ result in
+            if result.title.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil {
+                return false
+            }
+            if result.subtitle.rangeOfCharacter(from: CharacterSet.decimalDigits) != nil {
+                return false
+            }
+            return true
+        } //filter out some places from search
+        
+        tableView.reloadData(shouldAnimate: true)
+        tableView.layoutSubviews()
+        
+    }
+    
+    func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
+        print(error.localizedDescription)
+        if searchBar.text != ""{
+            recentsLabel.text = "No internet connection"
+        }
+        
+    }
+    
+}
 
 //MARK: - GADBannerView Delegate
 extension MenuViewController: GADBannerViewDelegate{
@@ -384,26 +506,49 @@ extension MenuViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //if number of menu items lower than 4, return that number of menu items
+        var count = 0
+        
+        if (searchBar.searchTextField.isEditing && searchBar.text != ""){
+            count = searchResults.count < 4 ? searchResults.count : 4
+        } else {
+            count = menuItems?.count ?? 0 < 4 ? menuItems?.count ?? 0 : 4
+        }
         if menuItems?.count == 0{
             recentsLabel.isHidden = true
         }
-        
-        return(menuItems?.count ?? 0 < 4 ? menuItems?.count ?? 0 : 4)
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReusableMenuCell", for: indexPath) as! MenuTableViewCell
         
-        cell.deleteButton.isHidden = true
-        
         cell.delegate = self
         
-        cell.menuLabel.text = menuItems?[indexPath.row].cityName
-        cell.menuButton.bottomGradient = menuItems?[indexPath.row].bottomGradient
-        cell.menuButton.topGradient = menuItems?[indexPath.row].topGradient
-        
-        if menuItems?[indexPath.row].isCurrentLocation != true{
+        if ((searchBar.searchTextField.isEditing || searchBar.searchTextField.isFocused) && searchBar.text != ""){
+
+            let searchResult = searchResults[indexPath.row]
+            
+            cell.menuLabel.text = searchResult.title
+            cell.menuButton.bottomGradient = "hill_menu_bottom"
+            cell.menuButton.topGradient = "hill_menu_top"
             cell.locationIcon.isHidden = true
+            cell.allowDeletion = false
+            cell.cellType = .searchResult
+            
+        }else{
+            
+            
+            cell.menuLabel.text = menuItems?[indexPath.row].cityName
+            cell.menuButton.bottomGradient = menuItems?[indexPath.row].bottomGradient
+            cell.menuButton.topGradient = menuItems?[indexPath.row].topGradient
+            
+            if menuItems?[indexPath.row].isCurrentLocation != true{
+                cell.locationIcon.isHidden = true
+            }else{
+                cell.locationIcon.isHidden = false
+            }
+            cell.allowDeletion = true
+            cell.cellType = .recent
             
         }
         

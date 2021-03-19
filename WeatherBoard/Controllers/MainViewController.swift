@@ -72,6 +72,7 @@ class MainViewController: UIViewController{
     
     //Delegate stuff
     var weatherManager = WeatherManager()
+    let dataManager = DataManager()
     let locationManager = CLLocationManager()
     
     
@@ -240,59 +241,70 @@ class MainViewController: UIViewController{
     
     //use when loading data from existing weathermodel
     func changeDetails() {
+        if (weatherModel != nil && weatherModel?.locationName != nil){
+            
+            weatherVC?.setWeatherDetails(using: weatherModel!, page: pageSelected)
+            detailsVC?.setWeatherDetails(using: weatherModel!)
+            locationLabel.text = weatherModel?.locationName?.uppercased()
+            updateGraphics()
+        }else{
+            showAlert(with: nil)
+        }
+    }
+    
+    func updateGraphics(){
+        updateBlur()
+        if (weatherModel != nil && weatherModel?.locationName != nil){
+
+            updateGradients()
+            updateParticles()
+        }
         
-        weatherVC?.setWeatherDetails(using: weatherModel!, page: pageSelected)
-        detailsVC?.setWeatherDetails(using: weatherModel!)
+    }
+    
+    func updateGradients(){
         
-        locationLabel.text = weatherModel?.locationName?.uppercased()
-        
-        //sets gradient color with string based on condition and day/night
-        if !menuOpen{
-            if pageSelected == .more{
+        if pageSelected == .more{
+            setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
+            setLocationLabel(hidden: false)
+        }else{
+            if pageSelected == .today {
                 
-                self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
-                setLocationLabel(hidden: false)
+                if weatherModel!.current.isSunset{
+                    setGradientColor(color: "sunset")
+                }else if weatherModel!.current.isSunrise{
+                    setGradientColor(color: "sunrise")
+                }else{
+                    setGradientColor(color: "\(weatherModel!.current.conditionName)_\(weatherModel!.current.isDayString)")
+                }
+                
                 
             }else{
-                if self.pageSelected == .today {
-                    
-                    if weatherModel!.current.isSunset{
-                        self.setGradientColor(color: "sunset")
-                    }else if weatherModel!.current.isSunrise{
-                        self.setGradientColor(color: "sunrise")
-                    }else{
-                        self.setGradientColor(color: "\(weatherModel!.current.conditionName)_\(weatherModel!.current.isDayString)")
-                    }
-                }else{
-                    self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
-                }
+                self.setGradientColor(color: "\(weatherModel!.daily[1].conditionName)_\(weatherModel!.current.isDayString)")
             }
         }
         
-        if self.pageSelected == .today{
+        
+    }
+    
+    func updateParticles(){
+        
+        if pageSelected == .today{
             if let particleToDisplay = weatherModel?.current.particle{
-                
                 emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
                 removeParticles(from: gradientView)
                 addParticles(baseView: gradientView, emitterNode: emitterNode)
                 
             }else {
                 removeParticles(from: gradientView)
-                //setParticles(baseView: gradientView, emitterNode: emitterNode)
             }
         }else {
             if let particleToDisplay = weatherModel?.daily[1].particle{
-                
-                //let newNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
-                //emitterNode = newNode
                 emitterNode = SKEmitterNode(fileNamed: String(particleToDisplay))!
                 removeParticles(from: gradientView)
                 addParticles(baseView: gradientView, emitterNode: emitterNode)
-                
-                
             }else {
                 removeParticles(from: gradientView)
-                //setParticles(baseView: gradientView, emitterNode: emitterNode)
             }
         }
         
@@ -618,9 +630,13 @@ class MainViewController: UIViewController{
         switch segue.identifier{
             case C.segues.mainToWeather:
                 weatherVC = segue.destination as? WeatherViewController
-                
             case C.segues.mainToDetails:
                 detailsVC = segue.destination as? DetailsViewController
+            case C.segues.mainToMenu:
+                let menuVC = segue.destination as? MenuViewController
+                menuVC?.loadViewIfNeeded()
+                menuVC?.delegate = self
+                
             default:
                 break
         }
@@ -654,6 +670,55 @@ class MainViewController: UIViewController{
 //MARK: - EXTENSIONS
 
 
+//MARK: - MenuViewControllerDelegate
+
+extension MainViewController: MenuViewControllerDelegate{
+    
+    func menuViewControllerDidEnd(_ menuViewController: MenuViewController) {
+        
+        UIView.animate(withDuration: 0.5) {
+            self.mainView.alpha = 1
+        }
+        menuViewController.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    //Clears details ready for new data to be displayed
+    func menuViewControllerDidRequestReload(_ menuViewController: MenuViewController) {
+        //menuOpen = false
+        clearDetails()
+        menuViewControllerDidEnd(menuViewController)
+    }
+    
+    //Called on exit of menu if no request was made
+    func menuViewControllerDidDismissWithNoRequest(_ menuViewController: MenuViewController) {
+        updateGraphics()
+        menuViewControllerDidEnd(menuViewController)
+    }
+    
+    //Called when user location is requested
+    func menuViewControllerDidRequestLocation(_ menuViewController: MenuViewController) {
+        menuViewControllerDidRequestReload(menuViewController)
+        locationManager.requestLocation()
+    }
+    
+    //Called when a specific search result is pressed
+    func menuViewControllerDidSearchResultPressed(_ menuViewController: MenuViewController, lat: Double, lon: Double) {
+        menuViewControllerDidRequestReload(menuViewController)
+        weatherManager.fetchWeather(latitude: lat, longitude: lon, doNotSave: false)
+        
+    }
+    
+    func menuViewControllerDidRecentPressed(_ menuViewController: MenuViewController, lat: Double, lon: Double){
+        menuViewControllerDidRequestReload(menuViewController)
+        weatherManager.fetchWeather(latitude: lat, longitude: lon, doNotSave: false)
+    }
+
+    
+    
+}
+
+
 
 
 //MARK: Location
@@ -663,13 +728,9 @@ extension MainViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]){
         
         if let location = locations.last{
-            do{
-                try self.realm.write{
-                    let oldLocations = self.realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
-                    self.realm.delete(oldLocations)
-                }
-            }catch{
-                print(error)
+
+            DispatchQueue.main.async {
+                self.dataManager.deleteOldLocations()
             }
             
             let lat = location.coordinate.latitude
@@ -708,14 +769,12 @@ extension MainViewController: CLLocationManagerDelegate{
 
 extension MainViewController: WeatherManagerDelegate{
     
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel){
+    func didUpdateWeather(_ weatherManager: WeatherManager, weatherModel: WeatherModel){
         
-        self.weatherModel = weather
-        let dataManager = DataManager()
-        
+        self.weatherModel = weatherModel
         //sets this view's weather model to data from weathermanager
         DispatchQueue.main.async {
-            dataManager.saveWeatherModel(weather)
+            self.dataManager.saveWeatherModel(weatherModel)
             self.setDetails()
         }
     }

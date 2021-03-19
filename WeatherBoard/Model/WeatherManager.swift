@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 protocol WeatherManagerDelegate {
-    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func didUpdateWeather(_ weatherManager: WeatherManager, weatherModel: WeatherModel)
     func didFailWithError(error: Error)
 }
 
@@ -66,6 +66,15 @@ struct WeatherManager {
         
     }
     
+    func fetchWeather(latitude: Double, longitude: Double, doNotSave: Bool){
+        
+        let weatherURL = "\(C.mainURL)\(Keys.openweathermap)\(getUnits())"
+        
+        let urlString = "\(weatherURL)&lat=\(latitude)&lon=\(longitude)"
+        print("Location Granted 📍")
+        performRequest(with: urlString, isCurrentLocation: false, doNotSave: doNotSave)
+    }
+    
     func fetchWeather(latitude: Double, longitude: Double){
         
         let weatherURL = "\(C.mainURL)\(Keys.openweathermap)\(getUnits())"
@@ -95,7 +104,7 @@ struct WeatherManager {
                 
                 if let safeData = data {
                     if let weather = self.parseJSON(safeData, isCurrentLocation: isCurrentLocation, doNotSave: doNotSave) {
-                        self.delegate?.didUpdateWeather(self, weather: weather)
+                        self.delegate?.didUpdateWeather(self, weatherModel: weather)
                     }
                 }
             }

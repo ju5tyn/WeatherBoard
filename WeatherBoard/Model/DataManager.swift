@@ -12,6 +12,21 @@ import CoreLocation
 
 struct DataManager {
     
+    func deleteOldLocations(){
+        
+        let realm = try! Realm()
+        
+        do{
+            try realm.write{
+                let oldLocations = realm.objects(MenuItem.self).filter("isCurrentLocation == %@", true)
+                realm.delete(oldLocations)
+            }
+        }catch{
+            print(error.localizedDescription)
+        }
+    }
+    
+    
     func saveWeatherModel(_ model: WeatherModel){
         
         let realm = try! Realm()
@@ -50,6 +65,8 @@ struct DataManager {
                     newItem.cityName = locality // will default to country if none supplied
                 }
                 
+                newItem.lon = model.lon
+                newItem.lat = model.lat
                 
 
                 // USERDEFAULTS
@@ -62,7 +79,7 @@ struct DataManager {
                 do{
                     try realm.commitWrite()
                 } catch {
-                    print(error)
+                    print(error.localizedDescription)
                 }
             })
             

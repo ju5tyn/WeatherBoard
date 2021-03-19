@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,17 +15,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="9nj-hg-r9a">
-                                <rect key="frame" x="87" y="323" width="240" height="45"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hillsl" translatesAutoresizingMaskIntoConstraints="NO" id="XDh-Yi-Egg">
+                                <rect key="frame" x="0.0" y="537.5" width="414" height="366.5"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GF8-fY-CrG"/>
-                        <color key="backgroundColor" name="hill_menu_bottom"/>
+                        <color key="backgroundColor" white="0.065927933673469385" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="9nj-hg-r9a" firstAttribute="leading" secondItem="GF8-fY-CrG" secondAttribute="leading" constant="87" id="6Eu-5u-wmt"/>
-                            <constraint firstItem="9nj-hg-r9a" firstAttribute="top" secondItem="GF8-fY-CrG" secondAttribute="top" constant="279" id="R6B-ve-7HW"/>
-                            <constraint firstItem="GF8-fY-CrG" firstAttribute="trailing" secondItem="9nj-hg-r9a" secondAttribute="trailing" constant="87" id="V8B-cu-GSy"/>
-                            <constraint firstItem="GF8-fY-CrG" firstAttribute="bottom" secondItem="9nj-hg-r9a" secondAttribute="bottom" constant="494" id="fA8-07-hn8"/>
+                            <constraint firstAttribute="trailing" secondItem="XDh-Yi-Egg" secondAttribute="trailing" id="3EY-WW-4PT"/>
+                            <constraint firstItem="GF8-fY-CrG" firstAttribute="bottom" secondItem="XDh-Yi-Egg" secondAttribute="bottomMargin" id="ZJM-Rk-QMc"/>
+                            <constraint firstItem="XDh-Yi-Egg" firstAttribute="leading" secondItem="vA5-W0-wxV" secondAttribute="leading" id="gyH-Wf-1ug"/>
+                            <constraint firstItem="XDh-Yi-Egg" firstAttribute="top" secondItem="vA5-W0-wxV" secondAttribute="bottom" multiplier="0.6" id="wo1-jr-z2z"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -36,9 +35,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="826" height="146"/>
-        <namedColor name="hill_menu_bottom">
-            <color red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="hillsl" width="375" height="332"/>
     </resources>
 </document>

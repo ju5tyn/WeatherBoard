@@ -248,17 +248,28 @@
                             </label>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search for a location" translatesAutoresizingMaskIntoConstraints="NO" id="1TO-c0-fHM">
                                 <rect key="frame" x="21" y="115" width="348" height="56"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="go" textContentType="location"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert" returnKeyType="done" textContentType="location"/>
                                 <scopeButtonTitles>
                                     <string>Accuweather</string>
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZm-fn-fpI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZm-fn-fpI" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
                                 <rect key="frame" x="29.999999999999996" y="181" width="62.666666666666657" height="20"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="morphingProgress">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="morphingDuration">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="morphingCharacterDelay">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7n4-rz-feH">
                                 <rect key="frame" x="336" y="80" width="24" height="24"/>
@@ -415,7 +426,7 @@
                         <outlet property="adSpinner" destination="ngW-ez-a4V" id="K4b-NR-txH"/>
                         <outlet property="backButton" destination="tDP-OQ-yOe" id="k8n-h2-OX3"/>
                         <outlet property="bannerView" destination="R9g-jp-U1I" id="zaP-H7-rPr"/>
-                        <outlet property="recentsLabel" destination="hZm-fn-fpI" id="4Ou-bK-d3c"/>
+                        <outlet property="recentsLabel" destination="hZm-fn-fpI" id="fIO-Gw-BpF"/>
                         <outlet property="searchBar" destination="1TO-c0-fHM" id="e2m-yP-sOv"/>
                         <outlet property="tableView" destination="aNd-QS-4El" id="1zt-gC-wom"/>
                         <outletCollection property="bottomButtons" destination="orj-CU-aat" collectionClass="NSMutableArray" id="JFb-Ez-lcr"/>
@@ -447,7 +458,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GX-x8-2sv">
-                                <rect key="frame" x="149.66666666666666" y="77" width="91" height="28"/>
+                                <rect key="frame" x="151" y="77" width="88.333333333333314" height="28"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -492,7 +503,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXd-yW-Zp9">
-                                <rect key="frame" x="34" y="216" width="133.33333333333334" height="21"/>
+                                <rect key="frame" x="34" y="216" width="132" height="21"/>
                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -516,7 +527,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remove Ads" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOi-nx-nGt">
-                                <rect key="frame" x="33.000000000000007" y="287" width="101.66666666666669" height="21"/>
+                                <rect key="frame" x="33" y="287" width="103" height="21"/>
                                 <fontDescription key="fontDescription" name="Roboto-Bold" family="Roboto" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -762,7 +773,7 @@
                                     <constraint firstAttribute="height" constant="140" id="frC-tJ-fzC"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WeatherBoard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-8U-sGI" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5I-8U-sGI" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
                                 <rect key="frame" x="16" y="242" width="358" height="42"/>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="35"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -884,7 +895,10 @@
         </designable>
         <designable name="NZ7-Qx-hdu"/>
         <designable name="a5I-8U-sGI">
-            <size key="intrinsicContentSize" width="225.33333333333334" height="41.333333333333336"/>
+            <size key="intrinsicContentSize" width="126.66666666666667" height="41.333333333333336"/>
+        </designable>
+        <designable name="hZm-fn-fpI">
+            <size key="intrinsicContentSize" width="62.666666666666664" height="20"/>
         </designable>
     </designables>
     <resources>
