@@ -10,9 +10,9 @@ import UIKit
 
 protocol MenuTableViewCellDelegate {
     
-    func didPressButton(with cellTitle: String, cellType: MenuTableViewCell.CellType, indexPath: IndexPath)
-    func didPressDelete(with cellTitle: String, indexPath: IndexPath)
-    
+    func didPressButton(_ menuTableViewCell: MenuTableViewCell, with cellTitle: String, cellType: MenuTableViewCell.CellType, indexPath: IndexPath)
+    func didPressDelete(_ menuTableViewCell: MenuTableViewCell, with cellTitle: String, indexPath: IndexPath)
+    func didShowDeleteButton(_ menuTableViewCell: MenuTableViewCell)
 }
 
 class MenuTableViewCell: UITableViewCell {
@@ -47,17 +47,9 @@ class MenuTableViewCell: UITableViewCell {
         
         menuLabel.textDropShadow()
         locationIcon.addShadow()
+        deleteButton.imageView?.addShadow()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.normalTap))
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
-        
-        swipeRight.direction = .right
-        swipeLeft.direction = .left
-        
-        menuButton.addGestureRecognizer(tapGesture)
-        menuButton.addGestureRecognizer(swipeLeft)
-        menuButton.addGestureRecognizer(swipeRight)
+        setupGestures()
             
         deleteButton.topGradient = "delete_top"
         deleteButton.bottomGradient = "delete_bottom"
@@ -68,6 +60,25 @@ class MenuTableViewCell: UITableViewCell {
     }
     
     
+    func setupGestures(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.normalTap))
+
+        menuButton.addGestureRecognizer(tapGesture)
+        
+        if allowDeletion{
+            let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
+            let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
+            
+            
+            swipeRight.direction = .right
+            swipeLeft.direction = .left
+            
+            menuButton.addGestureRecognizer(swipeLeft)
+            menuButton.addGestureRecognizer(swipeRight)
+        }
+    }
+    
+
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -81,7 +92,7 @@ class MenuTableViewCell: UITableViewCell {
         {
             if let validLabel = menuLabel.text{
                 
-                delegate?.didPressDelete(with: validLabel, indexPath: index)
+                delegate?.didPressDelete(self, with: validLabel, indexPath: index)
             }
         }
     }
@@ -95,54 +106,41 @@ class MenuTableViewCell: UITableViewCell {
             let index = collectionView.indexPath(for: self)
         {
             if let validLabel = menuLabel.text{
-                
-                delegate?.didPressButton(with: validLabel, cellType: cellType!, indexPath: index)
+                delegate?.didPressButton(self, with: validLabel, cellType: cellType!, indexPath: index)
             }
         }
 
     }
     
     @objc func swipedLeft(_ sender: UIGestureRecognizer){
-        
         if allowDeletion{
             if sender.state == .ended {
-                print("UIGestureRecognizerStateEnded")
-                
-                
-                
-                UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
-                    
-                    if self.deleteButton.isHidden{
-                        self.deleteButton.isHidden = false
-                    }
-                    self.deleteButton.alpha = 1
-                    self.stackView.layoutIfNeeded()
-                }
-
-            }else if sender.state == .began {
-                print("UIGestureRecognizerStateBegan.")
-                //Do Whatever You want on Began of Gesture
-            }
+                self.delegate?.didShowDeleteButton(self)
+             }
         }
     }
     
     @objc func swipedRight(_ sender: UIGestureRecognizer){
-        
         if sender.state == .ended {
-            print("UIGestureRecognizerStateEnded")
-            
-            hideButton()
-            
-            
-
-        }else if sender.state == .began {
-            print("UIGestureRecognizerStateBegan.")
-            //Do Whatever You want on Began of Gesture
+            hideDeleteButton()
         }
         
     }
     
-    func hideButton(){
+    func showDeleteButton(){
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
+            
+            if self.deleteButton.isHidden{
+                self.deleteButton.isHidden = false
+            }
+            self.deleteButton.alpha = 1
+            self.stackView.layoutIfNeeded()
+        }
+        
+    }
+    
+    func hideDeleteButton(){
         
         UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.5) {
             

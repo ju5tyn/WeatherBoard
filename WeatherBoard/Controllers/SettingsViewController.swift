@@ -1,5 +1,12 @@
 import UIKit
 
+protocol SettingsViewControllerDelegate{
+    
+    func didChangeUnits()
+    
+}
+
+
 class SettingsViewController: UIViewController {
     
     
@@ -17,6 +24,8 @@ class SettingsViewController: UIViewController {
     
     
     let defaults = UserDefaults.standard
+    
+    var delegate: SettingsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -120,6 +129,8 @@ class SettingsViewController: UIViewController {
         
         let val = sender.selectedSegmentIndex == 1 ? 1 : 0
         defaults.setValue(val, forKey: C.defaults.units)
+        delegate?.didChangeUnits()
+        
         
     }
     

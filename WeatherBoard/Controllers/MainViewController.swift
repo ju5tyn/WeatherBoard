@@ -1,7 +1,6 @@
 import UIKit
 import CoreLocation
 import SpriteKit
-import RealmSwift
 import LTMorphingLabel
 import ZSegmentedControl
 
@@ -62,10 +61,6 @@ class MainViewController: UIViewController{
     let hillGradient = CAGradientLayer()
     var emitterNode = SKEmitterNode()
     
-    //Realm
-    let realm = try! Realm()
-    var menuItems: Results<MenuItem>?
-    
     //Container views
     var weatherVC: WeatherViewController?
     var detailsVC: DetailsViewController?
@@ -75,16 +70,13 @@ class MainViewController: UIViewController{
     let dataManager = DataManager()
     let locationManager = CLLocationManager()
     
-    
-    
     let defaults = UserDefaults.standard
-    
-    
-    
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         hillViewHeightConstraint.constant = ((self.view.bounds.height))*0.4
         
@@ -107,6 +99,11 @@ class MainViewController: UIViewController{
         
         
     }
+    
+    
+    
+    
+    
     
     func addGestures(){
         
@@ -670,6 +667,11 @@ class MainViewController: UIViewController{
 //MARK: - EXTENSIONS
 
 
+
+
+
+
+
 //MARK: - MenuViewControllerDelegate
 
 extension MainViewController: MenuViewControllerDelegate{
@@ -684,7 +686,7 @@ extension MainViewController: MenuViewControllerDelegate{
     }
     
     //Clears details ready for new data to be displayed
-    func menuViewControllerDidRequestReload(_ menuViewController: MenuViewController) {
+    func menuViewControllerDidMakeRequest(_ menuViewController: MenuViewController) {
         //menuOpen = false
         clearDetails()
         menuViewControllerDidEnd(menuViewController)
@@ -698,23 +700,37 @@ extension MainViewController: MenuViewControllerDelegate{
     
     //Called when user location is requested
     func menuViewControllerDidRequestLocation(_ menuViewController: MenuViewController) {
-        menuViewControllerDidRequestReload(menuViewController)
+        menuViewControllerDidMakeRequest(menuViewController)
         locationManager.requestLocation()
     }
     
     //Called when a specific search result is pressed
-    func menuViewControllerDidSearchResultPressed(_ menuViewController: MenuViewController, lat: Double, lon: Double) {
-        menuViewControllerDidRequestReload(menuViewController)
+    func menuViewControllerDidSearchResultCellPressed(_ menuViewController: MenuViewController, lat: Double, lon: Double) {
+        menuViewControllerDidMakeRequest(menuViewController)
         weatherManager.fetchWeather(latitude: lat, longitude: lon, doNotSave: false)
         
     }
     
-    func menuViewControllerDidRecentPressed(_ menuViewController: MenuViewController, lat: Double, lon: Double){
-        menuViewControllerDidRequestReload(menuViewController)
-        weatherManager.fetchWeather(latitude: lat, longitude: lon, doNotSave: false)
+    func menuViewControllerDidRecentCellPressed(_ menuViewController: MenuViewController, lat: Double, lon: Double, isLocation: Bool){
+        menuViewControllerDidMakeRequest(menuViewController)
+        weatherManager.fetchWeather(latitude: lat, longitude: lon, doNotSave: isLocation)
     }
-
     
+    func menuViewControllerDidRequestRefresh(_ menuViewController: MenuViewController){
+        menuViewControllerDidMakeRequest(menuViewController)
+        if weatherModel != nil {
+            self.weatherManager.fetchWeather(latitude: weatherModel!.lat, longitude: weatherModel!.lon, doNotSave: true)
+        }else{
+            showAlert(with: nil)
+        }
+        
+        
+        
+        
+    }
+    
+    
+ 
     
 }
 
@@ -726,27 +742,19 @@ extension MainViewController: MenuViewControllerDelegate{
 extension MainViewController: CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations:[CLLocation]){
-        
         if let location = locations.last{
-
             DispatchQueue.main.async {
                 self.dataManager.deleteOldLocations()
             }
-            
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             
             weatherManager.fetchWeather(latitude: lat, longitude: lon)
-            
         }
-        
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error:Error){
         print(error.localizedDescription)
-        print("MIKE PENIS NOT HAPPY")
-        
-        
         showAlert(with: error)
     }
     

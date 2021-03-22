@@ -33,17 +33,14 @@ struct DataManager {
         
         if model.doNotSave != true{
 
-            //writes the city name to realm
-            
-            
             let location = CLLocation(latitude: model.lat, longitude: model.lon)
             
             CLGeocoder().reverseGeocodeLocation(location, completionHandler: { placemarks, error in
                 
                 realm.beginWrite()
-
                 
                 let newItem = MenuItem()
+                
                 newItem.isCurrentLocation = model.isCurrentLocation
                 
                 var colorName = "menu"
@@ -68,7 +65,6 @@ struct DataManager {
                 newItem.lon = model.lon
                 newItem.lat = model.lat
                 
-
                 // USERDEFAULTS
                 let defaults = UserDefaults.standard
                 defaults.setValue(newItem.cityName, forKey: C.defaults.defaultLocation)
