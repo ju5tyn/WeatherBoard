@@ -7,10 +7,17 @@ class AboutViewController: UIViewController {
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var textView: UIView!
     @IBOutlet weak var paperImage: UIImageView!
+    @IBOutlet weak var creditsHeaderLabel: UILabel!
     
 
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        ///LocalisedStrings
+        titleLabel.text = NSLocalizedString("ABOUT_TITLE", comment: "title for page")
+        creditsHeaderLabel.text = NSLocalizedString("ABOUT_TEXT_THANKS", comment: "thanks to label")
+        ///
+        
         
         setAlpha()
         

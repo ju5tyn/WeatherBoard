@@ -61,9 +61,9 @@ class DetailsViewController: UIViewController {
                     cell.setData(with: day, isDayString: weatherModel.current.isDayString)
                     
                     if indexPath.row == 0{
-                        cell.dayLabel.text = "Today"
+                        cell.dayLabel.text = NSLocalizedString("MORE_TEXT_TODAY", comment: "today")
                     }else if indexPath.row == 1{
-                        cell.dayLabel.text = "Tomorrow"
+                        cell.dayLabel.text = NSLocalizedString("MORE_TEXT_TOMORROW", comment: "tomorrow")
                     }else{
                         cell.dayLabel.text = day.dayString
                     }

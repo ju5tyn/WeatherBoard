@@ -64,6 +64,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="navButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vX7-El-PlG"/>
+                                                    <action selector="todayButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="su6-PZ-AGj"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="6Nc-9G-tHD">
@@ -82,6 +83,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="navButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2th-Zv-hxn"/>
+                                                    <action selector="tomorrowButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ci9-oG-YHB"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XED-g8-fVk">
@@ -98,6 +100,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
+                                                    <action selector="moreButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zre-Hn-mUZ"/>
                                                     <action selector="navButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rVn-u6-2ba"/>
                                                 </connections>
                                             </button>
@@ -211,12 +214,15 @@
                         <outlet property="locationLabelView" destination="xJs-cJ-fXL" id="UeE-hM-o7O"/>
                         <outlet property="mainView" destination="gQ8-HG-zRf" id="104-8S-lni"/>
                         <outlet property="menuButton" destination="6X1-WS-ejl" id="d3L-mM-XSn"/>
-                        <outlet property="navButtons" destination="KYU-or-FRp" id="e78-lz-Okz"/>
+                        <outlet property="navButtonStack" destination="KYU-or-FRp" id="e78-lz-Okz"/>
                         <outlet property="navButtonsBottomConstraint" destination="77r-2H-QEb" id="0S0-Ww-eB2"/>
                         <outlet property="separatorView" destination="Io4-Jo-IvA" id="AYZ-Fz-S2P"/>
                         <outlet property="todayButton" destination="loQ-k2-Fz5" id="CMg-p1-o4N"/>
                         <outlet property="tomorrowButton" destination="6Nc-9G-tHD" id="gbN-2D-XbU"/>
                         <outlet property="weatherContainerView" destination="q9T-eh-vLh" id="2IX-Tc-m07"/>
+                        <outletCollection property="navButtons" destination="loQ-k2-Fz5" collectionClass="NSMutableArray" id="40M-dK-O7E"/>
+                        <outletCollection property="navButtons" destination="6Nc-9G-tHD" collectionClass="NSMutableArray" id="3RU-dI-2Gr"/>
+                        <outletCollection property="navButtons" destination="XED-g8-fVk" collectionClass="NSMutableArray" id="86X-pH-M2p"/>
                         <segue destination="Ujs-7t-r3k" kind="presentation" identifier="toMenu" modalPresentationStyle="overCurrentContext" modalTransitionStyle="coverVertical" id="xTC-aY-veb"/>
                     </connections>
                 </viewController>
@@ -421,6 +427,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="aF1-yq-C47"/>
                     <connections>
+                        <outlet property="aboutButton" destination="VLe-hz-54r" id="DWn-HN-abe"/>
                         <outlet property="adBackground" destination="x4a-YY-waH" id="Ae3-ee-7Q4"/>
                         <outlet property="adLabel" destination="Yk5-gw-Wa3" id="MDq-jw-INK"/>
                         <outlet property="adSpinner" destination="ngW-ez-a4V" id="K4b-NR-txH"/>
@@ -428,6 +435,7 @@
                         <outlet property="bannerView" destination="R9g-jp-U1I" id="zaP-H7-rPr"/>
                         <outlet property="recentsLabel" destination="hZm-fn-fpI" id="fIO-Gw-BpF"/>
                         <outlet property="searchBar" destination="1TO-c0-fHM" id="e2m-yP-sOv"/>
+                        <outlet property="settingsButton" destination="orj-CU-aat" id="ExP-g4-ZQ8"/>
                         <outlet property="tableView" destination="aNd-QS-4El" id="1zt-gC-wom"/>
                         <outletCollection property="bottomButtons" destination="orj-CU-aat" collectionClass="NSMutableArray" id="JFb-Ez-lcr"/>
                         <outletCollection property="bottomButtons" destination="VLe-hz-54r" collectionClass="NSMutableArray" id="T4e-dh-Ic1"/>
@@ -727,6 +735,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="appLabel" destination="NGO-VO-Oac" id="PEV-Wz-iWw"/>
+                        <outlet property="creditsHeaderLabel" destination="bdz-Lo-pvX" id="5tE-0O-9dY"/>
                         <outlet property="iconImage" destination="9DX-eb-aNK" id="oZp-xg-S2h"/>
                         <outlet property="paperImage" destination="fOz-bl-MJU" id="4TQ-7a-E1N"/>
                         <outlet property="textView" destination="P2C-i3-bfc" id="kVG-Zf-aKP"/>
@@ -746,10 +755,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="636.66666666666663"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ7-Qx-hdu" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOJ-FL-lEZ" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
                                 <rect key="frame" x="16" y="293" width="358" height="23"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="9Mk-EC-Xb9"/>
+                                    <constraint firstAttribute="height" constant="23" id="55M-qs-gLF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -803,21 +812,44 @@
                                     <constraint firstAttribute="width" constant="300" id="Y6e-kq-SIO"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ7-Qx-hdu" customClass="LTMorphingLabel" customModule="LTMorphingLabel">
+                                <rect key="frame" x="16" y="293" width="358" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="9Mk-EC-Xb9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Black" family="Roboto" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="morphingProgress">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="morphingDuration">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="morphingCharacterDelay">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Q5y-5l-goy"/>
                         <constraints>
                             <constraint firstItem="NZ7-Qx-hdu" firstAttribute="trailing" secondItem="1IU-mS-zSX" secondAttribute="trailingMargin" id="3kh-7o-P18"/>
                             <constraint firstAttribute="trailingMargin" secondItem="a5I-8U-sGI" secondAttribute="trailing" id="6jh-yd-jmb"/>
-                            <constraint firstItem="NZ7-Qx-hdu" firstAttribute="top" secondItem="a5I-8U-sGI" secondAttribute="bottom" constant="10" id="IWT-Cj-rcq"/>
+                            <constraint firstItem="xOJ-FL-lEZ" firstAttribute="leading" secondItem="Q5y-5l-goy" secondAttribute="leading" constant="16" id="7Cl-y6-wSo"/>
+                            <constraint firstItem="xOJ-FL-lEZ" firstAttribute="top" secondItem="a5I-8U-sGI" secondAttribute="bottom" constant="10" id="Lr8-oB-c6n"/>
                             <constraint firstItem="yWN-VA-I3S" firstAttribute="centerX" secondItem="lJv-IT-U5x" secondAttribute="centerX" id="PME-cl-U0T"/>
                             <constraint firstItem="NZ7-Qx-hdu" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="Tbz-Ra-EZj"/>
                             <constraint firstItem="lJv-IT-U5x" firstAttribute="top" secondItem="1IU-mS-zSX" secondAttribute="topMargin" constant="40" id="WXY-Vl-Wsg"/>
+                            <constraint firstItem="Q5y-5l-goy" firstAttribute="trailing" secondItem="xOJ-FL-lEZ" secondAttribute="trailing" constant="16" id="bVW-Lv-cll"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="leading" secondItem="1IU-mS-zSX" secondAttribute="leadingMargin" id="f0T-h4-VrU"/>
                             <constraint firstItem="a5I-8U-sGI" firstAttribute="top" secondItem="lJv-IT-U5x" secondAttribute="bottom" constant="18" id="hdm-YN-oOT"/>
                             <constraint firstItem="lJv-IT-U5x" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="oy1-Vq-orw"/>
                             <constraint firstItem="Q5y-5l-goy" firstAttribute="bottom" secondItem="hf1-6j-YWt" secondAttribute="bottom" constant="5" id="rol-zb-qVQ"/>
                             <constraint firstItem="hf1-6j-YWt" firstAttribute="centerX" secondItem="1IU-mS-zSX" secondAttribute="centerX" id="tGa-bq-2sT"/>
                             <constraint firstItem="yWN-VA-I3S" firstAttribute="centerY" secondItem="lJv-IT-U5x" secondAttribute="centerY" id="wwm-K3-RRz"/>
+                            <constraint firstItem="NZ7-Qx-hdu" firstAttribute="top" secondItem="a5I-8U-sGI" secondAttribute="bottom" constant="10" id="y23-GJ-1H1"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -827,6 +859,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="yWN-VA-I3S" id="XCn-Ci-VLp"/>
+                        <outlet property="rainLabel" destination="xOJ-FL-lEZ" id="FHs-1H-xrv"/>
                         <outlet property="segmentedControl" destination="hf1-6j-YWt" id="qGc-zJ-ZEn"/>
                         <outlet property="tempLabel" destination="a5I-8U-sGI" id="FjJ-nZ-mEL"/>
                         <outlet property="timeLocationLabel" destination="NZ7-Qx-hdu" id="4XX-Td-igL"/>
@@ -900,6 +933,7 @@
         <designable name="hZm-fn-fpI">
             <size key="intrinsicContentSize" width="62.666666666666664" height="20"/>
         </designable>
+        <designable name="xOJ-FL-lEZ"/>
     </designables>
     <resources>
         <image name="cancel_24pt_white" width="24" height="24"/>

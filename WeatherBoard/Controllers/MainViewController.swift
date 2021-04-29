@@ -27,7 +27,9 @@ class MainViewController: UIViewController{
     @IBOutlet weak var todayButton: UIButton!
     @IBOutlet weak var tomorrowButton: UIButton!
     @IBOutlet weak var dayAfterButton: UIButton!
-    @IBOutlet weak var navButtons: UIStackView!
+    @IBOutlet var navButtons: [UIButton]!
+    
+    @IBOutlet weak var navButtonStack: UIStackView!
     
     //constraints
     @IBOutlet weak var navButtonsBottomConstraint: NSLayoutConstraint!
@@ -147,12 +149,13 @@ class MainViewController: UIViewController{
         setLocationLabel(hidden: pageSelected != .more) //hides location label if not on MORE page
         
         pageSelected == .more ?
-            viewChange(hide: weatherContainerView, show: detailsContainerView, refresh: false)
+            viewChange(hide: weatherContainerView,
+                       show: detailsContainerView,
+                       refresh: false)
             :
-            viewChange(hide: detailsContainerView, show: weatherContainerView, refresh: true)
-        
-        
-        
+            viewChange(hide: detailsContainerView,
+                       show: weatherContainerView,
+                       refresh: true)
     }
     
     
@@ -184,22 +187,24 @@ class MainViewController: UIViewController{
         
     }
     
+
     
-    @IBAction func navButtonPressed(_ sender: UIButton) {
-        
-        switch sender.titleLabel!.text{
-            case "TODAY":
-                pageSelected = .today
-            case "TOMORROW":
-                pageSelected = .tomorrow
-            case "MORE":
-                pageSelected = .more
-            default:
-                print("error in nav buttons")
-        }
-        
-        
+    
+    @IBAction func todayButtonPressed(_ sender: UIButton) {
+        pageSelected = .today
     }
+    
+    @IBAction func tomorrowButtonPressed(_ sender: UIButton) {
+        pageSelected = .tomorrow
+    }
+    
+    @IBAction func moreButtonPressed(_ sender: UIButton) {
+        pageSelected = .more
+    }
+    
+    
+    
+    
     
     
     
@@ -239,6 +244,8 @@ class MainViewController: UIViewController{
     //use when loading data from existing weathermodel
     func changeDetails() {
         if (weatherModel != nil && weatherModel?.locationName != nil){
+            
+            //minutely stuff
             
             weatherVC?.setWeatherDetails(using: weatherModel!, page: pageSelected)
             detailsVC?.setWeatherDetails(using: weatherModel!)
@@ -529,13 +536,13 @@ class MainViewController: UIViewController{
     func hideNavButtons(hidden: Bool){
         if hidden{
             UIView.animate(withDuration: 0.9){
-                self.navButtons.alpha = 0.0
+                self.navButtonStack.alpha = 0.0
             }
-            navButtons.isHidden = true
+            navButtonStack.isHidden = true
         }else{
-            navButtons.isHidden = false
+            navButtonStack.isHidden = false
             UIView.animate(withDuration: 0.3){
-                self.navButtons.alpha = 1.0
+                self.navButtonStack.alpha = 1.0
             }
             
         }

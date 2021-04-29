@@ -30,6 +30,14 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        ///Localised strings
+        titleLabel.text = NSLocalizedString("SETTINGS_TITLE", comment: "Title for page")
+        unitsLabel.text = NSLocalizedString("SETTINGS_TEXT_UNITS", comment: "Units label")
+        defaultLocationLabel.text = NSLocalizedString("SETTINGS_TEXT_DEFAULT_LOCATION", comment: "default location label")
+        defaultLocationPicker.setTitle(NSLocalizedString("SETTINGS_SWITCH_LAST_VIEWED", comment: "Text for default locaiton option on picker"), forSegmentAt: 1)
+        ///
+        
+        
         setAlpha()
         adsButtonSetup()
         

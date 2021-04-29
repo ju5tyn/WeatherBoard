@@ -15,12 +15,16 @@ class WeatherViewController: UIViewController{
     @IBOutlet weak var timeLocationLabel: LTMorphingLabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var segmentedControl: ZSegmentedControl!
+    @IBOutlet weak var rainLabel: LTMorphingLabel!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tempLabel.morphingEffect = .evaporate
         timeLocationLabel.morphingEffect = .evaporate
+        rainLabel.morphingEffect = .evaporate
         
         tempLabel.textDropShadow()
         timeLocationLabel.textDropShadow()
@@ -74,12 +78,15 @@ class WeatherViewController: UIViewController{
         weatherImageView.image = nil
         tempLabel.text = "Loading"
         timeLocationLabel.text = " "
+        rainLabel.text = " "
         activityIndicator.startAnimating()
         
     }
     
     //version OG
     func setWeatherDetails(using weatherModel: WeatherModel, page pageSelected: Pages){
+        
+        
         
         //sets tempLabel label to temperature followed by condition
         if pageSelected == .today {
@@ -89,18 +96,51 @@ class WeatherViewController: UIViewController{
             //sets weather image to string based on condition and day/night
             weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.current.conditionName)_\(weatherModel.current.isDayString)"))
             
+            if let rain = weatherModel.rainInfo {
+                
+                switch rain.type{
+                    case .starting:
+                        timeLocationLabel.text = "Rain starting in \(getRainLabel(rain.minutes!))"
+                    case .stopping:
+                        timeLocationLabel.text = "Rain stopping in \(getRainLabel(rain.minutes!))"
+                    case .wholeHour:
+                        timeLocationLabel.text = "Rain for the hour"
+                }
+                
+
+            }else{
+                
+                self.timeLocationLabel.text = "\(weatherModel.timeString) - \(weatherModel.locationName!)"
+                
+                
+            }
+            
+            
         }else if pageSelected == .tomorrow {
 
             tempLabel.text = "\(weatherModel.daily[1].tempString) \(weatherModel.daily[1].fullName!)"
 
             //sets weather image to string based on condition and day/night
             weatherImageView.setImage(UIImage(named: "icon_\(weatherModel.daily[1].conditionName)_\(weatherModel.current.isDayString)"))
+
+            self.timeLocationLabel.text = "\(weatherModel.timeString) - \(weatherModel.locationName!)"
+   
         }
-        
-        self.timeLocationLabel.text = "\(weatherModel.timeString) - \(weatherModel.locationName!)"
-        
+
         activityIndicator.stopAnimating()
         
+    }
+    
+
+    
+    
+    func getRainLabel(_ minutes: Int) -> String{
+        
+        if minutes == 1{
+            return "\(minutes) minute"
+        }else{
+            return "\(minutes) minutes"
+        }
     }
     
 

@@ -15,16 +15,31 @@ struct WeatherModel{
     let isCurrentLocation: Bool
     let doNotSave: Bool
     
-    let current : Current
+    let current: Current
+    let minutely: [Minutely]?
     let daily: [Daily]
     let hourly: [Hourly]
     
-    var locationName: String? = ""
+    var rainInfo: RainInfo? {return getRain(weatherModelMinutely: minutely)}
     
+    var locationName: String? = ""
     
     //MARK: Current
     
+    struct RainInfo{
+        enum Types{
+            case starting, stopping, wholeHour
+        }
+        var type: Types
+        var minutes: Int?
+        
+    }
+    
+    
+    
     struct Current{
+        
+        
         
         let id: Int
         let main: String
@@ -54,6 +69,13 @@ struct WeatherModel{
         
         
         
+    }
+    
+    struct Minutely{
+
+        let dt: Int
+        let precip: Double
+
     }
     
     struct Hourly{
@@ -107,7 +129,7 @@ struct WeatherModel{
         let windDirection: Double
         let precip: Double
         
-        //let visibility: Double //this is in metres
+        //let visibility: Double //this is in meters
         
         var dayString: String { return convertToDayString(dt) }
         var tempString: String { return "\(String(format: "%.0f", temp))°" }
@@ -118,6 +140,58 @@ struct WeatherModel{
         var windDirectionString: String { return windDirection.direction.description.uppercased() }
         var precipString: String { return "\(String(format: "%.0f", precip*100))%" }
         //var visibilityString: String { return String(format: "%.0fKM", Double(visibility/1000)) } //returns visibility string in KM
+    }
+    
+    
+    
+    
+    func getRain(weatherModelMinutely: [WeatherModel.Minutely]?) -> RainInfo? {
+        
+        if weatherModelMinutely != nil {
+            var startDt: Int?
+            var stopDt: Int?
+            let nowDt: Int = weatherModelMinutely![0].dt
+            
+            if weatherModelMinutely![0].precip != 0{
+                //raining right now
+                for minute in weatherModelMinutely!{
+                    if minute.precip == 0{
+                        stopDt = minute.dt
+                        //get time interval between nowDt and stopDt
+                        let interval = stopDt! - nowDt
+                        let intervalInMinutes = ((interval)/60)
+                        print("Rain stopping in \(intervalInMinutes) minutes" )
+                        return RainInfo(type: .stopping, minutes: intervalInMinutes)
+                    }
+                }
+                if stopDt == nil{
+                    print("rain for whole hour")
+                    return RainInfo(type: .wholeHour)
+                    //rain for whole hour
+                }
+            }else{
+                //check to see if rain in rest of hour
+                for minute in weatherModelMinutely!{
+                    if minute.precip > 0{
+                        startDt = minute.dt
+                        //get time interval between nowDt and startDt
+                        let interval = startDt! - nowDt
+                        let intervalInMinutes = ((interval)/60)
+                        print("Rain starting in \(intervalInMinutes) minutes" )
+                        return RainInfo(type: .starting, minutes: intervalInMinutes)
+                    }
+                }
+                if startDt == nil{
+                    print("no rain for the hour")
+                    return nil
+                    //no rain for the hour
+                }
+            }
+        }
+        //for minute in weatherModel.
+        
+        //on nothing occuring
+        return nil
     }
     
 }
@@ -148,7 +222,10 @@ enum ConditionNames: String{
     
 }
 
-//MARK: Get Condiiton Name
+
+
+
+//MARK: Get Condition Name
 func getConditionName(_ id: Int) -> ConditionNames{
     switch id{
         case 200...299:
@@ -185,25 +262,25 @@ func getConditionName(_ id: Int) -> ConditionNames{
 func getFullName(_ conditionID: Int, _ isDay: Bool) -> String? {
     switch getConditionName(conditionID){
         case .thunderstorm:
-            return "Storm"
+            return NSLocalizedString("FULL_NAME_STORM", comment: "Storm label")
         case .rain:
-            return "Drizzle"
+            return NSLocalizedString("FULL_NAME_DRIZZLE", comment: "Drizzle")
         case .rain_clouds:
-            return "Rain"
+            return NSLocalizedString("FULL_NAME_RAIN", comment: "Rain")
         case .shower_rain:
-            return "Showers"
+            return NSLocalizedString("FULL_NAME_SHOWER_RAIN", comment: "Shower rain")
         case .snow:
-            return "Snow"
+            return NSLocalizedString("FULL_NAME_SNOW", comment: "Snow")
         case .mist:
-            return "Mist"
+            return NSLocalizedString("FULL_NAME_MIST", comment: "Mist")
         case .clear:
-            return "Clear"
+            return NSLocalizedString("FULL_NAME_CLEAR", comment: "Clear")
         case .few_clouds:
-            return "Partly Cloudy"
+            return NSLocalizedString("FULL_NAME_FEW_CLOUDS", comment: "Few clouds")
         case .scattered_clouds:
-            return "Cloudy"
+            return NSLocalizedString("FULL_NAME_SCATTERED_CLOUDS", comment: "Scattered clouds")
         case .broken_clouds:
-            return "Cloudy"
+            return NSLocalizedString("FULL_NAME_BROKEN_CLOUDS", comment: "Broken clouds")
     }
 }
 
@@ -212,25 +289,25 @@ func getFullName(_ conditionID: Int, _ isDay: Bool) -> String? {
 func getSmallName(_ conditionID: Int, _ isDay: Bool) -> String? {
     switch getConditionName(conditionID){
         case .thunderstorm:
-            return "Storm"
+            return NSLocalizedString("SHORT_NAME_STORM", comment: "Storm label")
         case .rain:
-            return "Drizzle"
+            return NSLocalizedString("SHORT_NAME_DRIZZLE", comment: "Drizzle")
         case .rain_clouds:
-            return "Rain"
+            return NSLocalizedString("SHORT_NAME_RAIN", comment: "Rain")
         case .shower_rain:
-            return "Showers"
+            return NSLocalizedString("SHORT_NAME_SHOWER_RAIN", comment: "Shower rain")
         case .snow:
-            return "Snow"
+            return NSLocalizedString("SHORT_NAME_SNOW", comment: "Snow")
         case .mist:
-            return "Mist"
+            return NSLocalizedString("SHORT_NAME_MIST", comment: "Mist")
         case .clear:
-            return "Clear"
+            return NSLocalizedString("SHORT_NAME_CLEAR", comment: "Clear")
         case .few_clouds:
-            return "Cloudy"
+            return NSLocalizedString("SHORT_NAME_FEW_CLOUDS", comment: "Few clouds")
         case .scattered_clouds:
-            return "Cloudy"
+            return NSLocalizedString("SHORT_NAME_SCATTERED_CLOUDS", comment: "Scattered clouds")
         case .broken_clouds:
-            return "Cloudy"
+            return NSLocalizedString("SHORT_NAME_BROKEN_CLOUDS", comment: "Broken clouds")
     }
 }
 
@@ -291,5 +368,14 @@ extension Date {
     }
     
     
+}
+
+extension Int {
+    func getDateStringFromUnixTime() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .full
+        return dateFormatter.string(from: Date(timeIntervalSinceNow: TimeInterval(self)))
+    }
 }
 

@@ -1,0 +1,80 @@
+/* 
+  Localizable.strings
+  WeatherBoard
+
+  Created by Justyn Henman on 26/04/2021.
+  Copyright © 2021 Justyn Henman. All rights reserved.
+*/
+
+
+//MARK: Full Weather condition names
+//      Shown on main weather pages
+
+"FULL_NAME_STORM" = "Storm";
+"FULL_NAME_DRIZZLE" = "Drizzle";
+"FULL_NAME_RAIN" = "Storm";
+"FULL_NAME_SHOWER_RAIN" = "Showers";
+"FULL_NAME_SNOW" = "Snow";
+"FULL_NAME_MIST" = "Mist";
+"FULL_NAME_CLEAR" = "Clear";
+"FULL_NAME_FEW_CLOUDS" = "Partly Cloudy";
+"FULL_NAME_SCATTERED_CLOUDS" = "Cloudy";
+"FULL_NAME_BROKEN_CLOUDS" = "Cloudy";
+
+
+//MARK: Short Weather Condition names
+//      Shown on 'more' page
+
+"SHORT_NAME_STORM" = "Storm";
+"SHORT_NAME_DRIZZLE" = "Drizzle";
+"SHORT_NAME_RAIN" = "Storm";
+"SHORT_NAME_SHOWER_RAIN" = "Showers";
+"SHORT_NAME_SNOW" = "Snow";
+"SHORT_NAME_MIST" = "Mist";
+"SHORT_NAME_CLEAR" = "Clear";
+"SHORT_NAME_FEW_CLOUDS" = "Cloudy";
+"SHORT_NAME_SCATTERED_CLOUDS" = "Cloudy";
+"SHORT_NAME_BROKEN_CLOUDS" = "Cloudy";
+
+
+//MARK: Menu Elements
+//      Text for elements in the menu
+"MENU_BUTTON_SETTINGS" = "Settings";
+"MENU_BUTTON_ABOUT" = "About";
+"MENU_SEARCH_PLACEHOLDER" = "Search for a location";
+"MENU_TEXT_RECENTS" = "Recents";
+"MENU_TEXT_RESULTS" = "Results";
+"MENU_TEXT_INTERNET_ERROR" = "No internet connection";
+"MENU_TEXT_AD_SUCCESS" = "Ad";
+"MENU_TEXT_AD_ERROR" = "error loading Ad";
+
+
+//MARK: Settings Elements
+//      Text for elements in settings
+"SETTINGS_TITLE" = "Settings";
+"SETTINGS_TEXT_UNITS" = "Units";
+"SETTINGS_TEXT_DEFAULT_LOCATION" = "Default Location";
+"SETTINGS_SWITCH_LAST_VIEWED" = "Last Viewed";
+
+
+//MARK: About Card
+//      Text for credits card
+"ABOUT_TITLE" = "About";
+"ABOUT_TEXT_THANKS" = "Thanks to:";
+
+
+//MARK: More Cell
+//      Text for cells in more page
+"MORE_TEXT_TODAY" = "Today";
+"MORE_TEXT_TOMORROW" = "Tomorrow";
+"MORE_TEXT_PRECIP_CHANCE" = "Chance";
+
+//MARK: Bottom navbar
+//      Text for about card
+"NAVBAR_TEXT_TODAY" = "Today";
+"NAVBAR_TEXT_NOW" = "Now";
+"NAVBAR_TEXT_TOMORROW" = "Tomorrow";
+"NAVBAR_TEXT_MORE" = "More";
+"NAVBAR_TEXT_LATER" = "Later";
+
+ 

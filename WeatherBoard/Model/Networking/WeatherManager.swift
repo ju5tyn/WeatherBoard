@@ -90,6 +90,8 @@ struct WeatherManager {
         
         if let url = URL(string: urlString){
             
+            print(url)
+            
             let session = URLSession(configuration: .default)
             let task = session.dataTask(with: url) {
                 
@@ -121,14 +123,14 @@ struct WeatherManager {
         
         let decoder = JSONDecoder()
         do {
-            let decodedData = try decoder.decode(WeatherData.self, from: data)
+            let decodedData = try decoder.decode(OpenWeatherMapData.self, from: data)
             
             return WeatherModel(lat: decodedData.lat,
                                 lon: decodedData.lon,
                                 timeZoneOffset: decodedData.timezone_offset,
                                 isCurrentLocation: isCurrentLocation,
                                 doNotSave: doNotSave,
-                                current: getCurrent(decodedData),
+                                current: getCurrent(decodedData), minutely: getMinutelyArray(decodedData),
                                 daily: getDailyArray(decodedData),
                                 hourly: getHourlyArray(decodedData)
             )
@@ -144,7 +146,7 @@ struct WeatherManager {
     
     //current day data
     
-    func getCurrent(_ decodedData: WeatherData) -> WeatherModel.Current{
+    func getCurrent(_ decodedData: OpenWeatherMapData) -> WeatherModel.Current{
         
         let data = decodedData.current
         
@@ -157,16 +159,28 @@ struct WeatherManager {
         )
     }
     
+    func getMinutelyArray(_ decodedData: OpenWeatherMapData) -> [WeatherModel.Minutely]?{
+        var array: [WeatherModel.Minutely] = []
+        
+        if decodedData.minutely == nil {
+            return nil
+        }
+        for minute in decodedData.minutely!{
+            array.append(WeatherModel.Minutely(dt: minute.dt, precip: minute.precipitation))
+        }
+        return array
+        
+    }
     //5 day forecast array
     
-    func getHourlyArray(_ decodedData: WeatherData) -> [WeatherModel.Hourly]{
+    func getHourlyArray(_ decodedData: OpenWeatherMapData) -> [WeatherModel.Hourly]{
         var array: [WeatherModel.Hourly] = []
         for hour in 0...12{ array.append(getHourly(decodedData, hour))}
         return array
         
     }
     
-    func getHourly(_ decodedData: WeatherData, _ hour: Int) -> WeatherModel.Hourly {
+    func getHourly(_ decodedData: OpenWeatherMapData, _ hour: Int) -> WeatherModel.Hourly {
         
         let hourData = decodedData.hourly[hour]
         
@@ -187,14 +201,14 @@ struct WeatherManager {
     }
     
     
-    func getDailyArray(_ decodedData: WeatherData) -> [WeatherModel.Daily]{
+    func getDailyArray(_ decodedData: OpenWeatherMapData) -> [WeatherModel.Daily]{
         var array: [WeatherModel.Daily] = []
         for day in 0...4{ array.append(getDaily(decodedData, day)) }
         return array
     }
     
     
-    func getDaily(_ decodedData: WeatherData, _ day: Int) -> WeatherModel.Daily{
+    func getDaily(_ decodedData: OpenWeatherMapData, _ day: Int) -> WeatherModel.Daily{
         
         let dailyData = decodedData.daily[day]
         

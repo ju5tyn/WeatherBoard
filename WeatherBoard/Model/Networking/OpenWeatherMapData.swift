@@ -1,6 +1,6 @@
 import Foundation
 
-struct WeatherData: Decodable {
+struct OpenWeatherMapData: Decodable {
     
     let lat: Double
     let lon: Double
@@ -8,10 +8,19 @@ struct WeatherData: Decodable {
     let timezone_offset: Int
     
     let current: Current
+    let minutely: [Minutely]?
     let hourly: [Hourly]
     let daily: [Daily]
     
 }
+
+struct Minutely: Decodable {
+    
+    let dt: Int
+    let precipitation: Double
+    
+}
+
 
 
 struct Hourly: Decodable {

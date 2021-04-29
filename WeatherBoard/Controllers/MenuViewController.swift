@@ -35,6 +35,10 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet var bottomButtons: [UIButton]!
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var aboutButton: UIButton!
+    
+    
     @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var adLabel: UILabel!
     @IBOutlet weak var adBackground: UIView!
@@ -63,6 +67,14 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ///localisable strings init
+        settingsButton.titleLabel?.text = NSLocalizedString("MENU_BUTTON_SETTINGS", comment: "Settings button text")
+        aboutButton.titleLabel?.text = NSLocalizedString("MENU_BUTTON_ABOUT", comment: "Settings button text")
+        recentsLabel.text = NSLocalizedString("MENU_TEXT_RECENTS", comment: "Label showing recents below")
+        adLabel.text = NSLocalizedString("MENU_TEXT_AD_SUCCESS", comment: "Label shown above ad")
+        
+        
         
         recentsLabel.isHidden = false
         recentsLabel.morphingEffect = .scale
@@ -366,7 +378,7 @@ extension MenuViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         print("cancelcllilcked")
-        recentsLabel.text = "Recents"
+        recentsLabel.text = NSLocalizedString("MENU_TEXT_RECENTS", comment: "text indicating recents shown")
         if (searchBar.text != "" && searchBar.searchTextField.isEditing) {
             tableView.reloadData(shouldAnimate: true)
         }
@@ -387,7 +399,7 @@ extension MenuViewController: UISearchBarDelegate {
     
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        recentsLabel.text = "Recents"
+        recentsLabel.text = NSLocalizedString("MENU_TEXT_RECENTS", comment: "text indicating recents shown")
         if (searchBar.text != "") {
             tableView.reloadData(shouldAnimate: true)
         }
@@ -406,7 +418,7 @@ extension MenuViewController: UISearchBarDelegate {
     }
 
     @objc func querySearch(_ searchBar: UISearchBar) {
-        recentsLabel.text = "Results"
+        recentsLabel.text = NSLocalizedString("MENU_TEXT_RESULTS", comment: "text indicating results shown")
         
         if searchCompleter.queryFragment != searchBar.text{
             searchCompleter.queryFragment = searchBar.text!
@@ -447,7 +459,7 @@ extension MenuViewController: MKLocalSearchCompleterDelegate{
     func completer(_ completer: MKLocalSearchCompleter, didFailWithError error: Error) {
         print(error.localizedDescription)
         if searchBar.text != ""{
-            recentsLabel.text = "No internet connection"
+            recentsLabel.text = NSLocalizedString("MENU_TEXT_INTERNET_ERROR", comment: "internet error text")
         }
         
     }
@@ -467,7 +479,7 @@ extension MenuViewController: GADBannerViewDelegate{
     
     func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
         adSpinner.stopAnimating()
-        adLabel.text = "error loading ad".uppercased()
+        adLabel.text = NSLocalizedString("MENU_TEXT_AD_ERROR", comment: "ad error text").uppercased()
     }
     
     
