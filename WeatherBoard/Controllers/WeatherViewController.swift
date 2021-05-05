@@ -29,9 +29,6 @@ class WeatherViewController: UIViewController{
         tempLabel.textDropShadow()
         timeLocationLabel.textDropShadow()
         
-        //segmentedControl.delegate = self
-        segmentedControl.clearsContextBeforeDrawing = true
-        //setupSegmentedControl()
 
 
     }

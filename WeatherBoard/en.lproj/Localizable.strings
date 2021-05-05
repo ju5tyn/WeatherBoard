@@ -12,7 +12,7 @@
 
 "FULL_NAME_STORM" = "Storm";
 "FULL_NAME_DRIZZLE" = "Drizzle";
-"FULL_NAME_RAIN" = "Storm";
+"FULL_NAME_RAIN" = "Rain";
 "FULL_NAME_SHOWER_RAIN" = "Showers";
 "FULL_NAME_SNOW" = "Snow";
 "FULL_NAME_MIST" = "Mist";
@@ -27,7 +27,7 @@
 
 "SHORT_NAME_STORM" = "Storm";
 "SHORT_NAME_DRIZZLE" = "Drizzle";
-"SHORT_NAME_RAIN" = "Storm";
+"SHORT_NAME_RAIN" = "Rain";
 "SHORT_NAME_SHOWER_RAIN" = "Showers";
 "SHORT_NAME_SNOW" = "Snow";
 "SHORT_NAME_MIST" = "Mist";

@@ -232,7 +232,7 @@ func getConditionName(_ id: Int) -> ConditionNames{
             return .thunderstorm
         case 300...399:
             return .rain
-        case 500...504:
+        case 499...504:
             return .rain_clouds
         case 511:
             return .snow
@@ -259,8 +259,11 @@ func getConditionName(_ id: Int) -> ConditionNames{
 
 
 //MARK: Get Full Condition name
-func getFullName(_ conditionID: Int, _ isDay: Bool) -> String? {
-    switch getConditionName(conditionID){
+func getFullName(_ id: Int, _ isDay: Bool) -> String? {
+    
+    //print("Id is: \(getConditionName(id))")
+    
+    switch getConditionName(id){
         case .thunderstorm:
             return NSLocalizedString("FULL_NAME_STORM", comment: "Storm label")
         case .rain:
@@ -286,8 +289,8 @@ func getFullName(_ conditionID: Int, _ isDay: Bool) -> String? {
 
 
 //MARK: Get Smaller Condition name
-func getSmallName(_ conditionID: Int, _ isDay: Bool) -> String? {
-    switch getConditionName(conditionID){
+func getSmallName(_ id: Int, _ isDay: Bool) -> String? {
+    switch getConditionName(id){
         case .thunderstorm:
             return NSLocalizedString("SHORT_NAME_STORM", comment: "Storm label")
         case .rain:

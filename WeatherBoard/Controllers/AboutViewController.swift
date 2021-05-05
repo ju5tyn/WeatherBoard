@@ -14,7 +14,7 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
         
         ///LocalisedStrings
-        titleLabel.text = NSLocalizedString("ABOUT_TITLE", comment: "title for page")
+        titleLabel.text = NSLocalizedString("ABOUT_TITLE", comment: "title for page").uppercased()
         creditsHeaderLabel.text = NSLocalizedString("ABOUT_TEXT_THANKS", comment: "thanks to label")
         ///
         

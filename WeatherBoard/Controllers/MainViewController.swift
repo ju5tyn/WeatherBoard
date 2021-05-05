@@ -6,7 +6,6 @@ import ZSegmentedControl
 
 
 
-
 class MainViewController: UIViewController{
     
     
@@ -18,6 +17,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var hillView: UIView!
     @IBOutlet weak var weatherContainerView: UIView!
     @IBOutlet weak var detailsContainerView: UIView!
+    @IBOutlet weak var bottomContainerView: UIView!
     @IBOutlet weak var separatorView: UIView!
     
     //buttons
@@ -59,26 +59,50 @@ class MainViewController: UIViewController{
     var menuOpen: Bool = false
     
     var weatherModel: WeatherModel?
-    let gradient = CAGradientLayer()
-    let hillGradient = CAGradientLayer()
-    var emitterNode = SKEmitterNode()
+    
+    let skyGradient     = CAGradientLayer()
+    let hillGradient    = CAGradientLayer()
+    let bottomGradient  = CAGradientLayer()
+    
+    var emitterNode     = SKEmitterNode()
+    var panGesture      = UIPanGestureRecognizer()
     
     //Container views
     var weatherVC: WeatherViewController?
     var detailsVC: DetailsViewController?
     
     //Delegate stuff
-    var weatherManager = WeatherManager()
-    let dataManager = DataManager()
+    var weatherManager  = WeatherManager()
+    let dataManager     = DataManager()
     let locationManager = CLLocationManager()
+    let defaults        = UserDefaults.standard
     
-    let defaults = UserDefaults.standard
+    
+    //variables for custom view movement
+    var hillViewOGCenter            : CGPoint!
+    var weatherContainerOGCenter    : CGPoint!
+    var gradientViewOGCenter        : CGPoint!
+    var bottomContainerOGCenter     : CGPoint!
+    
+    var gradientOffset: CGFloat! = nil
+    var hillOffset: CGFloat! = nil
+    var weatherContainerOffset: CGFloat! = nil
+    var bottomContainerOffset: CGFloat! = nil
+    
+    var weatherContainerPosUp: CGPoint!
+    var hillPosUp: CGPoint!
+    var gradientPosUp: CGPoint!
+    var bottomContainerPosUp: CGPoint!
+    
+    var weatherContainerPosDown: CGPoint!
+    var hillPosDown: CGPoint!
+    var gradientPosDown: CGPoint!
+    var bottomContainerPosDown: CGPoint!
+    
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         
         hillViewHeightConstraint.constant = ((self.view.bounds.height))*0.4
         
@@ -96,13 +120,171 @@ class MainViewController: UIViewController{
         highlightNavButton(.today)
         getLocation()
         clearDetails()
-        addGestures()
+        //addGestures()
+        addVerticalGestures()
         
         
         
     }
     
+    func addVerticalGestures(){
+        
+        //creates a gesture which calls draggedView()
+        panGesture = UIPanGestureRecognizer(target: self,
+                                            action: #selector(draggedView(_:)))
+        
+        panGesture.delaysTouchesEnded = false
+        
+        hillView.isUserInteractionEnabled               = true
+        weatherContainerView.isUserInteractionEnabled   = true
+        
+        //view.bringSubviewToFront(hillView)
+        //view.bringSubviewToFront(navButtonStack)
+        
+        self.view.addGestureRecognizer(panGesture)
+        
+        //offsets for
+        hillOffset = UIScreen.screens[0].bounds.height * 0.42
+        gradientOffset = UIScreen.screens[0].bounds.height / 2
+        
+        //variables to make it easier
+        let window          = UIApplication.shared.windows[0]
+        let screenBounds    = UIScreen.screens[0].bounds
+        let topPadding      = window.safeAreaInsets.top
+        let hillHeight      = UIScreen.screens[0].bounds.height*0.4
+        
+        //up and down positions for hill
+        hillPosUp   = CGPoint(x: screenBounds.midX,
+                              y: screenBounds.minY + topPadding + (hillHeight/2) + 75)
+        
+        hillPosDown = CGPoint(x: screenBounds.midX,
+                              y: UIScreen.screens[0].bounds.maxY - (hillHeight / 2))
+        
+        //up and down positions for gradient
+        gradientPosUp   = CGPoint(x: screenBounds.midX,
+                                  y: screenBounds.midY - gradientOffset)
+        
+        gradientPosDown = CGPoint(x: screenBounds.midX,
+                                  y: screenBounds.midY)
+        
+        //up and down positions for weather container view
+        weatherContainerPosUp   = CGPoint(x: screenBounds.midX,
+                                          y: screenBounds.midY - screenBounds.height * 0.6)
+        
+        weatherContainerPosDown = CGPoint(x: screenBounds.midX,
+                                          y: screenBounds.minY + (weatherContainerView.frame.height / 2) + (100))
+        
+        
+        bottomContainerPosUp = CGPoint(x: screenBounds.midX,
+                                       y: screenBounds.midY)
+        
+        bottomContainerPosDown = CGPoint(x: screenBounds.midX,
+                                         y: screenBounds.maxY + (bottomContainerView.frame.height / 2))
+        
+        //sets weather container view position to newly created center
+        
+        //weatherContainerView.center = weatherContainerPosDown
+    }
     
+    
+    
+    
+    @objc func draggedView(_ sender: UIPanGestureRecognizer){
+        
+        //velocity and translation variables for gesture
+        let velocity    = sender.velocity(in: view)
+        let translation = sender.translation(in: view)
+        
+        //global midpoint of screen
+        let globalMidX  = UIScreen.screens[0].bounds.midX
+        
+        switch sender.state{
+            case .began:
+                DispatchQueue.main.async {
+                    self.hillViewOGCenter           = self.hillView.center
+                    self.gradientViewOGCenter       = self.gradientView.center
+                    self.weatherContainerOGCenter   = self.weatherContainerView.center
+                    self.bottomContainerOGCenter    = self.bottomContainerView.center
+                }
+                
+            case .changed:
+                DispatchQueue.main.async {
+                    
+                    let hillTranslation = self.hillViewOGCenter.y + translation.y
+                    let gradientTranslation = self.gradientViewOGCenter.y + (translation.y * 1.10)
+                    let weatherContainerTranslation = self.weatherContainerOGCenter.y + (translation.y * 1.10)
+                    let bottomContainerTranslation = self.bottomContainerOGCenter.y + translation.y
+                    
+                    if hillTranslation <= self.hillPosDown.y && hillTranslation >= self.hillPosUp.y{
+                        self.hillView.center = CGPoint(x: globalMidX,
+                                                       y: hillTranslation)
+                    }
+                    if gradientTranslation <= self.gradientPosDown.y && gradientTranslation >= self.gradientPosUp.y{
+                        self.gradientView.center = CGPoint(x: globalMidX,
+                                                           y: gradientTranslation)
+                    }
+                    
+                    if weatherContainerTranslation <= self.weatherContainerPosDown.y && weatherContainerTranslation >= self.weatherContainerPosUp.y{
+                        self.weatherContainerView.center = CGPoint(x: globalMidX,
+                                                                   y: weatherContainerTranslation)
+                        
+                        if translation.y < 0{
+                            self.weatherContainerView.alpha = 1 + (translation.y/500)
+                        }else{
+                            self.weatherContainerView.alpha = (translation.y/500)
+                        }
+                        
+                    }
+                    
+                    if bottomContainerTranslation <= self.bottomContainerPosDown.y && bottomContainerTranslation >= self.bottomContainerPosUp.y{
+                        
+                        self.bottomContainerView.center = CGPoint(x: globalMidX, y: bottomContainerTranslation)
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+            case .failed, .ended, .cancelled:
+                DispatchQueue.main.async {
+                    velocity.y > 0 ? self.hideHill() : self.showHill()
+                }
+            default:
+                break
+        }
+        
+    }
+
+    func hideHill(){
+        
+        setLocationLabel(hidden: true)
+        
+        UIView.animate(withDuration:0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1){
+            print("boolin")
+            self.hillView.center = self.hillPosDown
+            self.gradientView.center = self.gradientPosDown
+            self.weatherContainerView.center = self.weatherContainerPosDown
+            self.weatherContainerView.alpha = 1
+            self.bottomContainerView.center = self.bottomContainerPosDown
+        }
+    }
+    
+    func showHill(){
+        
+        setLocationLabel(hidden: false)
+        
+        UIView.animate(withDuration:0.4, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1){
+            print("boolin")
+            self.weatherContainerView.center = self.weatherContainerPosUp
+            self.hillView.center = self.hillPosUp
+            self.gradientView.center = self.gradientPosUp
+            self.weatherContainerView.alpha = 0
+            self.bottomContainerView.center = self.bottomContainerPosUp
+        }
+        
+    }
     
     
     
@@ -132,19 +314,31 @@ class MainViewController: UIViewController{
         }
     }
     
+
+    
     func switchPage(){
+        
+        hideHill()
         
         switch pageSelected{
             case .today:
                 removeBlur()
                 highlightNavButton(.today)
+                panGesture.isEnabled = true
+                //showHill()
             case .tomorrow:
                 removeBlur()
                 highlightNavButton(.tomorrow)
+                panGesture.isEnabled = false
+                //showHill()
             case .more:
                 updateBlur()
                 highlightNavButton(.more)
+                panGesture.isEnabled = false
+                //hideHill()
+            
         }
+        
         
         setLocationLabel(hidden: pageSelected != .more) //hides location label if not on MORE page
         
@@ -167,12 +361,15 @@ class MainViewController: UIViewController{
     
     @IBAction func menuButtonPressed(_ sender: UIButton) {
         
+        
         openMenu()
+        
         
     }
     
     func openMenu(){
         
+        hideHill()
         
         self.performSegue(withIdentifier: C.segues.mainToMenu, sender: self)
         removeBlur()
@@ -244,8 +441,6 @@ class MainViewController: UIViewController{
     //use when loading data from existing weathermodel
     func changeDetails() {
         if (weatherModel != nil && weatherModel?.locationName != nil){
-            
-            //minutely stuff
             
             weatherVC?.setWeatherDetails(using: weatherModel!, page: pageSelected)
             detailsVC?.setWeatherDetails(using: weatherModel!)
@@ -449,15 +644,22 @@ class MainViewController: UIViewController{
     //Sets gradient up for initial app launch
     func addGradient(){
         
-        gradient.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height)*0.8)
-        gradientView.layer.addSublayer(gradient)
-        gradient.startPoint = CGPoint(x: 0.5, y: 1)
-        gradient.endPoint = CGPoint(x: 0.5, y: 0)
+        skyGradient.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: (self.view.bounds.height)*0.8)
+        gradientView.layer.addSublayer(skyGradient)
+        skyGradient.startPoint = CGPoint(x: 0.5, y: 1)
+        skyGradient.endPoint = CGPoint(x: 0.5, y: 0)
+        
         
         hillGradient.frame = CGRect.init(x: 0, y: 0, width: UIScreen.screens[0].bounds.width, height: UIScreen.screens[0].bounds.height*0.4)
         hillView.layer.addSublayer(hillGradient)
         hillGradient.startPoint = CGPoint(x: 0.5, y: 1)
         hillGradient.endPoint = CGPoint(x: 0.5, y: 0)
+        
+//        bottomGradient.frame = CGRect.init(x: 0, y: 0, width: UIScreen.screens[0].bounds.width, height: UIScreen.screens[0].bounds.height*0.4)
+//        hillView.layer.addSublayer(bottomGradient)
+//        bottomGradient.startPoint = CGPoint(x: 0.5, y: 1)
+//        bottomGradient.endPoint = CGPoint(x: 0.5, y: 0)
+        
         
         setGradientColor(color: "menu")
         
@@ -551,7 +753,9 @@ class MainViewController: UIViewController{
     
     //sets color of gradient to string passed in. Should match asset in asssets folder
     func setGradientColor(color: String){
-        gradient.colors = [
+        gradientView.backgroundColor = UIColor(named: "grad_\(color)_bottom")!
+        self.view.backgroundColor = UIColor(named: "hill_\(color)_bottom")
+        skyGradient.colors = [
             UIColor(named: "grad_\(color)_bottom")!.cgColor,
             UIColor(named: "grad_\(color)_top")!.cgColor
         ]
@@ -559,6 +763,10 @@ class MainViewController: UIViewController{
             UIColor(named: "hill_\(color)_bottom")!.cgColor,
             UIColor(named: "hill_\(color)_top")!.cgColor
         ]
+//        bottomGradient.colors = [
+//            UIColor(named: "hill_\(color)_bottom")!.cgColor,
+//            UIColor(named: "hill_\(color)_top")!.cgColor
+//        ]
     }
     
     
