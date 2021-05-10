@@ -50,6 +50,7 @@ struct C {
         static let mainToDetails = "toDetails"
         static let menuToAbout = "toAbout"
         static let menuToSettings = "toSettings"
+        static let mainToBottom = "toBottom"
         
     }
     

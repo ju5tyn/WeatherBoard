@@ -35,6 +35,7 @@ class MainViewController: UIViewController{
     @IBOutlet weak var navButtonsBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var hillViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var hillViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomContainerHeightConstraint: NSLayoutConstraint!
     
     
     //Location label header
@@ -68,8 +69,9 @@ class MainViewController: UIViewController{
     var panGesture      = UIPanGestureRecognizer()
     
     //Container views
-    var weatherVC: WeatherViewController?
-    var detailsVC: DetailsViewController?
+    var weatherVC   : WeatherViewController?
+    var detailsVC   : DetailsViewController?
+    var bottomVC    : BottomViewController?
     
     //Delegate stuff
     var weatherManager  = WeatherManager()
@@ -105,6 +107,7 @@ class MainViewController: UIViewController{
         super.viewDidLoad()
         
         hillViewHeightConstraint.constant = ((self.view.bounds.height))*0.4
+        bottomContainerHeightConstraint.constant = self.view.bounds.height*0.6
         
         overrideUserInterfaceStyle = .dark
         
@@ -176,7 +179,7 @@ class MainViewController: UIViewController{
         
         
         bottomContainerPosUp = CGPoint(x: screenBounds.midX,
-                                       y: screenBounds.midY)
+                                       y: screenBounds.minY + (bottomContainerView.frame.height/2) + 170)
         
         bottomContainerPosDown = CGPoint(x: screenBounds.midX,
                                          y: screenBounds.maxY + (bottomContainerView.frame.height / 2))
@@ -281,6 +284,10 @@ class MainViewController: UIViewController{
             self.hillView.center = self.hillPosUp
             self.gradientView.center = self.gradientPosUp
             self.weatherContainerView.alpha = 0
+            
+        }
+        
+        UIView.animate(withDuration:0.4, delay: 0, usingSpringWithDamping: 100, initialSpringVelocity: 0.01){
             self.bottomContainerView.center = self.bottomContainerPosUp
         }
         
@@ -848,7 +855,10 @@ class MainViewController: UIViewController{
                 let menuVC = segue.destination as? MenuViewController
                 menuVC?.loadViewIfNeeded()
                 menuVC?.delegate = self
+            case C.segues.mainToBottom:
+                bottomVC = segue.destination as? BottomViewController
                 
+            
             default:
                 break
         }
@@ -861,6 +871,8 @@ class MainViewController: UIViewController{
                 weatherVC = segue.destination as? WeatherViewController
             case C.segues.mainToDetails:
                 detailsVC = segue.destination as? DetailsViewController
+            case C.segues.mainToBottom:
+                bottomVC = segue.destination as? BottomViewController
             default:
                 break
         }
