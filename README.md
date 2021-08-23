@@ -89,3 +89,5 @@ My Website and Portfolio: [justynhenman.com](https://justynhenman.com)
 * [Realm](https://realm.io)
 * [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel)
 * [Netguru Weather Icons](https://dribbble.com/shots/2923788-Free-Weather-Icons)
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
